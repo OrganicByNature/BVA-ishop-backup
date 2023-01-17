@@ -1,0 +1,81 @@
+/* ==========================================================================
+   #@font-face
+   ========================================================================== */
+
+/**
+ * @font-face declaration using .woff format only
+ * http://caniuse.com/#search=woff
+ *
+ * @font-face {
+ *   font-family: "<FONT NAME>";
+ *   src: url("{{ '<FONT FILE.WOFF>' | file_url }}") format("woff");
+ *   font-weight: <FONT WEIGHT>;
+ *   font-style: <FONT WEIGHT>;
+ * }
+ *
+ */
+
+@font-face {
+  font-family: 'Brandon Grotesque';
+  src: url("{{ 'brandon-grotesque.eot' | asset_url }}"); /* IE9 Compat Modes */
+  src: url("{{ 'brandon-grotesque.eot?#iefix' | asset_url }}") format('embedded-opentype'), /* IE6-IE8 */
+      url("{{ 'brandon-grotesque.woff' | asset_url }}") format('woff'), /* Modern Browsers */
+      url("{{ 'brandon-grotesque.ttf' | asset_url }}")  format('truetype'), /* Safari, Android, iOS */
+      url("{{ 'brandon-grotesque.svg#50bf5a2005a5412419d6a4b30314e68e' }}") format('svg'); /* Legacy iOS */
+  font-style:   normal;
+  font-weight:  400;
+}
+
+@font-face {
+  font-family: 'Brandon Grotesque Bold';
+  src: url("{{ 'brandon-grotesque-bold.eot' | asset_url }}"); /* IE9 Compat Modes */
+  src: url("{{ 'brandon-grotesque-bold.eot?#iefix' | asset_url }}") format('embedded-opentype'), /* IE6-IE8 */
+       url("{{ 'brandon-grotesque-bold.woff' | asset_url }}") format('woff'), /* Modern Browsers */
+       url("{{ 'brandon-grotesque-bold.ttf' | asset_url }}")  format('truetype'), /* Safari, Android, iOS */
+       url("{{ 'brandon-grotesque-bold.svg#41e76bd6e414417d52adb646f262964a' | asset_url }}") format('svg'); /* Legacy iOS */
+  font-style:   normal;
+  font-weight:  700;
+}
+
+@font-face {
+  font-family: 'Brandon Grotesque Medium';
+  src: url("{{ 'brandon-grotesque-medium.woff2' | asset_url }}") format('woff2'),  url("{{ 'brandon-grotesque-medium.woff' | asset_url }}") format('woff');
+  font-style:   normal;
+  font-weight:  500;
+}
+
+@font-face {
+  font-family: 'Brandon Grotesque Light';
+  src: url("{{ 'brandon-grotesque-light.eot' | asset_url }}"); /* IE9 Compat Modes */
+  src: url("{{ 'brandon-grotesque-light.eot?#iefix' | asset_url }}") format('embedded-opentype'), /* IE6-IE8 */
+       url("{{ 'brandon-grotesque-light.woff' | asset_url }}") format('woff'), /* Modern Browsers */
+       url("{{ 'brandon-grotesque-light.ttf' | asset_url }}")  format('truetype'), /* Safari, Android, iOS */
+       url("{{ 'brandon-grotesque-light.svg' | asset_url }}") format('svg'); /* Legacy iOS */
+  font-style:   normal;
+  font-weight:  100;
+}
+
+@font-face {
+  font-family: 'RobleAltMedium';
+  src: url("{{ 'brandon-grotesque-light.eot' | asset_url }}"); /* IE9 Compat Modes */
+  src: url("{{ 'brandon-grotesque-light.eot?#iefix' | asset_url }}") format('embedded-opentype'), /* IE6-IE8 */
+       url("{{ 'brandon-grotesque-light.woff' | asset_url }}") format('woff'), /* Modern Browsers */
+       url("{{ 'brandon-grotesque-light.ttf' | asset_url }}")  format('truetype'); /* Safari, Android, iOS */
+  font-style:   normal;
+  font-weight:  100;
+}
+
+@font-face {
+  font-family: 'Roble Alt';
+  src: url("{{ 'RobleAltMedium.woff2' | asset_url }}") format('woff2'),  url("{{ 'RobleAltMedium.woff' | asset_url }}") format('woff');
+  font-style:   normal;
+  font-weight:  500;
+}
+
+@font-face {
+  font-family: 'Roble Alt';
+  src: url("{{ 'RobleAltThin.woff2' | asset_url }}") format('woff2'), url("{{ 'RobleAltThin.woff' | asset_url }}") format('woff');
+  font-style:   normal;
+  font-weight:  100;
+}
+

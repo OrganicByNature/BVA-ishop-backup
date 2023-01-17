@@ -1,0 +1,19 @@
+<div class="rewards-props">
+	<div class="rewards-props__inner">
+		<h2 class="rewards-props__header">{{ section.settings.header }}</h2>
+		<div class="rewards-props__blocks">
+		{% for block in section.blocks %}
+			<div class="rewards-props__block">
+				<div class="rewards-props__img-wrap">
+					<img class="rewards-props__prop-img" src="{{ block.settings.prop_img | img_url: '156x' }}" />
+				</div>
+				<h3 class="rewards-props__prop-title">{{ block.settings.prop_title }}</h3>
+				<p class="rewards-props__prop-copy">{{ block.settings.prop_copy }}</p>
+				{% if block.settings.fine_print != blank %}
+					<span class="rewards-props__fine-print">{{ block.settings.fine_print }}</span>
+				{% endif %}
+			</div>
+		{% endfor %}
+		</div>
+	</div>
+</div>

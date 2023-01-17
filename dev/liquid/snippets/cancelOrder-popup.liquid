@@ -1,0 +1,224 @@
+<style type="text/css">
+  .loading {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url('{{ 'ajax-loader.gif' | asset_url }}') 
+                50% 50% 
+                no-repeat;
+}
+</style>
+
+
+<div class="modal modal--edit" data-modal="under-75">
+  <div class="modal__wrap">
+    <h2 class="modal__head">Order Actions</h2>
+    <p class="modal__desc"></p>
+    <div class="flex-12-md col-info" style="display:none">
+      <h3 class="info" style="text-align:center">Confirm Contact Information</h3>
+      <div class="input-group flex-12">
+          <label id="customer-email">Email</label>
+          <input type="email" name="customer[email]" id="customer-email" placeholder="{{customer.email}}" autocorrect="off" autocapitalize="off" autofocus="" autocomplete="off">
+      </div>
+      <div class="input-group flex-12">
+          <label id="customer-tel">Telephone</label>
+          <input type="tel" name="customer[tel]" id="customer-tel" placeholder="{{customer.phone}}" autocorrect="off" autocapitalize="off" autofocus="" autocomplete="off">
+      </div>
+      <div class="input-group flex-12">
+          <label id="customer-reas">Reason</label>
+          <textarea placeholder="Describe reason for order modification..." style="min-height:100px;resize: none;" type="text" name="customer[text]" id="customer-text"></textarea>
+      </div>
+    </div>
+    <a class="btn modal__button btn--secondary refund">Refund</a>
+    <a class="btn modal__button btn--secondary modify">Modify</a>
+    <a class="btn modal__button btn--secondary confirm" style="display:none">Confirm</a>
+    <a class="btn modal__button btn--secondary nevermind" style="display:none">Nevermind</a>
+    <a class="btn modal__button btn--secondary cancel" style="display:none">Cancel Order</a>
+    <a href="https://ishoppurium.com/account?view=smart-order"class="btn modal__button btn--secondary finish" style="display:none">Continue Shopping</a>
+  </div>
+  <div class="loader"></div>
+</div>
+
+<script type="text/javascript">
+  
+  $( document ).ready(function( $ ) {
+    
+    
+     <!-- Modify Actions -->
+    $( ".btn.modal__button.btn--secondary.modify").click(function() {
+      	var orderid = $(".modal.modal--edit").attr("id");
+        $(".modal__head").text("Are you sure..?");
+        $(".modal__desc").html("By clicking CONFIRM, order <strong>#" + orderid + "</strong> will be placed on hold and immediately sent to a customer service agent, who will contact you if necessary to process modifications.");  	
+      	$(".flex-12-md.col-info").css("display","block");
+        $(".btn.modal__button.btn--secondary.confirm").css("display","block");
+        $(".btn.modal__button.btn--secondary.nevermind").css("display","block");
+        $(".btn.modal__button.btn--secondary.refund").css("display","none");
+        $(".btn.modal__button.btn--secondary.modify").css("display","none");
+    });
+    
+     <!-- Confirm Modify -->
+    $( ".btn.modal__button.btn--secondary.confirm" ).click(function() {
+
+        var orderid = $(".modal.modal--edit").attr("id");
+      	var email;
+        var telephone;
+        var first_name = '{{customer.first_name}}';
+        var last_name = '{{customer.last_name}}';
+        var order_count = '{{customer.orders_count}}';
+        var total_spent = '{{customer.total_spent}}';
+        
+        if($("input[id=customer-email]").val() == ''){
+          email = $("input[id=customer-email]").attr("placeholder");
+        }else{
+          email = $("input[id=customer-email]").val();
+        }
+      
+         if($("input[id=customer-tel]").val() == ''){
+            telephone = $("input[id=customer-tel]").attr("placeholder");
+         }else{
+           telephone = $("input[id=customer-tel]").val();
+         }
+      
+        if(email == ''){
+          $("label[id=customer-email]").text("Must Provide Valid Email");
+          $("label[id=customer-email]").css("color","red");
+        }
+      
+        if(telephone == ''){
+          $("label[id=customer-tel]").text("Must Provide Valid Phone Number");
+          $("label[id=customer-tel]").css("color","red");
+        }
+      
+        if(telephone !== '' && email !== ''){
+          var reason = $("textarea[id=customer-text]").val();
+          
+          $(".loader").addClass("loading");
+          $(".loader").css("display", "block");
+          $(".modal__head").css("display", "none");
+          $(".modal__desc").css("display", "none");
+          $(".btn.modal__button.btn--secondary.confirm").css("display", "none");
+          $(".btn.modal__button.btn--secondary.nevermind").css("display", "none");
+          $(".modal__wrap").css("min-height","250px");
+        
+			
+          var json = { 
+            order_num : orderid,
+            email : email, 
+            tel : telephone, 
+            first_name : first_name, 
+            last_name : last_name, 
+            total_spent : total_spent, 
+            order_count : order_count, 
+            reason : reason
+          };
+          
+          json = JSON.stringify(json);
+          
+          var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://puriumcancelorder.azurewebsites.net/api/ProcessRefund?orderid=" + orderid,
+            "method": "PUT",
+            "headers": {
+              "content-type": "application/json"
+            },
+            "processData": false,
+            "data": json
+          }
+          
+           $.ajax(settings).done(function (response) {
+             console.log(response);
+              $(".loader").css("display", "none");
+              $(".modal__wrap").css("min-height");
+              $(".modal__head").css("display", "block");
+              $(".modal__desc").css("display", "block");
+              $(".flex-12-md.col-info").css("display","none");
+              $(".btn.modal__button.btn--secondary").css("display","none");
+             if(response === "SUCCESS"){
+               $(".modal__head").text("Success!");
+               $(".modal__desc").text("Your order has been succesfully put on hold and sent to an agent. We will be reaching out to you shortly");
+               $(".btn.modal__button.btn--secondary.finish").css("display", "block");
+             }else{
+               $(".modal__head").text("Uh oh !");
+               $(".modal__desc").text("Something went wrong. Click the link below to contact customer service for support with modifying this order.");
+               $(".btn.modal__button.btn--secondary.finish").css("display", "block");
+               $(".btn.modal__button.btn--secondary.finish").text("Customer Service");
+               $(".btn.modal__button.btn--secondary.finish").attr("href", "https://docs.google.com/forms/d/e/1FAIpQLSe9O1GnjPbLUdPQTFk-_aGx66-5Nu1smNICOTgtzFM1Fw3Eqg/viewform?usp=sf_link"); 
+             }
+           });   
+
+       }
+       
+    });
+    
+    
+    
+    <!-- Nevermind Button. No Actions -->
+    $( ".btn.modal__button.btn--secondary.nevermind" ).click(function() {
+        $(".btn").removeClass("confirm");
+  		$(".modal.modal--edit").css( "display", "none" );
+    });
+    
+    
+    <!-- Refund Order Button -->
+    $( ".btn.modal__button.btn--secondary.refund" ).click(function() {
+      var orderid = $(".modal.modal--edit").attr("id");
+      var orderamount = $(".modal.modal--edit").attr("amount");
+      $(".modal__head").text("Are you sure..?");
+      $(".modal__desc").html("You are about to cancel order #" + orderid + ". A refund of " + orderamount + " will be processed immediately, but it may take 2-3 days before the funds appear in your account. If you wish to cancel your order click <strong>CANCEL ORDER</strong>.");
+      $(".btn.modal__button.btn--secondary.refund").attr("id",orderid);
+      $(".btn.modal__button.btn--secondary.cancel").css("display","block");
+      $(".btn.modal__button.btn--secondary.nevermind").css("display","block");
+      $(".btn.modal__button.btn--secondary.confirm").css("display","none");
+      $(".btn.modal__button.btn--secondary.refund").css("display","none");
+      $(".btn.modal__button.btn--secondary.modify").css("display","none");
+    });
+
+    <!-- Cancel Order Button -->
+    $( ".btn.modal__button.btn--secondary.cancel" ).click(function() {
+      	var orderid = $(".modal.modal--edit").attr("id");
+        $(".loader").addClass("loading");
+        $(".loader").css("display", "block");
+        $(".modal__head").css("display", "none");
+        $(".modal__desc").css("display", "none");
+        $(".btn.modal__button.btn--secondary.refund").css("display", "none");
+        $(".btn.modal__button.btn--secondary.nevermind").css("display", "none");
+        $(".btn.modal__button.btn--secondary.cancel").css("display", "none");
+        $(".modal__wrap").css("min-height","250px");
+      
+        var settings = {
+          "async": true,
+          "crossDomain": true,
+          "url": "https://puriumcancelorder.azurewebsites.net/api/ProcessRefund?orderid=" + orderid,
+          "method": "POST",
+          "headers": {}
+        }
+
+     $.ajax(settings).done(function (response) {
+       console.log(response);
+        $(".loader").css("display", "none");
+        $(".modal__wrap").css("min-height");
+        $(".modal__head").css("display", "block");
+        $(".modal__desc").css("display", "block");
+       if(response === "SUCCESS"){
+         $(".modal__head").text("Success!");
+         $(".modal__desc").text("Your order has been succesfully cancelled and refunded. Lookout for an email with confirmation");
+         $(".btn.modal__button.btn--secondary.finish").css("display", "block");
+       }else{
+         $(".modal__head").text("Uh oh !");
+         $(".modal__desc").text("Something went wrong. Click the link below to contact customer service for support with cancelling this order.");
+         $(".btn.modal__button.btn--secondary.finish").css("display", "block");
+         $(".btn.modal__button.btn--secondary.finish").text("Customer Service");
+         $(".btn.modal__button.btn--secondary.finish").attr("href", "https://docs.google.com/forms/d/e/1FAIpQLSe9O1GnjPbLUdPQTFk-_aGx66-5Nu1smNICOTgtzFM1Fw3Eqg/viewform?usp=sf_link"); 
+       }
+     });   
+      
+   });
+  });
+  
+</script>

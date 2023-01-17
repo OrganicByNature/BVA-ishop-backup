@@ -1,0 +1,209 @@
+.customer-template {
+  justify-content: space-between;
+  width: calc(100% - 30px);
+  max-width: 1120px;
+  margin-top: 70px;
+  padding: 0;
+  @include mq($global-breakpoint-md) {
+    padding: 0px;
+    margin-top: 40px;
+    margin-bottom: 120px;
+  }
+}
+
+.cust__header {
+  display: flex;
+  flex-basis: 100%;
+  width: 100%;
+  border-bottom: 2px solid $color-grey-border;
+  margin: 20px 0 0;
+  @include mq($global-breakpoint-md) {
+    margin: 0;
+  }
+}
+
+.cust__title {
+  margin: 0 0 -2px 0;
+  padding-bottom: 10px;
+  font-family: $global-font-bold;
+  font-size: 20px;
+  text-align: center;
+  letter-spacing: 0.5px;
+  flex-basis: 50%;
+  width: 50%;
+  @include mq($global-breakpoint-md) {
+    margin: 0 25px -2px 0;
+    font-size: 24px;
+    flex-basis: auto;
+    width: auto;
+  }
+  &.active {
+    color: $color-primary;
+    border-bottom: 2px solid $color-primary;
+  }
+}
+
+.cust__logout {
+  display: none;
+  margin-left: auto;
+  font-size: 16px;
+  position: relative;
+  bottom: -8px;
+  text-align: right;
+  @include mq($global-breakpoint-md) {
+    display: inline-block;
+  }
+}
+
+.cust__main {
+  width: 100%;
+  flex-basis: 100%;
+
+  @include mq($global-breakpoint-md) {
+    width: calc(100% - 225px);
+    flex-basis: calc(100% - 225px);
+    font-size: 32px;
+  }
+}
+
+.cust__sidebar {
+  position: relative;
+  width: 100%;
+  flex-basis: 100%;
+
+  @include mq($global-breakpoint-md) {
+    width: 225px;
+    flex-basis: 225px;
+  }
+}
+
+.customer-form {
+  text-align: center;
+
+  .form-title {
+    margin-bottom: $global-spacing-unit;
+    font-weight: bold;
+  }
+  .form-subtitle {
+    margin-bottom: $global-spacing-unit-sm;
+  }
+  .form-submit {
+    font-weight: bold;
+  }
+}
+
+.account-container {
+  .table-wrap:first-of-type {  
+    margin-bottom: 50px;
+  }
+  .h5:last-of-type {
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(0, 0, 0, .2);
+    margin-bottom: 30px;
+  }
+}
+
+.form-note {
+  border-radius: $global-radius;
+  padding: 14px;
+  border: $global-radius solid transparent;
+  font-size: 16px;
+  text-align: left;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+  &.is-success {
+    color: $color-success;
+    background-color: $color-success-alt;
+    border-color: $color-success;
+  }
+  &.is-error {
+    color: $color-error;
+    background-color: $color-error-alt;
+    border-color: $color-error;
+  }
+
+  .smart-order-error & {
+    margin: 0 0 16px;
+  }
+}
+
+.forgot-password {
+  font-family: $global-font-bold;
+  color: $color-thunder;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.shopify-challenge__button {
+  color: $color-white;
+  background-color: $color-primary;
+}
+
+.grid__item.one-half,
+.grid__item.large--one-half {
+  @include mq($global-breakpoint-md) {
+    width: 48%;
+    display: inline-block;
+
+    &:nth-child(even) {
+      margin-left: 3.2%
+    }
+  }
+  @include mq($global-breakpoint-lg) {
+    &:nth-child(even) {
+      margin-left: 3.2%
+    }
+  }
+}
+
+.grid__item.one-quarter,
+.grid__item.large--one-quarter {
+  @include mq($global-breakpoint-md) {
+    width: 22%;
+    display: inline-block;
+    margin-left: 3.2%
+  }
+  @include mq($global-breakpoint-lg) {
+    width: 22.2%;
+  }
+}
+
+.account__title {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.btn.text-link {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.step-1,
+.step-2 {
+  opacity: 0;
+  visibility: hidden;
+  height: 0;
+  margin: 0;
+  transition: all 0.3s ease-in-out;
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+    height: 50px;
+    margin-bottom: 24px;
+  }
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.phone-address {
+  display: none;
+}

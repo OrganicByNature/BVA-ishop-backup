@@ -1,0 +1,66 @@
+// /pages/about-smart-orders
+
+.so__wrap {
+  max-width: 940px;
+  padding-left: 15px;
+  padding-right: 15px;
+  text-align: center;
+}
+
+.so__title {
+  margin-bottom: 24px;
+  font-family: $global-font-bold;
+  font-size: 32px;
+  text-align: center;
+
+  @include mq($global-breakpoint-lg) {
+    margin-bottom: 34px;
+    font-size: 50px;
+  }
+}
+
+.so__content {
+  padding-bottom: 30px;
+  font-size: 18px;
+  line-height: 28px;
+  text-align: left;
+
+  @include mq($global-breakpoint-lg) {
+    font-size: 20px;
+    line-height: 32px;
+  }
+}
+
+.so_content--bottom {
+  padding-top: 10px;
+  padding-bottom: 0;
+  text-align: center;
+
+  @include mq($global-breakpoint-lg) {
+    padding-top: 20px;
+  }
+}
+
+.so__shop-now {
+  margin-top: 20px;
+  margin-bottom: 45px;
+  text-align: center;
+}
+
+.so__customer {
+  font-size: 18px;
+  text-align: center;
+
+  @include mq($global-breakpoint-lg) {
+    font-size: 20px;
+  }
+}
+
+.so__account {
+  font-size: 18px;
+  text-align: center;
+
+  @include mq($global-breakpoint-lg) {
+    font-size: 20px;
+  }
+}

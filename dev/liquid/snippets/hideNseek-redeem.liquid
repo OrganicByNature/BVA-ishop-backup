@@ -1,0 +1,64 @@
+<div class="rewards-redeem rewards-redeem--{{ section.id }}">
+	<div class="rewards-redeem__inner">
+		<h2 class="rewards-redeem__header" style="margin-bottom:20px;">{{ section.settings.header }}</h2>
+      	<h2 id="codes_remaining" style="color: #FFFFFF;text-align: center;">1/5 Codes Remaining</h2>
+      <p id="redeem_results"></p>
+        <div class="input-group" style="max-width: 400px; margin: 0 auto">
+          
+          {% if customer %}
+          <input id="code_input" placeholder="Enter your code" autocapitalize="words" style="margin-bottom:24px" autofocus required>
+          <button type="submit" class="form-submit btn btn--primary flex-12" style="background-color:#231F20; border:#231F20" onclick='redeemCode();'>Submit</button>
+          {% else %}
+          <button type="submit" class="form-submit btn btn--primary flex-12" style="background-color:#231F20; border:#231F20" onclick="window.location.href = '/account/login?return_url=/pages/hideNseek'">Log In</button>
+          {% endif %}
+        </div>
+	</div>
+</div>
+
+<style type="text/css">
+	.rewards-redeem--{{ section.id }} {
+		background-image: url('{{ section.settings.background_img | img_url: '1920x' }}');
+	}
+</style>
+
+<script>
+function redeemCode(){
+  var customer_id = '{{ customer.id }}';
+  var code = document.querySelector('#code_input').value;
+  var customer_email = '{{ customer.email }}';
+  
+  var hideObject = new Object();
+  hideObject.id = customer_id;
+  hideObject.code = code;
+  hideObject.email = customer_email;
+
+  var hideString = JSON.stringify(hideObject);
+  
+      var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://purium-rewards.azurewebsites.net/api/HideNseek?code=J6HBTZHwGfYV5wdACLISdzaLn9UWtVFDxAXyWpDOazPryEhZggXsxA==",
+        "method": "POST",
+        "headers": {
+          "content-type": "application/json"
+        },
+        "processData": false,
+        "data": hideString
+      }
+
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+        var resp = JSON.parse( response );
+        $(".modal__head").text(resp.header);
+        $(".modal__desc").text(resp.body);
+        if(resp.winner){
+       		 $("a[href='/pages/hideNseek']").attr('href', '/collections/quick-shop');
+          	 $(".btn.modal__button").text("Shop Now");
+             console.log("winner");
+        }
+        $("#hideSeekModal").css("display", "block");
+        $(".overlay").css("display", "block");
+      });
+};
+  
+</script>

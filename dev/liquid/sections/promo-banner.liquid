@@ -1,0 +1,91 @@
+<div class="header-top promo-banner">
+
+    <div class="promo-banner-container" js-promo-banner>
+
+        {%- for value_prop in section.blocks -%}
+            {% assign title = value_prop.settings.value_prop_title %}
+            {% assign text = value_prop.settings.value_prop_text %}
+            {% assign link_text = value_prop.settings.value_prop_link_text %}
+            {% assign link_url = value_prop.settings.value_prop_url %}
+            {% assign customers_only = value_prop.settings.customer_check%}
+
+            {% if customer and customer.orders_count > 0  %}
+
+                {% if customers_only %}
+
+                    <div class="value-prop init-hide" js-value-prop>
+
+                        {% unless title == empty %}
+                            <p class="value-prop__title">{{ title }}</p>
+                        {% endunless %}
+
+                        <p class="value-prop__text" data-full-text="{{ text | strip_html }}" js-value-prop-text>{{ text | truncate: 26, '...'}}</p>
+
+                        {% if link_text != empty and link_url != empty %}
+                            <a href="{{ link_url }}" class="value-prop__link">{{ link_text }}</a>
+                        {% endif %}
+
+                    </div>
+
+                {% endif %}
+
+            {% else %}
+
+                {% unless customers_only %}
+
+                    <div class="value-prop init-hide" js-value-prop>
+                        <p class="value-prop__title">{{ title }}</p>
+                        <p class="value-prop__text">{{ text }}</p>
+                        {% if link_text and link_url %}
+                            <a href="{{ link_url }}" class="value-prop__link">{{ link_text }}</a>
+                        {% endif %}
+                    </div>
+
+                {% endunless %}
+
+            {% endif %}
+
+        {%- endfor -%}
+    </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Promo Banner",
+    "blocks": [
+        {
+            "type": "value_prop",
+            "name": "Value Prop",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "value_prop_title",
+                    "label": "Title"
+                },
+                {
+                    "type": "text",
+                    "id": "value_prop_text",
+                    "label": "Text"
+                },
+                {
+                    "type": "text",
+                    "id": "value_prop_link_text",
+                    "label": "Link Text",
+                    "default": "See Details"
+                },
+                {
+                    "type": "url",
+                    "id": "value_prop_url",
+                    "label": "Link URL"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "customer_check",
+                    "label": "For Current Customers",
+                    "info": "Check to show to customers who have previously ordered."
+                }
+            ]
+        }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,31 @@
+<div class="rewards-slider">
+  <div class="rewards-slider__inner">
+    <h2 class="rewards-slider__header">{{ section.settings.header }}</h2>
+    <div class="colls-grid">
+      <div class='featured-products-container featured-products smart-order-products__slider'>
+        {% for product in collections[section.settings.collection].products %}
+          <div class="colls-grid__product product">
+            <a href="{{ product.url }}">
+              <div class="tag-img-container">
+                <img class="colls-grid__product-img" src="{{ product | img_url: '680x' | scale: 2 }}" />
+                <p class="rewards-slider__prod-title">{{ product.title }}</p>
+              </div>
+            </a>
+            <form class="pdp-info__form smart-add-to-cart-form" action="/cart/add" method="post">
+              <select id="single-product-select" class='smart-orders-select' name="id">
+                  {% for variant in product.variants %}
+                    <option value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
+                  {% endfor %}
+              </select>
+              <div class="pdp-info__submit-wrap">
+                  <input class="pdp-info__qty btn btn--secondary" type="hidden" value="1" name="quantity">
+                  <input class="product-a pdp-info__submit add-to-cart-button btn btn--primary" type="submit" value="Add to cart" />
+                </div>
+            </form>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<div class="grid-prod grid-prod--together">
+  {% include 'oval-badges' %} 
+  <a 
+  data-productdata="{% include 'product-json', mod_item: product %}" 
+  data-add-together 
+  data-variant="{{ product.selected_or_first_available_variant.id }}" 
+  ata-item-id="{{ product.id }}" 
+  data-exigo-type="{{ product.type }}" 
+  data-exigo-id="{{ product.metafields.global.item_id }}">
+    <div class="tag-img-container">
+      <img class="grid-prod__image" src="{{ product.featured_image | img_url: '390x', scale: 2 }}">
+      {% if newProductTag == 'true' %}
+        <div class="new-product-badge">NEW</div>
+      {% endif %}
+    </div>
+    <div class="grid-prod__info">
+    <h2 class="grid-prod__title">{{ product.title }}</h2>
+    {% if customer_discount == 1 or event %}
+      <div class="grid-prod__price price">{{product.price | money}}<span>{{product.compare_at_price | money}}</span></div>
+    {% else %}
+      <div class="grid-prod__price price member-price">{{product.price | times: customer_discount | ceil | money}}<span>{{product.price | money}}</span></div>
+    {% endif %}
+    </div>
+  </a>
+</div>

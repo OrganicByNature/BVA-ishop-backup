@@ -1,0 +1,24 @@
+{% layout none %}
+
+{% comment %}
+
+  This is where the liquid/markup for the cart's contents are produced. It will
+    be asynchronously retrieved and injected into:
+
+    <section class="inline-cart" data-inline-cart>
+
+  For example:
+
+    {% for line_item in cart.items %}
+      <div class="line-item">
+        <div class="line-item-image">
+          <img src="{{ line_item.product.featured_image | img_url: 'small'  }}" alt="" />
+        </div>
+        <div class="line-item-title">{{ line_item.title }}</div>
+        <div class="line-item-price">{{ line_item.price }}</div>
+        <div class="remove-item" data-variant-id="{{ line_item.variant_id }}">X</div>
+      </div>
+    {% endfor %}
+    <div class="subtotal">{{ cart.total_price }}</div>
+
+{% endcomment %}

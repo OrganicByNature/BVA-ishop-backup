@@ -1,0 +1,24 @@
+<script type="text/javascript">
+$(document).ready(function(){
+  	var value = '{{ customer.id }}';
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://purium-rewards.azurewebsites.net/api/Gc_HasBalance?code=71qVtoEJRnCEgSM/LIduopzhx6zARXVAAH6Pjgz04AC6LUDgSazjJA==",
+        "method": "POST",
+        "headers": {
+          "content-type": "application/json"
+        },
+        "processData": false,
+        "data": "{\"value\" : \"" + value + "\"}"
+      }
+      
+     $.ajax(settings).done(function (response) {
+       if (response) {
+    	   console.log(response);
+          	$(".order-summary__section--discount").css("display", "block");
+          	$('input[placeholder="Gift card or discount code"]').attr('placeholder', 'Purium Rewards Gift Card')
+		}
+      });
+});
+</script>

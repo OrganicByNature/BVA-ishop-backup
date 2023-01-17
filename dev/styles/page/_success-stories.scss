@@ -1,0 +1,26 @@
+.success-stories {
+  display: block;
+  flex-flow: row wrap;
+  @include mq($global-breakpoint-sm) {
+    display: flex;
+  }
+  .success-story {
+    width: 100%;
+    padding: 20px 0px;
+    @include mq($global-breakpoint-sm) {
+      padding: 10px;
+      flex-basis: 50%;
+    }
+    @include mq($global-breakpoint-md) {
+      flex-basis: 33.332%;
+      padding: 25px;
+    }
+    img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      object-position: top;
+    }
+  }
+}
+

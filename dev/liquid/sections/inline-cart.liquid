@@ -1,0 +1,37 @@
+{% include 'inline-cart', fields: section.settings, ticket_products: section.blocks %}
+
+{% schema %}
+{
+  "name": "Inline Cart",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Free Shipping Notice"
+    },
+    {
+      "type": "text",
+      "id": "inlinecart_free_shipping_min",
+      "label": "Min. Cart Total",
+      "default": "250"
+    },
+    {
+      "type": "collection",
+      "id": "collection_inline_cart",
+      "label": "Recommended Products Collection"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "ticket_products",
+      "name": "Ticket Products",
+      "settings": [
+        {
+          "id": "ticket_product",
+          "type": "product",
+          "label": "Select Ticket Product"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

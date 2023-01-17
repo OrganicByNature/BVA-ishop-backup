@@ -1,0 +1,21 @@
+<script>
+$( document ).ready(function() {
+  var shop_id = '{{ customer.id }}';
+  var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "https://purium.sunriseintegration.com/api/customers/" + shop_id,
+    "method": "GET",
+    "headers": {},
+    "processData": false,
+    "data": ""
+  }
+
+  $.ajax(settings).done(function (response) {
+    var exigo_id = response.exigo_id;
+    if(exigo_id){
+    	$("a[href='/collections/upgrade']").attr('href', 'https://puriumenrollment.com/#/Enrollment?customerId=' + exigo_id);
+    }
+  });
+});
+</script>

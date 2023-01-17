@@ -1,0 +1,75 @@
+
+$badge-spacing: 5px;
+$badge-height-mobile: 20px;
+$badge-height-desktop: 20px;
+
+.oval-badge {
+  height: 20px;
+  min-width: 100px;
+  position: absolute;
+  left: -10px;
+  z-index: 5;
+  border-radius: 100px;
+  padding: 0 5px;
+  
+  @include mq($global-breakpoint-md) {
+    left: -15px;
+    height: 22px;
+    min-width: 130px;
+  }
+  
+  &:nth-of-type(1) {
+    top: $badge-spacing;
+
+    @include mq($global-breakpoint-md) {
+      top: $badge-spacing;
+    }
+  }
+  &:nth-of-type(2) {
+    top: #{$badge-height-mobile + $badge-spacing * 2};
+    
+    @include mq($global-breakpoint-md) {
+      top: #{$badge-height-desktop + $badge-spacing * 2};
+    }
+  }
+  &:nth-of-type(3) {
+    top: #{$badge-height-mobile * 2 + $badge-spacing * 3};
+    
+    @include mq($global-breakpoint-md) {
+      top: #{$badge-height-desktop * 2 + $badge-spacing * 3};
+    }
+  }
+  &:nth-of-type(4) {
+    top: #{$badge-height-mobile * 3 + $badge-spacing * 4};
+    
+    @include mq($global-breakpoint-md) {
+      top: #{$badge-height-desktop * 3 + $badge-spacing * 4};
+    }
+  }
+  
+  p {
+    margin: 0;
+    color: #fff;
+    font-size: 12px;
+    letter-spacing: 1.17px;
+    text-transform: uppercase;
+    font-family: $global-font-medium !important;
+    text-align: center;
+    
+    @include mq($global-breakpoint-md) {
+      font-size: 14px;      
+    }
+  }
+}
+
+
+.pdp-image .oval-badge {
+  left: 0;
+
+  @include mq($global-breakpoint-sm) {
+    left: 10px;
+  }
+  @include mq($global-breakpoint-lg) {
+    left: -15px;
+  }
+} 

@@ -1,0 +1,66 @@
+<!-- /templates/customers/register.liquid -->
+{% include 'customer-metafields' %}
+{% include 'CBD-From-Magento' %}
+{% include 'get_EnrollerName' %}
+{% include 'email_error' %}
+
+<section class="customer-template register-container flex flex-justify-center" style="margin: auto; padding-top: 40px; padding-bottom: 120px; max-width: 600px;">
+  <div class="flex-4-md col-login">
+      <div class="customer-form flex-form">
+        {% form 'create_customer' %}
+          {% if form.errors %}
+            <div class="form-note is-error">
+              <ul>
+                {% for error in form.errors %}
+                  <li>{{ form.errors.translated_fields[error] }} error: {{ form.errors.messages[error] }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+
+          <h2 id="gcode_ref" >Gift / Referral Code</h2>
+
+          <div class="input-group flex-12 step-2">
+            <label for="first-name" class="hidden-label">First Name</label>
+            <input type="hidden" name="customer[first_name]" id="first-name" class="" placeholder="First Name" autocapitalize="words" autofocus required>
+          </div>
+
+          <div class="input-group flex-12 step-2">
+            <label for="last-name" class="hidden-label">Last Name</label>
+            <input type="hidden" name="customer[last_name]" id="last-name" class="" placeholder="Last Name" autocapitalize="words" required>
+          </div>
+
+          <div class="input-group flex-12 step-2">
+            <label for="telephone" class="hidden-label">Phone</label>
+            <input type="tel" name="customer[phone]" id="telephone" class="" placeholder="Phone">
+          </div>
+
+          <div class="input-group flex-12 step-2">
+            <label for="email" class="hidden-label">Email</label>
+            <input type="hidden" name="customer[email]" id="email" class="{% if form.errors contains 'email' %}error{% endif %}" placeholder="Email" autocorrect="off" autocapitalize="off" required>
+          </div>
+
+          <div class="input-group flex-12 step-2">
+            <label for="create-password" class="hidden-label">Password</label>
+            <input type="hidden" name="customer[password]" id="create-password" class="{% if form.errors contains 'password' %}error{% endif %}" placeholder="Password" required>
+          </div>
+
+          <div class="input-group flex-12 step-1 active">
+            <label for="web-alias" class="hidden-label">Gift Card / Web Alias</label>
+            <input type="text" name="customer[web_alias]" id="web-alias" class="" required>
+          </div>
+
+          <div class="input-group flex-12">
+            <button id="submit" type="submit" class="form-submit btn btn--primary flex-12 check-web-alias">Submit</button>
+          </div>
+
+          <div class="input-group flex-12">
+            <a href="{{ shop.url }}" class="text-link less-margin reset-text">RETURN TO STORE</a>
+          </div>
+
+        {% endform %}
+      </div>
+
+    </div>
+
+</section>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="35px" height="45px" viewBox="0 0 35 45" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 45.2 (43514) - http://www.bohemiancoding.com/sketch -->
+    <title>badge-kosher</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Badge-/-Kosher">
+            <g id="badge-kosher">
+                <g id="Group-2" stroke-width="2" stroke="#828282">
+                    <circle id="Oval" cx="17.5" cy="17.5" r="16.5"></circle>
+                </g>
+                <text id="KOSHER" font-family="BrandonGrotesque-Bold, Brandon Grotesque" font-size="8" font-weight="bold" fill="#828282">
+                    <tspan x="1.92" y="44">KOSHER</tspan>
+                </text>
+                <polygon id="Path-4" fill="#828282" points="8.38769531 9.37255859 8.38769531 25.6411133 14.1333008 25.6411133 14.1333008 18.965332 20.9804688 25.6411133 28.9526367 25.6411133 19.5405273 15 27.309082 9.37255859 20.9804688 9.37255859 14.1333008 14.1318359 14.1333008 9.37255859"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

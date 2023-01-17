@@ -1,0 +1,47 @@
+<script type="text/javascript">
+  
+$( document ).ready(function( $ ) {
+  
+  var customerid = '{{ customer.id }}';
+  var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "https://puriumcancelorder.azurewebsites.net/api/EligibleOrders?customerid=" + customerid,
+    "method": "GET",
+    "headers": {}
+  }
+
+  $.ajax(settings).done(function (response) {
+    console.log('eligibleorders:' + response);
+    var obj = JSON.parse(response);
+    for (i in obj.orderids) {
+      var table = $(".orders");
+      table.find('.orders__data').each(function(c) {
+        var $tds = $(this).find('.orders__cell.orders__cell--number'),
+            orderid = $tds.eq(0).text();
+        var $tda = $(this).find('.orders__cell.orders__cell--total'),
+            amount = $tda.eq(0).text();
+        if (orderid === obj.orderids[i]) {
+          // do something with productId, product, Quantity
+          console.log('Row ' + (c + 1) + ':\nORDERID: ' + orderid);
+          $tds.css({ "display": "grid" });
+          $tds.append("<p id="+ orderid +":"+ amount + " class=\"orders__to-cancel\" style=\"color:red;text-decoration: underline;font-size: 14px;cursor:pointer\">EDIT</p>");
+        }
+      });
+    };
+   	
+    
+    <!-- Activate Modal -->
+    $( ".orders__to-cancel" ).click(function() {
+		var orderData = $(this).attr('id');
+       	var orderArray = orderData.split(':'),
+            orderid = orderArray[0], orderamount = orderArray[1];
+        $(".modal.modal--edit").css( "display", "block" );
+        $(".modal.modal--edit").attr("id",orderid);
+        $(".modal.modal--edit").attr("amount",orderamount);
+    });
+    
+  }); 
+}); 
+  
+</script>

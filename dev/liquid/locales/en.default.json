@@ -1,0 +1,32 @@
+{
+  "shopify": {
+    "checkout": {
+      "order_summary": {
+        "taxes_label": "Estimated Taxes",
+        "gift_card_and_discount_placeholder": "Purium Rewards Code",
+        "gift_card_and_discount_title": "Purium Rewards Code",
+        "gift_card_and_discount_label": "Purium Rewards Code"
+      },
+      "shipping": {
+        "shipping_method_notice": "Free Shipping is 5-14+ day delivery. Will Call is immediately ready for pick-up M-F 8:00am-5:30pm. 2-Day Shipping is 2-4 day delivery. See Terms and Conditions for complete Shipping Policy. *PLEASE NOTE* Although the option may be given for FedEx to deliver to your PO Box, the package WILL ship USPS since FedEx cannot deliver to a PO Box. ",
+        "shipping_line_phone_label": "Shipping Phone Number"
+      },
+      "contact": {
+        "email_or_phone_label": "Shipping Phone Number",
+        "email_or_phone_placeholder": "Shipping Phone Number",
+        "phone_label": "Shipping Phone Number - In case we need to contact you about your order",
+        "phone_placeholder": "Shipping Phone Number"
+      },
+      "field_errors": {
+        "handle_phone_invalid": "Shipping Phone Number - In case we need to to contact you about your order",
+        "shipping_line_phone_blank": "Shipping Phone Number - In case we need to to contact you about your order",
+        "shipping_line_phone_invalid": "Shipping Phone Number - In case we need to to contact you about your order"
+      }
+    }
+  },
+  "plus": {
+    "product": {
+      "out_of_stock": "Out of stock"
+    }
+  }
+}

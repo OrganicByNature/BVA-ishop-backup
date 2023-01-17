@@ -1,0 +1,70 @@
+{%- assign collection_image_desktop = collection.image | img_url: '1440x' -%}
+{%- assign collection_image_mobile = '' -%}
+{%- assign custom_images_specified = false -%}
+{%- assign custom_mobile_image_specified = false -%}
+{%- for block in section.blocks -%}
+  {%- if collection.handle == block.settings.coll -%}
+    {% assign custom_images_specified = true %}
+    {%- assign collection_image_mobile = block.settings.image_mobile | default: '' -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- if collection_image_mobile != blank -%}
+  {%- assign collection_image_mobile = collection_image_mobile | img_url: '767x' -%}
+  {%- assign custom_mobile_image_specified = true -%}
+{%- endif -%}
+
+<div class="banner collections__banner{% if custom_images_specified == true %} custom_images_specified{% endif %}{% if custom_mobile_image_specified == true %} banner__has-mobile-image{% endif %}">
+  <img class="banner__img banner__desktop" src="{{ collection_image_desktop }}" alt="{{ }}" />
+  {% if collection_image_mobile != blank %}
+  <img class="banner__img banner__mobile" src="{{ collection_image_mobile }}" alt="{{  }}" />
+  {% endif %}
+  <div class="banner__desc">
+    
+    {% if collection.metafields.c_f.Collection_Banner_Text != blank %}
+    <p class="banner__para">{{ collection.metafields.c_f.Collection_Banner_Text }}</p>
+    {% endif %}
+  </div>
+</div>
+
+{%- schema -%}
+  {
+  "name": "Collection Hero",
+    "settings": [
+      {
+        "type": "header",
+        "content": "How To"
+      },
+      {
+        "type": "paragraph",
+        "content": "By default the image selected on the Collection admin page is displayed."
+      },
+      {
+        "type": "paragraph",
+        "content": "In order to provide a custom mobile image for a collection, please add an `Image Set`."
+      },
+      {
+        "type": "paragraph",
+        "content": "Select a collection under the `Image Set` section and select your custom mobile image for the selected collection."
+      }
+    ],
+    "blocks": [
+      {
+        "type": "image_set",
+        "name": "Image Set",
+        "settings": [
+          {
+            "type": "collection",
+            "id": "coll",
+            "label": "Select Collection"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_mobile",
+            "label": "Mobile Image",
+            "info": "(Optional) Defaults to the image set on the collection edit page. Recommended size 767px wide"
+          }
+        ]
+      }
+    ]
+  }
+{%- endschema -%}

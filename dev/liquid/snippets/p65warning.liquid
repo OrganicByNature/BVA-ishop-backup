@@ -1,0 +1,26 @@
+{% if checkout.shipping_address.province == 'California' %}
+{% for item in checkout.line_items %}
+{% if item.product.tags contains 'p65' %}         		
+{% assign p65 = true %}
+{% break %}
+{% endif %}
+{% endfor %}
+{% endif %}
+
+{% if p65 %}
+<div class="section" style="padding-bottom: 10px;">
+  <div class="content-box">
+    <div role="grid" class="content-box__row content-box__row--tight-spacing-vertical">
+      <div role="row" class="review-block">
+        <div class="review-block__inner">
+          <div role="gridcell" class="review-block__label">WARNING</div>
+          <div role="gridcell" class="review-block__content">Reproductive harm - <a href="https://p65warnings.ca.gov" target="_blank">https://www.p65warnings.ca.gov</a></div>
+        </div>
+        <div role="gridcell" class="review-block__link">
+          <img src="https://cdn.shopify.com/s/files/1/2062/5235/files/p65.png?2066086943921174089">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}

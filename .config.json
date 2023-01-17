@@ -1,0 +1,4 @@
+{
+  "babel": true,
+  "browserSupport": ["> 2.5% in US", "ie 11"]
+}

@@ -1,0 +1,67 @@
+{% include 'customer-metafields' %}
+<div class="page-wrapper">
+<h1 class="page-title">Support</h1>
+  <div class="support-wrapper">
+  {% form 'contact' %}
+
+    {% if form.posted_successfully? %}
+      <div class="successForm feedback">
+       Thank you! Your message has been sent.
+      </div>
+    {% endif %}
+
+    {% if form.errors %}
+    <div class="errorForm feedback">
+      <p>Oops! Something went wrong. Please check that everything was enterred correctly.</p>
+    </div>
+    {% endif %}
+
+    <div id="contactFormWrapper">
+      <p>
+        <label>Your Name</label>
+        <input type="text" required id="contactFormName" name="contact[name]">
+      </p>
+      <p>
+        <label>Your Email</label>
+        <input type="email" required id="contactFormEmail" name="contact[email]">
+      </p>
+      <p>
+        <label>Your Phone Number</label>
+        <input type="telephone" id="contactFormTelephone" name="contact[phone]">
+      </p>
+      <p>
+        <label>Your Message</label>
+        <textarea required rows="10" id="contactFormMessage" name="contact[body]"></textarea>
+      </p>
+      <p>
+        <input type="submit" id="contactFormSubmit" value="Send" class="btn btn--primary"/>
+      </p>
+    </div>
+
+    {% endform %}
+    <div class="contact-content">
+      <div class="padding-wrapper">
+        <div class="address-wrapper contact-row1">
+          <h2>Contact Us</h2>
+          <h3>Purium Health Products</h3>
+          <h3>1495 Seabright Ave</h3>
+          <h3>Long Beach, CA</h3>
+          <h3>USA 90813</h3>
+        </div>
+        <div class="contact-row2">
+          <h3><strong>US/Canada Customer Service:</strong> <a href="tel:888-747-6733" class="text-link">888-PHP-ORDER (888-747-6733)</a><br /></h3>
+          <h3><strong>Fax:</strong> 866-PHP-FAX1 (866-747-3291)<br /></h3>
+          <h3><strong>Email: <a href="mailto:support@puriumcorp.com" class="text-link">support@puriumcorp.com</a></strong><br /></h3>
+        </div>
+        <div class="hours-wrapper">
+          <h2>Call Center Hours</h2>
+          <h3>Monday-Friday</h3>
+          <h3>6:00 AM - 7:00 AM</h3>
+          <p><strong>Michael Wohlfeld, ND</strong> - is is available to help with health concerns and questions you may have on Purium products. Consultations are ABSOLUTELY FREE.</p>
+          <p><strong>Toll-Free Number:</strong><a href="tel:800-962-5433" class="text-link">800-962-LIFE (5433)</a></p><br />
+          <p><strong>Email:</strong> <a href="mailto:PuriumNaturopath@gmail.com" class="text-link">PuriumNaturopath@gmail.com</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<!-- /templates/customers/account.smart-order.liquid -->
+{% include 'customer-metafields' %}
+<section class="customer-template account-container flex flex--wrap page-wrapper cust__template--smart-order">
+  <header class="cust__header">
+    <h2 class="cust__title cust__title--my"><a href="/account">My Account</a></h2>
+    <h1 class="cust__title cust__title--smart active">Smart Order</h1>
+    <a href="/account/logout" class="cust__logout text-link">Log Out</a>
+  </header>
+
+  <div class="flex-4-md cust__sidebar">
+    {% include 'smart_order_nav' with 'Current Smart Order' %}
+  </div>
+
+  <div class="flex-8-md cust__main">
+    <h2 class="h4 so__header">Current Smart Order </h2>
+
+    <div class="so__current so__current--none">
+      {% comment %}
+      <h6 class="so__steps">Start a smart order in just two simple steps:</h6>
+      {% endcomment %}
+      <p class="so__step so__step--one">1. Add your <a href="account?view=billing" class="so__step-link">payment information</a> to your account.</p>
+      <p class="so__step so__step--instructions">- (Credit Card info is not stored for security purposes until you are ready for a subscription) <br> - After entering your Credit Card info you may see the statement "You haven't entered a payment method yet!" Please disregard and go to Step 2 - Add Products. </p>
+      <p class="so__complete so__complete--one">{% include 'icon-svg' with 'check' %} COMPLETE!</p>
+      <p class="so__step so__step--two">2.<a href="/account?view=add-item" class="so__step-link">Add Products to your Smart Order.</a></p>
+      <p class="so__step so__step--three">3.<a href="/account?view=delivery" class="so__step-link">Choose your Monthly Subscription Order date.</a></p>
+    </div>
+
+    <div class="so__current so__current--order">
+      <h5 class="so__current-ships">Ships to: <span class="so__current-ships-to"></span><a class="so__current-address-edit" href="/account?view=payment">Edit</a></h5>
+
+      <div class="so__current-table">
+      </div>
+
+      <div class="so__totals-wrap">
+        <h6 class="so__current-total">TOTAL PRICE: <span class="so__current-total-price"></span></h6>
+        {% if rank == '10' or rank == '17' or rank == '19' or rank == '21' %}
+        <h6 class="so__current-bv">TOTAL BV: <span class="so__current-bv-amount"></span></h6>
+        {% endif %}
+      </div>
+
+      <a class="so__start-btn btn btn--primary" href="/account?view=add-item" title="Add an Item">+ Add an Item</a>
+    </div>
+
+  </div>
+  
+</section>
+
+<div class="modal modal--item-cancelled" data-modal="item-cancelled">
+  <div class="modal__wrap">
+    <h2 class="modal__head">Smart Order Cancelled</h2>
+    <p class="modal__desc">The delivery of this item on all future deliveries has been cancelled.</p>
+    <a class="btn modal__button btn--primary" href="javascript:;" data-close-cancel>Got It</a>
+  </div>
+</div>

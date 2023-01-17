@@ -1,0 +1,39 @@
+{% include 'hideNseek-redeem' %}
+
+{% schema %}
+{
+	"name": "Rewards Redeem",
+	"settings": [
+		{
+			"type": "text",
+			"id": "header",
+			"label": "Header",
+			"default": "Redeem Your Points and Save"
+		},
+		{
+			"type": "image_picker",
+			"id": "background_img",
+			"label": "Background Image"
+		}
+	],
+	"blocks": [
+		{
+			"name": "Redeem Block",
+			"type": "redeem_block",
+			"limit": 2,
+			"settings": [
+				{
+					"type": "text",
+					"id": "point_thresh",
+					"label": "Point Threshold"
+				},
+				{
+					"type": "text",
+					"id": "discount",
+					"label": "Dollar Discount"
+				}
+			]
+		}
+	]
+}
+{% endschema %}

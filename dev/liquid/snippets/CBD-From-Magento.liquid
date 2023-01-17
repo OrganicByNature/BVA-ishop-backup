@@ -1,0 +1,14 @@
+<script type="text/javascript">
+   $(document).ready(function() {
+     var urlParams = new URLSearchParams(window.location.search);
+     if(urlParams.has('giftcard')){
+     	document.getElementById('web-alias').value=value[1];
+     }
+     if(urlParams.has('magento')){
+     	localStorage.setItem('magento', 'true');
+     }
+     if(urlParams.has('user_email')){
+     	document.getElementById('customer-email').value= urlParams.get('user_email');
+   	 }
+ });
+</script>

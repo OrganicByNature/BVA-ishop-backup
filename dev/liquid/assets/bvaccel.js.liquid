@@ -1,0 +1,2963 @@
+! function(e, t, i) {
+    "use strict";
+    var r, n = function() {
+            var e = t(".account__edit-email").val(),
+                i = function(e) {
+                    t("[data-save-contact]").hide(), t("[data-edit-contact]").show(), t(".account__email-phone").html(e)
+                };
+            if ("" != e) t.get("//purium-admin-products.herokuapp.com/edit-user?customer=" + window.customer.id + "&email=" + e).done(function(e) {
+                console.log("Data Loaded: ", e), void 0 !== e.errors ? (t(".account__email-phone").append('<p class="account__edit-error">Email ' + e.errors.email[0] + "</p>"), console.log('typeof data.errors != "undefined" its true, so errors')) : (console.log("success"), i(e.customer.email))
+            });
+            else i(r)
+        },
+        o = function() {
+            t(".cust__logout").on("click", function(e) {
+                e.preventDefault(), CartJS.clear(), window.location.href = t(this).attr("href")
+            }), t("[data-edit-contact]").on("click", function() {
+                ! function() {
+                    t("[data-edit-contact]").hide(), t("[data-save-contact]").show();
+                    var e = t(".account__email-phone").text();
+                    r = e, t(".account__email-phone").html('<form class="account__edit-form"><input class="account__edit-email" type="text" value="' + e + '" /></form>'), t(".account__edit-email").select()
+                }()
+            }), t("body").on("click", "[data-save-contact]", function() {
+                n()
+            }), t("body").on("submit", ".account__edit-form", function(e) {
+                e.preventDefault(), n()
+            })
+        };
+    e.init = function() {
+        void 0 !== window.customer && "" != window.customer.gift_card_code && t.get("https://purium.sunriseintegration.com/api/affiliate?code=" + window.customer.gift_card_code).done(function(e) {
+            t(".uses-left").html(e.uses_left)
+        }), o()
+    }
+}(window.Account = window.Account || {}, jQuery),
+function(e, t) {
+    "use strict";
+    var i, r, n, o = 0,
+        a = 0,
+        s = t('<div class="empty-cart__contents"><p class="empty-cart__text">Your cart is empty.</p><a class="btn btn--secondary" href="/collections/quick-shop">Get Shopping!</a></div>'),
+        c = function() {
+            o = 0, a = 0, t(".prod-summary__qty-input").each(function(e, s) {
+                i = t(this).val(), r = parseFloat(t(this).parents(".prod-summary").find(".prod-summary__price-reg").html().replace("$", "")), n = parseFloat(t(this).parents(".prod-summary").attr("data-bv")), o += i * r, a += i * n, t(".subtotal span").html("$" + o.toFixed(2)), t(".bvtotal .bv-span").html(a), t(".subtotal").data("subtotal", 100 * o), Cart.setUp()
+            })
+        };
+    e.init = function() {
+        t(".prod-summary__qty-input").on("keyup input", function(e) {
+            t(this);
+            var i = t(this).parents(".prod-summary").attr("data-variant-id"),
+                r = parseInt(t(this).val()),
+                n = t(this).closest(t(".prod-summary"));
+            CartJS.updateItemById(i, r, {}, {
+                success: function(e, i, o) {
+                    c(), t(".header .cart-link span").css("display", "none"), r < 1 && n.remove(), t(".one-time-orders .prod-summary").length < 1 && (t(".cart-contents").remove(), t(".prod-summary-wrapper").append(s))
+                }
+            })
+        }), c()
+    }
+}(window.AddCart = window.AddCart || {}, jQuery);
+var _extends = Object.assign || function(e) {
+    for (var t = 1; t < arguments.length; t++) {
+        var i = arguments[t];
+        for (var r in i) Object.prototype.hasOwnProperty.call(i, r) && (e[r] = i[r])
+    }
+    return e
+};
+
+function _asyncToGenerator(e) {
+    return function() {
+        var t = e.apply(this, arguments);
+        return new Promise(function(e, i) {
+            return function r(n, o) {
+                try {
+                    var a = t[n](o),
+                        s = a.value
+                } catch (e) {
+                    return void i(e)
+                }
+                if (!a.done) return Promise.resolve(s).then(function(e) {
+                    r("next", e)
+                }, function(e) {
+                    r("throw", e)
+                });
+                e(s)
+            }("next")
+        })
+    }
+}! function(e, t) {
+    "use strict";
+    var i = this;
+    e.kits = {};
+    var r, n = [],
+        o = function(e) {
+            return "$" + parseFloat(Math.round(100 * e) / 100).toFixed(2)
+        },
+        a = function(e) {
+            return fetch(e).then(function(e) {
+                return e.status >= 200 && e.status < 300 ? Promise.resolve(e) : Promise.reject(new Error(e.statusText))
+            }).then(function(e) {
+                return e.json()
+            }).then(function(e) {
+                return console.log("Request succeeded with JSON response", e), e
+            }).catch(function(e) {
+                console.log("Request failed", e)
+            })
+        },
+        s = function(r) {
+            var n, s = [],
+                c = "",
+                l = (window.findifyProdPrice, n = _asyncToGenerator(regeneratorRuntime.mark(function t(r) {
+                    var n, s, l, d, u, p, f, h, m, v, g, _, w;
+                    return regeneratorRuntime.wrap(function(t) {
+                        for (;;) switch (t.prev = t.next) {
+                            case 0:
+                                if (n = window.customer && 1 == window.customer.discount || !window.customer ? "" + o(r.price[0]) : o(r.price[0] * window.customer.discount) + "<span>" + o(r.price[0]) + "</span>", s = r.tags.find(function(e) {
+                                        return e.toLowerCase().indexOf("exigo_id:") >= 0
+                                    }) ? r.tags.find(function(e) {
+                                        return e.toLowerCase().indexOf("exigo_id:") >= 0
+                                    }).split(":")[1].replace(" ", "") : "3551", l = "", d = window.customer ? window.customer.discount : 1, !(r.category[0].category1.indexOf("Dynamic Kit") >= 0)) {
+                                    t.next = 24;
+                                    break
+                                }
+                                return u = {}, t.next = 8, a("//shopifyexigoitemcontentsync.azurewebsites.net/api/get-prod-meta?product_id=" + r.id);
+                            case 8:
+                                p = t.sent, f = JSON.parse(p.metafields.find(function(e) {
+                                    return "materials" == e.key
+                                }).value).materials, t.t0 = regeneratorRuntime.keys(f);
+                            case 11:
+                                if ((t.t1 = t.t0()).done) {
+                                    t.next = 22;
+                                    break
+                                }
+                                return h = t.t1.value, m = f[h], v = h.replace(/[^\w\s]/g, "").replace(/ /g, "-"), t.next = 17, a("//shopifyexigoitemcontentsync.azurewebsites.net/api/get-prod?product_id=" + m.default+"&params=variants,title");
+                            case 17:
+                                g = t.sent, u[v] = "[id: " + g.product.variants[0].sku + ", qty: 1]", m.variants && m.variants.length > 1 && (u["selected-" + v] = g.product.title + "(x1)"), t.next = 11;
+                                break;
+                            case 22:
+                                l = 'data-dynamics="' + r.selected_variant_id + '"', e.kits[r.selected_variant_id] = u;
+                            case 24:
+                                _ = r.tags.map(function(e, t) {
+                                    if (e.includes("oval-icon::")) {
+                                        var i = e.split("::");
+                                        return {
+                                            text: i[1],
+                                            color: i[2],
+                                            order: i[3]
+                                        }
+                                    }
+                                }).sort(function(e, t) {
+                                    return e.order - t.order
+                                }).map(function(e) {
+                                    return e ? "<div class='oval-badge' style='background-color: " + e.color + "'><p>" + e.text + "</p></div>" : ""
+                                }), w = '\n      <div class="grid-prod grid-prod--together">\n        ' + _.join("") + '\n        <a data-add-together data-variant="' + r.selected_variant_id + '" data-item-id="' + r.id + '" data-exigo-type="' + r.category[0].category1 + '" data-exigo-id="' + s + '" ' + l + '>\n          <div class="tag-img-container">\n            <img class="grid-prod__image" src="' + r.image_url.replace("_medium", "") + '" />\n          </div>\n          <div class="grid-prod__info">\n            <h2 class="grid-prod__title">' + r.title + '</h2>\n            <div class="grid-prod__price price">' + n + "</div>\n          </div>\n          </a>\n      </div>", c += w, r.price[0], d;
+                            case 29:
+                            case "end":
+                                return t.stop()
+                        }
+                    }, t, i)
+                })), function(e) {
+                    return n.apply(this, arguments)
+                });
+            r.forEach(function(e) {
+                s.push(l(e))
+            }), Promise.all(s).then(function() {
+                t("[data-together-slider]").append(c), t("[data-together-slider]").slick({
+                    slide: ".grid-prod",
+                    infinite: !0,
+                    slidesToScroll: 1,
+                    slidesToShow: 1,
+                    centerMode: !0,
+                    centerPadding: "50px",
+                    arrows: !0,
+                    prevArrow: "<div class='slick-prev'><img src={{ 'Left.svg' | asset_url }} /></div>",
+                    nextArrow: "<div class='slick-next'><img src={{ 'Right.svg' | asset_url }} /></div>",
+                    mobileFirst: !0,
+                    responsive: [{
+                        breakpoint: 500,
+                        settings: {
+                            arrows: !0,
+                            slidesToShow: 3,
+                            centerMode: !1
+                        }
+                    }, {
+                        breakpoint: 1050,
+                        settings: {
+                            arrows: !0,
+                            slidesToShow: 5,
+                            centerMode: !1
+                        }
+                    }]
+                })
+            })
+        },
+        c = (r = _asyncToGenerator(regeneratorRuntime.mark(function r(o) {
+            var a, s, c, l, d, u, p, f, h, m, v = arguments.length > 1 && void 0 !== arguments[1] && arguments[1];
+            return regeneratorRuntime.wrap(function(i) {
+                for (;;) switch (i.prev = i.next) {
+                    case 0:
+                        return a = o.attr("data-variant"), s = o.attr("data-item-id"), c = o.attr("data-exigo-type"), l = o.attr("data-exigo-id"), d = o.attr("data-productdata"), u = t(".together-all__atc"), p = {
+                            delivery: "One-time Order",
+                            qty: "1",
+                            type: c,
+                            id: l
+                        }, o.is("[data-dynamics]") && (f = e.kits[o.attr("data-dynamics")], p = _extends({
+                            delivery: "One-time Order",
+                            qty: "1",
+                            type: c,
+                            id: l
+                        }, f)), !(h = n.find(function(e) {
+                            var t = e.id;
+                            return s === t
+                        })) && d && (h = JSON.parse(decodeURIComponent(d.replace(/\+/g, " ")))), i.next = 12, Exigo.prepareProductProperties(h);
+                    case 12:
+                        m = i.sent, p = Exigo.setPropertyQtys(m, 1), v && u.html("ADDING..."), CartJS.addItem(a, 1, p, {
+                            success: function(e, i, r) {
+                                o.closest(".together-prod").addClass("together-prod--added"), o.toggleClass("btn--primary btn--secondary").attr("data-quantity", e.quantity), v && u.html("ADDED ALL THREE!"), Product.updateNavCart(), setTimeout(function() {}, 5e3), Findify.sdk.feedback("click-item", {
+                                    item_id: s
+                                }), Findify.sdk.feedback("add-to-cart", {
+                                    item_id: s,
+                                    rid: window.findifyProdId,
+                                    quantity: 1
+                                }), 3 == t(".together-prod--added").length && (t(".together-all__atc").removeClass("btn--primary").addClass("btn--secondary").text("UNDO ALL THREE"), t(".together-all").addClass("together-all--added"))
+                            },
+                            error: function(e, t, i) {
+                                console.log("Error: " + i + "!")
+                            }
+                        });
+                    case 16:
+                    case "end":
+                        return i.stop()
+                }
+            }, r, i)
+        })), function(e) {
+            return r.apply(this, arguments)
+        }),
+        l = function(e) {
+            var i = e.attr("data-variant"),
+                r = e.attr("data-quantity") - 1;
+            CartJS.updateItemById(i, r, null, {
+                success: function(i, r, n) {
+                    e.closest(".together-prod").removeClass("together-prod--added"), e.toggleClass("btn--primary btn--secondary").html("+ ADD");
+                    var o = parseInt(t(".fa-shopping-cart span").html());
+                    t(".fa-shopping-cart span").html(o - 1), setTimeout(function() {}, 5e3), t(".together-all__atc").addClass("btn--primary").removeClass("btn--secondary").text("+ ADD ALL THREE"), t(".together-all").removeClass("together-all--added")
+                },
+                error: function(e, t, i) {
+                    console.log("Error: " + i + "!")
+                }
+            })
+        };
+    e.init = function() {
+        window.findifyProdId ? function e() {
+            var t = {
+                name: "request",
+                item_id: window.findifyProdId,
+                limit: 2
+            };
+            Findify.sdk.recommendations("bought", t).then(function(e) {
+                console.log("bought together data", e), s(e.items), n = n.concat(e.items)
+            }, function(t) {
+                console.log("bought together error", t), e()
+            })
+        }() : slickRecs(), t(document).on("click", "[data-add-together]", function() {
+            t(this).closest(".together-prod--added").length ? l(t(this)) : c(t(this))
+        }), t(document).on("click", ".together-all__atc", function() {
+            t(this).closest(".together-all--added").length ? t("[data-add-together]").each(function() {
+                l(t(this))
+            }) : t(".grid-prod--together:not(.together-prod--added) [data-add-together]").each(function() {
+                c(t(this), !0)
+            })
+        })
+    }
+}(window.BoughtTogether = window.BoughtTogether || {}, jQuery),
+function(e, t) {
+    "use strict";
+    var i, r, n, o, a = t(".single-order__confirm"),
+        s = t(".cart-action .btn").not(".qualify-75--button"),
+        c = "step=contact_information&discount=",
+        l = function() {
+            console.log("exigofying cart");
+            t.get("/cart.js", null, null, "json").done(function(e) {
+                console.log(e);
+                for (var r, n, o, a, s, c, l, d, u, p = function(e) {
+                        for (var t = e.split("["), i = "", r = 0; r < t.length; r++) i += t[r].split(", qty")[0];
+                        return i
+                    }, f = function(e, t) {
+                        var i = e.split("qty: ")[1];
+                        return Number(i.split("]")[0]) * t
+                    }, h = function(e, t) {
+                        var i = e.split("(x")[1];
+                        return Number(i.split(")")[0]) * t
+                    }, m = [], v = {}, g = [], _ = 0; _ < e.items.length; _++) void 0 === m[e.items[_].id] && (m[e.items[_].id] = []), m[e.items[_].id].push(_);
+                for (var w in console.log("ids", m), m) {
+                    if ((r = e.items[m[w][0]]).quantity != r.properties.qty || r.quantity == r.properties.qty && m[w].length > 1)
+                        for (var y = 0; y < m[w].length; y++)
+                            for (var b in console.log("j", y), n = e.items[m[w][y]], console.log("thisItem.quantity", n.quantity), 0 != y && (r.quantity = r.quantity + n.quantity), r.properties) console.log(n.properties[b]), l = r.properties[b].indexOf(p(n.properties[b])), d = r.properties[b].indexOf(n.properties[b].split("(x")[0]), u = b.indexOf("selected-"), "id" != b && "qty" != b && "type" != b && "delivery" != b && (0 == y ? -1 != u ? (console.log("hitting flow: first selected"), a = r.properties[b].split(n.properties[b].split("(x")[0])[0], s = r.properties[b].split(new RegExp(n.properties[b].split("(x")[0] + "(.+)"))[1], r.properties[b] = a + n.properties[b].split("(")[0] + "(x" + h(r.properties[b], r.quantity) + ")") : (console.log("hitting flow: first qty/id"), a = r.properties[b].split(p(n.properties[b]))[0], s = r.properties[b].split(new RegExp(p(n.properties[b]) + "(.+)"))[1], r.properties[b] = a + p(n.properties[b]) + ", qty: " + f(r.properties[b], r.quantity) + "]") : -1 == u && -1 == l || -1 != u && -1 == d ? (-1 != u ? (console.log("hitting flow: appending selected"), a = n.properties[b].split(n.properties[b].split("(x")[0])[0], s = n.properties[b].split(new RegExp(n.properties[b].split("(x")[0] + "(.+)"))[1], n.properties[b] = a + n.properties[b].split("(")[0] + "(x" + h(n.properties[b], n.quantity) + ")") : (console.log("hitting flow: appending qty/id"), a = n.properties[b].split(p(n.properties[b]))[0], s = n.properties[b].split(new RegExp(p(n.properties[b]) + "(.+)"))[1], n.properties[b] = a + p(n.properties[b]) + ", qty: " + f(n.properties[b], n.quantity) + "]"), r.properties[b] = r.properties[b] + ", " + n.properties[b]) : (o = "", -1 != u ? (console.log("hitting flow: adding selected"), a = r.properties[b].split(n.properties[b].split("(x")[0])[0], void 0 === (c = (s = r.properties[b].split(new RegExp(n.properties[b].split("(x")[0] + "(.+)"))[1]).split(/\)(.+)/)[1]) && (c = ""), o = a + n.properties[b].split("(x")[0] + "(x" + (h(s, 1) + h(n.properties[b], n.quantity)) + ")" + c) : (console.log("hitting flow: adding qty/id"), a = r.properties[b].split(p(n.properties[b]))[0], void 0 === (c = (s = r.properties[b].split(new RegExp(p(n.properties[b]) + "(.+)"))[1]).split(/](.+)/)[1]) && (c = ""), o = a + p(n.properties[b]) + ", qty: " + (f(s, 1) + f(n.properties[b], n.quantity)) + "]" + c), r.properties[b] = o)), console.log(r.properties[b]);
+                    r.properties.qty = r.quantity.toString(), console.log("keeper after", r), (v = {}).quantity = r.quantity, v.id = r.id, v.properties = r.properties, console.log("itemPackage", v), g.push(v), console.log("prodPackage", g)
+                }
+                console.log("prodPackage", g);
+                t.post("/cart/clear.js", null, null, "json").done(function(e) {
+                    console.log("deleteData", e),
+                        function e() {
+                            if (g.length) {
+                                var r = g.shift();
+                                console.log("request", r), t.post("/cart/add.js", r, null, "json").done(function(t) {
+                                    console.log("addData", t), e()
+                                })
+                            } else console.log(i), window.location.href = i
+                        }()
+                })
+            })
+        };
+    e.removeSmartItems = function(e, r) {
+        i = e.prop("href");
+        var n = {
+            updates: {}
+        };
+        console.log("postContent start", n), console.log("checkoutURL", i);
+        t.get("/cart.js", null, null, "json").done(function(e) {
+            console.log("data", e);
+            for (var i = e.items, o = 0; o < i.length; o++) "Smart Order" == i[o].properties.delivery && (n.updates[i[o].id] = 0);
+            console.log("postContent done", n);
+            t.post("/cart/update.js", n, null, "json").done(function(e) {
+                console.log("updated cart"), "single" == r ? l() : "smart" == r && console.log("type smart")
+            })
+        }).fail(function(e, t) {
+            $smartOrderButton.text("Submitting Smart Order..."), Exigo.alert($cartErrorSmart, "Sorry, there was error adding these items to your Smart Order. Please try again"), console.log("error", e), console.log("errorText", t)
+        })
+    }, e.setUp = function() {
+        if (n = Number(t(".subtotal").data("subtotal")), window.customer && "18" == window.customer.rank && 0 == window.customer.order_count ? r > 0 ? i = d(n) && !window.customer.update_in_cart ? "javascript:;" : "https://puriumcorp.myshopify.com/checkout?" + c + window.customer.web_alias : 0 == r && (i = "https://puriumcorp.myshopify.com/checkout?" + c) : i = window.customer && void 0 !== window.customer.web_alias && window.customer.order_count > 0 ? "https://puriumcorp.myshopify.com/checkout?" + c + window.customer.discount_name : "https://puriumcorp.myshopify.com/checkout?" + c, a.length) {
+            if (window.customer) {
+                var e = window.customer.web_alias;
+                t.get("https://purium.sunriseintegration.com/api/affiliate?code=" + e).done(function(e) {
+                    console.log(e), console.log("response.uses_left", e.uses_left), console.log("window.customer.order_count", window.customer.order_count), r = e.uses_left, window.customer && "18" == window.customer.rank && 0 == window.customer.order_count ? r > 0 ? i = d(n) && !window.customer.update_in_cart ? "javascript:;" : "https://puriumcorp.myshopify.com/checkout?discount=" + window.customer.web_alias : 0 == r && (i = "https://puriumcorp.myshopify.com/checkout?discount=") : i = window.customer && void 0 !== window.customer.web_alias && window.customer.order_count > 0 ? "https://puriumcorp.myshopify.com/checkout?discount=" + window.customer.discount_name : "https://puriumcorp.myshopify.com/checkout?discount=", a.prop("href", i).css("display", "inline-block"), console.log(i), window.customer && "18" == window.customer.rank && 0 == window.customer.order_count && r > 0 && d(n) && !window.customer.update_in_cart && "BGMA2018" != window.customer.discount_name ? (console.log("priceLeft", o), t(".js-money--under-75").text(o), t(".cart-action").addClass("to-right"), a.addClass("popup")) : (t(".cart-action").removeClass("to-right"), a.removeClass("popup"))
+                })
+            }
+        } else s.length && (i = "https://puriumcorp.myshopify.com/account/login?to-checkout")
+    };
+    var d = function(e) {
+        return console.log(e), !(e >= 7500 || "BGMA2018" == window.customer.web_alias.toUpperCase()) && (o = ((7500 - e) / 100).toFixed(2), !0)
+    };
+    e.init = function() {
+        -1 !== window.location.href.indexOf("?under75") && Modal.show("under-75"), window.customer && void 0 !== window.customer.update_in_cart && !window.customer.update_in_cart && Upgrade.removeProp(), s.on("click", function(e) {
+            e.preventDefault(), t(this).hasClass("popup") ? Modal.show("under-75") : t(this).addClass("disabled").text("Submitting..."), l()
+        }), e.setUp()
+    }
+}(window.Cart = window.Cart || {}, jQuery),
+function(e, t) {
+    "use strict";
+    var i = !1,
+        r = function(i, r) {
+            for (var n, o = []; n = r.exec(i);) o.push(n[0]);
+            e.itemsToAdd = o.length, e.itemsReady = 0, o.forEach(function(i) {
+                var r = i.split(":");
+                if (2 === r.length) {
+                    var n = parseInt(r[0]),
+                        o = parseInt(r[1]);
+                    t.get("//shopifyexigoitemcontentsync.azurewebsites.net/api/get-prod?product_id=" + n + "&params=variants,product_type").done(function(i) {
+                        var r, a = i.product,
+                            s = {},
+                            c = [],
+                            l = function() {
+                                var t = a.variants[0].id,
+                                    i = a.product_type;
+                                s.id = r, s.qty = o, s.type = i, s.delivery = "One-time Order", s = Exigo.setPropertyQtys(s, o), CartJS.addItem(t, o, s), e.itemsReady++
+                            },
+                            d = function e() {
+                                if (console.log("next"), c.length) {
+                                    var i = c.shift();
+                                    console.log("nextProp", i);
+                                    t.get("//shopifyexigoitemcontentsync.azurewebsites.net/api/get-prod?product_id=" + i.subProd.default+"&params=variants,title").done(function(t) {
+                                        console.log("prod data", t);
+                                        var r = t.product.variants[0].sku,
+                                            n = t.product.title;
+                                        s[i.idAppend] = "[id: " + r + ", qty: " + Number(i.subProd.quantity) + "]", i.subProd.variants && i.subProd.variants.length > 1 && (s["selected-" + i.index.replace(/[^\w\s]/g, "").replace(/ /g, "-")] = n + "(x" + Number(i.subProd.quantity) + ")"), e()
+                                    })
+                                } else l()
+                            };
+                        a.variants && a.variants.length > 0 && t.get("//shopifyexigoitemcontentsync.azurewebsites.net/api/get-prod-meta?product_id=" + n).done(function(e) {
+                            for (var t = !1, i = e.metafields.length - 1; i >= 0; i--)
+                                if ("item_id" == e.metafields[i].key && (r = e.metafields[i].value), "materials" == e.metafields[i].key) {
+                                    var n = JSON.parse(e.metafields[i].value).materials;
+                                    for (var i in n) {
+                                        ! function(e, t) {
+                                            var i = e.replace(/[^\w\s]/g, "").replace(/ /g, "-");
+                                            void 0 == t.quantity && null == t.quantity && (t.quantity = 1), c.push({
+                                                subProd: t,
+                                                idAppend: i,
+                                                index: e
+                                            })
+                                        }(i, n[i])
+                                    }
+                                    t = !0, d()
+                                } t || l()
+                        })
+                    })
+                }
+            })
+        };
+    e.init = function() {
+        var n, o;
+        n = window.location.search, (o = /(\d+:\d+)/g).test(n) && (Modal.show("loading"), o.lastIndex = 0, CartJS.clear({
+            success: function(e, t, i) {
+                r(n, o)
+            }
+        })), t(document).on("cart.requestComplete", function() {
+            if (void 0 !== e.itemsReady && e.itemsReady === e.itemsToAdd && !i) return i = !0, Scroll.unlock(), Overlay.hide(), InlineCart.init(!0), !1
+        })
+    }
+}(window.CartPermalink = window.CartPermalink || {}, jQuery);
+var _slicedToArray = function() {
+    return function(e, t) {
+        if (Array.isArray(e)) return e;
+        if (Symbol.iterator in Object(e)) return function(e, t) {
+            var i = [],
+                r = !0,
+                n = !1,
+                o = void 0;
+            try {
+                for (var a, s = e[Symbol.iterator](); !(r = (a = s.next()).done) && (i.push(a.value), !t || i.length !== t); r = !0);
+            } catch (e) {
+                n = !0, o = e
+            } finally {
+                try {
+                    !r && s.return && s.return()
+                } finally {
+                    if (n) throw o
+                }
+            }
+            return i
+        }(e, t);
+        throw new TypeError("Invalid attempt to destructure non-iterable instance")
+    }
+}();
+
+function _asyncToGenerator(e) {
+    return function() {
+        var t = e.apply(this, arguments);
+        return new Promise(function(e, i) {
+            return function r(n, o) {
+                try {
+                    var a = t[n](o),
+                        s = a.value
+                } catch (e) {
+                    return void i(e)
+                }
+                if (!a.done) return Promise.resolve(s).then(function(e) {
+                    r("next", e)
+                }, function(e) {
+                    r("throw", e)
+                });
+                e(s)
+            }("next")
+        })
+    }
+}
+Object.fromEntries || Object.defineProperty(Object, "fromEntries", {
+        value: function(e) {
+            if (!e || !e[Symbol.iterator]) throw new Error("Object.fromEntries() requires a single iterable argument");
+            var t = {};
+            return Object.keys(e).forEach(function(i) {
+                var r = _slicedToArray(e[i], 2),
+                    n = r[0],
+                    o = r[1];
+                t[n] = o
+            }), t
+        }
+    }),
+    function(e, t) {
+        "use strict";
+        var i, r, n = this,
+            o = (i = _asyncToGenerator(regeneratorRuntime.mark(function e(i) {
+                var r, n;
+                return regeneratorRuntime.wrap(function(e) {
+                    for (;;) switch (e.prev = e.next) {
+                        case 0:
+                            return e.next = 2, t.getJSON("https://shopifyexigoitemcontentsync.azurewebsites.net/api/get-prod?product_id=" + i + "&params=variants,title,id");
+                        case 2:
+                            if (r = e.sent, n = r.product) {
+                                e.next = 6;
+                                break
+                            }
+                            return e.abrupt("return", null);
+                        case 6:
+                            return e.abrupt("return", n);
+                        case 7:
+                        case "end":
+                            return e.stop()
+                    }
+                }, e, this)
+            })), function(e) {
+                return i.apply(this, arguments)
+            }),
+            a = t("#create_customer"),
+            s = (t(".cart-error__single-order"), t(".cart-error__smart-order"), window.location.href),
+            c = "step=contact_information&discount=",
+            l = function(e) {
+                return e.toLowerCase().replace(/[^\w\u00C0-\u024f]+/g, "-").replace(/^-+|-+$/g, "")
+            };
+        e.check = function(e) {
+            t.get("https://purium.sunriseintegration.com/api/affiliate?code=" + e).done(function(e) {
+                console.log(e), u(e.uses_left)
+            })
+        }, e.alert = function(e, i) {
+            t(".is-error").length ? -1 == t(".is-error").html().indexOf(i) && t(".is-error ul").append("<li>" + i + "</li>") : (e.prepend('<div class="form-note is-error"><ul><li>' + i + "</li></ul></div>"), t(".is-error").hide().fadeIn())
+        }, e.notice = function(e, i) {
+            t(".is-success").length ? t(".is-success").fadeOut(function() {
+                -1 == t(".is-success").html().indexOf(i) && t(".is-success ul").append("<li>" + i + "</li>"), t(this).fadeIn()
+            }) : (e.prepend('<div class="form-note is-success"><ul><li>' + i + "</li></ul></div>"), t(".is-success").hide().fadeIn())
+        };
+        var d;
+        e.setPropertyQtys = function(e) {
+            var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 1,
+                i = parseInt(e.qty);
+            return e.qty = t.toString(), Object.fromEntries(Object.entries(e).map(function(e) {
+                return [e[0], function(e, t, i) {
+                    if (e.indexOf("qty: ") < 0) return e;
+                    var r = e.split("qty: "),
+                        n = parseInt(r[1].split("]")[0]) / i * parseInt(t);
+                    return r[0] + "qty: " + n + "]"
+                }(e[1], t, i)]
+            }))
+        }, e.prepareProductProperties = (d = _asyncToGenerator(regeneratorRuntime.mark(function e(t) {
+            var i, r, a, s, c, d, u, p, f, h, m, v, g, _;
+            return regeneratorRuntime.wrap(function(e) {
+                for (;;) switch (e.prev = e.next) {
+                    case 0:
+                        if (t) {
+                            e.next = 2;
+                            break
+                        }
+                        throw new Error("Missing product data");
+                    case 2:
+                        if ((i = t).type) {
+                            e.next = 12;
+                            break
+                        }
+                        return r = i.product_url.split("?")[0], e.next = 7, jQuery.get(r + "?view=api").promise();
+                    case 7:
+                        if (a = e.sent, s = JSON.parse(decodeURIComponent(a).replace(/\+/g, " "))) {
+                            e.next = 11;
+                            break
+                        }
+                        throw new Error("Cannot fetch product proivded");
+                    case 11:
+                        i = s;
+                    case 12:
+                        if (i) {
+                            e.next = 14;
+                            break
+                        }
+                        throw new Error("Failed to add product to cart, data missing");
+                    case 14:
+                        if (c = l(i.type), d = i.tags.reduce(function(e, t) {
+                                if (e) return e;
+                                var i = l(t);
+                                return i.indexOf("exigo_id") >= 0 ? i.replace("exigo_id-", "").trim() : e
+                            }, null), u = {
+                                delivery: "One-time Order",
+                                qty: "1",
+                                type: i.type,
+                                id: d
+                            }, "dynamic-kit" != c && "static-kit" != c || !i.metafields.materials) {
+                            e.next = 26;
+                            break
+                        }
+                        for (m in p = JSON.parse(i.metafields.materials), f = p.materials, h = [], f) h.push(o(f[m].default));
+                        return e.next = 23, Promise.all(h);
+                    case 23:
+                        for (_ in v = e.sent, g = function(e) {
+                                var t = f[e],
+                                    i = v.find(function(e) {
+                                        return e && e.id == Number(t.default)
+                                    }),
+                                    r = e.replace(/[^\w\s]/g, "").replace(/ /g, "-");
+                                if (i) {
+                                    var n = i.variants[0];
+                                    n && (u[r] = "[id: " + n.sku + ", qty: " + parseInt(t.quantity) + "]")
+                                }
+                                t.variants && t.variants.length > 1 && (u["selected-" + r] = i.title + "(x" + parseInt(t.quantity) + ")")
+                            }, f) g(_);
+                    case 26:
+                        return e.abrupt("return", u);
+                    case 27:
+                    case "end":
+                        return e.stop()
+                }
+            }, e, n)
+        })), function(e) {
+            return d.apply(this, arguments)
+        });
+        var u = function(i) {
+                var n = t("#first-name").val(),
+                    o = t("#last-name").val(),
+                    l = t("#email").val(),
+                    d = t("#telephone").val(),
+                    u = encodeURIComponent(t("#create-password").val()),
+                    p = t("#web-alias").val();
+                if (console.log("//purium-admin-products.herokuapp.com/create-user?first_name=" + n + "&last_name=" + o + "&email=" + l + "&phone=" + d + "&password=" + u + "&web_alias=" + p), void 0 !== i)
+                    if (console.log("exigoUses", i), console.log('$(".step-1").is(".active")', t(".step-1").is(".active")), t(".step-1").is(".active")) t(".is-error").remove(), t("#first-name").attr("type", "text"), t("#last-name").attr("type", "text"), t("#telephone").attr("type", "text"), t("#email").attr("type", "email"), t("#create-password").attr("type", "password"), t(".step-1, .step-2").toggleClass("active"), setTimeout(function() {
+                        t("#web-alias").attr("type", "hidden"), t("#first-name").focus()
+                    }, 300), t(".check-web-alias").text("Submit"), t(".account-creation-title").html("Create Account");
+                    else t.get("//purium-admin-products.herokuapp.com/create-user?first_name=" + n + "&last_name=" + o + "&email=" + l + "&phone=" + d + "&password=" + u + "&web_alias=" + p).done(function(n) {
+                        if (console.log("Data Loaded: ", n), void 0 !== n.errors) {
+                            for (var o in console.log("shopify data errors"), console.log('typeof data.errors != "undefined" its true'), t(".is-error ul").html(""), n.errors)
+                                for (var d = n.errors[o].length - 1; d >= 0; d--) e.alert(a, o + " " + n.errors[o][d]);
+                            t(".check-web-alias").text("Submit")
+                        } else t.post("/account/login", "form_type=customer_login&utf8=%E2%9C%93&customer%5Bemail%5D=" + l + "&customer%5Bpassword%5D=" + u).done(function(n, o) {
+                            console.log(o), console.log(n);
+                            t.get("/account", function(t) {
+                                console.log("/account", t), -1 !== t.indexOf('<h1 class="cust__title cust__title--my active">My Account</h1>') ? (console.log("succesful login"), -1 !== s.indexOf("?to-checkout") ? i > 0 ? ! function(e) {
+                                    return console.log(e), !(e >= 7500 || (((7500 - e) / 100).toFixed(2), 0))
+                                }(r) ? window.location.href = "https://puriumcorp.myshopify.com/checkout?discount=" + c + p : window.location.href = "/cart?under75" : 0 == i && (window.location.href = "https://puriumcorp.myshopify.com/checkout?" + c) : window.location.href = "/account") : e.alert(a, "Sorry, we could not login to your account. Please login again.")
+                            })
+                        })
+                    });
+                else t(".is-error ul").html(""), e.alert(a, "Invalid Gift Card / Web Alias"), t(".check-web-alias").text("Submit")
+            },
+            p = function() {
+                localStorage.removeItem("inCheckoutFlow"), window.location.search.indexOf("giftcard") > -1 && localStorage.setItem("storedGiftCardCode", function(e) {
+                    e = e.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+                    var t = new RegExp("[\\?&]" + e + "=([^&#]*)").exec(location.search);
+                    return null === t ? "" : decodeURIComponent(t[1].replace(/\+/g, " "))
+                }("giftcard")), -1 !== s.indexOf("?to-checkout") && t.get("/cart.js", null, null, "json").done(function(e) {
+                    console.log(e), r = e.total_price
+                })
+            };
+        e.init = function() {
+            p(), a.on("submit", function(i) {
+                var r = t("#web-alias").val();
+                return t(".step-1").is(".active") ? t(".check-web-alias").text("Checking...") : t(".check-web-alias").text("Creating..."), e.check(r), !1
+            })
+        }
+    }(window.Exigo = window.Exigo || {}, jQuery),
+    function(e, t) {
+        var i = void 0;
+        e.init = function() {
+            (i = FindifyAnalytics({
+                key: "1dc06848-99d3-4778-943e-b14902310b0b"
+            })).initialize(), e.sdk = FindifySDK.init({
+                key: "1dc06848-99d3-4778-943e-b14902310b0b",
+                user: i.user,
+                timeout: 9e4
+            }), e.sdk.feedback("view-page", {
+                url: "https://ishoppurium.com/collections/quick-shop",
+                ref: document.referrer,
+                width: t(document).width(),
+                height: t(document).height()
+            })
+        }
+    }(window.Findify = window.Findify || {}, jQuery),
+    function(e, t) {
+        "use strict";
+        e.init = function() {
+            t(".footer-bottom-mobile .footer-h2").on("click", function() {
+                t(this).siblings(".footer-dropdown").hasClass("active") ? (t(this).removeClass("active"), t(this).children(".nav-arrow").removeClass("active"), t(this).siblings(".footer-dropdown").removeClass("active")) : (t(this).addClass("active"), t(this).siblings(".footer-dropdown").addClass("active"), t(this).children(".nav-arrow").addClass("active"))
+            })
+        }
+    }(window.Footer = window.Footer || {}, jQuery),
+    function(e, t) {
+        "use strict";
+        e.init = function() {
+            ! function() {
+                if (void 0 !== window.customer) {
+                    var e = window.customer.web_alias;
+                    t.get("https://purium.sunriseintegration.com/api/affiliate?code=" + e).done(function(e) {
+                        0 == e.uses_left && 0 == window.customer.order_count && 18 == window.customer.rank && (t(".desktop-header .spend-75").text(window.customer.wa_desktop), t(".mobile-header .spend-75").text(window.customer.wa_mobile)), t("body").addClass("header-notice")
+                    })
+                } else t("body").addClass("header-notice")
+            }(), t(".desktop-header .nav-link-wrapper").on("mouseover", function() {
+                t(this).children(".nav-dropdown").stop().addClass("active")
+            }), t(".desktop-header .nav-link-wrapper").on("mouseleave", function() {
+                t(this).children(".nav-dropdown").stop().removeClass("active")
+            }), t(".desktop-header .nav-link-wrapper").on("click", function() {
+                t(this).children(".nav-dropdown").stop().toggleClass("active"), t(this).siblings(".nav-link-wrapper").children(".nav-dropdown").stop().removeClass("active")
+            }), t(".desktop-header .dropdown-item a").on("mouseover", function() {
+                t(this).parents(".nav-link-wrapper").find(".nav-link__main").addClass("active")
+            }), t(".desktop-header .dropdown-item a").on("mouseleave", function() {
+                t(this).parents(".nav-link-wrapper").find(".nav-link__main").removeClass("active")
+            }), t(".mobile-header .nav-link-wrapper .nav-link__main").on("click", function() {
+                t(this).siblings(".nav-dropdown").hasClass("active") ? (t(this).removeClass("active"), t(this).siblings(".nav-dropdown").removeClass("active"), t(this).siblings(".nav-arrow").removeClass("active")) : (t(this).addClass("active"), t(this).siblings(".nav-dropdown").stop().addClass("active"), t(this).siblings(".nav-arrow").addClass("active"))
+            }), t(".mobile-header .menu-container img").on("click", function() {
+                t(this).parents(".mobile-header").find(".mobile-nav-container").hasClass("active") ? t(this).parents(".mobile-header").find(".mobile-nav-container").removeClass("active") : t(this).parents(".mobile-header").find(".mobile-nav-container").addClass("active")
+            }), t(".dropdown-item").on("mouseover", function() {
+                t(this).stop().addClass("active"), t(this).children("a").stop().addClass("active")
+            }), t(".dropdown-item").on("mouseleave", function() {
+                t(this).stop().removeClass("active"), t(this).children("a").stop().removeClass("active")
+            }), t(".header .fa-search").on("click", function() {
+                t(".search").hasClass("active") ? t(".search").removeClass("active") : t(".search").addClass("active")
+            })
+        }
+    }(window.Header = window.Header || {}, jQuery),
+    function(e, t, i) {
+        "use strict";
+        e.debounce = function(e, t, i) {
+            var r;
+            return function() {
+                var n = this,
+                    o = arguments,
+                    a = i && !r;
+                clearTimeout(r), r = setTimeout(function() {
+                    r = null, i || e.apply(n, o)
+                }, t), a && e.apply(n, o)
+            }
+        }
+    }(window.Helpers = window.Helpers || {}, jQuery),
+    function(e, t) {
+        "use strict";
+        var i = t(".homepage-collection-content .collection-container");
+        t(".featured-products .product img");
+
+        function r() {
+            t(".homepage-collection-content .collection").each(function(e, i) {
+                var r = t(this).find("h2"),
+                    n = (t(this).outerHeight(), .5 * r.width()),
+                    o = .5 * r.height();
+                r.css({
+                    top: "50%",
+                    left: "50%",
+                    "margin-top": -o,
+                    "margin-left": -n
+                })
+            })
+        }
+
+        function n(e) {
+            e.each(function(e, i) {
+                var r = t(this).width();
+                t(this).css("height", r)
+            })
+        }
+        var o = function() {
+            (window.navigator.userAgent.indexOf("MSIE ") > 0 || navigator.userAgent.match(/Trident.*rv\:11\./)) && t(".homepage-collection-content .collection-container").css("flex-basis", "32%"), r(), n(i), t(window).resize(function() {
+                r(), n(i)
+            })
+        };
+        e.init = function() {
+            o()
+        }
+    }(window.Homepage = window.Homepage || {}, jQuery),
+    function(e, t, i) {
+        "use strict";
+        var r = {
+            tooltipWrapper: "[infotooltip]",
+            tooltipToggle: "[infotooltip-toggle]",
+            tooltipContainer: "[infotooltip-container]",
+            tooltipMessage: "[infotooltip-tip]",
+            tooltipClose: "[infotooltip-close]",
+            lastOpenTooltip: null
+        };
+        e.openTooltip = function(e) {
+            e.addClass("is-open"), r.lastOpenTooltip = e;
+            var t = e.find(r.tooltipContainer),
+                i = e.find(r.tooltipMessage);
+            TweenLite.set(t, {
+                opacity: 0,
+                display: "block"
+            }), TweenLite.set(i, {
+                opacity: 0,
+                y: 10
+            }), TweenLite.to(t, .2, {
+                opacity: 1
+            }), TweenLite.to(i, .3, {
+                opacity: 1,
+                y: 0
+            })
+        }, e.closeTooltip = function() {
+            var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : null;
+            if (e ? e.removeClass("is-open") : t(r.lastOpenTooltip).removeClass("is-open"), !r.lastOpenTooltip) return null;
+            var i = r.lastOpenTooltip.find(r.tooltipContainer),
+                n = r.lastOpenTooltip.find(r.tooltipMessage);
+            r.lastOpenTooltip = null, TweenLite.to(n, .2, {
+                opacity: 0,
+                y: 10
+            }), TweenLite.to(i, .2, {
+                delay: .3,
+                opacity: 0,
+                onComplete: function() {
+                    TweenLite.set([n, i], {
+                        clearProps: "all"
+                    })
+                }
+            })
+        }, e.init = function() {
+            UTILS.isTouch() ? t(document).on("click.infoTooltip", function(i) {
+                var n = t(i.target);
+                if (n.is(r.tooltipToggle) || n.parent().is(r.tooltipToggle)) e.openTooltip(n.closest(r.tooltipWrapper));
+                else {
+                    if (n.is(r.tooltipClose) || n.parents().is(r.tooltipClose)) return e.closeTooltip();
+                    if (n.is(r.tooltipMessage) || n.parents().is(r.tooltipMessage)) return;
+                    e.closeTooltip()
+                }
+            }) : (t(document).on("mouseenter", r.tooltipToggle, function(i) {
+                e.openTooltip(t(this).closest(r.tooltipWrapper))
+            }), t(document).on("mouseleave", "" + r.tooltipWrapper, function(t) {
+                e.closeTooltip()
+            }), t(document).on("click", "" + r.tooltipClose, function(t) {
+                e.closeTooltip()
+            }))
+        }
+    }(window.InfoTooltips = window.InfoTooltips || {}, jQuery);
+_slicedToArray = function() {
+    return function(e, t) {
+        if (Array.isArray(e)) return e;
+        if (Symbol.iterator in Object(e)) return function(e, t) {
+            var i = [],
+                r = !0,
+                n = !1,
+                o = void 0;
+            try {
+                for (var a, s = e[Symbol.iterator](); !(r = (a = s.next()).done) && (i.push(a.value), !t || i.length !== t); r = !0);
+            } catch (e) {
+                n = !0, o = e
+            } finally {
+                try {
+                    !r && s.return && s.return()
+                } finally {
+                    if (n) throw o
+                }
+            }
+            return i
+        }(e, t);
+        throw new TypeError("Invalid attempt to destructure non-iterable instance")
+    }
+}(), _extends = Object.assign || function(e) {
+    for (var t = 1; t < arguments.length; t++) {
+        var i = arguments[t];
+        for (var r in i) Object.prototype.hasOwnProperty.call(i, r) && (e[r] = i[r])
+    }
+    return e
+};
+var _createClass = function() {
+    function e(e, t) {
+        for (var i = 0; i < t.length; i++) {
+            var r = t[i];
+            r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(e, r.key, r)
+        }
+    }
+    return function(t, i, r) {
+        return i && e(t.prototype, i), r && e(t, r), t
+    }
+}();
+
+function _defineProperty(e, t, i) {
+    return t in e ? Object.defineProperty(e, t, {
+        value: i,
+        enumerable: !0,
+        configurable: !0,
+        writable: !0
+    }) : e[t] = i, e
+}
+
+function _toConsumableArray(e) {
+    if (Array.isArray(e)) {
+        for (var t = 0, i = Array(e.length); t < e.length; t++) i[t] = e[t];
+        return i
+    }
+    return Array.from(e)
+}
+
+function _asyncToGenerator(e) {
+    return function() {
+        var t = e.apply(this, arguments);
+        return new Promise(function(e, i) {
+            return function r(n, o) {
+                try {
+                    var a = t[n](o),
+                        s = a.value
+                } catch (e) {
+                    return void i(e)
+                }
+                if (!a.done) return Promise.resolve(s).then(function(e) {
+                    r("next", e)
+                }, function(e) {
+                    r("throw", e)
+                });
+                e(s)
+            }("next")
+        })
+    }
+}
+
+function _classCallCheck(e, t) {
+    if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function")
+}! function(e, t) {
+    "use strict";
+    var i, r = this,
+        n = (i = _asyncToGenerator(regeneratorRuntime.mark(function e() {
+            var t, i, r, n, o, a = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : u;
+            return regeneratorRuntime.wrap(function(e) {
+                for (;;) switch (e.prev = e.next) {
+                    case 0:
+                        if (!h.findifyBusy && a) {
+                            e.next = 2;
+                            break
+                        }
+                        return e.abrupt("return");
+                    case 2:
+                        return h.findifyBusy = !0, e.prev = 3, e.next = 6, Promise.all([T(a), S()]);
+                    case 6:
+                        t = e.sent, i = _slicedToArray(t, 2), r = i[0], n = i[1], o = w([].concat(_toConsumableArray(n), _toConsumableArray(r.filteredItems)), "selected_variant_id"), h.recommendations = [].concat(_toConsumableArray(h.recommendations), _toConsumableArray(o)), C(o), e.next = 18;
+                        break;
+                    case 15:
+                        e.prev = 15, e.t0 = e.catch(3), console.log(e.t0);
+                    case 18:
+                        return e.prev = 18, h.findifyBusy = !1, O(), e.finish(18);
+                    case 22:
+                    case "end":
+                        return e.stop()
+                }
+            }, e, this, [
+                [3, 15, 18, 22]
+            ])
+        })), function() {
+            return i.apply(this, arguments)
+        }),
+        o = {
+            18: "GUEST",
+            19: "RETURNING_CUSTOMER",
+            20: "RETURNING_CUSTOMER",
+            2: "LOYAL_CUSTOMER",
+            12: "LOYAL_CUSTOMER",
+            15: "LOYAL_CUSTOMER",
+            21: "LOYAL_CUSTOMER",
+            22: "LOYAL_CUSTOMER",
+            4: "PERCENT30",
+            5: "PERCENT30",
+            6: "PERCENT30",
+            7: "PERCENT30",
+            8: "PERCENT30",
+            13: "PERCENT30",
+            23: "PROFESSIONAL",
+            24: "PROFESSIONAL",
+            25: "PROFESSIONAL",
+            10: "PROFESSIONAL"
+        },
+        a = {
+            GIFTCARD_DISCOUNT: 5e3,
+            GIFTCARD_LIMIT: 7500,
+            GUEST: {
+                LIMIT: 15e3,
+                DISCOUNT: .25,
+                FAIL_DISCOUNT: .25
+            },
+            RETURNING_CUSTOMER: {
+                LIMIT: 25e3,
+                DISCOUNT: .25,
+                FAIL_DISCOUNT: .15
+            },
+            LOYAL_CUSTOMER: {
+                LIMIT: 0,
+                DISCOUNT: .25,
+                FAIL_DISCOUNT: .25
+            },
+            PERCENT30: {
+                LIMIT: 0,
+                DISCOUNT: .3,
+                FAIL_DISCOUNT: .3
+            },
+            PROFESSIONAL: {
+                LIMIT: 0,
+                DISCOUNT: .35,
+                FAIL_DISCOUNT: .35
+            }
+        },
+        s = function() {
+            function e(t) {
+                _classCallCheck(this, e), this.$wrapper = t, this.notices = {}, this.visibleNoticesCount = 0
+            }
+            return _createClass(e, [{
+                key: "createNotice",
+                value: function(e) {
+                    return t("<div><span>" + e + "</span></div>")
+                }
+            }, {
+                key: "notice",
+                value: function() {
+                    var e = _asyncToGenerator(regeneratorRuntime.mark(function e() {
+                        var t, i, r = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : null,
+                            n = arguments[1];
+                        return regeneratorRuntime.wrap(function(e) {
+                            for (;;) switch (e.prev = e.next) {
+                                case 0:
+                                    if (!this.notice[n]) {
+                                        e.next = 2;
+                                        break
+                                    }
+                                    return e.abrupt("return", null);
+                                case 2:
+                                    return t = this.createNotice(r), this.notice[n] = t, e.next = 6, UTILS.wait(200);
+                                case 6:
+                                    return TweenLite.from(t, .2, {
+                                        height: 0
+                                    }), this.$wrapper.prepend(t), i = 2e3 * this.visibleNoticesCount + 2e3, this.visibleNoticesCount += 1, e.next = 12, UTILS.wait(i);
+                                case 12:
+                                    this.visibleNoticesCount > 0 && (this.visibleNoticesCount -= 1), TweenLite.to(t, .5, {
+                                        height: 0,
+                                        delay: .5,
+                                        onComplete: function() {
+                                            return t.hide()
+                                        }
+                                    });
+                                case 14:
+                                case "end":
+                                    return e.stop()
+                            }
+                        }, e, this)
+                    }));
+                    return function() {
+                        return e.apply(this, arguments)
+                    }
+                }()
+            }, {
+                key: "remove",
+                value: function(e) {
+                    this.notice[e] && (this.notice[e].remove(), delete this.notice[e]), this.notice.all && (this.notice.all.remove(), delete this.notice.all)
+                }
+            }, {
+                key: "allNotices",
+                value: function() {
+                    var e = this;
+                    if (this.notice.all) return null;
+                    Object.keys(this.notice).forEach(function(t) {
+                        return "all" != t && e.remove(t)
+                    }), this.notice("All Perks Unlocked", "all")
+                }
+            }]), e
+        }(),
+        c = function() {
+            function e(t) {
+                var i = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
+                    r = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : null;
+                _classCallCheck(this, e), this.$wrapper = t, this.noticesManager = i.unlockNotices, this.parentState = i, this.cart = r, this.notices = {}, this.rewardCards = {}, this.unlockedAwards = {}, this.addMoreNoticeEnabled = !1, this.state = {
+                    customer: i.customer,
+                    freeShippingAt: 25e3
+                }, this.init()
+            }
+            return _createClass(e, [{
+                key: "init",
+                value: function() {
+                    this.parentState.freeShippingThreshold && (this.state.freeShippingAt = 100 * this.parentState.freeShippingThreshold)
+                }
+            }, {
+                key: "getRewardCardDOM",
+                value: function(e) {
+                    switch (e) {
+                        case "gift_card":
+                            return t('<div class="reward-card"><span>' + UTILS.pricify(a.GIFTCARD_DISCOUNT / 100, !0) + " Gift Card</span></div>");
+                        case "free_shipping":
+                            return t('<div class="reward-card"><span>Free Shipping</span></div>');
+                        case "discounts":
+                            return t('<div class="reward-card"><span>' + 100 * a[this.customerKind].FAIL_DISCOUNT + "% Off</span></div>");
+                        case "returning_customer":
+                            return t('<div class="reward-card"><span>' + 100 * a[this.customerKind].DISCOUNT + "% Off</span></div>");
+                        default:
+                            return null
+                    }
+                }
+            }, {
+                key: "renderRewardsBar",
+                value: function(e) {
+                    var t = this,
+                        i = {};
+                    this.rewardsList.forEach(function(r) {
+                        i[r] = t.getRewardCardDOM(r), e.append(i[r])
+                    }), this.rewardCards = i
+                }
+            }, {
+                key: "hasFreeShipping",
+                value: function() {
+                    return (this.hasUpsell ? this.futureDiscountSubtotal : this.currentSubtotal) >= this.freeShippingAt
+                }
+            }, {
+                key: "update",
+                value: function(e) {
+                    var t = !(arguments.length > 1 && void 0 !== arguments[1]) || arguments[1];
+                    this.lastUnlockedRewards = this.unlockedRewardsList, this.cart = e, t && this.render()
+                }
+            }, {
+                key: "getNoticeFor",
+                value: function(e) {
+                    return this.notices[e] || (this.notices[e] = t('<div class="inline-cart__bonus"></div>'), this.notices[e].hide(), this.$wrapper.append(this.notices[e])), this.notices[e]
+                }
+            }, {
+                key: "setUnlocked",
+                value: function(e) {
+                    this.unlockedAwards[e] = !0
+                }
+            }, {
+                key: "unsetUnlocked",
+                value: function(e) {
+                    this.unlockedAwards[e] = null
+                }
+            }, {
+                key: "isUnlocked",
+                value: function(e) {
+                    return !!this.unlockedAwards[e]
+                }
+            }, {
+                key: "getUnlockedMessage",
+                value: function(e) {
+                    switch (e) {
+                        case "free_shipping":
+                            return "FREE SHIPPING UNLOCKED";
+                        case "gift_card":
+                            return "GIFT CARD UNLOCKED";
+                        case "discounts":
+                            return 100 * this.currentDiscount + "% Loyalty Pricing UNLOCKED";
+                        case "returning_customer":
+                            return 100 * a[this.customerKind].DISCOUNT + "% Loyalty Pricing UNLOCKED";
+                        default:
+                            return ""
+                    }
+                }
+            }, {
+                key: "renderFreeShippingNote",
+                value: function() {
+                    var e = this.getNoticeFor("free_shipping");
+                    if (this.hasFreeShipping()) this.isUnlocked("free_shipping") || e.fadeOut(), this.addMoreNoticeEnabled = !1, this.setUnlocked("free_shipping");
+                    else {
+                        if (this.addMoreNoticeEnabled && !this.addMoreNoticeEnabled.is(e)) return e.hide();
+                        this.addMoreNoticeEnabled = e, this.unsetUnlocked("free_shipping"), e.html("<span>ADD " + UTILS.pricify(this.forFreeShipping / 100) + " MORE</span> TO UNLOCK FREE SHIPPING!").show()
+                    }
+                }
+            }, {
+                key: "renderGiftCardNote",
+                value: function() {
+                    var e = this.getNoticeFor("gift_card");
+                    this.getsGiftCard ? 0 === this.giftCard ? (e.html("<span>ADD " + UTILS.pricify(this.forGiftCard / 100) + "</span> TO UNLOCK " + UTILS.pricify(a.GIFTCARD_DISCOUNT / 100) + " OFF GIFT CARD").show(), this.unsetUnlocked("gift_card"), this.addMoreNoticeEnabled = e) : (this.isUnlocked("gift_card") ? e.hide() : e.fadeOut(), this.setUnlocked("gift_card"), this.addMoreNoticeEnabled = !1) : (e.hide(), this.unsetUnlocked("gift_card"), this.addMoreNoticeEnabled = !1)
+                }
+            }, {
+                key: "renderDiscountsNote",
+                value: function() {
+                    var e = this.getNoticeFor("discounts");
+                    if (this.isCustomer)
+                        if (this.hasDiscounts) {
+                            var t = this.currentDiscount,
+                                i = a[this.customerKind];
+                            if (i.FAIL_DISCOUNT != i.DISCOUNT) {
+                                this.isUnlocked("discounts") ? e.hide() : e.fadeOut(), this.setUnlocked("discounts");
+                                var r = this.getNoticeFor("returning_customer");
+                                if (t !== i.DISCOUNT) {
+                                    var n = this.originalTotal * (1 - a[this.customerKind].DISCOUNT),
+                                        o = 1.11765 * (i.LIMIT - n);
+                                    this.addMoreNoticeEnabled && !this.addMoreNoticeEnabled.is(r) && r.hide();
+                                    var s = i.LIMIT === this.freeShippingAt;
+                                    r.html("<span>ADD " + UTILS.pricify(o / 100) + "</span> TO UNLOCK " + 100 * i.DISCOUNT + "% OFF " + (s ? "& FREE SHIPPING" : "")).show(), this.addMoreNoticeEnabled = r, this.unsetUnlocked("returning_customer")
+                                } else this.isUnlocked("returning_customer") ? r.hide() : r.fadeOut(), this.addMoreNoticeEnabled = !1, this.setUnlocked("returning_customer")
+                            } else this.isUnlocked("discounts") ? e.hide() : e.fadeOut(), this.addMoreNoticeEnabled = !1, this.setUnlocked("discounts")
+                        } else this.unsetUnlocked("discounts"), e.hide();
+                    else {
+                        var c = this.getNoticeFor("discounts"),
+                            l = a[this.customerKind];
+                        if (this.hasDiscounts) this.isUnlocked("discounts") ? c.hide() : c.fadeOut(), this.addMoreNoticeEnabled = !1, this.setUnlocked("discounts");
+                        else {
+                            if (this.addMoreNoticeEnabled && !this.addMoreNoticeEnabled.is(c)) return c.hide();
+                            this.addMoreNoticeEnabled = c, this.unsetUnlocked("discounts");
+                            var d = l.LIMIT - this.currentSubtotal;
+                            c.html("<span>ADD " + UTILS.pricify(d / 100) + "</span> TO UNLOCK " + 100 * l.DISCOUNT + "% OFF LOYALTY PRICING").show()
+                        }
+                    }
+                }
+            }, {
+                key: "hideAllNotices",
+                value: function() {
+                    this.$wrapper.children().hide(), this.unlockedAwards = {}
+                }
+            }, {
+                key: "render",
+                value: function() {
+                    var e = this;
+                    this.cart.items.length ? (this.isCustomer || this.renderGiftCardNote(), this.renderDiscountsNote(), this.renderFreeShippingNote()) : this.hideAllNotices();
+                    var t = this.unlockedRewardsList,
+                        i = this.rewardsList;
+                    Object.entries(this.rewardCards).forEach(function(e) {
+                        e[1].toggleClass("is-active", t.indexOf(e[0]) >= 0)
+                    });
+                    var r = this.lastUnlockedRewards.length === i.length - 1;
+                    if (t.length === i.length && 0 === this.lastUnlockedRewards.length || this.lastUnlockedRewards.length <= i.length && t.length === i.length && !r && this.lastUnlockedRewards.length !== t.length) return h.unlockNotices.allNotices();
+                    (t.length < i.length || r) && (t.forEach(function(t) {
+                        h.unlockNotices.notice(e.getUnlockedMessage(t), t)
+                    }), i.forEach(function(e) {
+                        if (t.indexOf(e) >= 0) return null;
+                        h.unlockNotices.remove(e)
+                    }))
+                }
+            }, {
+                key: "rewardsList",
+                get: function() {
+                    var e = [];
+                    return this.isCustomer || e.push("gift_card"), this.isCustomer ? (e.push("discounts"), this.hasUpsell && e.push("returning_customer")) : e.push("discounts"), e.push("free_shipping"), e
+                }
+            }, {
+                key: "freeShippingAt",
+                get: function() {
+                    return this.state.freeShippingAt
+                }
+            }, {
+                key: "forFreeShipping",
+                get: function() {
+                    var e = this.hasUpsell ? this.futureDiscountSubtotal : this.currentSubtotal;
+                    return e >= this.freeShippingAt ? 0 : this.freeShippingAt - e
+                }
+            }, {
+                key: "originalTotal",
+                get: function() {
+                    return this.cart.original_total_price
+                }
+            }, {
+                key: "savings",
+                get: function() {
+                    return this.originalTotal - this.currentSubtotal
+                }
+            }, {
+                key: "currentSubtotal",
+                get: function() {
+                    return this.isCustomer ? this.originalTotal * (1 - this.currentDiscount) : (this.originalTotal - this.giftCard) * (1 - this.currentDiscount)
+                }
+            }, {
+                key: "futureDiscountSubtotal",
+                get: function() {
+                    return this.hasUpsell ? this.originalTotal * (1 - a[this.customerKind].DISCOUNT) : this.currentSubtotal
+                }
+            }, {
+                key: "isCustomer",
+                get: function() {
+                    return null != this.state.customer && (this.state.customer && this.state.customer.order_count >= 1)
+                }
+            }, {
+                key: "getsGiftCard",
+                get: function() {
+                    return !(this.isCustomer || 0 !== this.currentDiscount)
+                }
+            }, {
+                key: "giftCard",
+                get: function() {
+                    return this.getsGiftCard && this.originalTotal >= a.GIFTCARD_LIMIT ? a.GIFTCARD_DISCOUNT : 0
+                }
+            }, {
+                key: "giftCardUnlocked",
+                get: function() {
+                    return !this.isCustomer && this.originalTotal >= a.GIFTCARD_LIMIT
+                }
+            }, {
+                key: "forGiftCard",
+                get: function() {
+                    return this.currentSubtotal >= a.GIFTCARD_LIMIT ? 0 : a.GIFTCARD_LIMIT - this.currentSubtotal
+                }
+            }, {
+                key: "customerRank",
+                get: function() {
+                    return !!this.state.customer && (!!this.state.customer.last_order && this.state.customer.rank)
+                }
+            }, {
+                key: "customerKind",
+                get: function() {
+                    if (this.isCustomer) {
+                        var e = this.customerRank,
+                            t = o[e];
+                        return t || "GUEST"
+                    }
+                    return "GUEST"
+                }
+            }, {
+                key: "currentDiscount",
+                get: function() {
+                    return this.isCustomer ? a[this.customerKind].DISCOUNT > a[this.customerKind].FAIL_DISCOUNT && this.originalTotal * (1 - a[this.customerKind].DISCOUNT) >= a[this.customerKind].LIMIT ? a[this.customerKind].DISCOUNT : a[this.customerKind].FAIL_DISCOUNT : this.originalTotal - a.GIFTCARD_DISCOUNT >= a.GUEST.LIMIT ? a.GUEST.DISCOUNT : 0
+                }
+            }, {
+                key: "hasDiscounts",
+                get: function() {
+                    return this.currentDiscount > 0
+                }
+            }, {
+                key: "hasUpsell",
+                get: function() {
+                    return !!this.hasDiscounts && a[this.customerKind].FAIL_DISCOUNT != a[this.customerKind].DISCOUNT
+                }
+            }, {
+                key: "unlockedRewardsList",
+                get: function() {
+                    var e = this;
+                    return this.rewardsList.filter(function(t) {
+                        return "free_shipping" === t ? e.hasFreeShipping() : "gift_card" === t ? e.giftCardUnlocked : "discounts" === t ? e.hasDiscounts : "returning_customer" === t && e.unlockedAwards.returning_customer
+                    })
+                }
+            }]), e
+        }(),
+        l = function() {
+            function e(t, i) {
+                var r = arguments.length > 2 && void 0 !== arguments[2] && arguments[2];
+                _classCallCheck(this, e), this.data = t, this.container = i, this.wrapper = null, this.hasDiscountedPrice = r, this.inCart = y(this.data.selected_variant_id), this.wasInCart = this.inCart, this.render()
+            }
+            return _createClass(e, [{
+                key: "priceHTML",
+                value: function() {
+                    var e = this.data.price;
+                    return "\n        " + (this.hasDiscountedPrice ? "<span class='loyalty-price'>Loyal Customer Price: " + UTILS.pricify(I(e[0])) + "</span>" : "") + "\n        <span class='retail-price'>Retail Price: " + UTILS.pricify(e[0]) + " USD" + "</span>\n      "
+                }
+            }, {
+                key: "contents",
+                value: function() {
+                    var e = this.data,
+                        t = e.title,
+                        i = e.image_url,
+                        r = e.tags,
+                        n = e.selected_variant_id,
+                        o = e.product_url,
+                        a = e.handle,
+                        s = o ? o.split("?")[0] : "/product/" + a,
+                        c = UTILS.getProductColorClasses(r),
+                        l = r.reduce(function(e, t) {
+                            if (e) return e;
+                            var i = t.toLowerCase().replace(/[^\w\u00C0-\u024f]+/g, "-").replace(/^-+|-+$/g, "");
+                            return i.indexOf("exigo_id") >= 0 ? i.replace("exigo_id-", "").trim() : e
+                        }, null),
+                        d = this.inCart;
+                    return '\n        <div class="inline-cart__upsells__item inline-cart__lineItem ' + (d ? "incart" : "") + " " + c + '" data-productid="' + this.data.id + "\" data-id='" + n + "' data-product-url=\"" + s + '" data-exigo-id="' + l + '">\n          <div class="image"><img src="' + i + '" alt=""></div>\n          <div class="details">\n            <div class="name">' + t + '</div>\n            <div class="price">\n              ' + this.priceHTML() + '\n            </div>\n          </div>\n          <button cart-add="' + n + "\" class='add-to-cart " + (d ? "added" : "") + "'>\n            <span class='btn-notadded'>Add</span>\n            <span class='btn-added'>Added</span>\n          </button>\n        </div>\n      "
+                }
+            }, {
+                key: "update",
+                value: function(e) {
+                    var t = arguments.length > 1 && void 0 !== arguments[1] && arguments[1];
+                    this.prevData = this.data, this.data = _extends({}, e), this.wasInCart = this.inCart, this.inCart = y(this.data.selected_variant_id), this.hasDiscountedPrice = t, this.render()
+                }
+            }, {
+                key: "removedFromCart",
+                value: function() {
+                    TweenLite.set(this.wrapper, {
+                        maxHeight: 0
+                    }), this.wrapper.removeClass("incart"), this.wrapper.removeClass("busy"), TweenLite.set(this.wrapper, {
+                        maxHeight: 300,
+                        clearProps: "all"
+                    })
+                }
+            }, {
+                key: "addedToCart",
+                value: function() {
+                    var e = this;
+                    this.wrapper.addClass("incart"), this.wrapper.addClass("busy"), TweenLite.set(this.wrapper, {
+                        maxHeight: 300
+                    }), TweenLite.to(this.wrapper, .3, {
+                        maxHeight: 0,
+                        marginBottom: 0,
+                        delay: 2,
+                        onComplete: function() {
+                            e.wrapper.removeClass("busy")
+                        }
+                    })
+                }
+            }, {
+                key: "render",
+                value: function() {
+                    if (this.wrapper) {
+                        TweenLite.killTweensOf(this.wrapper);
+                        var e = this.inCart;
+                        this.price.html(this.priceHTML()), this.button.toggleClass("added", e), e ? this.addedToCart() : this.wasInCart && this.removedFromCart()
+                    } else {
+                        var i = t(this.contents());
+                        this.wrapper = i, this.price = this.wrapper.find(".price"), this.button = this.wrapper.find(".add-to-cart"), this.container.append(this.wrapper)
+                    }
+                }
+            }]), e
+        }(),
+        d = function() {
+            function e(t) {
+                _classCallCheck(this, e), this.wrapper = t, this.slides = this.wrapper.find(".inline-cart__upsells__item"), this.fileredSlides = this.wrapper.find(".inline-cart__upsells__item:not(.incart)"), this.inCart = this.wrapper.find(".inline-cart__upsells__item.incart"), this.state = {
+                    currentActive: 0,
+                    prevActive: null,
+                    total: this.fileredSlides.length
+                }, this.init()
+            }
+            return _createClass(e, [{
+                key: "init",
+                value: function() {
+                    this.slides.hide(), this.render()
+                }
+            }, {
+                key: "render",
+                value: function() {
+                    null !== this.state.prevActive && this.fileredSlides.eq(this.state.prevActive).css("display", "none"), this.fileredSlides.eq(this.state.currentActive).css("display", "")
+                }
+            }, {
+                key: "next",
+                value: function() {
+                    this.state.prevActive = this.state.currentActive, this.state.currentActive + 1 >= this.state.total ? this.state.currentActive = 0 : this.state.currentActive += 1, this.render()
+                }
+            }, {
+                key: "prev",
+                value: function() {
+                    this.state.prevActive = this.state.currentActive, 0 === this.state.currentActive ? this.state.currentActive = this.state.total - 1 : this.state.currentActive -= 1, this.render()
+                }
+            }, {
+                key: "destroy",
+                value: function() {
+                    this.slides.css("display", "")
+                }
+            }]), e
+        }(),
+        u = 6,
+        p = {
+            cart: "#inline-cart",
+            backdrop: "#inline-cart .inline-cart__backdrop",
+            cartToggle: "[inlincart-toggle]",
+            cartContents: "#inline-cart .inline-cart__container",
+            cartContainer: "#inline-cart .inline-cart__cart",
+            cartMainContainer: "#inline-cart .inline-cart__cartMain",
+            upsells: "#inline-cart .inline-cart__upsells",
+            upsellsContainer: "#inline-cart [upsell-items]",
+            customerJSON: "#customer-metafields",
+            totals: "#inline-cart .inline-cart__subtotal",
+            totalSavings: "#inline-cart .inline-cart__subtotal .saving",
+            totalSavingsValue: "#inline-cart .inline-cart__subtotal .saving span",
+            retailPrice: "#inline-cart .inline-cart__subtotal .retail-price",
+            loyaltyPrice: "#inline-cart .inline-cart__subtotal .loyalty-price",
+            onSaleClass: "on-sale",
+            toggleUpsells: "#inline-cart .inline-cart__upsellsToggle",
+            upsellsClosedClass: "inline-cart--upsellsClosed",
+            cartBonuses: "#inline-cart .inline-cart__bonuses",
+            emptyCartNote: "#inline-cart .inline-cart--empty",
+            cartLineItems: "#inline-cart [cart-lineitems]",
+            ticketProductsData: "#inline-cart-json",
+            rewardsBarContainer: "#inline-cart [data-rewardsbar]",
+            unlockNotices: "#inline-cart [data-unlocksnotices]"
+        },
+        f = {
+            body: t("body"),
+            htmlBody: t("html, body")
+        },
+        h = {
+            upsellCollection: null,
+            upsellCollectionPage: 1,
+            discountsManager: null,
+            isOpen: !1,
+            cart: null,
+            upsellsInitialised: !1,
+            recommendations: [],
+            upsellCollectionProds: [],
+            customer: null,
+            ready: !1,
+            upsellCarousel: null,
+            freeShippingThreshold: 250,
+            findifyPageOffset: 0,
+            findifyLoadMore: !0,
+            findifyBusy: !1,
+            gotoNextUpsell: !1,
+            upsellEls: {},
+            ticketProducts: [],
+            ticketProductIds: [],
+            ticketPurchase: !1,
+            findifyErrorCount: 0
+        };
+
+    function m(e) {
+        if (R(e), f.cart = t(p.cart), f.customerJSON = t(p.customerJSON), f.customerJSON.length) {
+            var i = f.customerJSON.html();
+            try {
+                var r = JSON.parse(i);
+                r && (h.customer = r)
+            } catch (e) {}
+        }
+        if (f.ticketProductsData = t(p.ticketProductsData), f.ticketProductsData.length) {
+            var n = f.ticketProductsData.html();
+            try {
+                var o = JSON.parse(n);
+                o && (h.ticketProducts = o, h.ticketProductIds = o.map(function(e) {
+                    return e.id
+                }))
+            } catch (e) {}
+        }
+        v();
+        var a = parseFloat(f.cart.attr("data-freeshippingthreshold"));
+        isNaN(a) || (h.freeShippingThreshold = a), h.upsellCollection = f.cart.attr("data-collection") || null, h.unlockNotices = new s(t(p.unlockNotices)), h.discountsManager = new c(t(p.cartBonuses), h, h.cart), h.discountsManager.renderRewardsBar(t(p.rewardsBarContainer))
+    }
+
+    function v() {
+        var e = h.cart.items.reduce(function(e, t) {
+            var i = t.product_id;
+            return !!e || h.ticketProductIds.indexOf(i) >= 0
+        }, !1);
+        h.ticketPurchase != e && (h.recommendations = [], h.findifyBusy = !1, h.findifyErrorCount = 0, h.findifyPageOffset = 0, h.findifyLoadMore = !0), h.ticketPurchase = e
+    }
+
+    function g() {
+        f.cartContainer.animate({
+            scrollTop: f.cartContainer[0].scrollHeight - f.cartContainer[0].clientHeight
+        }), f.cartMainContainer.animate({
+            scrollTop: f.cartMainContainer[0].scrollHeight - f.cartMainContainer[0].clientHeight
+        })
+    }
+
+    function _() {
+        f.upsellsContainer = t(p.upsellsContainer), f.upsells = t(p.upsells), f.backdrop = t(p.backdrop), f.cartContents = t(p.cartContents), f.totalSavings = t(p.totalSavings), f.totalSavingsValue = t(p.totalSavingsValue), f.retailPrice = t(p.retailPrice), f.loyaltyPrice = t(p.loyaltyPrice), f.cartBonuses = t(p.cartBonuses), f.emptyCartNote = t(p.emptyCartNote), f.cartLineItems = t(p.cartLineItems), f.cartContainer = t(p.cartContainer), f.cartMainContainer = t(p.cartMainContainer)
+    }
+    var w = function(e, t) {
+        var i = "function" == typeof t ? t : function(e) {
+            return e[t]
+        };
+        return [].concat(_toConsumableArray(e.reduce(function(e, t) {
+            var r = null === t || void 0 === t ? t : i(t);
+            return e.has(r) || e.set(r, t), e
+        }, new Map).values()))
+    };
+
+    function y(e) {
+        return !!h.cartItems && !!h.cartItems[e]
+    }
+
+    function b() {
+        return !h.ticketPurchase && h.discountsManager.hasDiscounts
+    }
+
+    function C(e) {
+        var t = arguments.length > 1 && void 0 !== arguments[1] && arguments[1],
+            i = b(),
+            r = t ? h.recommendations : e;
+        0 === h.recommendations.length && (h.upsellEls = {}, f.upsellsContainer.empty()), r.forEach(function(e) {
+            h.upsellEls[e.selected_variant_id] ? h.upsellEls[e.selected_variant_id].update(e, i) : h.upsellEls[e.selected_variant_id] = new l(e, f.upsellsContainer, i)
+        }), !h.upsellsInitialised && h.recommendations.length && (h.upsellsInitialised = !0, f.upsells.addClass("init")), x(0)
+    }
+    var k, x = function() {
+            var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : null;
+            if (h.upsellsInitialised)
+                if (UTILS.isBreakpointMd()) {
+                    if (h.upsellCarousel && null == e) return null;
+                    h.upsellCarousel && h.upsellCarousel.destroy(), h.upsellCarousel = new d(f.upsellsContainer), f.upsells.off("click.arrows"), f.upsells.on("click.arrows", ".arrow-prev, .arrow-next", function(e) {
+                        t(e.currentTarget).is(".arrow-prev") && h.upsellCarousel.prev(), t(e.currentTarget).is(".arrow-next") && h.upsellCarousel.next()
+                    })
+                } else h.upsellCarousel && (f.upsells.off("click.arrows"), h.upsellCarousel.destroy(), h.upsellCarousel = null)
+        },
+        S = (k = _asyncToGenerator(regeneratorRuntime.mark(function e() {
+            var i, n, o, a, s;
+            return regeneratorRuntime.wrap(function(e) {
+                for (;;) switch (e.prev = e.next) {
+                    case 0:
+                        if (h.upsellCollection && 0 != h.upsellCollectionPage) {
+                            e.next = 2;
+                            break
+                        }
+                        return e.abrupt("return", []);
+                    case 2:
+                        return e.prev = 2, e.next = 5, t.ajax("/collections/" + h.upsellCollection + "?view=inline-cart&page=" + h.upsellCollectionPage).promise();
+                    case 5:
+                        return i = e.sent, n = JSON.parse(i), o = n.products, a = n.page, s = n.pages, h.upsellCollectionPage = a + 1 != s && h.upsellCollectionPage + 1, h.upsellCollectionProds = h.upsellCollectionProds.concat(o), e.abrupt("return", o);
+                    case 12:
+                        return e.prev = 12, e.t0 = e.catch(2), console.log(e.t0), e.abrupt("return", []);
+                    case 16:
+                    case "end":
+                        return e.stop()
+                }
+            }, e, r, [
+                [2, 12]
+            ])
+        })), function() {
+            return k.apply(this, arguments)
+        }),
+        T = function() {
+            var e, t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : u;
+            return new Promise((e = _asyncToGenerator(regeneratorRuntime.mark(function e(i, n) {
+                var o;
+                return regeneratorRuntime.wrap(function(e) {
+                    for (;;) switch (e.prev = e.next) {
+                        case 0:
+                            if (t) {
+                                e.next = 2;
+                                break
+                            }
+                            return e.abrupt("return", n("Nothing to laod"));
+                        case 2:
+                            return o = {
+                                kind: "trending",
+                                name: "request",
+                                offset: h.findifyPageOffset,
+                                limit: h.findifyPageOffset + t
+                            }, window.findifyProdId && (h.ticketProductIds.indexOf(window.findifyProdId) >= 0 !== h.ticketPurchase && 0 !== h.cart.items.length || (o.kind = "bought", o.item_id = window.findifyProdId, h.ticketPurchase && (o.kind = "viewed"))), e.next = 6, UTILS.wait(2500);
+                        case 6:
+                            Findify.sdk.recommendations(o.kind, o).then(function(e) {
+                                h.findifyPageOffset += t;
+                                var r = e.items.filter(function(e) {
+                                    var t = e.id,
+                                        i = parseInt(t),
+                                        r = h.ticketProductIds.indexOf(i);
+                                    return h.ticketPurchase ? r >= 0 : -1 == r
+                                });
+                                (0 === e.items.length || h.ticketPurchase && o.offset >= 18) && (h.findifyLoadMore = !1), i({
+                                    items: e.items,
+                                    filteredItems: r
+                                })
+                            }, function(e) {
+                                console.log("recommendation error", e), h.findifyErrorCount >= 2 ? h.findifyLoadMore = !1 : h.findifyErrorCount += 1, n(e)
+                            });
+                        case 7:
+                        case "end":
+                            return e.stop()
+                    }
+                }, e, r)
+            })), function(t, i) {
+                return e.apply(this, arguments)
+            }))
+        };
+
+    function O() {
+        var e = h.recommendations.filter(function(e) {
+                return y(e.selected_variant_id)
+            }).length,
+            t = h.recommendations.length - e,
+            i = u - t;
+        if (i > 0 && h.findifyLoadMore) return n(i)
+    }
+
+    function I(e) {
+        return e * (1 - h.discountsManager.currentDiscount)
+    }
+
+    function P() {
+        var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : null;
+        if (!e) return null;
+        if (R(e), h.discountsManager.update(h.cart), t(".header .cart-link span").html(h.cart.item_count), f.cartContainer.scrollTop(0), f.cartMainContainer.scrollTop(0), h.upsellsInitialised && (v(), C([], !0), O()), function(e) {
+                var t = e.items;
+                if (0 == t.length) return f.cartLineItems.empty();
+                var i = b(),
+                    r = t.map(function(e, t) {
+                        var r = e.line_price,
+                            n = e.original_line_price,
+                            o = (e.original_price, e.price),
+                            a = e.variant_id,
+                            s = e.product_title,
+                            c = e.image,
+                            l = (e.total_discount, e.url),
+                            d = e.quantity,
+                            u = r !== n,
+                            p = u ? n / 100 : o / 100;
+                        return '\n        <div class="inline-cart__cart__item inline-cart__lineItem" data-id=\'' + a + "'>\n          <a href='" + l + '\' class="image"><img src="' + c + '" alt=""></a>\n          <div class="details">\n            <a href=\'' + l + '\' class="name">' + s + '</a>\n            <div class="price">\n              ' + (i ? "<span class='loyalty-price'>Loyal Customer Price: " + UTILS.pricify(I(p)) + "</span>" : "") + "\n              <span class='retail-price'>Retail Price: " + UTILS.pricify(u ? n / 100 : o / 100) + "</span>\n            </div>\n          </div>\n          <div class='actions'>\n            <div class='quantity'>\n              <div class='quantity__ctrl quantity__minus' quantity-toggle quantity-minus>-</div>\n              <input type=\"number\" value=\"" + d + '" min="1" edit-quantity="' + (t + 1) + "\" />\n              <div class='quantity__ctrl quantity__plus' quantity-toggle quantity-add>+</div>\n            </div>\n            <button class='remove' data-cart-remove=\"" + (t + 1) + '" remove-lineitem>REMOVE</button>\n          </div>\n        </div>\n      '
+                    });
+                f.cartLineItems.html(r)
+            }(h.cart), (h.discountsManager.hasDiscounts || h.discountsManager.giftCard) && h.cart.items.length) {
+            f.retailPrice.addClass(p.onSaleClass), f.loyaltyPrice.show(), f.totalSavings.show();
+            var i = h.discountsManager.currentSubtotal,
+                r = h.discountsManager.savings;
+            f.loyaltyPrice.html(UTILS.pricify(i / 100)), f.totalSavingsValue.html(UTILS.pricify(r / 100))
+        } else f.retailPrice.removeClass(p.onSaleClass), f.loyaltyPrice.hide(), f.totalSavings.hide();
+        f.retailPrice.html(UTILS.pricify(h.discountsManager.originalTotal / 100)), h.cart.items.length ? f.emptyCartNote.hide() : f.emptyCartNote.show(), setTimeout(g, 1e3)
+    }
+
+    function q(e) {
+        var t = parseInt(e.currentTarget.value);
+        t = isNaN(t) ? 1 : t;
+        var i = e.currentTarget.getAttribute("edit-quantity"),
+            r = Exigo.setPropertyQtys(CartJS.cart.items[i - 1].properties, t);
+        e.currentTarget.value = t, CartJS.updateItem(i, t, r)
+    }
+    var N, L = (N = _asyncToGenerator(regeneratorRuntime.mark(function e(i) {
+        var r, n, o, a, s, c, l;
+        return regeneratorRuntime.wrap(function(e) {
+            for (;;) switch (e.prev = e.next) {
+                case 0:
+                    if (i.preventDefault(), r = t(i.currentTarget), n = r.attr("cart-add"), !(o = r.closest(".inline-cart__upsells__item")).hasClass("busy") && !r.hasClass("added")) {
+                        e.next = 7;
+                        break
+                    }
+                    return CartJS.removeItemById(n), e.abrupt("return", !1);
+                case 7:
+                    return a = o.attr("data-productid"), s = h.recommendations.find(function(e) {
+                        return e.id === a
+                    }), e.next = 11, Exigo.prepareProductProperties(s);
+                case 11:
+                    c = e.sent, l = Exigo.setPropertyQtys(c, 1), o.addClass("busy"), CartJS.addItem(n, 1, l, {
+                        success: function() {
+                            o.removeClass("busy")
+                        },
+                        error: function() {
+                            o.removeClass("busy")
+                        }
+                    });
+                case 15:
+                case "end":
+                    return e.stop()
+            }
+        }, e, this)
+    })), function(e) {
+        return N.apply(this, arguments)
+    });
+
+    function A(e) {
+        var i = t(e.currentTarget),
+            r = i.parent().find("[edit-quantity]"),
+            n = parseInt(r.val());
+        if (isNaN(n) && (n = 1), i.is("[quantity-minus]")) {
+            if (n <= 1) return null;
+            r.val(n - 1).trigger("change")
+        }
+        i.is("[quantity-add]") && r.val(n + 1).trigger("change")
+    }
+
+    function D() {
+        t(document).on("cart.requestComplete", function(e, t) {
+            h.ready && (null == h.cart || h.cart && h.cart.item_count !== t.item_count) && t.item_count && M(), h.ready || (h.ready = !0), P(t)
+        }), f.upsellsContainer.on("click", "[cart-add]", L)
+    }
+
+    function E() {
+        t(document).on("click", p.cartToggle, U), f.backdrop.on("click", F), f.cart.on("click", ".inline-cart__upsellsToggle", function(e) {
+            f.cart.toggleClass(p.upsellsClosedClass)
+        }), f.cart.on("change.quantityEdit", "[edit-quantity]", q), f.cart.on("click.quantityToggle", "[quantity-toggle]", A), UTILS.optimizedResize.add(function() {
+            return x()
+        })
+    }
+
+    function U(e) {
+        e.preventDefault(), h.isOpen ? F() : M()
+    }
+
+    function M() {
+        var e;
+        if (console.log("opening"), h.isOpen) return null;
+        h.isOpen = !0;
+        f.htmlBody.addClass("inlineCartOpen"), TweenLite.set(f.cartContents, {
+            clearProps: "all"
+        }), TweenLite.set(f.cartContents, _defineProperty({}, "xPercent", 100)), TweenLite.set(f.cart, {
+            opacity: 0,
+            display: "block"
+        }), TweenLite.to(f.cart, .4, {
+            opacity: 1,
+            ease: Power3.easeOut
+        }), TweenLite.to(f.cartContents, .3, (_defineProperty(e = {
+            delay: .3
+        }, "xPercent", 0), _defineProperty(e, "ease", Power3.easeOut), e)), x()
+    }
+
+    function F() {
+        var e;
+        if (!h.isOpen) return null;
+        h.isOpen = !1, f.htmlBody.removeClass("inlineCartOpen");
+        TweenLite.to(f.cartContents, .2, (_defineProperty(e = {}, "xPercent", 100), _defineProperty(e, "ease", Power3.easeIn), e)), TweenLite.to(f.cart, .2, {
+            delay: .3,
+            opacity: 0,
+            ease: Power3.easeIn,
+            clearProps: "all"
+        })
+    }
+
+    function R() {
+        var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : null;
+        e || (h.cart = null), h.cart = _extends({}, e), h.cartItems = {}, h.cart.items.forEach(function(e) {
+            h.cartItems[e.variant_id] = e
+        })
+    }
+    e.show = M, e.hide = F, e.init = function() {
+        var e = arguments.length > 0 && void 0 !== arguments[0] && arguments[0];
+        window.location.href.includes("?prods=") || e ? window.location.href.includes("?prods=") && e && CartJS.getCart().then(function(e) {
+            m(e), n(), _(), E(), D(), M()
+        }) : CartJS.getCart().then(function(e) {
+            m(e), n(), _(), E(), D(), UTILS.getQueryVariable("cart") && M()
+        })
+    }
+}(window.InlineCart = window.InlineCart || {}, jQuery),
+function(e, t, i) {
+    "use strict";
+    var r = function(e) {
+        for (var t in e) "success" === t && "error" === t && "complete" === t || (valid = !1);
+        return !0
+    };
+    e.add = function(e, t, i, n) {
+        n === object && r(n) || (n = {}), CartJS.addItem(e, t, i, n)
+    }, e.remove = function(e, t) {
+        t === object && r(t) || (t = {}), CartJS.removeItemById(e, t)
+    }, e.init = function() {}
+}(window.LineItems = window.LineItems || {}, jQuery),
+function(e, t, i) {
+    "use strict";
+    var r, n = function() {
+            -1 !== window.location.href.indexOf("?to-checkout") && (t(".create-account-btn").attr("href", "/account/register?to-checkout"), t.get("/cart.js", null, null, "json").done(function(e) {
+                console.log(e), r = e.total_price
+            })), localStorage.getItem("storedGiftCardCode") && t("#web-alias").val(localStorage.getItem("storedGiftCardCode")), console.log('$(".form-note.the-errors").length', t(".form-note.the-errors").length), t(".form-note.the-errors").length && Exigo.alert(t("#customer_login"), t(".form-note.the-errors").text())
+        },
+        o = function() {
+            var e, i, n, o, a = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : null,
+                s = t("#customer-email").val(),
+                c = t("#customer-password").val(),
+                l = "step=contact_information&discount=";
+            t.post("/account/login", "form_type=customer_login&utf8=%E2%9C%93&customer%5Bemail%5D=" + s + "&customer%5Bpassword%5D=" + c).done(function(s, c) {
+                if (console.log(c), console.log(s), console.log("redirectTo", a), -1 !== s.indexOf("Invalid login credentials")) Exigo.alert(t("#customer_login"), "Invalid login credentials.");
+                else {
+                    e = (e = s.split('"rank": ')[1]).split(",")[0], i = (i = s.split('"web_alias": "')[1]).split('",')[0], n = (n = s.split('"discount_name": "')[1]).split('",')[0], o = (o = s.split('"order_count": ')[1]).split(",")[0];
+                    t.get("https://purium.sunriseintegration.com/api/affiliate?code=" + i).done(function(t) {
+                        console.log(t), console.log("rank", e), console.log("order_count", o), console.log("web_alias", i), "18" == e && 0 == o ? t.uses_left > 0 ? ! function(e) {
+                            return console.log(e), !(e >= 7500 || (((7500 - e) / 100).toFixed(2), 0))
+                        }(r) ? window.location.href = "https://puriumcorp.myshopify.com/checkout?discount=" + l + i : window.location.href = "/cart?under75" : 0 == t.uses_left && (window.location.href = "https://puriumcorp.myshopify.com/checkout?" + l) : window.location.href = "" != i && o > 0 ? "https://puriumcorp.myshopify.com/checkout?" + l + n : "https://puriumcorp.myshopify.com/checkout?" + l
+                    })
+                }
+            })
+        };
+    e.init = function() {
+        var e;
+        n(), e = UTILS.getQueryVariable("redirect_to"), t("#customer_login").on("submit", function(i) {
+            t(this).find(".form-submit").text("Signing In..."), console.log("trying to login"), (-1 !== window.location.href.indexOf("?to-checkout") || e) && (console.log("special login"), i.preventDefault(), o(e))
+        })
+    }
+}(window.Login = window.Login || {}, jQuery),
+function(e, t, i) {
+    "use strict";
+    e.show = function(e) {
+        Overlay.show(), Scroll.lock(), t('[data-modal="' + e + '"]').fadeIn(300), t("body").attr("data-active-modal", e), t("html, body").animate({
+            scrollTop: 0
+        }, 300)
+    }, e.hide = function() {
+        Overlay.hide(), Scroll.unlock(), t("[data-modal]").fadeOut(300), t("body").removeAttr("data-active-modal")
+    }, e.init = function() {
+        t("[data-modal-show]").on("click", function(i) {
+            i.preventDefault(), e.show(t(this).attr("data-modal-show"))
+        }), t("[data-modal-hide]").on("click", function(t) {
+            t.preventDefault(), e.hide()
+        })
+    }
+}(window.Modal = window.Modal || {}, jQuery),
+function(e, t, i) {
+    "use strict";
+    e.show = function() {
+        t("[data-overlay]").fadeIn(300)
+    }, e.hide = function() {
+        t("[data-overlay]").fadeOut(300)
+    }, e.init = function() {
+        t("[data-overlay]").on("click", function() {
+            Modal.hide(), e.hide()
+        })
+    }
+}(window.Overlay = window.Overlay || {}, jQuery),
+function(e, t) {
+    "use strict";
+    var i, r = "Cart";
+    window.materials && (i = window.materials.materials);
+    var n = function(e) {
+        return "$" + parseFloat(Math.round(100 * e) / 100).toFixed(2)
+    };
+    e.selectCallback = function(e, i) {
+        e ? (e.available ? t(".add-to-cart-button").removeClass("disabled").removeAttr("disabled").val("Add to Cart").fadeTo(200, 1) : t(".add-to-cart-button").val("Sold Out").addClass("disabled").attr("disabled", "disabled").fadeTo(200, .5), e.compare_at_price > e.price ? (t(".pdp-info__price-reg").html(Shopify.formatMoney(e.price, "")), t(".pdp-info__price-compare").html(Shopify.formatMoney(e.compare_at_price, ""))) : t(".pdp-info__price-reg").html(Shopify.formatMoney(e.price, ""))) : t(".add-to-cart-button").val("Unavailable").addClass("disabled").attr("disabled", "disabled").fadeTo(200, .5)
+    }, e.updateNavCart = function() {
+        var e = parseInt(t(".fa-shopping-cart span").html()),
+            i = t(".pdp-info__qty").length ? parseInt(t(".pdp-info__qty").val()) : 1;
+        isNaN(e) ? t(".fa-shopping-cart span").html("1") : t(".fa-shopping-cart span").html(e + i)
+    }, e.buildMaterials = function(e) {
+        var i = [];
+        for (var r in e) {
+            var n = e[r];
+            if (i[r] = "", n.variants && 1 == n.variants.length) ! function(e, i) {
+                var n = r.replace(/[^\w\s]/g, "").replace(/ /g, "-");
+                void 0 == i.quantity && null == i.quantity && (i.quantity = 1);
+                t.get("//shopifyexigoitemcontentsync.azurewebsites.net/api/get-prod?product_id=" + i.variants[0] + "&params=variants").done(function(e) {
+                    var r = e.product.variants[0].sku;
+                    t(".pdp-info__field-wrap").append('<input class="kit-product exigo-id hidden required" id="property__exigo-id-' + n + '" type="hidden" name="properties[' + n + ']" value="[id: ' + r + ", qty: " + Number(i.quantity) + ']">')
+                })
+            }(0, n);
+            else if (n.variants && n.variants.length > 1)
+                for (var o in t(".pdp-info__field-wrap").append('<label class="pdp-info__variant-label">' + r + ':</label><div class="selector-wrapper"><select class="kit-product-select exigo-id required" id="property__exigo-id-' + r.replace(/[^\w\s]/g, "").replace(/ /g, "-") + '" name="properties[' + r.replace(/[^\w\s]/g, "").replace(/ /g, "-") + ']"></select></div><input class="kit-product exigo-id hidden required" id="property__selected__exigo-id-' + r.replace(/[^\w\s]/g, "").replace(/ /g, "-") + '" type="hidden" name="properties[selected-' + r.replace(/[^\w\s]/g, "").replace(/ /g, "-") + ']" value="">'), n.variants) ! function(e, i) {
+                    var n = r.replace(/[^\w\s]/g, "").replace(/ /g, "-");
+                    void 0 == i.quantity && null == i.quantity && (i.quantity = 1);
+                    t.get("//shopifyexigoitemcontentsync.azurewebsites.net/api/get-prod?product_id=" + i.variants[o] + "&params=id,variants,title").done(function(e) {
+                        var r = "#property__exigo-id-" + n,
+                            o = e.product.variants[0].sku,
+                            a = e.product.title,
+                            s = '<option value="[id: ' + o + ", qty: " + Number(i.quantity) + ']" data-prop-val="' + a + "(x" + Number(i.quantity) + ')">' + a + "</option>";
+                        e.product.id.toString() == i.default ? (t(r).prepend(s).val("[id: " + o + ", qty: " + Number(i.quantity) + "]"), t("#property__selected__exigo-id-" + n).val(a + "(x" + Number(i.quantity) + ")"), t("#property__selected__exigo-id-" + n).parent().next().val(a + "(x" + Number(i.quantity) + ")")) : t(r).append(s)
+                    })
+                }(0, n);
+            else n.default && function(e, i) {
+                var n = r.replace(/[^\w\s]/g, "").replace(/ /g, "-");
+                void 0 == i.quantity && null == i.quantity && (i.quantity = 1);
+                t.get("//shopifyexigoitemcontentsync.azurewebsites.net/api/get-prod?product_id=" + i.default+"&params=variants").done(function(e) {
+                    var r = e.product.variants[0].sku;
+                    t(".pdp-info__field-wrap").append('<input class="kit-product exigo-id hidden required" id="property__exigo-id-' + n + '" type="hidden" name="properties[' + n + ']" value="[id: ' + r + ", qty: " + Number(i.quantity) + ']">')
+                })
+            }(0, n)
+        }
+    };
+    var o = function() {
+            t(".prod-slider__wrap").slick({
+                slide: ".grid-prod",
+                infinite: !0,
+                slidesToScroll: 1,
+                slidesToShow: 1,
+                centerMode: !0,
+                centerPadding: "50px",
+                arrows: !0,
+                prevArrow: "<div class='slick-prev'><img src={{ 'Left.svg' | asset_url }} /></div>",
+                nextArrow: "<div class='slick-next'><img src={{ 'Right.svg' | asset_url }} /></div>",
+                mobileFirst: !0,
+                responsive: [{
+                    breakpoint: 500,
+                    settings: {
+                        arrows: !0,
+                        slidesToShow: 3,
+                        centerMode: !1
+                    }
+                }, {
+                    breakpoint: 1050,
+                    settings: {
+                        arrows: !0,
+                        slidesToShow: 5,
+                        centerMode: !1
+                    }
+                }]
+            })
+        },
+        a = function e() {
+            var i = {
+                name: "request",
+                item_id: window.findifyProdId,
+                limit: window.findifyProdsLimit
+            };
+            Findify.sdk.recommendations("viewed", i).then(function(e) {
+                var i, r;
+                i = e.items, r = "", i.forEach(function(e) {
+                    var t = e.tags.find(function(e) {
+                            return e.toLowerCase().indexOf("new-product") >= 0
+                        }) ? '<div class="new-product-badge">NEW</div>' : "",
+                        i = window.customer && 1 == window.customer.discount || !window.customer ? '">' + n(e.price[0]) : 'member-price">' + n(e.price[0] * window.customer.discount),
+                        o = window.customer && 1 == window.customer.discount || !window.customer ? "" : "" + n(e.price[0]),
+                        a = '\n        <div class="grid-prod">\n          <a href="' + e.product_url + '">\n            <div class="tag-img-container">\n              <img class="grid-prod__image" src="' + e.image_url.replace("_medium", "") + '">\n              ' + t + '\n            </div>\n            <div class="grid-prod__info">\n              <h2 class="grid-prod__title">' + e.title + '</h2>\n              <div class="grid-prod__price price' + i + "<span>" + o + "</span></div>\n            </div>\n            </a>\n        </div>";
+                    r += a
+                }), t(".prod-slider__wrap").append(r), o()
+            }, function(t) {
+                console.log("recommendation error", t), e()
+            })
+        };
+    e.init = function() {
+        i && e.buildMaterials(i), window.findifyProdId ? a() : o(), t(".pdp-more__heading").on("click", function() {
+            var e = t(this),
+                i = t(this).next();
+            e.toggleClass("active-toggle"), Toggle.slideToggle(i)
+        }), t('[name="properties[delivery]"]').on("change", function() {
+            var e = t(this).val();
+            r = "Smart Order" == e ? "Smart Order" : "Cart", t(".pdp-info__submit").val("Add to " + r)
+        }), t(document).on("submit", ".add-to-cart-form", function(i) {
+            i.preventDefault();
+            var n = t(this),
+                o = t(".add-to-cart-button", n),
+                a = t('[name="id"]', n).val(),
+                s = t('[name="quantity"]', n).val(),
+                c = {};
+            t('[name^="properties"]').each(function() {
+                var e = t(this).attr("name").replace("properties[", "").replace("]", "");
+                c[e] = t(this).val()
+            }), c = Exigo.setPropertyQtys(c, s), o.val("Adding..."), CartJS.addItem(a, s, c, {
+                success: function(i, n, a) {
+                    console.log("in success"), e.updateNavCart(), o.val("Add to " + r), location.href.indexOf("quick-shop") && Findify.sdk.feedback("add-to-cart", {
+                        item_id: t("#property__shopify-id").val(),
+                        rid: "quick-shop",
+                        quantity: 1
+                    })
+                },
+                error: function(e, t, i) {
+                    console.log("in error"), o.val("Add to " + r), setTimeout(function() {}, 1e4)
+                }
+            })
+        }), t(document).on("change", ".kit-product-select", function() {
+            var e = t(this).children(":selected").data("prop-val");
+            t(this).parent().next().val(e)
+        })
+    }
+}(window.Product = window.Product || {}, jQuery),
+function(e, t) {
+    var i = {},
+        r = function() {
+            return t(window).width() <= 480
+        },
+        n = function() {
+            t(".value-prop-arrow--left").fadeOut(350), i.valueProp.removeClass("init-hide")
+        },
+        o = function(e, i) {
+            var r = i.currentSlide,
+                n = i.slideCount,
+                o = r + 1,
+                a = o > 1 && o < n,
+                s = n == o;
+            1 == o && (t(".value-prop-arrow--left").fadeOut(250), t(".value-prop-arrow--right").fadeIn(250)), a && t(".value-prop-arrow").fadeIn(250), s && (t(".value-prop-arrow--left").fadeIn(250), t(".value-prop-arrow--right").fadeOut(250))
+        };
+    e.init = function() {
+        console.log("promo bar loaded"), i.PromoBar = t("[js-promo-banner]"), i.valueProp = t("[js-value-prop]"), i.valuePropText = t("[js-value-prop-text]"), i.PromoBar.on("init", n), i.PromoBar.on("afterChange", o), i.valueProp.length > 1 && i.PromoBar.slick({
+            mobileFirst: !0,
+            autoplay: !0,
+            autoplaySpeed: 7e3,
+            arrows: !1,
+            infinite: !1,
+            responsive: [{
+                breakpoint: 640,
+                settings: {
+                    arrows: !0,
+                    prevArrow: '<button class="value-prop-arrow value-prop-arrow--left" aria-label="slide"></button>',
+                    nextArrow: '<button class="value-prop-arrow value-prop-arrow--right" aria-label="slide"></button>'
+                }
+            }]
+        }), console.log(r()), r() || i.valuePropText.each(function() {
+            var e = t(this).attr("data-full-text");
+            t(this).text(e)
+        })
+    }
+}(window.PromoBar = window.PromoBar || {}, jQuery),
+function(e, t) {
+    var i = "";
+    window.location.pathname.includes("account") && (i = "?view=smart-order");
+    var r = {},
+        n = {
+            "custom_fields.custom_category": {
+                Cleansing: !0,
+                "Anti-Aging": !0,
+                "Kids & Dogs": !0,
+                Athletes: !0,
+                "Weight Loss": !0,
+                "Gut Health": !0
+            },
+            "custom_fields.custom_badge": {
+                Glutenfree: !1,
+                Raw: !1,
+                Vegan: !1,
+                Kosher: !1,
+                Usda: !1
+            }
+        },
+        o = "",
+        a = [{
+            field: "title",
+            order: "asc"
+        }],
+        s = function(e) {
+            return e.toLowerCase().replace(/[^\w\u00C0-\u024f]+/g, "-").replace(/^-+|-+$/g, "")
+        },
+        c = function(e) {
+            return "$" + parseFloat(Math.round(100 * e) / 100).toFixed(2)
+        },
+        l = function(e) {
+            var t = void 0;
+            return e.meta.filters.forEach(function(e) {
+                "custom_fields.custom_badge" == e.name && e.values.length > 1 && (t = e.values.map(function(e) {
+                    return "Badge::" + e.value.toLowerCase()
+                }))
+            }), t ? e.items.filter(function(e) {
+                return t.every(function(t) {
+                    return e.tags.indexOf(t) >= 0
+                })
+            }) : e.items
+        },
+        d = function() {
+            var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : 0,
+                t = {
+                    q: o,
+                    limit: 120,
+                    filters: [{
+                        name: "custom_fields.custom_category",
+                        type: "text",
+                        values: []
+                    }, {
+                        name: "custom_fields.custom_badge",
+                        type: "text",
+                        values: []
+                    }],
+                    offset: e,
+                    sort: a
+                };
+            for (var i in n["custom_fields.custom_category"])
+                if (n["custom_fields.custom_category"][i]) {
+                    var r = {
+                        value: i
+                    };
+                    t.filters[0].values.push(r)
+                } for (var i in n["custom_fields.custom_badge"])
+                if (n["custom_fields.custom_badge"][i]) {
+                    r = {
+                        value: i
+                    };
+                    t.filters[1].values.push(r)
+                } return t
+        },
+        u = function(e) {
+            var n = "";
+            e.forEach(function(e, r) {
+                var o, a = s(e.title),
+                    l = e.product_url.split("?")[0] + "?view=quick-shop",
+                    d = window.bests.indexOf(e.title) >= 0 ? '<div class="qs-table__cell-best">Best Seller</div>' : "",
+                    u = window.customer ? c(e.price[0] * window.customer.discount) : c(e.price[0]),
+                    p = !!e.tags.find(function(e) {
+                        return e.toLowerCase().indexOf("bv::") >= 0
+                    }) && e.tags.find(function(e) {
+                        return e.toLowerCase().indexOf("bv::") >= 0
+                    }).toLowerCase().replace("bv::", "").replace(" ", ""),
+                    f = window.customer && window.customer.show_bv && p ? '<span class="qs-table__bv">A ' + p + " BV VALUE</span>" : "",
+                    h = e.tags.find(function(e) {
+                        return e.toLowerCase().indexOf("exigo_id:") >= 0
+                    }) ? e.tags.find(function(e) {
+                        return e.toLowerCase().indexOf("exigo_id:") >= 0
+                    }).split(":")[1] : "3551";
+                o = e.tags.map(function(e) {
+                    if (e.indexOf("Badge::") >= 0 && !e.indexOf("detox") >= 0) return '<img src="' + window.badges[e.replace("Badge::", "").toLowerCase()] + '" class="qs-table__badge">'
+                }).join("");
+                var m;
+                m = e.tags.map(function(e) {
+                    if (e.toLowerCase().indexOf("coll::") >= 0) return "coll--" + e.toLowerCase().replace("zcoll::", "").replace("coll::", "").replace(" ", "-")
+                }).join(" ");
+                var v = void 0;
+                v = t(".cust__template--add-item").length ? '<a href="' + e.product_url.split("?")[0] + '?view=smart-order" class="btn btn--secondary so__to-prod qs-table__cta"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Add</a>' : e.category[0].category1.indexOf("Dynamic Kit") >= 0 ? '<button class="btn btn--secondary btn-transparent qs-table__cta" data-qs-modal="' + l + '"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Customize</button>' : '<button class="btn btn--secondary btn-transparent qs-table__cta" data-add-to-cart data-variant="' + e.selected_variant_id + '" data-item-id="' + e.id + '" data-exigo-type="' + e.category[0].category1 + '" data-exigo-id="' + h + '"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="qs-table__add">Add</span><span class="qs-table__add-extra"> to cart</span></button>';
+                var g = '\n        <tr class="qs-table__row qs-table__row--' + a + " " + m + '">\n          <td class="qs-table__cell qs-table__cell--desc"><a class="qs-table__cell-link" href="' + e.product_url + i + '">' + e.title + d + '</a></td>\n          <td class="qs-table__cell qs-table__cell--price"><span class="qs-table__price">' + u + " USD" + "</span>" + f + '</td>\n          <td class="qs-table__cell qs-table__cell--quals">' + o + '</td>\n          <td class="qs-table__cell qs-table__cell--action">' + v + "</td>\n        </tr>";
+                n += g
+            }), r.tbody.html(n)
+        },
+        p = function e(t, i) {
+            Findify.sdk.search(t).then(function(e) {
+                console.log("then data", e);
+                var t = l(e);
+                t.length ? u(t) : r.tbody.html('<tr class="qs-table__row qs-table__row--none"><td class="qs-table__cell qs-table__cell--none" colspan="4">No items matched your filters</td></tr>'), "function" == typeof i && i()
+            }, function(i) {
+                console.log("then error", i), e(t)
+            })
+        },
+        f = function e() {
+            Findify.sdk.recommendations("trending", {
+                name: "request",
+                payload: {
+                    limit: 5
+                }
+            }).then(function(e) {
+                var t, i;
+                console.log("recommendation data", e), t = e.items, i = "", t.forEach(function(e) {
+                    var t = s(e.title),
+                        r = e.product_url.split("?")[0] + "?view=quick-shop",
+                        n = window.customer ? c(e.price[0] * window.customer.discount) : c(e.price[0]),
+                        o = !!e.tags.find(function(e) {
+                            return e.toLowerCase().indexOf("bv::") >= 0
+                        }) && e.tags.find(function(e) {
+                            return e.toLowerCase().indexOf("bv::") >= 0
+                        }).toLowerCase().replace("bv::", "").replace(" ", ""),
+                        a = window.customer && window.customer.show_bv ? '<span class="qs-table__bv">A ' + o + " BV VALUE</span>" : "",
+                        l = e.tags.find(function(e) {
+                            return e.toLowerCase().indexOf("exigo_id:") >= 0
+                        }) ? e.tags.find(function(e) {
+                            return e.toLowerCase().indexOf("exigo_id:") >= 0
+                        }).split(":")[1] : "3551",
+                        d = e.category[0].category1.indexOf("Dynamic Kit") >= 0 ? 'data-qs-modal="' + r + '">Customize' : 'data-add-to-cart data-variant="' + e.selected_variant_id + '" data-item-id="' + e.id + '" data-exigo-type="' + e.category[0].category1 + '" data-exigo-id="' + l + '">Add to cart',
+                        u = '\n        <div class="bests__block bests__block--' + t + '">\n          <div class="bests__left">\n            <div class="bests__badge">Best Seller</div>\n            <div class="bests__picture"><img src="' + e.image_url + '" alt="Best Sellers"></div>\n          </div>\n          <div class="bests__right">\n            <div class="bests__title"><a class="bests__title-link" href="' + e.product_url + '">' + e.title + '</a></div>\n            <div class="bests__price">' + n + " USD" + '</div>\n            <div class="bests__value">' + a + '</div>\n            <div class="bests__cta"><button class="btn btn--secondary btn-transparent" ' + d + "</button></div>\n          </div>\n        </div>";
+                    i += u
+                }), r.bestsWrap.html(i), h()
+            }, function(t) {
+                console.log("recommendation error", t), e()
+            })
+        },
+        h = function() {
+            t(".bests__wrap").slick({
+                infinite: !0,
+                slidesToShow: 2,
+                slidesToScroll: 1,
+                variableWidth: !0,
+                arrows: !0,
+                prevArrow: "<div class='slick-prev'></div>",
+                nextArrow: "<div class='slick-next'></div>",
+                responsive: [{
+                    breakpoint: 767,
+                    settings: "unslick"
+                }]
+            })
+        },
+        m = function() {
+            r.filterTitles.on("click", function() {
+                var e, i;
+                e = t(this), (i = e.closest(".filter")).toggleClass("active"), t(".filter__dropdown", i).slideToggle(), r.filters.not(i[0]).removeClass("active"), r.filterDrops.not(t(".filter__dropdown", i)[0]).slideUp()
+            }), r.filterClose.on("click", function() {
+                t(this).closest(".filter__dropdown").slideUp(), t(this).closest(".filter").removeClass("active")
+            }), r.openBests.on("click", function() {
+                r.bests.addClass("active")
+            }), r.closeBests.on("click", function() {
+                r.bests.removeClass("active")
+            }), r.search.on("submit", function(e) {
+                e.preventDefault(), r.tbody.html('<tr><td colspan="4"><div class="findify-component-spinner"></div></td></tr>');
+                var i = t(this).serializeArray();
+                o = i[0].value;
+                var n = d();
+                p(n)
+            }), r.filterChecks.on("change", function() {
+                r.tbody.html('<tr><td colspan="4"><div class="findify-component-spinner"></div></td></tr>'), this.checked ? n[t(this).attr("data-filter-type")][t(this).attr("data-filter")] = !0 : n[t(this).attr("data-filter-type")][t(this).attr("data-filter")] = !1;
+                var e = d();
+                p(e)
+            }), r.descSort.on("click", function() {
+                t(this).hasClass("sort--up") ? (t(this).toggleClass("sort--up sort--down"), a = [{
+                    field: "title",
+                    order: "desc"
+                }]) : (t(this).removeClass("sort--down"), t(this).addClass("sort--up"), a = [{
+                    field: "title",
+                    order: "asc"
+                }]);
+                var e = d();
+                p(e), r.priceSort.removeClass("sort--up sort--down")
+            }), r.priceSort.on("click", function() {
+                t(this).hasClass("sort--up") ? (t(this).toggleClass("sort--up sort--down"), a = [{
+                    field: "price",
+                    order: "desc"
+                }]) : (t(this).removeClass("sort--down"), t(this).addClass("sort--up"), a = [{
+                    field: "price",
+                    order: "asc"
+                }]);
+                var e = d();
+                p(e), r.descSort.removeClass("sort--up sort--down")
+            }), t(document).on("click", "[data-add-to-cart]", function() {
+                var e = t(this),
+                    i = t(".qs-table__add", e),
+                    r = t(this).attr("data-variant"),
+                    n = t(this).attr("data-item-id"),
+                    o = {
+                        delivery: "One-time Order",
+                        qty: "1",
+                        type: t(this).attr("data-exigo-type"),
+                        id: t(this).attr("data-exigo-id")
+                    };
+                o = Exigo.setPropertyQtys(o, 1), i.html("Adding"), CartJS.addItem(r, 1, o, {
+                    success: function(e, t, r) {
+                        i.html("Added"), Product.updateNavCart(), setTimeout(function() {
+                            i.html("Add")
+                        }, 5e3), Findify.sdk.feedback("click-item", {
+                            item_id: n
+                        }), Findify.sdk.feedback("add-to-cart", {
+                            item_id: n,
+                            rid: "quick-shop",
+                            quantity: 1
+                        })
+                    },
+                    error: function(e, t, i) {
+                        console.log("Error: " + i + "!")
+                    }
+                })
+            }), t(document).on("click", "[data-qs-modal]", function() {
+                var e = t(this).attr("data-qs-modal"),
+                    i = t("#property__shopify-id").val();
+                t.get(e).done(function(n) {
+                    r.body.append(n), Product.buildMaterials(window.materials.materials), t.getScript("//productreviews.shopifycdn.com/assets/v4/spr.js?shop=puriumcorp.myshopify.com"), t(".qs-modal").addClass("open"), Scroll.lock(), Findify.sdk.feedback("click-item", {
+                        item_id: i
+                    }), Findify.sdk.feedback("view-page", {
+                        url: e,
+                        ref: "https://ishoppurium.com/collections/quick-shop",
+                        width: t(document).width(),
+                        height: t(document).height(),
+                        item_id: i
+                    })
+                })
+            }), t(document).on("click", "[data-qs-modal-close]", function() {
+                t(".qs-modal").removeClass("open").delay(400).remove(), Scroll.unlock()
+            }), t(document).on("click", ".qs-modal", function(e) {
+                t(event.target).hasClass("qs-modal") && (t(".qs-modal").removeClass("open").delay(400).remove(), Scroll.unlock())
+            }), t(window).on("resize", function() {
+                t(this).width() >= 768 && h()
+            })
+        };
+    e.init = function() {
+        ! function() {
+            Findify.init();
+            var e = d();
+            e.slot = "/collections/quick-shop", delete e.q,
+                function t() {
+                    Findify.sdk.collection(e).then(function(e) {
+                        console.log("load data", e);
+                        var t = l(e);
+                        t.length ? u(t) : r.tbody.html('<tr class="qs-table__row qs-table__row--none"><td class="qs-table__cell qs-table__cell--none" colspan="4">No items matched your filters</td></tr>')
+                    }, function(e) {
+                        console.log("load error", e), t()
+                    })
+                }(), f()
+        }(), r.body = t("body"), r.search = t(".qs-search"), r.filters = t(".filter"), r.filterTitles = t(".filter__title"), r.filterDrops = t(".filter__dropdown"), r.filterChecks = t(".filter__checkbox"), r.filterClose = t("[data-close-filter]"), r.descSort = t(".qs-table__th--desc"), r.priceSort = t(".qs-table__th--price"), r.tbody = t(".qs-table__body"), r.bests = t(".bests"), r.bestsWrap = t(".bests__wrap"), r.openBests = t("[data-bests]"), r.closeBests = t("[data-bests-close]"), m()
+    }
+}(window.Quickshop = window.Quickshop || {}, jQuery),
+function(e, t, i) {
+    "use strict";
+    e.lock = function(e) {
+        t("html, body").addClass("no-scroll")
+    }, e.unlock = function(e) {
+        t("html, body").removeClass("no-scroll")
+    }, e.init = function() {}
+}(window.Scroll = window.Scroll || {}, jQuery),
+function(e, t) {
+    "use strict";
+    e.init = function() {
+        t(".search-item-description").each(function() {
+            var e = t(this).text().substring(0, 100);
+            t(this).html(e + "..."), console.log(length)
+        })
+    }
+}(window.Search = window.Search || {}, jQuery),
+function(e, t, i) {
+    "use strict";
+    e.init = function() {
+        t(".home-slider__slider").slick({
+            mobileFirst: !0,
+            dots: !0,
+            arrows: !0,
+            autoplay: !0,
+            autoplaySpeed: 5e3,
+            responsive: [{
+                breakpoint: 991,
+                settings: {
+                    arrows: !0
+                }
+            }]
+        }), t(".featured-products__slider").slick({
+            mobileFirst: !0,
+            infinite: !0,
+            slidesToScroll: 1,
+            arrows: !0,
+            prevArrow: "<div class='slick-prev'><img src={{ 'Left.svg' | asset_url }} /></div>",
+            nextArrow: "<div class='slick-next'><img src={{ 'Right.svg' | asset_url }} /></div>",
+            responsive: [{
+                breakpoint: 300,
+                settings: {
+                    arrows: !0,
+                    slidesToShow: 2
+                }
+            }, {
+                breakpoint: 1050,
+                settings: {
+                    arrows: !0,
+                    slidesToShow: 5
+                }
+            }]
+        }), t(".smart-order-products__slider").slick({
+            mobileFirst: !0,
+            infinite: !0,
+            slidesToScroll: 1,
+            arrows: !0,
+            prevArrow: "<div class='slick-prev'><img src={{ 'Left.svg' | asset_url }} /></div>",
+            nextArrow: "<div class='slick-next'><img src={{ 'Right.svg' | asset_url }} /></div>",
+            responsive: [{
+                breakpoint: 991,
+                settings: {
+                    arrows: !0,
+                    slidesToShow: 3
+                }
+            }, {
+                breakpoint: 650,
+                settings: {
+                    arrows: !0,
+                    slidesToShow: 3
+                }
+            }, {
+                breakpoint: 300,
+                settings: {
+                    arrows: !0,
+                    slidesToShow: 2
+                }
+            }]
+        }), t(".slick-slider").on("setPosition", function() {
+            t(this).find(".slick-slide").height("auto");
+            var e = t(this).find(".slick-track"),
+                i = t(e).height();
+            t(this).find(".slick-slide").css("height", i + "px")
+        }), t(".featured-products__paging-slide").on("click", function() {
+            var e = t(this).attr("data-slick-index");
+            t(".featured-products__slider").slick("slickGoTo", e)
+        })
+    }
+}(window.Sliders = window.Sliders || {}, jQuery);
+_extends = Object.assign || function(e) {
+    for (var t = 1; t < arguments.length; t++) {
+        var i = arguments[t];
+        for (var r in i) Object.prototype.hasOwnProperty.call(i, r) && (e[r] = i[r])
+    }
+    return e
+};
+var _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(e) {
+    return typeof e
+} : function(e) {
+    return e && "function" == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype ? "symbol" : typeof e
+};
+
+function _asyncToGenerator(e) {
+    return function() {
+        var t = e.apply(this, arguments);
+        return new Promise(function(e, i) {
+            return function r(n, o) {
+                try {
+                    var a = t[n](o),
+                        s = a.value
+                } catch (e) {
+                    return void i(e)
+                }
+                if (!a.done) return Promise.resolve(s).then(function(e) {
+                    r("next", e)
+                }, function(e) {
+                    r("throw", e)
+                });
+                e(s)
+            }("next")
+        })
+    }
+}
+
+function _defineProperty(e, t, i) {
+    return t in e ? Object.defineProperty(e, t, {
+        value: i,
+        enumerable: !0,
+        configurable: !0,
+        writable: !0
+    }) : e[t] = i, e
+}! function(e, t, i) {
+    "use strict";
+    var r, n, o, a, s, c, l = this,
+        d = !1,
+        u = !1,
+        p = "https://shopify-smartordersync.azurewebsites.net/api",
+        f = window.customer ? p + "/smart-order/" + window.customer.id : "",
+        h = window.customer ? p + "/payment-token/" + window.customer.id : "",
+        m = function() {
+            return t.get(f)
+        },
+        v = function(e, i) {
+            var r = {
+                url: f,
+                type: "PUT",
+                data: e
+            };
+            return "multipart" === i && (r.enctype = "multipart/form-data", r.processData = !1, r.contentType = !1), t.ajax(r)
+        },
+        g = function(e) {
+            return e ? "curr" == o || "deliver" == o ? (y(s), t(".so__complete--one").show()) : "bill" == o ? k("payment", a, !0) : "ship" == o ? k("shipping", s, !1) : "rev" == o ? (k("payment", a, !0), k("shipping", s, !0)) : "add" == o ? (t(".so__add-item--none").hide(), t(".so__add-item--shop").show()) : "pay" == o && (k("payment", a, !1), k("shipping", s, !1), t('[name="ccnumber"]').attr("placeholder", "Current card ends in " + a.last4)) : "bill" == o && (t(".so__billing--filled").hide(), t(".so__billing--none").show()), !0
+        },
+        _ = function() {
+            return new Promise(function(e, i) {
+                t.get(h).done(function(t) {
+                    var i = JSON.parse(t);
+                    a = i;
+                    var r = !!i.last4;
+                    g(r), e()
+                }).fail(function(e) {
+                    i()
+                })
+            })
+        },
+        w = function() {
+            return new Promise(function(e, t) {
+                m().done(function(t) {
+                    var i = JSON.parse(t);
+                    s = i;
+                    var r = !!i.address1;
+                    g(r), e()
+                }).fail(function(e) {
+                    console.log("fetch error", e), t()
+                })
+            })
+        },
+        y = function(e) {
+            for (var i in e) void 0 !== e[i] && "null" != typeof e[i] && "object" != _typeof(e[i]) || e[i];
+            var r = e.address1 + " " + e.address2 + ", " + e.city + ", " + e.state + " " + e.zip;
+            t(".so__current-ships-to, .so__delivery-ships-to").html(r)
+        },
+        b = function(e) {
+            var i, r, n = e.line_items,
+                a = parseFloat(e.start_date.substring(0, 4)),
+                s = parseFloat(e.start_date.substring(5, 7)),
+                c = parseFloat(e.start_date.substring(8, 10)),
+                l = new Date,
+                d = new Date,
+                u = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+                p = 0;
+            if (l.setFullYear(a, s - 1, c), l.getTime() < d && (l.setFullYear(d.getFullYear(), d.getMonth(), c), d.getDate() > c && l.setMonth(l.getMonth() + 1, c)), "curr" == o) {
+                r = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][l.getDay()] + ", " + u[l.getMonth()] + " " + l.getDate();
+                for (var f = 0; f < n.length; f++) {
+                    n[f].material_names = void 0 !== n[f].material_names ? n[f].material_names : "";
+                    var h = void 0 !== n[f].prod_url ? '<a class="item__cell-link" data-smart-order href="' + n[f].prod_url + '">Edit</a>' : "";
+                    i = '<div class="item"><div class="item-head"><p class="item__header item__header--product">Product</p><p class="item__header item__header--amount">Amount</p><p class="item__header item__header--price">Unit Price</p><p class="item__header item__header--frequency">Frequency</p><p class="item__header item__header--next">Next Charge Date</p><p class="item__header item__header--edit"></p></div><div class="item-data"><p class="item__cell item__cell--product"><span class="item__cell-product-title">' + n[f].title + '</span><span class="item__cell-product-props">' + n[f].material_names + '</span></p><p class="item__cell item__cell--amount">' + parseInt(n[f].quantity) + '</p><p class="item__cell item__cell--price">$' + n[f].price_each + '</p><p class="item__cell item__cell--frequency">1 month</p><p class="item__cell item__cell--next">' + r + '</p><p class="item__cell item__cell--edit">' + h + '<a class="item__cell-link" href="javascript:;" data-smart-cancel>Cancel</a></p></div></div>', t(".so__current-table").append(i)
+                }
+            } else if ("deliver" == o) {
+                for (f = n.length - 1; f >= 0; f--) i = '<div class="so__delivery-prod">' + parseInt(n[f].quantity) + "x " + n[f].title + "</div>", t(".so__delivery-products").append(i);
+                for (f = 0; f < 6; f++) t(".so__delivery-upcoming").append('<p class="so__delivery-date">' + u[l.getMonth()] + " " + l.getDate() + ", " + l.getFullYear() + "</p>"), l.setMonth(l.getMonth() + 1, l.getDate())
+            }
+            for (f = e.line_items.length - 1; f >= 0; f--) p += parseFloat(e.line_items[f].price_each) * parseFloat(e.line_items[f].quantity);
+            t(".so__current-total-price").text("$" + p.toFixed(2)), t(".so__current-bv-amount").text(e.business_volume)
+        },
+        C = function() {
+            var e, i = t(".pdp-info__sub-title");
+            for (var r in t(".so__smart-qty").append(n.quantity), n) r.indexOf("properties[selected-") > -1 && (e = "" == i.text() ? n[r].split("(x")[0] : ", " + n[r].split("(x")[0], i.append(e))
+        },
+        k = function(e, i, r) {
+            for (var n in i)
+                if (void 0 !== i[n] && "null" != typeof i[n] && "object" != _typeof(i[n])) {
+                    var o = t("[data-so-" + e + '="' + n + '"]');
+                    o && o.length && o.text(i[n]);
+                    var a = t('[name="' + e + "[" + n + ']"]');
+                    a && a.length && a.val(i[n])
+                }
+        },
+        x = function() {
+            var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : null,
+                i = e || "There was an error saving your settings. Please enter all fields and try again.";
+            Exigo.alert(t(".smart-order-error"), i), window.scrollTo(0, 0)
+        },
+        S = function() {
+            window.customer.currency;
+            var e = t("[data-save-payment]"),
+                i = t("#Payment-Fname").val(),
+                r = t("#Payment-Lname").val(),
+                n = t("#Payment-Number").val(),
+                o = t("#Payment-Month").val(),
+                a = t("#Payment-Year").val(),
+                s = t("#Payment-Address1").val(),
+                c = t("#Payment-Address2").val(),
+                l = t("#Payment-City").val(),
+                d = t("#Payment-Country").val(),
+                u = t("#Payment-State").val(),
+                p = t("#Payment-Zip").val();
+            1 === o.length && (o = "0" + o);
+            var f, m = new FormData;
+            m.set("first_name", i), m.set("last_name", r), m.set("number", n), m.set("month", o), m.set("year", a), m.set("country", d), m.set("state", u), m.set("city", l), m.set("address1", s), m.set("address2", c), m.set("zip", p), e.text("Saving..."), t("#Payment-Number").val().length > 0 ? (f = m, t.ajax({
+                url: h,
+                type: "PUT",
+                data: f,
+                enctype: "multipart/form-data",
+                processData: !1,
+                contentType: !1
+            })).done(function(t) {
+                setTimeout(function() {
+                    e.text("Success!"), setTimeout(function() {
+                        window.location.href = "/account?view=billing"
+                    }, 1e3)
+                }, 0)
+            }).fail(function(t) {
+                console.log("order submission error:", t), x(), e.text("Save")
+            }) : x("Please fill out all fields")
+        },
+        T = function() {
+            return {
+                first_name: t("#Shipping-First_Name").val(),
+                last_name: t("#Shipping-Last_Name").val(),
+                address1: t("#Shipping-Address1").val(),
+                address2: t("#Shipping-Address2").val(),
+                city: t("#Shipping-City").val(),
+                country: t("#Shipping-Country").val(),
+                state: t("#Shipping-State").val(),
+                zip: t("#Shipping-Zip").val(),
+                phone: t("#Shipping-Phone").val()
+            }
+        },
+        O = function() {
+            r = JSON.parse(localStorage.getItem("smartProduct")), n = {};
+            for (var e = r.length - 1; e >= 0; e--) n[r[e].name] = r[e].value
+        },
+        I = function(e) {
+            var i = s,
+                r = t(".item").eq(e);
+            r.find("[data-smart-cancel]").text("Cancelling...").css({
+                "pointer-events": "none",
+                color: "#D1D3C7"
+            }), i.line_items.splice(e, 1);
+            var n = i;
+            if (0 == i.line_items.length) t.ajax({
+                url: f,
+                type: "DELETE"
+            }).done(function(e) {
+                r.addClass("removed"), r.find(".item__cell--product").append('<span class="so__cancelled">Cancelled</span>'), Modal.show("item-cancelled"), r.find("[data-smart-cancel]").text("Cancel")
+            });
+            else {
+                var o = {
+                    order: {
+                        header: {
+                            first_name: i.first_name,
+                            last_name: i.last_name,
+                            address1: i.address1,
+                            address2: i.address2,
+                            start_date: i.start_date,
+                            country: i.country,
+                            city: i.city,
+                            state: i.state,
+                            zip: i.zip,
+                            existing: i.smart_order_id
+                        },
+                        line_items: i.line_items
+                    }
+                };
+                t.ajax({
+                    url: f,
+                    type: "PUT",
+                    data: o
+                }).done(function(e) {
+                    r.addClass("removed"), r.find(".item__cell--product").append('<span class="so__cancelled">Cancelled</span>'), Modal.show("item-cancelled"), r.find("[data-smart-cancel]").text("Cancel"), s = n
+                })
+            }
+        },
+        P = (c = _asyncToGenerator(regeneratorRuntime.mark(function e() {
+            return regeneratorRuntime.wrap(function(e) {
+                for (;;) switch (e.prev = e.next) {
+                    case 0:
+                        return t("[data-review-shipping-form]").hide(), O(), C(), e.next = 5, _();
+                    case 5:
+                        return a.customer_id, e.next = 8, w();
+                    case 8:
+                        d = !!s.exigo_id && !!s.exigo_id.length, u = !!s.country && !!s.country.length, d && u || (t("[data-review-shipping-form]").show(), t("[data-review-shipping-summary]").hide());
+                    case 11:
+                    case "end":
+                        return e.stop()
+                }
+            }, e, l)
+        })), function() {
+            return c.apply(this, arguments)
+        }),
+        q = function() {
+            t(".so__nav .active").on("click", function() {
+                t(this).parent().toggleClass("open")
+            }), t(".so__current-table").on("click", ".item__header:first-child, .item__cell:first-child", function() {
+                var e = t(this).parents(".item");
+                t(".item__header, .item__cell", e).toggleClass("open")
+            }), t("[data-country]").on("change", function() {
+                ! function(e) {
+                    var i = e.find(":selected").data("states"),
+                        r = t("[data-state]");
+                    for (var n in r.html(""), i) r.append('<option value="' + i[n][0] + '">' + i[n][1] + "</option>")
+                }(t(this))
+            }), t("[data-save-payment]").on("click", function() {
+                S()
+            }), t("[data-save-shipping]").on("click", function() {
+                var e, i, r, n, o, a;
+                i = window.customer.currency, r = t("[data-save-shipping]"), n = T(), o = _extends({}, s, n, {
+                    currency: i
+                }), a = {
+                    header: (e = {
+                        first_name: o.firstName,
+                        last_name: o.lastName,
+                        existing: o.smart_order_id,
+                        start_date: o.start_date
+                    }, _defineProperty(e, "first_name", o.first_name), _defineProperty(e, "last_name", o.last_name), _defineProperty(e, "address1", o.address1), _defineProperty(e, "address2", o.address2), _defineProperty(e, "city", o.city), _defineProperty(e, "country", o.country), _defineProperty(e, "state", o.state), _defineProperty(e, "zip", o.zip), e),
+                    line_items: o.line_items
+                }, r.text("Saving..."), v({
+                    order: a
+                }).done(function(e) {
+                    var t = e.Response;
+                    t.includes("fault") ? (console.log("order submission error:", t), x()) : r.text("Success!")
+                }).fail(function() {
+                    console.log("order submission error:", response), x(), r.text("Save")
+                })
+            }), t(".so__add-item .filter-btn").on("click", function() {
+                var e = t(this).parents(".so__sort").find(".mixup-title");
+                Quickshop.toggleSort(e)
+            }), t("[data-add-to-confirm]").on("submit", function(e) {
+                e.preventDefault();
+                var i = JSON.stringify(t(this).serializeArray()),
+                    r = t(".so__smart-order-submit").data("href");
+                localStorage.removeItem("smartProduct"), localStorage.setItem("smartProduct", i), window.location.href = r
+            }), t("[data-add-to-smart]").on("submit", function(e) {
+                e.preventDefault(),
+                    function() {
+                        t(".add-to-cart-button").val("Adding...").prop("disabled", !0);
+                        var e = {
+                            header: {},
+                            line_items: []
+                        };
+                        d && (e.header = {
+                            first_name: s.first_name,
+                            last_name: s.last_name,
+                            start_date: s.start_date,
+                            address1: s.address1,
+                            address2: s.address2,
+                            city: s.city,
+                            country: s.country,
+                            state: s.state,
+                            zip: s.zip,
+                            phone: s.phone
+                        }, e.line_items = s.line_items);
+                        var i = {
+                                title: n.title,
+                                price: parseFloat(n.price),
+                                quantity: parseFloat(n.quantity),
+                                item_code: n.id,
+                                prod_url: n.prod_url,
+                                materials: {}
+                            },
+                            r = void 0,
+                            o = void 0,
+                            a = void 0;
+                        for (var c in n) c.indexOf("properties[selected-") > -1 ? void 0 !== i.material_names ? i.material_names = i.material_names + ", " + n[c] : i.material_names = n[c] : c.indexOf("properties[") > -1 && (r = n[c].replace("[", "").replace("]", ""), c = c.replace("properties[", "").replace("]", ""), i.materials[c] = r);
+                        if (e.line_items.push(i), d && (e.header.existing = s.smart_order_id), !u) {
+                            var l = T();
+                            e.header = _extends({}, e.header, l)
+                        }
+                        d || ((a = (o = new Date).getDate()) > 20 ? o.setMonth(o.getMonth() + 1, 20) : o.setMonth(o.getMonth() + 1, a), o = o.toISOString().substring(0, 10), e.header.start_date = o);
+                        for (var p = e.line_items.length - 1; p >= 0; p--) e.line_items[p].quantity = parseFloat(e.line_items[p].quantity).toFixed(2).toString(), e.line_items[p].price && (e.line_items[p].price = parseFloat(e.line_items[p].price).toFixed(2).toString());
+                        v(e).done(function(e) {
+                            t(".add-to-cart-button").val("Success!"), setTimeout(function() {
+                                return window.location.href = "/account?view=smart-order"
+                            }, 3e3)
+                        }).fail(function(e) {
+                            console.log("response", e)
+                        })
+                    }()
+            }), t("body").on("click", "[data-smart-cancel]", function() {
+                var e = t(this).parents(".item").index();
+                I(e)
+            }), t("[data-close-cancel]").on("click", function() {
+                m().done(function(e) {
+                    var i = 0;
+                    if (void 0 !== e.total) {
+                        for (var r = e.line_items.length - 1; r >= 0; r--) i += Number(e.line_items[r].price_total);
+                        t(".so__current-total-price").text("$" + i.toFixed(2)), t(".so__current-bv-amount").text(e.business_volume)
+                    } else t(".so__current-total-price").text("$0.00"), t(".so__current-bv-amount").text("0.00");
+                    Modal.hide()
+                })
+            }), t("[data-edit-delivery]").on("click", function() {
+                t(this).hide(), t(".so__delivery-edit").show()
+            }), t("[data-save-delivery]").on("submit", function(e) {
+                e.preventDefault(),
+                    function() {
+                        var e = {
+                                order: {
+                                    start_date: "",
+                                    line_items: []
+                                }
+                            },
+                            i = t("#Delivery-Month").val(),
+                            r = t("#Delivery-Day").val(),
+                            n = t("#Delivery-Year").val(),
+                            o = (new Date).getTime(),
+                            a = new Date(parseFloat(n), parseFloat(i) - 1, parseFloat(r), 23, 59, 59, 999).getTime();
+                        if (t(".so__save").text("Saving..."), a > o) {
+                            e.order.start_date = n + "-" + i + "-" + r, e.order.line_items = s.line_items;
+                            for (var c = e.order.line_items.length - 1; c >= 0; c--) e.order.line_items[c].item_code = e.order.line_items[c].item_code, e.order.line_items[c].price = parseFloat(e.order.line_items[c].price), e.order.line_items[c].quantity = parseFloat(e.order.line_items[c].quantity);
+                            t.ajax({
+                                url: "https://shopify-smartordersync.azurewebsites.net/api/smart-date/" + window.customer.id,
+                                type: "PUT",
+                                data: '{\n   "start_date" : ' + a + "\n}",
+                                dataType: "json"
+                            }).done(function(e) {
+                                console.log("response", e), t(".so__save").text("Save"), window.location.href = "/account?view=delivery"
+                            }).fail(function(e) {
+                                console.log("fail sendOrder"), console.log("response", e), console.log("response", e.responseText)
+                            })
+                        } else t(".account__edit-error").text("Please enter date starting or after today"), t(".so__save").text("Save")
+                    }()
+            }), t("[data-cancel-delivery]").on("click", function() {
+                t(".so__delivery-edit").hide(), t("[data-edit-delivery]").show()
+            })
+        };
+    e.init = function() {
+        var e;
+        t(".so__current").length ? o = "curr" : t(".so__billing").length ? o = "bill" : t(".so__add-item").length ? o = "add" : t(".so__payment").length ? o = "pay" : t(".so__delivery").length ? o = "deliver" : t(".so__product").length ? o = "prod" : t(".so__review").length ? o = "rev" : t(".so__shipping").length && (o = "ship"), "curr" == o || "deliver" == o ? m().done(function(e) {
+            var i = JSON.parse(e);
+            void 0 !== i.start_date ? (t(".so__current--none, .so__delivery--none").hide(), t(".so__current--order, .so__delivery--filled").show(), b(i)) : (t(".so__current--order, .so__delivery--filled").hide(), t(".so__current--none, .so__delivery--none").show()), s = i
+        }) : "bill" !== o && "add" !== o && "pay" !== o && "ship" !== o || (w(), _()), "add" == o && null != (e = localStorage.getItem("sendSmartOrderSuccess")) && (t(".success-item").text(e), Modal.show("add-success"), localStorage.removeItem("sendSmartOrderSuccess")), "rev" == o && P(), q()
+    }
+}(window.SmartOrders = window.SmartOrders || {}, jQuery), $(document).on("submit", ".smart-add-to-cart-form", function(e) {
+    e.preventDefault();
+    var t = $(this).val();
+    deliveryText = "Smart Order" == t ? "Smart Order" : "Cart";
+    var i = $(this),
+        r = $(".add-to-cart-button", i),
+        n = $('[name="id"]', i).val(),
+        o = $('[name="quantity"]', i).val(),
+        a = {};
+    $('[name^="properties"]').each(function() {
+        var e = $(this).attr("name").replace("properties[", "").replace("]", "");
+        a[e] = $(this).val()
+    }), a = Exigo.setPropertyQtys(a, o), r.val("Adding..."), CartJS.addItem(n, o, a, {
+        success: function(e, t, i) {
+            console.log("in success"), "alert-success", "Added to " + deliveryText + ". Go to <a class='cart-alert__link' href='/cart'>Cart</a>.", Product.updateNavCart(), r.val("Add to " + deliveryText), location.href.indexOf("quick-shop") && Findify.sdk.feedback("add-to-cart", {
+                item_id: $("#property__shopify-id").val(),
+                rid: "quick-shop",
+                quantity: 1
+            })
+        },
+        error: function(e, t, i) {
+            console.log("in error"), "alert-error", "There was a problem adding this product. Please try again.", r.val("Add to " + deliveryText), setTimeout(function() {}, 1e4)
+        }
+    })
+});
+var dom = {};
+dom.body = $("body"), dom.window = $(window), dom.scrollElement = $(".js-scroll-element");
+var checkElementVisible = function(e, t, i) {
+        if ($(e).length) {
+            var r = dom.window.scrollTop() + dom.window.height() - t;
+            Array.from(document.querySelectorAll(e)).map(function(e) {
+                var t = $(e).offset().top;
+                return r >= t ? i(e) : e
+            })
+        }
+    },
+    runParallax = function(e) {
+        var t = (dom.window.scrollTop() - $(e).offset().top + dom.window.height()) / 12;
+        $(e).css("transform", "translateY(" + -t + "px)")
+    };
+dom.window.on("scroll", function() {
+        checkElementVisible(".js-parallax", -20, runParallax)
+    }),
+    function(e, t) {
+        "use strict";
+        var i = "[sweetooth-rewards]",
+            r = {
+                customer: null
+            },
+            n = function() {
+                var t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : null;
+                r.customer = t, r.customer && e.renderRewardPoints()
+            };
+        e.renderRewardPoints = function() {
+            if (!r.customer) return null;
+            t(i).html(r.customer.points_balance)
+        }, e.init = function() {
+            t(document).on("sweettooth-ready", function(e) {
+                SweetTooth.subscribe("customer-ready", function() {
+                    SweetTooth.fetchCustomer().then(function(e) {
+                        n(e)
+                    })
+                })
+            })
+        }
+    }(window.SweetToothHelper = window.SweetToothHelper || {}, jQuery),
+    function(e, t, i) {
+        "use strict";
+        e.toggle = function(e) {
+            t(e).toggle()
+        }, e.slideToggle = function(e) {
+            t(e).slideToggle()
+        };
+        e.init = function() {
+            t("[data-toggle]").on("click", function(i) {
+                e.toggle(t(this).data("target"))
+            }), "#recover" === window.location.hash && e.toggle("#customer-login-form, #recover-password-form")
+        }
+    }(window.Toggle = window.Toggle || {}, jQuery),
+    function(e, t, i) {
+        "use strict";
+        var r, n, o, a, s = 1,
+            c = 1;
+        e.toggle = function(e, i) {
+            t("[data-upgrade='" + e + "'").slideToggle(), i.closest(".colls-table__product").toggleClass("colls-table__product--active")
+        }, e.step = function(e) {
+            1 == (s = e) ? (r = "Pick a Kit", n = "Choose your upgrade.") : 2 == s ? (r = "Create Gift Card Code", n = "Choose unique gift card code just for you.<br>This will also be used as your Referral code for enrollments.<br><span class='small'>(Codes are alphanumeric with no spaces or special character)</span>") : 3 == s && (r = "Terms & Conditions", n = "Please accept our <a class='colls-tc__tc-link' href='/pages/terms-and-conditions' target='_blank'>Terms &amp; Conditions</a> to complete your upgrade."), t(".collections--upgrade, .callouts").fadeOut(200, function() {
+                t("[data-step]").hide(), t("[data-step-step]").html(s), t("[data-step-pick]").html(r), t("[data-step-choose]").html(n), t("html, body").scrollTop(0), t('[data-step="' + s + '"]').show(), t(".collections--upgrade").fadeIn(200), 1 == s && t(".callouts").fadeIn(200), 1 != s ? t(".colls-error").hide() : t(".colls-error").show()
+            })
+        }, e.updatePhone = function() {
+            var e = t("#colls-tc__phone").val();
+            if ("" != e) {
+                console.log("not blank");
+                t.get("//purium-admin-products.herokuapp.com/edit-user?customer=" + window.customer.id + "&phone=" + e).done(function(e) {
+                    console.log("Data Loaded: ", e), void 0 !== e.errors ? console.log('typeof data.errors != "undefined" its true, so errors') : console.log("success")
+                })
+            }
+        }, e.addProd = function() {
+            void 0 === o ? (location.hash = 1, e.alert(t(".colls-error"), "Please choose a kit.")) : void 0 === a || "" == a ? (location.hash = 2, e.alert(t(".colls-code__form"), "Please fill out this field")) : CartJS.clear({
+                success: function(e, t, i) {
+                    console.log("cart cleared"), CartJS.addItem(o, 1, {
+                        delivery: "One-time Order"
+                    }, {
+                        success: function(e, t, i) {
+                            console.log("cart added upgrade"), CartJS.setAttribute("GiftCardCode", a, {
+                                success: function(e, t, i) {
+                                    console.log("cart GiftCardCode"), window.location.href = "https://puriumcorp.myshopify.com/checkout?discount="
+                                }
+                            })
+                        }
+                    })
+                }
+            })
+        }, e.removeProp = function() {
+            Shopify.updateCartAttributes({
+                GiftCardCode: ""
+            })
+        }, e.check = function(i) {
+            a = t("#web-alias").val();
+            t.get("https://purium.sunriseintegration.com/api/affiliate?code=" + a).done(function(i) {
+                console.log(i), void 0 === i.uses_left && e.goodFormat(t("#web-alias").val()) ? l() : e.goodFormat(t("#web-alias").val()) ? e.alert(t(".colls-code__form"), "Sorry, this code is not available") : e.alert(t(".colls-code__form"), "Sorry, codes are only alphanumeric.")
+            })
+        }, e.alert = function(e, i) {
+            e.find(".is-error").length ? -1 == t(".is-error").html().indexOf(i) && t(".is-error ul").append("<li>" + i + "</li>") : e.prepend('<div class="form-note is-error"><ul><li>' + i + "</li></ul></div>"), t(".is-error").hide().fadeIn(), t(".submit-upgrade").removeClass("disabled").text("Submit")
+        }, e.goodFormat = function(e) {
+            return !!new RegExp("[a-zA-Z0-9]").test(e)
+        };
+        var l = function() {
+            c++, location.hash = c
+        };
+        e.init = function() {
+            (void 0 === window.customer || "18" != window.customer.rank && "20" != window.customer.rank && "22" != window.customer.rank) && (window.location.href = "/"), t("[data-toggle-upgrade]").on("click", function(i) {
+                e.toggle(t(this).data("toggle-upgrade"), t(this))
+            }), t("[data-step-up]").on("click", function() {
+                l()
+            }), t("[data-prod-id]").on("click", function() {
+                o = t(this).data("prod-id")
+            }), t(".colls-code__form").on("submit", function(t) {
+                t.preventDefault(), e.check()
+            }), t(".colls-tc__form").on("submit", function(i) {
+                i.preventDefault(), t("#colls-tc__agree").is(":checked") ? (t(".submit-upgrade").addClass("disabled").text("Submitting..."), e.updatePhone(), e.addProd()) : e.alert(t(".colls-tc__form"), "Please agree to our Terms & Conditions to continue.")
+            }), t("#web-alias").on("keypress", function(t) {
+                console.log(t);
+                var i = String.fromCharCode(t.charCode ? t.charCode : t.which);
+                if (!e.goodFormat(i) && 13 != t.charCode) return t.preventDefault(), !1
+            }), t(window).on("hashchange load", function() {
+                c = location.hash.length > 0 ? parseInt(location.hash.replace("#", ""), 10) : 1, e.step(c)
+            }), t(".colls-tc__phone form").on("submit", function(e) {
+                e.preventDefault()
+            })
+        }
+    }(window.Upgrade = window.Upgrade || {}, jQuery),
+    function(e, t, i) {
+        "use strict";
+        var r = {
+            customer: null
+        };
+        e.isTouch = function() {
+            var e = " -webkit- -moz- -o- -ms- ".split(" ");
+            return !!("ontouchstart" in window || window.DocumentTouch && document instanceof DocumentTouch) || function(e) {
+                return window.matchMedia(e).matches
+            }(["(", e.join("touch-enabled),("), "heartz", ")"].join(""))
+        }, e.isBreakpointSm = function() {
+            return window.innerWidth <= 480
+        }, e.isBreakpointMd = function() {
+            return window.innerWidth <= 767
+        }, e.isMinBreakpoint = function() {
+            var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : 0;
+            return window.innerWidth > e
+        }, e.pricify = function(e) {
+            var t = arguments.length > 1 && void 0 !== arguments[1] && arguments[1];
+            return "$" + parseFloat(Math.floor(100 * e) / 100).toFixed(t ? 0 : 2)
+        }, e.getCustomerPrice = function(e) {
+            var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : r.customer,
+                i = arguments.length > 2 && void 0 !== arguments[2] && arguments[2];
+            return t ? (i ? .75 : t.discount) * e : e
+        }, e.isCustomer = function() {
+            return !!r.customer
+        }, e.getProductColorClasses = function(e) {
+            return e.map(function(e) {
+                if (e.toLowerCase().indexOf("coll::") >= 0) return "coll--" + e.toLowerCase().replace("zcoll::", "").replace("coll::", "").replace(" ", "-")
+            }).join(" ")
+        }, e.optimizedResize = function() {
+            var e = [],
+                t = !1;
+
+            function i() {
+                t || (t = !0, window.requestAnimationFrame ? window.requestAnimationFrame(r) : setTimeout(r, 66))
+            }
+
+            function r() {
+                e.forEach(function(e) {
+                    e()
+                }), t = !1
+            }
+            return {
+                add: function(t) {
+                    e.length || window.addEventListener("resize", i),
+                        function(t) {
+                            t && e.push(t)
+                        }(t)
+                }
+            }
+        }(), e.getQueryVariable = function(e) {
+            for (var t = window.location.search.substring(1).split("&"), i = 0; i < t.length; i++) {
+                var r = t[i].split("=");
+                if (decodeURIComponent(r[0]) == e) return decodeURIComponent(r[1])
+            }
+            return null
+        }, e.getImageOfSize = function(e, t) {
+            var i = e.substr(e.lastIndexOf(".") + 1);
+            return e.replace("." + i, "_" + t + "." + i)
+        }, e.wait = function() {
+            var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : 500;
+            return new Promise(function(t) {
+                setTimeout(t, e)
+            })
+        }, e.init = function() {
+            ! function() {
+                var e = t("#customer-metafields").text().trim();
+                if (!e.length) return null;
+                try {
+                    r.customer = JSON.parse(e)
+                } catch (e) {
+                    console.log(e)
+                }
+            }()
+        }
+    }(window.UTILS = window.UTILS || {}, jQuery);

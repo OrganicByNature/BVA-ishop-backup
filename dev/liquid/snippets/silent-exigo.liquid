@@ -1,0 +1,20 @@
+<script type="text/javascript">
+$(document).ready(function(){
+  	var value = '{{ customer.id }}';
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://silentlogin.azurewebsites.net/api/CreateExigoToken?code=VAiyruG5iuWbWvE0FFnje0kalHDLLtL6/XgAhFiYHcfpUEAAcE29ng==",
+        "method": "POST",
+        "headers": {
+          "content-type": "application/json"
+        },
+        "processData": false,
+        "data": "{\"value\" : \"" + value + "\"}"
+      }
+      
+     $.ajax(settings).done(function (response) {
+        $("a[href='https://backoffice.mypurium.com/retailsilentlogin?token=']").attr('href', 'https://backoffice.mypurium.com/retailsilentlogin?token=' + response);
+      });
+});
+</script>

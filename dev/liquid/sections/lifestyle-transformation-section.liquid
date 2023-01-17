@@ -1,0 +1,424 @@
+{% schema %}
+  {
+    "name": "Lifestyle Settings",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "smart_orders_desktop_hero",
+        "label": "Desktop Hero",
+        "info": "Landscape Image 1920 x 1080"
+      },
+      {
+        "type": "image_picker",
+        "id": "smart_orders_mobile_hero",
+        "label": "Mobile Hero",
+        "info": "Portrait Image 900 x 640"
+      },
+      {
+        "type": "collection",
+        "id": "lifestyle_collection",
+        "label": "Featured Collection"
+      },
+      {
+        "type": "collection",
+        "id": "ultimate_products",
+        "label": "Ultimate Products"
+      },
+      {
+        "type": "image_picker",
+        "id": "ultimate_nutrition",
+        "label": "Ultimate Nutritrion Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "daily_core_4",
+        "label": "Ultimate Nutritrion Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "tracker_1",
+        "label": "Tracker Image 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "tracker_2",
+        "label": "Tracker Image 2"
+      },
+      {
+
+        "type": "image_picker",
+        "id": "daily_fiber",
+        "label": "Daily Fiber"
+      },
+      {
+        "type": "image_picker",
+        "id": "super_cleansr",
+        "label": "Super CleansR"
+ 	  }
+    ],
+    "blocks": [
+      {
+        "name": "Product Labels",
+        "type": "value_prop",
+        "settings": [
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Prod Label"
+          },
+          {
+            "type": "text",
+            "id": "prod_benefit",
+            "label": "Prod Benefit"
+          },
+          {
+            "type": "text",
+            "id": "prod_fine_copy",
+            "label": "Prod Value"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
+
+{% style %}
+  @media screen and (min-width: 800px){
+    .top-container.smart-orders-bg{
+    background-image: url("{{section.settings.smart_orders_desktop_hero | img_url: '1884x' }}");
+    background-repeat: no-repeat;
+    background-size: cover;
+    }
+    .get-started p{
+	max-width: 50%;
+    margin-left: 25%;
+	}
+  }
+    @media screen and (max-width: 641px){
+    .top-container.smart-orders-bg-mobile{
+    background-image: url("{{section.settings.smart_orders_mobile_hero | img_url: 'original'}}");
+    background-repeat: no-repeat;
+    background-size: cover;
+    }
+    .colls-grid{
+    display: block;
+    }
+    .get-started p{
+      max-width: 75%;
+      margin-left: 12.5%;
+	}
+  }
+    .promo-banner{
+    background-color: #006145;
+    background: #006145;
+  }
+    .top-container.smart-orders-bg{
+    padding-bottom: 600px;
+  }
+    .mid-container{
+    padding-bottom: 40px;
+  }
+    .mid-img{
+    height: auto;
+    width: auto;
+  }
+    .mid-right{
+    text-align: left !important;
+  }
+    @media screen and (min-width: 1024px){
+    #main_prod{
+    height: 450px !important;
+    width: auto !important;
+	margin-top: 50px;
+	}
+   }
+  }
+   	.mid-bg{
+    background: #FFFFFF !important;
+  }
+	.outer-li{
+    margin-left: 10px;
+  }
+{% endstyle %}
+
+<div class="page-wrappery smart-orders-page">
+    <div
+        class="top-container {% if section.settings.smart_orders_desktop_hero %} smart-orders-bg {% endif %}{% if section.settings.smart_orders_mobile_hero %} smart-orders-bg-mobile {% endif %}">
+    </div>
+    <div class='mid-bg' style="padding-top: 0px; padding-right: 0px; padding-left: 0px;">
+        <div class="mid-container mid-top" style="background: #FFFFFF; padding-top: 0px">
+
+            <div class='mid-left' style="background: #F5F5F5;height: 550px;flex: 0 0 50%;">
+                <div class='mid-img' style="flex: 0 0 100%" ;>
+                  <img id='main_prod' src="https://cdn.shopify.com/s/files/1/2062/5235/files/New_Eco-Friendly_ULT_Pack_stainlessSteel.png?v=1640906962" />  
+                </div>
+            </div>
+
+            <div class='mid-right' style="background:#FFFFFF;height: 600px; flex: 0 0 50%">
+                <div>
+                    <h2 style="color:#231F20; font-size:38px; line-height:40px; padding-top:40px; padding-left:10px; padding-right:10px">ULTIMATE LIFESTYLE
+                        TRANSFORMATION</h2>
+                    <p style="color:#231F20; padding:20px">Truly transform your lifestyle to experience more energy, better digestion, deeper sleep and a more balanced mood.  The products in this 30-day program will nourish and detoxify your body with vegan protein, greens, healthy fats, gut health, organic super fruit and natural colon cleansing support. </p>
+                    <p style="border-bottom: 2px solid #006145; color:#231f20; width: 100px; display: initial;">Benefits</p>
+
+                    <ul style="list-style:none; padding: 10px">
+                        <li style="color:#231F20; padding: 5px">Get A 30-day supply of superfoods</li>
+                        <li style="color:#231F20">+</li>
+                        <li style="color:#231F20; padding: 5px">Replace 2 meals per day (for only $11!)</li>
+                        <li style="color:#231F20">+</li>
+                        <li style="color:#231F20; padding: 5px">Choose your schedule style (3 options)</li>
+                        <li style="color:#231F20">+</li>
+                        <li style="color:#231F20; padding: 5px">Great for intermittent fasting!</li>
+                    </ul>
+                    <p style="color:#231f20;padding:20px"><strong>Includes:</strong> 
+                      (2) Master-Amino - 150ct, 
+                      (2) Biome Medic, 
+                      (2) Power Shake - Apple Berry, 
+                      (2) Apothe Cherry, 
+                      (1) Super CleansR </p>
+				<div style="text-align:center;">
+                      <form class="pdp-info__form smart-add-to-cart-form" action="/cart/add" method="post" style="display: inline-block;">
+                        <select id="single-product-select" class='smart-orders-select' name="id">
+                          <option value="31544490229832">Default Title - $419.00</option>
+                        </select>
+                        <div class="pdp-info__submit-wrap">
+                          <input class="pdp-info__qty btn btn--secondary" type="hidden" value="1" name="quantity">
+                          <input class="product-a pdp-info__submit add-to-cart-button btn btn--primary" type="submit"
+                                 value="Add to cart" />
+                        </div>
+               </form>
+              </div>
+             </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="lower-container low-top" style= "z-index: -1">
+        <div class='lower-title'>
+            <h2 style="padding-top:130px;">Meet the Products</h2>
+        </div>
+        <div class="colls-grid" style="flex-wrap: nowrap;justify-content: center;">
+            {% for block in section.blocks %}
+            {% assign product_item = all_products[block.settings.product] %}
+            <div class="colls-grid__product product" style="margin: 30px;">
+                 <div style="min-height: 120px">
+                    <h2 style="color:#006145; font-size: 25px; font-weight:bold"> {{ block.settings.prod_benefit }}
+                    </h2>
+                    <p style="font-weight:bold;"> {{ block.settings.prod_fine_copy }} </p>
+                    <p> {{ product_item.title }}</p>
+                </div>
+                <div class="tag-img-container">
+                    <img class="colls-grid__product-img"
+                        src="{{ product_item.featured_image | img_url: '680x' | scale: 2 }}" />
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+  {% comment %} START SECTION {% endcomment %}
+       
+ <div style="background:#f7f7f7;"> 
+ 
+  <div class='lower-title'>
+       <h2 style="padding-top:50px;">Enhance Your Goals</h2> 
+   </div>
+ 
+        <div class="mid-container mid-top" style="background: #F7F7F7; padding-top: 0px">
+
+            <div class='mid-right' style="background:#f7f7f7;height: 100%; flex: 0 0 50%">
+                <div>
+                    <h2 style="color:#006145; font-size:38px; line-height:40px; padding-top:40px; padding-left:10px; padding-right:10px">Boost Fat Burn</h2>
+                    <p style="color:#231F20; padding:20px">Add Daily Fiber to your ULT to boost weight loss. </p>
+					<div class='mid-left' style="margin-left:100px; margin-right: 100px;">
+        				<div>
+         					<img src="{{ section.settings.daily_fiber | img_url: 'original' }}">
+       		 			</div>
+      				</div>
+                    <ul style="padding: 10px; text-align: left; margin-left:100px; margin-right:100px; ">
+                        <li style="color:#231F20; padding: 5px">Encourage production of “skinny hormone” to help burn fat </li>
+                        <li style="list-style:none;">/li>
+                        <li style="color:#231F20; padding: 5px">Support cardiovascular & bowel function</li>
+                        <li style="list-style:none;">/li>
+                        <li style="color:#231F20; padding: 5px">Mixes well with Apothe-Cherry (Tastes like an oatmeal cookie!) </li>
+                    </ul>
+                    
+				<div style="text-align:center;">
+                      <form class="pdp-info__form smart-add-to-cart-form" action="/cart/add" method="post" style="display: inline-block;">
+                        <select id="single-product-select" class='smart-orders-select' name="id">
+                          <option value="55054540373">Default Title - $32.95</option>
+                        </select>
+                        <div class="pdp-info__submit-wrap">
+                          <input class="pdp-info__qty btn btn--secondary" type="hidden" value="1" name="quantity">
+                          <input class="product-a pdp-info__submit add-to-cart-button btn btn--primary" type="submit"
+                                 value="Add to cart" />
+                        </div>
+               </form>
+              </div>
+             </div>
+          </div>
+
+            <div class='mid-right' style="background:#f7f7f7;height: 100%; flex: 0 0 50%">
+                <div>
+                    <h2 style="color:#006145; font-size:38px; line-height:40px; padding-top:40px; padding-left:10px; padding-right:10px">Cleanse Parasites</h2>
+                    <p style="color:#231F20; padding:20px">Add 1 extra Super CleansR to your ULT to support cleansing. </p>
+                    <div class='mid-left' style="margin-left:100px; margin-right: 100px;">
+        				<div>
+         					<img src="{{ section.settings.super_cleansr | img_url: 'original' }}">
+       		 			</div>
+      				</div>
+                    <ul style="padding: 10px; text-align: left; margin-left:100px; margin-right: 100px;">
+                        <li style="color:#231F20; padding: 5px">Flush parasites with black walnut hull & herbs  </li>
+                        <li style="list-style:none;">/li>
+                        <li style="color:#231F20; padding: 5px">Start ULT with 10 days of Super CleansR (2 doses per day) </li>
+                        <li style="list-style:none;">/li>
+                        <li style="color:#231F20; padding: 5px">Continue on Day 30 with extra Super CleansR to support detox of parasite eggs (2 doses per day) </li>
+                    </ul>
+				<div style="text-align:center;">
+                      <form class="pdp-info__form smart-add-to-cart-form" action="/cart/add" method="post" style="display: inline-block;">
+                        <select id="single-product-select" class='smart-orders-select' name="id">
+                          <option value="53100601301">Default Title - $44.95</option>
+                        </select>
+                        <div class="pdp-info__submit-wrap">
+                          <input class="pdp-info__qty btn btn--secondary" type="hidden" value="1" name="quantity">
+                          <input class="product-a pdp-info__submit add-to-cart-button btn btn--primary" type="submit"
+                                 value="Add to cart" />
+                        </div>
+               </form>
+              </div>
+             </div>
+          </div>
+        </div>
+  </div>
+
+    {% comment %} END SECTION {% endcomment %}
+  
+  
+    <div class='mid-bg' style="padding-top: 0px; padding-right: 0px; padding-left: 0px; margin-top:20px; z-index: 1;">
+
+        <div class="mid-container mid-top" style="padding-top: 0px; padding-bottom: 0px; background: #F5F5F5;">
+
+            <div class='mid-left' style="height: 350px;flex: 0 0 50%;">
+                <div class='mid-img' style="flex: 0 0 100%" ;>
+                    <img id='main_prod' src="https://d3k81ch9hvuctc.cloudfront.net/company/PGejLT/images/3c9ed37d-415c-4990-804c-b8caf0c25e6c.png">
+                </div>
+            </div>
+          
+ 			 <div class='mid-right' style="background:#FFFFFF;height: 600px; flex: 0 0 50%;">
+                <div>
+                    <h2 style="color:#231F20; font-size:40px; line-height:40px; padding-top:10px">Get Support</h2>
+					
+
+                    <ul style="list-style:none; padding: 10px; text-align: center;">
+                      <li style="color:#231F20; padding: 5px"><strong>TRACK</strong> your progress every step of the way with our tracker. </li>
+                      <li style="padding: 5px;"><a style="color:#006145" href="https://cdn.shopify.com/s/files/1/2062/5235/files/EDIT_ULT-Placemat_5508_RD1221.pdf?v=1640641844" target="_blank">Download Tracker</a></li>
+                    </ul>
+                   <hr style="border-bottom: 2px solid #006145; color:#231f20; margin-left: 30px; margin-right: 30px;">
+                   <ul style="list-style:none; padding: 10px; text-align: left;">
+                     <li style="color:#231F20; padding-top: 10px; padding-bottom: 20px; text-align: center;"><strong>CHOOSE</strong> a schedule below that matches your needs</li>     
+                     
+                     <li style="color:#231F20; padding: 5px"><strong>Simple:</strong> This path is all about subtraction, by way of addition. You flood your body with nutrient-rich superfoods without being restrictive with your diet. By meeting your nutritional needs with high-quality foods, you naturally stop craving foods and habits that stem from undernourishment. </li>
+                     <li style="padding: 5px;"><a style="color:#006145" href="https://cdn.shopify.com/s/files/1/2062/5235/files/SIMPLIFIED_30-DAY_SCHEDULE.png?v=1628124621" target="_blank">Download Simple Schedule</a></li>
+                     <li style="color:#231F20; padding: 5px"><strong>Accelerated:</strong> This path is all about accelerated change. By consciously eliminating foods and habits that are not serving your best health and flooding your body with nutrient-rich superfoods, a new fully nourished state of normal is established.  </li>
+                     <li style="padding: 5px;"><a style="color:#006145" href="https://cdn.shopify.com/s/files/1/2062/5235/files/Accelerated_ULT_Schedule.png?v=1628108492" target="_blank">Download Accelerated Schedule</a></li>
+                     <li style="color:#231F20; padding: 5px"><strong>Intermittent Fasting: </strong> This path is all about Intermittent Fasting.  Incorporate nutrient-rich superfoods while consuming substantially all your calories in a 6-8 hour window. </li>             
+                  	 <li style="padding: 5px;"><a style="color:#006145" href="https://cdn.shopify.com/s/files/1/2062/5235/files/INTERMITTENT_FASTING.pdf?v=1628109797" target="_blank">Download Intermittent Fasting Schedule</a></li>
+                  </ul>
+                  
+                  <p style="padding-top:25px"><a style="color:#006145; padding-top:25px;" href="https://blog.puriumcorp.com/2019/12/16/lifestyle-transformation-schedule/" target="_blank">Learn More on Our Blog</a></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    
+    <div class='mid-bg' style="padding-top: 0px; padding-right: 0px; padding-left: 0px;">
+        <div class="mid-container mid-top" style="background: #FFFFFF">
+
+            <div class='mid-left' style="background: #F5F5F5;height: 550px;flex: 0 0 50%;">
+                <div class='mid-img' style="flex: 0 0 100%;">
+                    <img id='main_prod' src="{{ section.settings.daily_core_4 | img_url: 'original' }}">
+                </div>
+            </div>
+
+            <div class='mid-right' style="background:#FFFFFF;height: 600px; flex: 0 0 50%">
+                <div>
+                    <h2 style="color:#231F20; font-size:40px; line-height:40px;">DAILY CORE 4</h2>
+                    <p style="color:#231F20; padding:20px">Gentle way to take a first step in your transformation and begin nourishing and detoxifying your body. This pack contains Purium's 4 main products to bring your body the daily foundational nutrition it needs. We suggest taking 1 serving of each product every day; no pressure to modify your existing diet. If you want to accelerate your transformation, check out the Ultimate Lifestyle Transformation.</p>
+                    <p style="border-bottom: 2px solid #006145; color:#231f20; width: 100px; display: initial;">What's
+                        in it?</p>
+
+                    <ul style="list-style:none; padding: 10px">
+                        <li style="color:#231F20; padding: 5px">Supports energy levels, digestion, deep sleep and mood</li>
+                        <li style="color:#231F20">+</li>
+                        <li style="color:#231F20; padding: 5px">Vegan protein, greens, healthy fats, organic super fruits, and gut health
+                        </li>
+                        <li style="color:#231F20">+</li>
+                        <li style="color:#231F20; padding: 5px">Recommended pack for ongoing nutrition and Smart Order </li>
+                    </ul>
+
+                    <p style="color:#231f20;padding:20px"><strong>Includes:</strong> (1) Power Shake - Apple Berry, (1)
+                        Apothe Cherry, (1) Biome Medic, (1) Master Amino - 150ct </p>
+                  <div style="text-align:center">
+                      <form class="pdp-info__form smart-add-to-cart-form" action="/cart/add" method="post" style="display: inline-block;">
+                        <select id="single-product-select" class='smart-orders-select' name="id">
+                          <option value="31772248834120">Default Title - $419.00</option>
+                        </select>
+                        <div class="pdp-info__submit-wrap">
+                          <input class="pdp-info__qty btn btn--secondary" type="hidden" value="1" name="quantity">
+                          <input class="product-a pdp-info__submit add-to-cart-button btn btn--primary" type="submit"
+                                 value="Add to cart" />
+                        </div>
+                     </form>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+
+    <div class="lower-container low-top" >
+        {% if collections[section.settings.lifestyle_collection].products != "" %}
+        <div class='lower-title' style="text-align:center">
+            <h2>Get Started Today!</h2>
+          <div class="get-started" >
+            <p>Start your journey with the Ultimate Lifestyle Transformation. Some choose to repeat the Ultimate Lifestyle Transformation for multiple months to achieve their ultimate goals. If your health is in maintenance, we recommend the Daily Core 4 to be your ongoing superfoods nutrition.</p>
+          </div>
+          </div>
+        <div class="colls-grid"   >
+            <div class='featured-products-container featured-products smart-order-products__slider'>
+                {% for product in collections[section.settings.lifestyle_collection].products %}
+                <div class="colls-grid__product product">
+                    <a href="{{ product.url }}">
+                        <div class="tag-img-container" >
+                            <img class="colls-grid__product-img" src="{{ product | img_url: '680x' | scale: 2 }}" />
+                            <p>{{ product.title }}</p>
+                        </div>
+                    </a>
+           <form class="pdp-info__form smart-add-to-cart-form"  >         
+           <div class='pdp-info__submit-wrap' >
+            {% if product.url contains "ultimate" %}
+            <a class="product-a pdp-info__submit add-to-cart-button btn btn--primary"  
+                href="https://ishoppurium.com/products/ultimate-lifestyle-transformation" style="display:inline-block;">Learn More </a> 
+            {% else %}
+           <a class="product-a pdp-info__submit add-to-cart-button btn btn--primary"
+                href="https://ishoppurium.com/products/daily-core-4"  style="display:inline-block;">Learn More </a>     
+            {% endif %}
+        </div>
+      </form>
+                  
+                  
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        <hr class='bot-hr' style="background: #006145;">
+    </div>
+
+
+</div>
+
+<script> (function () { var qs, js, q, s, d = document, gi = d.getElementById, ce = d.createElement, gt = d.getElementsByTagName, id = "typef_orm_share", b = "https://embed.typeform.com/"; if (!gi.call(d, id)) { js = ce.call(d, "script"); js.id = id; js.src = b + "embed.js"; q = gt.call(d, "script")[0]; q.parentNode.insertBefore(js, q) } })() </script>

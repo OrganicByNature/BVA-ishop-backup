@@ -1,0 +1,124 @@
+{% assign not_bgma = true %}
+{% for tag in customer.tags %}
+	{% if tag == "BGMA"%}
+		{% assign not_bgma = false %}
+	{% endif %}
+{% endfor %}
+
+<!-- Purium Notification Bar -->
+<div id="alert-container" style="position: fixed; z-index: 6000;"></div>
+
+<div class="header desktop-header">
+  
+  <div class="header-bottom">
+    <div class="nav-section logo-container">
+      <a href="/"><img class="logo-gradient" src="{{'Gradient.svg' | asset_url}}" /></a>
+    </div>
+    <div class="nav-section nav-items-container">
+      {%for link in linklists.new-main-menu.links%}
+      <div class="nav-link-wrapper">
+        {% if link.url == '/'%}
+        <a class="nav-link__main{% if link.active %} active{% endif %}" href="#">{{link.title}}</a>
+        {% else %}
+        <a class="nav-link__main{% if link.active %} active{% endif %}" href="{{link.url}}">{{link.title}}</a>
+        {% endif %}
+        <div class="extra-space"></div>
+        {% assign child_list_handle = link.title | handle %}
+        {% if linklists[child_list_handle] and linklists[child_list_handle].links.size > 0 %}
+        <div class="nav-dropdown">
+          {%for child_link in linklists[child_list_handle].links%}
+          <li class="dropdown-item"><a href="{{child_link.url}}">{{child_link.title}}</a></li>
+          {%endfor%}
+        </div>
+        {%endif%}
+      </div>
+      {%endfor%}
+    </div>
+    <div class="nav-section account-container">
+      <i class="fa fa-search" aria-hidden="true"></i>
+      <a href="/cart" class="cart-link" inlincart-toggle><i class="fa fa-shopping-cart" aria-hidden="true"><span>
+        {% unless cart.item_count < 1 %}
+          {{ cart.item_count }}
+        {% endunless %}
+      </span></i></a>
+      <form class="search" action="/search" style="bottom:0px;left:-190px;" >
+        <input type="text" placeholder="Search" class="findify-not-enabled" name="q" value="{{ search.terms | escape }}"  />
+        <input type="submit" value="Go" />
+        <input type="hidden" name="type" value="product" />
+      </form>
+      {% if customer %}
+      <a href="/account"><img src="{{'Account.svg' | asset_url}}" /></a> 
+      {% else %}
+      <a href="/account">Sign In</a>
+      {% endif %}
+    </div>
+  </div>
+  {% include 'promo-banner' %}
+
+</div>
+<div class="header mobile-header">
+    <div class="header-container">
+      <div class="nav-section menu-container">
+        <img src="{{'Menu.svg' | asset_url}}" />
+      </div>
+      <div class="nav-section logo-container">
+        <a href="/"><img class="logo-gradient" src="{{'Gradient.svg' | asset_url}}" /></a>
+      </div>
+      <a href="/cart" class="cart-link" inlincart-toggle><i class="fa fa-shopping-cart" aria-hidden="true"><span>
+        {% unless cart.item_count < 1%}
+          {{ cart.item_count }}
+        {% endunless %}
+      </span></i></a>
+      <i class="fa fa-search fa-search-mobile" aria-hidden="true"></i>
+        <form class="search mobile-search" action="/search">
+          <input type="text" placeholder="Search" class="findify-not-enabled" name="q" value="{{ search.terms | escape }}"  />
+          <input type="submit" value="Go" />
+        </form>
+      {% if customer %}
+      <div class="nav-section account-container logged-in">
+        <a href="/account" class="mobile-account">
+          <img src="{{'Account.svg' | asset_url}}" />
+        </a>
+      </div>
+      {% else %}
+      <div class="nav-section account-container">
+        <a href="/account/login" class="mobile-account">Sign In</a>
+      </div>
+      {% endif %} 
+      
+    </div>
+    <div class="mobile-nav-container">
+      <div class="nav-section nav-items-container">
+        {% for link in linklists.new-main-menu.links %}
+        {% if link.url == '/'%}
+        <div class="nav-link-wrapper">
+          <a class="nav-link__main{% if link.active %} active{% endif %}" href="#">{{link.title}}</a>
+          {%assign mobile_child_list_handle = link.title | handle%}
+          {% if linklists[mobile_child_list_handle] and linklists[mobile_child_list_handle].links.size > 0 %}
+          <div class="nav-dropdown">
+          {%for child_link in linklists[mobile_child_list_handle].links%}
+            <li class="dropdown-item"><a href="{{child_link.url}}">{{child_link.title}}</a></li>
+          {%endfor%}
+          </div>
+          <img class="nav-arrow" src="{{'Down.svg' | asset_url}}" />
+          {%endif%}
+        </div>
+        {% else %}
+        <div class="nav-link-wrapper">
+          <a class="nav-link__main{% if link.active %} active{% endif %}" href="{{link.url}}">{{link.title}}</a>
+          {%assign mobile_child_list_handle = link.title | handle%}
+          {% if linklists[mobile_child_list_handle] and linklists[mobile_child_list_handle].links.size > 0 %}
+          <div class="nav-dropdown">
+          {%for child_link in linklists[mobile_child_list_handle].links%}
+            <li class="dropdown-item"><a href="{{child_link.url}}">{{child_link.title}}</a></li>
+          {%endfor%}
+          </div>
+          <img class="nav-arrow" src="{{'Down.svg' | asset_url}}" />
+          {%endif%}
+        </div>
+        {% endif %}
+        {%endfor%}
+      </div>
+    </div>
+    {% include 'promo-banner' %}
+</div>

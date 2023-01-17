@@ -1,0 +1,41 @@
+<!-- /templates/search.liquid -->
+{% include 'customer-metafields' %}
+<div class="page-wrapper">
+  <h1 class="page-title">Search Results</h1>
+  {% if search.results_count > 0 %}
+  {% for item in search.results %}
+  {% unless item.tags contains 'findify-remove' %} 	
+    <a href="{{ item.url }}">
+      <div class="result">
+          {{ item | image_url: 'small' | img_tag: item.title }}
+        <div class="search-content">
+          <h2>{{ item.title }}</h2>
+          <div class="search-item-description">{{ item.description }}</div>
+        </div>
+      </div>
+    </a>
+  {% endunless %}
+  {% endfor %}
+  {% else %}
+    <h1 class="no-results">Sorry, no matches found.</h1>
+  {% endif %}
+</div>
+
+<script type="text/javascript"> 
+  
+     function getUrlParameter(name) {
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        var results = regex.exec(location.search);
+        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    };
+  
+  	var paramValue = getUrlParameter('q');
+  	if(paramValue.includes("cbd")){
+      	var _learnq = _learnq || [];
+  		_learnq.push(['track', 'Searched CBD', {'search_value' : paramValue}]);
+     };
+    
+  	console.log(getUrlParameter('q'));	
+  
+</script>

@@ -1,0 +1,15 @@
+<div class="together">
+  <h1 class="together__heading">Frequently Bought Together</h1>
+  <div class="together__wrap">
+    <div data-together-slider class="together__slider">
+      {% include 'together-product' %}
+    </div>
+    <div class="together-all">
+      <button class="together-all__atc btn btn--secondary">+ ADD ALL THREE</button>
+    </div>
+  </div>
+  <script>
+    window.findifyProdId = {{ product.id | json }};
+    window.findifyProdPrice = {{ product.price | divided_by: 100 | json }}.{{ product.price | modulo: 100 | json }};
+  </script>
+</div>

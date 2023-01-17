@@ -1,0 +1,14 @@
+{% include 'member-price-info-tooltip', message: section.settings.tooltip_message %}
+
+{% schema %}
+{
+  "name": "Member's Price Tooltip",
+  "settings": [
+    {
+      "id": "tooltip_message",
+      "type": "text",
+      "label": "Message"
+    }
+  ]
+}
+{% endschema %}

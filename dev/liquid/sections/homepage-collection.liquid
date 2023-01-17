@@ -1,0 +1,47 @@
+<div class="homepage-collection-container page-wrapper">
+{% for block in section.blocks %}
+  <a href="{{ block.settings.link }}"class="collection-container">
+    <div class="collection" style="background-image: url({{ block.settings.the_image | img_url: 'medium' }}"></div>
+  </a>
+{% endfor %}
+</div>
+
+{% include 'instagram-feed'%}
+
+{% schema %}
+
+{
+  "name": "Homepage Collection Grid",
+  "settings": [
+    {
+      "id": "title",
+      "type": "text",
+      "label": "Enter a header"
+    }
+  ],
+  "blocks":[
+    {
+       "type":"image",
+       "name":"Collection Image",
+       "settings":[
+         {
+          "id": "collection_title",
+          "type": "text",
+          "label": "Collection Title"
+         },
+         {
+          "id":"the_image",
+          "type":"image_picker",
+          "label":"Upload Collection Image"
+         },
+         {
+          "id": "link",
+          "type": "url",
+          "label": "Link to"
+         }
+       ]
+    }
+  ]
+}
+
+{% endschema %}

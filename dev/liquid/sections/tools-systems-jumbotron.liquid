@@ -1,0 +1,29 @@
+{% schema %}
+
+{
+  "name": "Jumbotron",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "jumbotron_image",
+      "label": "Upload Image"
+    },
+    {
+      "type": "text",
+      "id": "jumbotron_title",
+      "label": "Enter a title"
+    },
+    {
+      "type": "text",
+      "id": "jumbotron_subheader",
+      "label": "Enter description text"
+    }
+  ]
+}
+
+{% endschema %}
+<div class="jumbotron">
+  <img src="{{section.settings.jumbotron_image | img_url: 'master'}}" />
+  <h1>{{ section.settings.jumbotron_title }}</h1>
+  <h2>{{ section.settings.jumbotron_subheader }}</h2>
+</div>

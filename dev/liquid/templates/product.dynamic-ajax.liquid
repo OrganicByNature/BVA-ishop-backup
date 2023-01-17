@@ -1,0 +1,53 @@
+{% layout none %}
+{% include 'customer-metafields' %}
+{
+  "id": {{ product.id | json }},
+  "title": {{ product.title | json }},
+  "handle": {{ product.handle | json }},
+  "url": {{ product.url | json }},
+  "exigoId": {{ product.metafields.global.item_id | json }},
+  "exigoMaterials": {{ product.metafields.c_f.materials | json }},
+  {% comment %}"image245": {{ product.selected_or_first_available_variant.image | img_url: '245x' | json }},{% endcomment %}
+  "image140": {{ product.featured_image | img_url: '140x' | json }},
+  {% if customer %}
+  "customerPrice": {{ product.price | times: customer_discount | ceil | money | json }},
+  {% else %}
+  "retailPrice": {{ product.price | money | json }},
+  {% endif %}
+  "type": {{ product.type | json }},
+  "firstVar": {{ product.selected_or_first_available_variant.id }},
+  {% comment %}
+  "available": {{ product.available | json }},
+  "invPolicy": {{ product.selected_or_first_available_variant.inventory_policy | json }},
+  "invQty": {{ product.selected_or_first_available_variant.inventory_quantity | json }},
+  "date": {{ product.published_at | date: "%Y%m%d" }},
+  "tags": {{ product.tags | json }},
+  "varSize": {{ product.variants.size | json }},
+  "variants": [
+  {% for variant in product.variants %}
+    {
+      "id": {{ variant.id | json }},
+      "url": {{ variant.url | json }},
+      "title": {{ variant.title | json }},
+      "invPolicy": {{ variant.inventory_policy | json }},
+      "invQty": {{ variant.inventory_quantity | json }},
+      "image": {{ variant.image | img_url: '50x' | json }},
+      "altImage": {{ variant.metafields.c_f.Swatch_Image | file_img_url: '50x' | json }},
+      "dataSrc": {{ variant.image | img_url: '245x' | json }},
+      "price": {{ variant.price | money | json }},
+      "priceRaw": {{ variant.price | json }},
+      "priceCompare": {{ variant.compare_at_price | money | json }}
+    }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+  ],
+  "options": [
+  {% for product_option in product.options_with_values %}
+    {
+      "name": {{ product_option.name | upcase | json }},
+      "values": [{% for value in product_option.values %}{{ value | json }}{% unless forloop.last %},{% endunless %}{% endfor %}],
+      "valueImgs": [{% for value in product_option.values %}{{ value | append: ".png" | file_img_url: "40x50" | json }}{% unless forloop.last %},{% endunless %}{% endfor %}]
+    }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+  ]
+  {% endcomment %}
+}

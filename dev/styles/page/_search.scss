@@ -1,0 +1,23 @@
+.result {
+  width: 100%;
+  padding: 30px;
+  border: 1px solid rgba(0, 0, 0, .2);
+  margin: 0 auto ;
+  margin-bottom: 20px;
+  .search-content {
+    padding: 10px;
+  }
+  @include mq($global-breakpoint-lg) {
+    display: flex;
+    width: 70%;
+  }
+}
+.no-results {
+  text-align: center;
+  color: $color-primary;
+  font-size: 40px;
+  margin-top: 40px;
+  @include mq($global-breakpoint-md) {
+    font-size: 60px;
+  }
+}

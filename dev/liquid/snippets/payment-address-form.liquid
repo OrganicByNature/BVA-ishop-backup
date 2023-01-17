@@ -1,0 +1,36 @@
+
+<div data-so-payment-form class="so__section so__section--payment">
+  <div class="so__field-group so__field-group--address1">
+    <label class="so__field-label">Address 1</label>
+    <input type="text" id="Payment-Address1" class="so__field so__field--text" name="payment[address1]">
+  </div>
+  <div class="so__field-group so__field-group--address2">
+    <label class="so__field-label">Address 2</label>
+    <input type="text" id="Payment-Address2" class="so__field so__field--text" name="payment[address2]">
+  </div>
+  <div class="so__field-group--wrapper">
+    <div class="so__field-group so__field-group--city">
+      <label class="so__field-label">City</label>
+      <input type="text" id="Payment-City" class="so__field so__field--text" name="payment[city]">
+    </div>
+    <div class="so__field-group so__field-group--select so__field-group--state">
+      <label class="so__field-label">State</label>
+      <select id="Payment-State" class="so__field so__field--select" name="payment[state]" data-state>
+        <option value="">--</option><option value="AL">AL</option><option value="AK">AK</option><option value="AS">AS</option><option value="AZ">AZ</option><option value="AR">AR</option><option value="CA">CA</option><option value="CO">CO</option><option value="CT">CT</option><option value="DE">DE</option><option value="DC">DC</option><option value="FM">FM</option><option value="FL">FL</option><option value="GA">GA</option><option value="GU">GU</option><option value="HI">HI</option><option value="ID">ID</option><option value="IL">IL</option><option value="IN">IN</option><option value="IA">IA</option><option value="KS">KS</option><option value="KY">KY</option><option value="LA">LA</option><option value="ME">ME</option><option value="MH">MH</option><option value="MD">MD</option><option value="MA">MA</option><option value="MI">MI</option><option value="MN">MN</option><option value="MS">MS</option><option value="MO">MO</option><option value="MT">MT</option><option value="NE">NE</option><option value="NV">NV</option><option value="NH">NH</option><option value="NJ">NJ</option><option value="NM">NM</option><option value="NY">NY</option><option value="NC">NC</option><option value="ND">ND</option><option value="MP">MP</option><option value="OH">OH</option><option value="OK">OK</option><option value="OR">OR</option><option value="PW">PW</option><option value="PA">PA</option><option value="PR">PR</option><option value="RI">RI</option><option value="SC">SC</option><option value="SD">SD</option><option value="TN">TN</option><option value="TX">TX</option><option value="UT">UT</option><option value="VT">VT</option><option value="VI">VI</option><option value="VA">VA</option><option value="WA">WA</option><option value="WV">WV</option><option value="WI">WI</option><option value="WY">WY</option><option value="AA">AA</option><option value="AE">AE</option><option value="AP">AP</option>
+      </select>
+    </div>
+  </div>
+  <div class="so__field-group--wrapper">
+    <div class="so__field-group so__field-group--bill-zip">
+      <label class="so__field-label">Zip Code</label>
+      <input type="text" id="Payment-Zip" class="so__field so__field--text" name="payment[zip]" maxlength="11" onkeypress="return (/[a-zA-Z0-9-]/.test(String.fromCharCode(event.keyCode)))">
+    </div>
+    <div class="so__field-group so__field-group--select so__field-group--country">
+      <label class="so__field-label">Country</label>
+      <select id="Payment-Country" class="so__field so__field--select" name="payment[country]" data-country>
+        <option value="US" data-states="[[&quot;AL&quot;,&quot;AL&quot;],[&quot;AK&quot;,&quot;AK&quot;],[&quot;AS&quot;,&quot;AS&quot;],[&quot;AZ&quot;,&quot;AZ&quot;],[&quot;AR&quot;,&quot;AR&quot;],[&quot;CA&quot;,&quot;CA&quot;],[&quot;CO&quot;,&quot;CO&quot;],[&quot;CT&quot;,&quot;CT&quot;],[&quot;DE&quot;,&quot;DE&quot;],[&quot;DC&quot;,&quot;DC&quot;],[&quot;FM&quot;,&quot;FM&quot;],[&quot;FL&quot;,&quot;FL&quot;],[&quot;GA&quot;,&quot;GA&quot;],[&quot;GU&quot;,&quot;GU&quot;],[&quot;HI&quot;,&quot;HI&quot;],[&quot;ID&quot;,&quot;ID&quot;],[&quot;IL&quot;,&quot;IL&quot;],[&quot;IN&quot;,&quot;IN&quot;],[&quot;IA&quot;,&quot;IA&quot;],[&quot;KS&quot;,&quot;KS&quot;],[&quot;KY&quot;,&quot;KY&quot;],[&quot;LA&quot;,&quot;LA&quot;],[&quot;ME&quot;,&quot;ME&quot;],[&quot;MH&quot;,&quot;MH&quot;],[&quot;MD&quot;,&quot;MD&quot;],[&quot;MA&quot;,&quot;MA&quot;],[&quot;MI&quot;,&quot;MI&quot;],[&quot;MN&quot;,&quot;MN&quot;],[&quot;MS&quot;,&quot;MS&quot;],[&quot;MO&quot;,&quot;MO&quot;],[&quot;MT&quot;,&quot;MT&quot;],[&quot;NE&quot;,&quot;NE&quot;],[&quot;NV&quot;,&quot;NV&quot;],[&quot;NH&quot;,&quot;NH&quot;],[&quot;NJ&quot;,&quot;NJ&quot;],[&quot;NM&quot;,&quot;NM&quot;],[&quot;NY&quot;,&quot;NY&quot;],[&quot;NC&quot;,&quot;NC&quot;],[&quot;ND&quot;,&quot;ND&quot;],[&quot;MP&quot;,&quot;MP&quot;],[&quot;OH&quot;,&quot;OH&quot;],[&quot;OK&quot;,&quot;OK&quot;],[&quot;OR&quot;,&quot;OR&quot;],[&quot;PW&quot;,&quot;PW&quot;],[&quot;PA&quot;,&quot;PA&quot;],[&quot;PR&quot;,&quot;PR&quot;],[&quot;RI&quot;,&quot;RI&quot;],[&quot;SC&quot;,&quot;SC&quot;],[&quot;SD&quot;,&quot;SD&quot;],[&quot;TN&quot;,&quot;TN&quot;],[&quot;TX&quot;,&quot;TX&quot;],[&quot;UT&quot;,&quot;UT&quot;],[&quot;VT&quot;,&quot;VT&quot;],[&quot;VI&quot;,&quot;VI&quot;],[&quot;VA&quot;,&quot;VA&quot;],[&quot;WA&quot;,&quot;WA&quot;],[&quot;WV&quot;,&quot;WV&quot;],[&quot;WI&quot;,&quot;WI&quot;],[&quot;WY&quot;,&quot;WY&quot;],[&quot;AA&quot;,&quot;AA&quot;],[&quot;AE&quot;,&quot;AE&quot;],[&quot;AP&quot;,&quot;AP&quot;]]">United States</option>
+        <option value="CA" data-states="[[&quot;AB&quot;,&quot;AB&quot;],[&quot;BC&quot;,&quot;BC&quot;],[&quot;MB&quot;,&quot;MB&quot;],[&quot;NB&quot;,&quot;NB&quot;],[&quot;NL&quot;,&quot;NL&quot;],[&quot;NT&quot;,&quot;NT&quot;],[&quot;NS&quot;,&quot;NS&quot;],[&quot;NU&quot;,&quot;NU&quot;],[&quot;ON&quot;,&quot;ON&quot;],[&quot;PE&quot;,&quot;PE&quot;],[&quot;QC&quot;,&quot;QC&quot;],[&quot;SK&quot;,&quot;SK&quot;],[&quot;YT&quot;,&quot;YT&quot;]]">Canada</option>
+      </select>
+    </div>
+  </div>
+</div>

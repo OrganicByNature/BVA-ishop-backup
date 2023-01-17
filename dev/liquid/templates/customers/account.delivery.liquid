@@ -1,0 +1,113 @@
+<!-- /templates/customers/account.delivery.liquid -->
+{% include 'customer-metafields' %}
+<section class="customer-template account-container flex flex--wrap page-wrapper cust__template--delivery">
+  <header class="cust__header">
+    <h2 class="cust__title cust__title--my"><a href="/account">My Account</a></h2>
+    <h1 class="cust__title cust__title--smart active">Smart Order</h1>
+    <a href="/account/logout" class="cust__logout text-link">Log Out</a>
+  </header>
+
+  <div class="flex-4-md cust__sidebar">
+    {% include 'smart_order_nav' with 'Delivery Schedule' %}
+  </div>
+
+  <div class="flex-8-md cust__main">
+    <h2 class="h4 so__header">Delivery Schedule</h2>
+
+    <div class="so__delivery so__delivery--none">
+      <p class="so__start-content">Start a smart order!</p>
+      <a class="so__start-btn btn btn--secondary" href="/account?view=add-item" title="Add an Item">+ Add an Item</a>
+    </div>
+
+    <div class="so__delivery so__delivery--filled">
+      <p class="so__delivery-content">Delivery schedule dates are when your order will be placed. Future deliveries will be added to your schedule as the date approaches.</p>
+      <h3 class="so__delivery-title">Your Smart Order</h3>
+      <h5 class="so__delivery-subtitle">Ships to:</h5>
+      <p class="so__delivery-ships-to"></p>
+      <h5 class="so__delivery-subtitle">Products:</h5>
+      <p class="so__delivery-products"></p>
+      <h5 class="so__delivery-subtitle">UPCOMING DELIVERY DATES: <a href="javascript:;" class="text-link account__edit-delivery" data-edit-delivery>Change Delivery Date</a></h5>
+
+      <form class="so__delivery-edit" data-save-delivery>
+        <h6 class="so__delivery-edit-title">Change next delivery date to:</h6>
+        
+        <div class="so__edit-content">
+          <div class="so__field-group so__field-group--delivery">
+            <div class="so__field-group so__field-group--del-month">
+              <select id="Delivery-Month" class="so__field so__field--select" name="delivery[month]">
+                <option value="">MM</option>
+                <option value="01">Jan</option>
+                <option value="02">Feb</option>
+                <option value="03">Mar</option>
+                <option value="04">Apr</option>
+                <option value="05">May</option>
+                <option value="06">Jun</option>
+                <option value="07">Jul</option>
+                <option value="08">Aug</option>
+                <option value="09">Sep</option>
+                <option value="10">Oct</option>
+                <option value="11">Nov</option>
+                <option value="12">Dec</option>
+              </select>
+            </div>
+            <div class="so__field-group so__field-group--del-day">
+              <select id="Delivery-Day" class="so__field so__field--select" name="delivery[day]">
+                <option value="">DD</option>
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+              </select>
+            </div>
+            <div class="so__field-group so__field-group--del-year">
+              <select id="Delivery-Year" class="so__field so__field--select" name="delivery[year]">
+                <option value="">YYYY</option>
+                <option value="2020">2020</option>
+                <option value="2021">2021</option>
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+                <option value="2027">2027</option>
+                <option value="2028">2028</option>
+                <option value="2029">2029</option>
+                <option value="2030">2030</option>
+                <option value="2031">2031</option>
+                <option value="2032">2032</option>
+                <option value="2033">2033</option>
+                <option value="2034">2034</option>
+                <option value="2035">2035</option>
+                <option value="2036">2036</option>
+              </select>
+            </div>
+          </div>
+          <p class="account__edit-error"></p>
+          <p class="so__delivery-edit-message">Changing your next delivery date will also change all future delivery dates.<br>Orders will be delivered on the same date each month.</p>
+        </div>
+        <div class="so__delivery-edit-fields">
+          <button href="javascript:;" type="submit" class="btn btn--primary so__save">Save</button>
+          <a href="javascript:;" class="text-link account__cancel-delivery" data-cancel-delivery>Cancel</a>
+        </div>
+      </form>
+
+      <p class="so__delivery-upcoming"></p>
+    </div>
+  </div>
+</section>

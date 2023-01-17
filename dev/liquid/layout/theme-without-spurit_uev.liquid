@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+{% include 'limespot' %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="canonical" href="{{ canonical_url }}" />
+    <link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}" type="image/png" />
+
+    <!-- Title and Description ================================ -->
+    <title>
+      {{ page_title }}{% if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif %}{% if current_page != 1 %} &ndash; Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+    </title>
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}" />
+    {% endif %}
+
+    <!-- Product Meta ================================ -->
+    {% include 'open-graph-tags' %}
+    {% include 'twitter-card' %}
+
+    <!-- Header Content ================================ -->
+    {{ content_for_header }}
+
+    <!-- Stylesheets ================================ -->
+    {{ 'vendor.css' | asset_url | stylesheet_tag }}
+    {{ 'bvaccel.css' | asset_url | stylesheet_tag }}
+
+    <!-- jQuery ================================ -->
+    {{ '//code.jquery.com/jquery-1.11.3.min.js' | script_tag }}
+
+    <!-- Shopify ================================ -->
+    {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
+    {% if template contains 'product' %}
+    {{ 'option_selection.js' | shopify_asset_url | script_tag }}
+    {% endif %}
+    {% if template contains 'customers' %}
+      {% comment %}{{ 'customer_area.js'  | shopify_asset_url | script_tag }}{% endcomment %}
+    {% endif %}
+
+    <!-- Vendor Scripts & Libraries ================================ -->
+    <script src="{{ 'vendor.js' | asset_url }}"></script>
+    <script src="https://use.fontawesome.com/17b2bd72bb.js"></script>
+
+    <!-- Libraries Used: ================================ -->
+    <!-- ================================================ -->
+    <!-- ##########:   https://github.com/ -->
+
+    <!-- Object API ================================ -->
+    <script>
+      window.shop = {
+        template: {{ template | json }},
+        currentPage: {{ current_page }},
+        customerIsLogged: {% if customer %}true{% else %}false{% endif %},
+        shopCurrency: {{ shop.currency | json }},
+        moneyFormat: {{ shop.money_format | json }},
+        moneyWithCurrencyFormat: {{ shop.money_with_currency_format | json }},
+        collectionSortBy: {{ collection.sort_by | default: collection.default_sort_by | json }}
+      }
+    </script>
+
+  {% include 'datalayer' %}
+  {% include 'google-tag-manager' %}
+  
+  
+
+  {% render 'shogun-head' %}
+</head>
+
+  <body id="{{ page_title | handle }}" class="template__{{ template | replace: '.', '--' }}{% if customer %} customer-logged-in{% endif %}">
+    <div class="overlay" data-overlay></div>
+
+    {% include 'header' %}
+
+    <main class="">
+      {% include 'breadcrumbs' %}
+      {{ content_for_layout }}
+<limespot></limespot>
+    </main>
+
+    <footer class="footer">{%include 'footer'%}</footer>
+
+    <!-- Footer Scripts ================================ -->
+    <script src="{{ 'bvaccel.js' | asset_url }}"></script>
+    <script>
+      (function() {
+
+        // CartJS.init({{ cart | json }});
+        FastClick.attach(document.body);
+
+        // init modules
+        Exigo.init();
+        Toggle.init();
+        Overlay.init();
+        Scroll.init();
+        Modal.init();
+        Header.init();
+        Footer.init();
+        Sliders.init();
+        Homepage.init();
+        Quickshop.init();
+        Search.init();
+        AddCart.init();
+        {% if template contains 'product' or template contains 'quick-shop' %}
+        Product.init();
+        {% elsif template contains 'customers/login' %}
+        Login.init();
+        {% elsif template contains 'account' %}
+        Account.init();
+        {% elsif template == 'cart' %}
+        Cart.init();
+        {% endif %}
+        {% if reset_password %}
+          Toggle.toggle('#reset-success');
+        {% endif %}
+
+
+      }());
+    </script>
+
+    {% include 'external-scripts' %}
+  </body>
+</html>

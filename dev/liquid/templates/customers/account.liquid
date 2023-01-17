@@ -1,0 +1,205 @@
+<!-- /templates/customers/account.liquid -->
+{% include 'customer-metafields' %}
+{% include 'silent-exigo' %}
+{% include 'silent-dreams' %}
+{% include 'CBD-Redirect-Alert' %}
+{% include 'upgrade_Path' %}
+
+<section class="customer-template account-container flex flex--wrap page-wrapper cust__template--my-account">
+  <header class="cust__header">
+    <h1 class="cust__title cust__title--my active">My Account</h1>
+    <h2 class="cust__title cust__title--smart"><a href="/account?view=smart-order">Smart Order</a></h2>
+    <a href="/account/logout" class="cust__logout cust__title text-link" style="margin-right: 0; display: inline;">Log Out</a>
+  </header>
+
+  
+  <div class="flex-4-md cust__sidebar">
+     {% comment %} Re-assign Rank Names to for Black Friday Promo {% endcomment %}
+    {% if rank == '19' %}
+    	{% assign rank_name = 'Brand Partner 25%' %}
+    {% elsif rank == '20' %}
+    	{% assign rank_name = 'Loyal Customer 25% %}
+    {% else %}
+        {% assign rank_name = customer.metafields.customers.Customer_Rank %}
+    {% endif %}
+   
+    <h2 class="h4 account__name">{{ customer.name }}<span class="account__rank rank-title"> ({{ customer.metafields.customers.Customer_Rank }})</span></h2>
+
+    {% if rank %}
+    {% unless rank == '18' or rank == '20' or rank == '22' or customer.metafields.customers.GiftCardCode == blank %}
+    <h3 class="h5 account__gift-card">Gift Card / Affiliate ID</h3>
+    <p class="account__gift-card-code">{{ customer.metafields.customers.GiftCardCode }} (<span class="account__uses uses-left"></span> uses left)</p>
+    {% endunless %}
+    {% endif %}
+
+    <h3 class="h4 account__contact">Contact Info <a href="javascript:;" class="text-link account__edit-contact" data-edit-contact>Edit</a><a href="javascript:;" class="text-link account__save-contact" data-save-contact>Save</a></h3>
+    <p class="default-phone account__email-phone">{{ customer.email }}<br>{{ customer.phone }}</p>
+
+    {% comment %}<h3><a href="{{ customer_status_url }}" class="btn btn--primary">{{ customer_status }}</a></h3>{% endcomment %}
+
+    {% comment %}<h3 class="h3">Customer Points: {% if customer.metafields.customers.Customer_Points %}{{ customer.metafields.customers.Customer_Points }}{% else %}0{% endif %}</h3>{% endcomment %}
+
+    <h3 class="h4 account__address-head">Address</h3>
+    {% if customer.default_address != nil %}
+      <p class="account__address">
+      {{ customer.default_address.name }}<br>
+      {{ customer.default_address.address1 }}{% if customer.default_address.address2 != blank %}, {{ customer.default_address.address2 }}{% endif %}<br>
+      {{ customer.default_address.city }}, {{ customer.default_address.province_code | upcase }}<br>
+      {{ customer.default_address.zip | upcase }}
+      {% comment %}{% if customer.default_address.country != "" %}
+        {{ customer.default_address.country }}<br>
+      {% endif %}{% endcomment %}
+      </p>
+    {% endif %}
+
+    <p><a href="/account/addresses" class="text-link account__edit">View Addresses{% comment %} ({{ customer.addresses_count }}){% endcomment %}</a></p>
+
+     {% unless customer.orders_count == 0 %}
+    <h3><a href="{{ customer_status_url }}" class="btn btn--primary" style="font-size: 14px; padding: 14px; margin-top: 12px;">{{ customer_status }}</a></h3>
+    {% endunless %}
+    
+    <!-- Login to DREAMS Button -->
+    {% unless customer.orders_count == 0 %}
+       {% unless rank == '18' or rank == '20' or rank == '22' %}
+      <h3><a href="{{ customer_status_url_dreams }}" class="btn btn--primary" style="font-size: 14px; padding: 14px 31px;;"> Login to Dreams </a></h3> 
+      {% endunless %}
+    {% endunless %}
+    
+    <!-- JBOT Button -->
+     {% if customer.metafields.customers.JBOT %}
+		<h3><a href="https://purium.typeform.com/to/vMkMl5" class="btn btn--primary" style="font-size: 14px; padding: 14px 24px; margin-top: 12px; background-color: #ee8223; border: 2px solid #ee8223"> JBOT Refills </a></h3> 
+	  {% endif %}
+    
+    <h3>
+      <a href="#" id="cbdProductButton">
+      </a>
+    </h3>  
+    
+  </div>
+
+  <div class="flex-8-md cust__main">
+    {% comment %}<h2 class="h4">Order History</h2>{% endcomment %}
+
+    {% comment %}
+      If we have past orders, loop through each one
+    {% endcomment %}
+    {% paginate customer.orders by 20 %}
+      <div class="orders">
+      {% if customer.orders.size != 0 %}
+        {% for order in customer.orders %}
+        <div class="orders__order">
+          <div class="orders__head">
+            <p class="orders__header orders__header--number">Order #</p>
+            <p class="orders__header orders__header--date">Date</p>
+            <p class="orders__header orders__header--name">Ship To</p>
+            <p class="orders__header orders__header--total">Order Total</p>
+            <p class="orders__header orders__header--fulfill">Status</p>
+          </div>
+          <div class="orders__data">
+            <p class="orders__cell orders__cell--number"><a href="{{ order.customer_url }}" class="orders__to-order">{{ order.name }}</a></p>
+            <p class="orders__cell orders__cell--date">{{ order.created_at | date: "%B %d, %Y" }}</p>
+            <p class="orders__cell orders__cell--name">{{ order.customer.name }}</p>
+            <p class="orders__cell orders__cell--total">{{ order.total_price | money }}</p>
+            {% if order.cancelled %}
+              <p class="orders__cell orders__cell--fulfill" style="color:red">Canceled</p>
+              {% else %}
+              <p class="orders__cell orders__cell--fulfill">{{ order.fulfillment_status_label }}</p>
+            {% endif %}
+          </div>
+        </div>
+        {% endfor %}
+      {% else %}
+        <div class="orders__order orders__order--none">
+          <div class="orders__head">
+            <p class="orders__header orders__header--number">Order #</p>
+            <p class="orders__header orders__header--date">Date</p>
+            <p class="orders__header orders__header--name">Ship To</p>
+            <p class="orders__header orders__header--total">Order Total</p>
+            <p class="orders__header orders__header--fulfill">Status</p>
+          </div>
+          <div class="orders__data">
+            <p class="orders__cell orders__cell--none">You haven't placed any orders yet.</p>
+          </div>
+        </div>
+      {% endif %}
+      </div>
+
+      {% if paginate.pages > 1 %}
+        <hr>
+        <div class="orders__pagination">
+          {{ paginate | default_pagination | replace: '&laquo; Previous', '&larr;' | replace: 'Next &raquo;', '&rarr;' }}
+        </div>
+      {% endif %}
+    {% endpaginate %}
+  </div>
+  
+  
+</section>
+
+{% comment %}
+	Because sunrise can't figure out how to do bigspender properly
+{% endcomment %}
+
+{% if rank == '19'%}
+ {% assign rank = '21' %}
+{% elsif rank == '20' %}
+ {% assign rank = '22' %}
+{% elsif rank == nil %}
+  {% for tag in customer.tags %}
+      {% if tag contains 'Loyal' %}
+          {% assign rank = '22' %}
+      {% endif %}
+  {% endfor %}	
+{% endif %}
+
+
+<script>
+  var aValue = false;
+  if(localStorage.getItem('magento') !== undefined){
+    aValue = localStorage.getItem('magento');
+  };
+  var redirectURL = "https://store.puriumcbd.com/sunriseintegration_saml/front/authorize";
+  redirectURL += "/email/" + "{{ customer.email }}";
+  redirectURL += "/customer_id/"+ "{{ customer.id }}";
+  redirectURL += "/customer_type/" + "{{ rank }}";
+
+  var cbdButton = document.getElementById('cbdProductButton');
+  cbdButton.href = redirectURL;
+  
+  $.ajax({
+      method: "GET",
+      url: "https://purium.sunriseintegration.com/api/customers/getByEmail/" + "{{ customer.email }}",
+      data: {}
+    })
+      .done(function( response ) {
+                if ("exigo_id" in response){
+        	redirectURL += "/customer_key/" + response.exigo_id
+        }
+      
+      if ("magento_login" in response){      
+        if (response.magento_login !== null || aValue){
+        	window.location.href = redirectURL;
+            if(aValue !== null){
+              localStorage.removeItem('magento');
+            }
+        }
+      }       
+		cbdButton.href = redirectURL;
+      	console.dir(response);
+       	console.log(redirectURL);
+      });
+
+</script>
+
+ {% if customer.metafields.customers.JBOT %}
+  <script>
+      var Jbot_storage = localStorage.getItem('JBOT');
+      if(Jbot_storage){
+        localStorage.removeItem('JBOT');
+        window.location.href = 'https://purium.typeform.com/to/vMkMl5';
+      };
+  </script>
+{% endif %} 
+
+
+{% include 'cancelOrder-eligible.liquid' %}

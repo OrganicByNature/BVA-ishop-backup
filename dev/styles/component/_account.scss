@@ -1,0 +1,157 @@
+.account__name {
+  margin-top: 28px;
+  font-family: $global-font-bold;
+  font-size: 20px;
+}
+
+.account__rank {
+  display: block;
+  font-family: $global-font-primary;
+  font-size: 14px;
+  line-height: 14px;
+}
+
+.account__gift-card,
+.account__contact,
+.account__address-head {
+  margin-top: 34px;
+  margin-bottom: 5px;
+  font-family: $global-font-bold;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.account__edit-contact,
+.account__save-contact,
+.account__edit-delivery,
+.account__cancel-delivery {
+  font-family: $global-font-primary;
+  font-size: 14px;
+  text-transform: none;
+}
+
+.account__save-contact {
+  display: none;
+}
+
+.account__edit {
+  color: $color-primary;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.account__edit-error {
+  margin-top: 6px;
+  color: $color-error;
+  font-size: 16px;
+}
+
+.account__gift-card-code,
+.account__email-phone,
+.account__address {
+  padding-right: 12px;
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.orders {
+  padding: 30px 0;
+}
+
+.orders__order {
+  display: flex;
+  margin-top: 25px;
+  border: 1px solid #DEDEDE;
+  flex-wrap: wrap;
+  margin: 0;
+  border-top: none;
+  &:first-child {
+    margin: 0;
+  }
+  &:first-child .orders__head {
+    display: flex;
+  }
+}
+
+.orders__head {
+  width: 35%;
+  flex-basis: 35%;
+  background-color: #DEDEDE;
+  display: none;
+  flex-wrap: wrap;
+  width: 100%;
+  flex-basis: 100%;
+  .orders__order--none & {
+    display: none;
+  }
+}
+
+.orders__header {
+  display: flex;
+  align-items: center;
+  height: 45px;
+  padding: 0 5px 0 15px;
+  font-family: $global-font-bold;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  line-height: 14px;
+  text-transform: uppercase;
+  border-bottom: 1px solid $color-grey-border;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.orders__header--number,
+.orders__cell--number {
+  width: 12%;
+}
+
+.orders__header--date,
+.orders__header--name,
+.orders__header--total,
+.orders__header--fulfill,
+.orders__cell--date,
+.orders__cell--name,
+.orders__cell--total,
+.orders__cell--fulfill {
+  width: 22%;
+}
+
+.orders__data {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  flex-basis: 100%;
+  padding: 10px 0;
+  .orders__order--none & {
+    width: 100%;
+    flex-basis: 100%;
+  }
+}
+
+.orders__cell {
+  display: flex;
+  align-items: center;
+  height: 45px;
+  padding: 0 5px 0 15px;
+  font-size: 18px;
+  line-height: 20px;
+  border-bottom: 1px solid $color-grey-border;
+  border: none;
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.orders__to-order {
+  color: $color-primary;
+  font-size: 14px;
+  text-decoration: underline;
+}
+
+.no-items {
+  margin-bottom: 26px;
+}

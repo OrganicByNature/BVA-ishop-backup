@@ -1,0 +1,17 @@
+.page-404 {
+  text-align: center;
+  margin: 60px 0px;
+  padding: 40px 0px;
+  h4 {
+    display: inline-block;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  }
+  h1 {
+    color: $color-primary;
+    font-size: 70px;
+  }
+  .error {
+    border-bottom: 1px solid rgba(0, 0, 0, .2);
+  }
+}

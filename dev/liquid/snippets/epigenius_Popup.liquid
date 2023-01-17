@@ -1,0 +1,27 @@
+<script src="jquery.js"></script>
+<script>
+$.noConflict();
+jQuery( document ).ready(function( $ ) {
+  	var value = '{{ customer.id }}';
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://purium-rewards.azurewebsites.net/api/epigenius_Popup?code=tLSbkicsBHfilMPcFlupApe8VBmRi07xcV7anAaKzX9Swx4VRw5azg==",
+        "method": "POST",
+        "headers": {
+          "content-type": "application/json"
+        },
+        "processData": false,
+        "data": "{\"value\" : \"" + value + "\"}"
+      }
+      
+     $.ajax(settings).done(function (response) {
+       if(response){
+          console.log('isgenius ' + response);
+          //popup for customers arriving at site with permalink
+      	  $("<div class=\"content-box\"><div class=\"content-box__row\"><h2 class=\"os-step__title\" style=\"color:#80BD01; font-size:3.9em\">You're a Genius!</h2><p class=\"os-step__description\" style=\"font-size:1.4em\">Make ordering a habit and get rewarded. For a limited time, add Epigenius Kids or Epigenius Pets to your smart order for 3 Months and Get the 4th Month Free*</p><br><a href=\"https://ishoppurium.com/account?view=smart-order\" style=\"font-size:1.4em\">Sign up for Smart Order</a></div></div>").insertBefore(".content-box:first");
+       }
+      });
+});
+</script>
+

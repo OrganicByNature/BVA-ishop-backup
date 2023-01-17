@@ -1,0 +1,24 @@
+<div class="modal modal--gcValidate" data-modal="under-75">
+  <div class="modal__wrap">
+    <h2 class="modal__head">Just to be sure...</h2>
+    <p class="modal__desc">Looks like you are going to sign up with Gift Code <strong><span class="js-gc-code"></span></strong>. Which belongs to <strong><span class="js-gc-name"></span></strong>. If this code is correct, press CONFIRM, otherwise press CLEAR CODE to enter the correct code.</p>
+    <a class="btn modal__button btn--primary confirm" href="">Confirm</a>
+    <a class="btn modal__button btn--clear" href="">Clear Code</a>
+  </div>
+</div>
+
+<script type="text/javascript">
+  
+  $( ".btn.modal__button.btn--primary.confirm" ).click(function() {
+      localStorage.setItem('confirmedcode',true);
+      $('#submit').css("display",block);
+  });
+  
+  $( ".btn.modal__button.btn--clear" ).click(function() {
+      localStorage.removeItem('storedGiftCardCode');
+      $('#web-alias').text('');
+      $('#submit').css("display",block);
+  });
+  
+  
+</script>

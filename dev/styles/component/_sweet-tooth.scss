@@ -1,0 +1,18 @@
+.smile-launcher-frame-container {
+  left: 15px !important;
+  right: auto !important;
+  bottom: 30px !important;
+
+  @include mq($global-breakpoint-md) {
+    left: 30px !important;
+    right: auto !important;
+  }
+}
+
+.smile-panel-frame-container {
+  left: 30px !important;
+  right: auto !important;
+
+  @include mq($global-breakpoint-md) {
+  }
+}

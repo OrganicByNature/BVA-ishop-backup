@@ -1,0 +1,62 @@
+
+<div class="so__section so__section--payment">
+  <div class="so__field-group so__field-group--name">
+    <label class="so__field-label">Name on Card</label>
+    <div class="so__field-group so__field-group--fname">
+      <input type="text" id="Payment-Fname" class="so__field so__field--text" name="payment[fname]" placeholder="First Name">
+    </div>
+    <div class="so__field-group so__field-group--lname">
+      <input type="text" id="Payment-Lname" class="so__field so__field--text" name="payment[lname]" placeholder="Last Name">
+    </div>
+  </div>
+  <div class="so__field-group so__field-group--number">
+    <label class="so__field-label">Card Number</label>
+    <input type="text" id="Payment-Number" class="so__field so__field--text" name="ccnumber" autocomplete="cc-number" maxlength="16" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+  </div>
+  <div class="so__field-group so__field-group--exp">
+    <label class="so__field-label">Expiration Date</label>
+    <div class="so__field-group so__field-group--month">
+      <select id="Payment-Month" class="so__field so__field--select" name="payment[month]">
+        <option value="">MM</option>
+        <option value="1">01</option>
+        <option value="2">02</option>
+        <option value="3">03</option>
+        <option value="4">04</option>
+        <option value="5">05</option>
+        <option value="6">06</option>
+        <option value="7">07</option>
+        <option value="8">08</option>
+        <option value="9">09</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+      </select>
+    </div>
+    <span class="so__field-separator">/</span>
+    <div class="so__field-group so__field-group--year">
+      <select id="Payment-Year" class="so__field so__field--select" name="payment[year]">
+        <option value="">YY</option>
+        <option value="2020">20</option>
+        <option value="2021">21</option>
+        <option value="2022">22</option>
+        <option value="2023">23</option>
+        <option value="2024">24</option>
+        <option value="2025">25</option>
+        <option value="2026">26</option>
+        <option value="2027">27</option>
+        <option value="2028">28</option>
+        <option value="2029">29</option>
+        <option value="2030">30</option>
+        <option value="2031">31</option>
+        <option value="2032">32</option>
+        <option value="2033">33</option>
+        <option value="2034">34</option>
+        <option value="2035">35</option>
+        <option value="2036">36</option>
+      </select>
+    </div>
+  </div>
+  <div class="so__field-group so__field-group--card-imgs">
+
+  </div>
+</div>

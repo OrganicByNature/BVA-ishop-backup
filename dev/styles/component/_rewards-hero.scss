@@ -1,0 +1,75 @@
+.rewards-hero {
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 500px;
+
+	@include mq($global-breakpoint-md) {
+		height: 700px;
+	}
+}
+
+.rewards-hero__content {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	flex-direction: column;
+	background-color: rgba(255, 255, 255, .85);
+	border-radius: 50%;
+	width: 350px;
+	height: 350px;
+
+	.logo-gradient {
+		width: 80px;
+
+		@include mq($global-breakpoint-md) {
+			width: 137px;
+		}
+	}
+
+	@include mq($global-breakpoint-md) {
+		height: 600px;
+		width: 600px;
+	}
+}
+
+.rewards-hero__header {
+	color: $color-fun-green;
+	font-family: $global-font-bold;
+	text-transform: uppercase;
+	margin: 0px;
+	font-size: 48px;
+
+	@include mq($global-breakpoint-md) {
+		font-size: 95px;
+	}
+}
+
+.rewards-hero__subheader {
+  max-width: 340px;
+  margin: 0 auto;
+  font-weight: 900;
+  color: $color-black;
+  font-size: 16px;
+  line-height: 20px ;
+
+  @include mq($global-breakpoint-md) {
+  	font-size: 20px;
+  	line-height: 29px;
+  }
+}
+
+.rewards-hero__btn {
+	margin-top: 18px;
+	font-size: 12px;
+}
+
+.rewards-hero__link {
+	font-size: 13px !important;
+	color: $color-black !important;
+	font-weight: 500;
+}

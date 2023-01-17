@@ -1,0 +1,23 @@
+<div class="rewards-bonus rewards-bonus--{{ section.id }}">
+	<div class="rewards-bonus__inner">
+		<h2 class="rewards-bonus__header">{{ section.settings.header }}</h2>
+		<div class="rewards-bonus__grid-wrap">
+			{% for block in section.blocks %}
+			<div class="rewards-bonus__block">
+				<h3 class="rewards-bonus__block-title">
+					<span class="big-text">{{ block.settings.point_total }}</span>
+					<span class="small-text">pts</span>
+				</h3>
+				<p class="rewards-bonus__block-copy">{{ block.settings.copy }}</p>
+			</div>
+			{% endfor %}
+		</div>
+		<a href="{{ section.settings.cta_url }}" class="rewards-bonus__cta btn btn--tertiary">{{ section.settings.cta_text }}</a>
+	</div>
+</div>
+
+<style type="text/css">
+	.rewards-bonus--{{ section.id }} {
+		background-color: {{ section.settings.background_color }};
+	}
+</style>

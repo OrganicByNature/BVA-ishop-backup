@@ -1,0 +1,19 @@
+{%- layout none -%}
+{%- paginate collection.products by 5 -%}
+{
+"products":[
+{%- for product in collection.products -%}
+{%- assign mod_featured = false -%}
+{%- if forloop.index == 1 -%}
+  {%- assign mod_featured = true -%}
+{%- endif -%}
+{%- include 'product-json',
+  mod_item: product,
+  mod_encode: false -%}{%- unless forloop.last -%},{%- endunless -%}
+{%- endfor -%}
+],
+"pages":{{ paginate.pages }},
+"page":{{ current_page | minus: 1 }}
+}
+{%- endpaginate -%}
+

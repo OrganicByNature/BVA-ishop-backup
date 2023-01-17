@@ -1,0 +1,33 @@
+<div class="rewards-redeem rewards-redeem--{{ section.id }}">
+	<div class="rewards-redeem__inner">
+		<h2 class="rewards-redeem__header">{{ section.settings.header }}</h2>
+		<div class="rewards-redeem__blocks">
+			{% for block in section.blocks %}
+			<div class="rewards-redeem__block">
+				<div class="rewards-redeem__block-half top">
+					<h4 class="rewards-redeem__points">
+						<label class="rewards-redeem__label">COLLECT</label>
+						<span class="big-text">{{ block.settings.point_thresh | strip }}</span>
+						<span class="small-text">pts</span>
+					</h4>
+				</div>
+				<div class="rewards-redeem__block-half bottom">
+					<h4 class="rewards-redeem__discount">
+						{{ block.settings.discount }} OFF
+						<span class="rewards-redeem__label">COUPON</span>
+					</h4>
+				</div>
+			</div>
+			{% if forloop.first %}
+			<div class="rewards-redeem__or">OR</div>
+			{% endif %}
+			{% endfor %}
+		</div>
+	</div>
+</div>
+
+<style type="text/css">
+	.rewards-redeem--{{ section.id }} {
+		background-image: url('{{ section.settings.background_img | img_url: '1920x' }}');
+	}
+</style>

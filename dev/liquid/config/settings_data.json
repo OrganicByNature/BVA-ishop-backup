@@ -1,0 +1,1044 @@
+{
+  "current": {
+    "facebook_url": "",
+    "instagram_url": "",
+    "twitter_url": "",
+    "pinterest_url": "",
+    "tumblr_url": "",
+    "youtube_url": "",
+    "gc_uses_desktop": "Your Gift Card Code has been Activated! You can use it immediately by adding at least $75 worth of product to your cart and we will discount your order by $50.",
+    "gc_uses_mobile": "Your Gift Card Has been Activated!",
+    "gc_out_desktop": "Oh no! Your Brand Partner is so popular they're out of Gift Cards. Contact Purium Customer Service (888) 747-6733 and we'll be happy to fix this for you.",
+    "gc_out_mobile": "Your Brand Partner is out of Gift Cards.",
+    "not_customer_desktop": "<a href=\"/pages/loyal-customer-program\">Save $50 on your first order with a Purium Gift Card! Learn More.</a>",
+    "not_customer_mobile": "<a href=\"/pages/loyal-customer-program\">Save $50! Learn More.</a>",
+    "checkout_header_image": "",
+    "checkout_logo_image": "",
+    "checkout_logo_position": "left",
+    "checkout_logo_size": "medium",
+    "checkout_body_background_image": "",
+    "checkout_body_background_color": "#fff",
+    "checkout_input_background_color_mode": "white",
+    "checkout_sidebar_background_image": "",
+    "checkout_sidebar_background_color": "#fafafa",
+    "checkout_heading_font": "Helvetica Neue",
+    "checkout_body_font": "Helvetica Neue",
+    "checkout_accent_color": "#1990c6",
+    "checkout_button_color": "#1990c6",
+    "checkout_error_color": "#ff6d6d",
+    "farm-main-image": "",
+    "farm-main-video": "https://player.vimeo.com/video/136534709",
+    "farm-main-header": "Farm to Family",
+    "farm-sub-header": "Cardigan kinfolk lyft green juice locavore vinyl. Man braid organic raw denim hashtag.",
+    "video-title-1": "The Products",
+    "video-tour-1": "https://player.vimeo.com/video/177761447",
+    "video-title-2": "The Business",
+    "video-tour-2": "https://player.vimeo.com/video/177760473",
+    "video-title-3": "",
+    "video-tour-3": "",
+    "video-title-4": "",
+    "video-tour-4": "",
+    "video-title-5": "",
+    "video-tour-5": "",
+    "video-title-6": "",
+    "video-tour-6": "",
+    "video-title-7": "",
+    "video-tour-7": "",
+    "video-title-8": "",
+    "video-tour-8": "",
+    "video-title-9": "",
+    "video-tour-9": "",
+    "video-title-10": "",
+    "video-tour-10": "",
+    "video-title-11": "",
+    "video-tour-11": "",
+    "video-title-12": "",
+    "video-tour-12": "",
+    "video-title-13": "",
+    "video-tour-13": "",
+    "video-title-14": "",
+    "video-tour-14": "",
+    "video-title-15": "",
+    "video-tour-15": "",
+    "video-title-16": "",
+    "video-tour-16": "",
+    "video-title-17": "",
+    "video-tour-17": "",
+    "video-title-18": "",
+    "video-tour-18": "",
+    "video-title-19": "",
+    "video-tour-19": "",
+    "video-title-20": "",
+    "video-tour-20": "",
+    "sections": {
+      "events-section": {
+        "type": "events-section",
+        "blocks": {
+          "1553555181202": {
+            "type": "image",
+            "settings": {
+              "the_image": "",
+              "the_title": "",
+              "the_event": "Leslie Zann, expert in field leadership, is hosting a series of Zoom Calls - just for Purium Brand Partners. As our Keynote Speaker for The Summit 2019, she is here to lead you in your run for convention. Specializing in meeting leaders where they're at, she will also be leading a Zoom series just for Diamonds and above. Be sure to mark your calenders because you won't want to miss out on these exclusive trainings. <br><br>\nAll call times are: 5:00pm PST |       7:00pm CST |  8:00pm EST\n<br><br>\n<b>Schedule:</b>\n<br>\nGeneral Field Training        Wednesday, April 3 <br>     \nDiamonds and above Training       Wednesday, April 10 <br>       \nGeneral Field Training       Wednesday, April 17   <br>     \n<br>                   \nGeneral Field Training        Wednesday, May 8 <br>       \nDiamonds and above Training       Wednesday, May 15 <br>      \nGeneral Field Training        Wednesday, May 22 <br>       \n <br>                  \nGeneral Field Training        Wednesday, June 5    <br>    \nDiamonds and above Training        Wednesday, June 12    <br>    \nGeneral Field Training       Wednesday, June 19  <br><br>\nDiamonds and Above, you will be emailed and texted the private Zoom links - so make sure you are opted into our Corporate communication!",
+              "the_flyer_link": "https://zoom.us/j/8688687567",
+              "the_flyer_text": "Bookmark the General Field Training Zoom Link",
+              "the_location": "",
+              "the_date": "",
+              "the_rsvp": ""
+            }
+          },
+          "1546622646489": {
+            "type": "image",
+            "settings": {
+              "the_image": "",
+              "the_title": "DIAMOND CLUB",
+              "the_event": "Ask any Crown what event made the biggest difference in their Purium career and many would say - \"Diamond Club.\" Why? Because of the unshakeable belief that comes from seeing the products made, meeting the owners, and understanding the roots of the mission. <br>",
+              "the_flyer_link": "https://vimeo.com/263952470",
+              "the_flyer_text": "Check out the video!",
+              "the_location": "Long Beach, CA",
+              "the_date": "JUNE 21-23, 2019",
+              "the_rsvp": ""
+            }
+          },
+          "1536335098061": {
+            "type": "image",
+            "settings": {
+              "the_image": "",
+              "the_title": "THE SUMMIT 2019",
+              "the_event": "S U R P R I S E! Dave Sandoval and Amy Venner are thrilled to announce this year's Convention. Featuring Keynote Speaker Leslie Zann, this year will focus on ACTIONABLE training. Stay plugged in here for all the new twists and details. Save this date and share the news with your Tribe of Brand Partners because you won't want to miss this event! \n<br>\n<a href=\"https://ishoppurium.com/pages/the-summit\" class=\"text-link\" target=\"_blank\">Get Tickets</a>",
+              "the_flyer_link": "https://www.facebook.com/events/565757153938785/",
+              "the_flyer_text": "Facebook Event",
+              "the_location": "Burbank, CA",
+              "the_date": "JULY 18-21, 2019",
+              "the_rsvp": ""
+            }
+          }
+        },
+        "block_order": ["1553555181202", "1546622646489", "1536335098061"],
+        "settings": {
+          "heading": "Purium Events"
+        }
+      },
+      "giftcard-section": {
+        "type": "giftcard-section",
+        "blocks": {
+          "1501526788571": {
+            "type": "video",
+            "settings": {
+              "the_video": "https://player.vimeo.com/video/201778343"
+            }
+          },
+          "1501526849566": {
+            "type": "video",
+            "settings": {
+              "the_video": "https://player.vimeo.com/video/202233675"
+            }
+          }
+        },
+        "block_order": ["1501526788571", "1501526849566"],
+        "settings": {
+          "heading": "Give $50. Get $50.",
+          "subheading": "The Purium sampling program is unlike any other system you’ve ever seen. You hand out $50 Gift Cards and then Purium pays you a $50 bill every time a card is redeemed for a Transformation. If you think it’s easier to give something away than it is to sell something, please check out these two short video presentations:"
+        }
+      },
+      "video-tour-section": {
+        "type": "video-tour-section",
+        "blocks": {
+          "1501536339474": {
+            "type": "video",
+            "settings": {
+              "video_title": "The Products",
+              "the_video": "https://player.vimeo.com/video/177761447"
+            }
+          },
+          "1501536380760": {
+            "type": "video",
+            "settings": {
+              "video_title": "The Business",
+              "the_video": "https://player.vimeo.com/video/177760473"
+            }
+          },
+          "1501536406768": {
+            "type": "video",
+            "settings": {
+              "video_title": "Skinny Hormone",
+              "the_video": "https://player.vimeo.com/video/202233675"
+            }
+          }
+        },
+        "block_order": ["1501536339474", "1501536380760", "1501536406768"],
+        "settings": {}
+      },
+      "home-slider": {
+        "type": "home-slider",
+        "blocks": {
+          "1588373334425": {
+            "type": "home_slide",
+            "settings": {
+              "home_slider_heading": "<br><br><br><br>",
+              "home_slider_desc": "<br><br>",
+              "home_slider_button_text": "VIEW THE COLLECTION",
+              "home_slider_button_url": "shopify://collections/immune-support",
+              "home_slide_image": "shopify://shop_images/ImmuneDesktop_5b940e20-2735-48f2-bf19-433c1cdc8505.jpg",
+              "home_slide_image_mobile": "shopify://shop_images/ImmuneMobile_bfe385ad-befd-4fbe-875d-a11218d3b35e.jpg",
+              "home_slide_video": ""
+            }
+          },
+          "1554145004726": {
+            "type": "home_slide",
+            "settings": {
+              "home_slider_heading": "<br><br><br><br>",
+              "home_slider_desc": "<br><br>",
+              "home_slider_button_text": "Transform Today",
+              "home_slider_button_url": "shopify://pages/lifestyle-transformation",
+              "home_slide_image": "shopify://shop_images/Slider-UL-Transformation_19210671-f827-4b1f-ba73-50c2821ac613.png",
+              "home_slide_image_mobile": "shopify://shop_images/Mobile-Slider.png",
+              "home_slide_video": "",
+              "home_slider_link": "shopify://pages/lifestyle-transformation"
+            }
+          },
+          "1502231963736": {
+            "type": "home_slide",
+            "settings": {
+              "home_slider_heading": "<br><br><br><br>",
+              "home_slider_desc": "<br><br>",
+              "home_slider_button_text": "Protect Your Gut",
+              "home_slider_button_url": "shopify://collections/epi-genius",
+              "home_slide_image": "shopify://shop_images/Purium_BiomeMedicDesktop_02.jpg",
+              "home_slide_image_mobile": "shopify://shop_images/Purium_BiomeMedicMobile_02.jpg",
+              "home_slide_video": "",
+              "home_slider_link": "shopify://collections/epi-genius"
+            }
+          },
+          "1526483838143": {
+            "type": "home_slide",
+            "settings": {
+              "home_slider_heading": "<br><br><br><br>",
+              "home_slider_desc": "<br><br>",
+              "home_slider_button_text": "Learn more",
+              "home_slider_button_url": "shopify://pages/smart-orders",
+              "home_slide_image": "shopify://shop_images/Purium_SmartOrderDesktop_02.jpg",
+              "home_slide_image_mobile": "shopify://shop_images/Purium_SmartOrderMobile_02.jpg",
+              "home_slide_video": "",
+              "home_slider_link": "https://ishoppurium.com/pages/smart-orders"
+            }
+          },
+          "1552933291638": {
+            "type": "home_slide",
+            "settings": {
+              "home_slider_heading": "<br><br><br><br>",
+              "home_slider_desc": "<br><br>",
+              "home_slider_button_text": "Meet Your Core",
+              "home_slider_button_url": "shopify://products/core-4",
+              "home_slide_image": "shopify://shop_images/Core4Desktop_03.jpg",
+              "home_slide_image_mobile": "shopify://shop_images/Core4Mobile_03.jpg",
+              "home_slide_video": ""
+            }
+          }
+        },
+        "block_order": [
+          "1588373334425",
+          "1554145004726",
+          "1502231963736",
+          "1526483838143",
+          "1552933291638"
+        ],
+        "settings": {}
+      },
+      "prop-banner": {
+        "type": "prop-banner",
+        "settings": {
+          "banner_text": "",
+          "banner_color": "",
+          "text_color": ""
+        }
+      },
+      "tools-systems-jumbotron": {
+        "type": "tools-systems-jumbotron",
+        "settings": {
+          "jumbotron_image": "shopify://shop_images/Tools-head_269a9fd5-08f6-47b3-a4ea-720ba66efcc5.jpg",
+          "jumbotron_title": "Tools and Systems",
+          "jumbotron_subheader": "Succeed and Share. Anytime. Anywhere."
+        }
+      },
+      "enrollment-jumbotron": {
+        "type": "enrollment-jumbotron",
+        "settings": {
+          "jumbotron_image": "shopify://shop_images/Website-DollarDeal-Opportunity_70dc307c-321b-44e6-bb6c-298754883470.jpg",
+          "jumbotron_title": "Enrollment Options",
+          "jumbotron_subheader": ""
+        }
+      },
+      "promise": {
+        "type": "promise",
+        "settings": {
+          "promise_header": "Healthy Immune Support",
+          "the_promise": "We are proud to be #PuriumStrong during this time. As our products are in high demand, we are committed to providing organic superfoods to nourish people and communities all over the world.<br><br><a class=\"btn btn--primary home-slider__cta\" href=\"/collections/immune-support\" tabindex=\"-1\">Be Well</a>",
+          "the_promise_image": "shopify://shop_images/Background_-Resize.png",
+          "the_promise_color": "#4F7282",
+          "the_promise_text_color": "white"
+        }
+      },
+      "featured-video": {
+        "type": "featured-video",
+        "settings": {
+          "featured_video": "https://player.vimeo.com/video/388047951"
+        }
+      },
+      "homepage-collection": {
+        "type": "homepage-collection",
+        "blocks": {
+          "1501633296012": {
+            "type": "image",
+            "settings": {
+              "collection_title": "QUICK SHOP",
+              "the_image": "shopify://shop_images/greenCollection.jpg",
+              "link": "shopify://collections/quick-shop"
+            }
+          },
+          "1501633142308": {
+            "type": "image",
+            "settings": {
+              "collection_title": "#CleanGreenCleanse<br><span style=\"font-size: 1rem\">CLEANSING</span>",
+              "the_image": "shopify://shop_images/purpleCollection.jpg",
+              "link": "shopify://collections/cleansing"
+            }
+          },
+          "1501633345794": {
+            "type": "image",
+            "settings": {
+              "collection_title": "#ItStartsWith10Days<br><span style=\"font-size: 1rem\">WEIGHT LOSS</span>",
+              "the_image": "shopify://shop_images/redCollection.jpg",
+              "link": "shopify://collections/weight-loss-1"
+            }
+          },
+          "1501633224469": {
+            "type": "image",
+            "settings": {
+              "collection_title": "#ActivateToAwesome<br><span style=\"font-size: 1rem\">PERFORMANCE</span>",
+              "the_image": "shopify://shop_images/blueCollection.jpg",
+              "link": "shopify://collections/performance"
+            }
+          },
+          "1501633185717": {
+            "type": "image",
+            "settings": {
+              "collection_title": "#PathwayToHealthy<br><span style=\"font-size: 1rem\">FAMILY</span>",
+              "the_image": "shopify://shop_images/orangeCollection.jpg",
+              "link": "shopify://collections/family"
+            }
+          },
+          "1501633317462": {
+            "type": "image",
+            "settings": {
+              "collection_title": "#RechargeYourYouth<br><span style=\"font-size: 1rem\">REJUVENATE</span>",
+              "the_image": "shopify://shop_images/indigoCollection.jpg",
+              "link": "shopify://collections/restorative"
+            }
+          }
+        },
+        "block_order": [
+          "1501633296012",
+          "1501633142308",
+          "1501633345794",
+          "1501633224469",
+          "1501633185717",
+          "1501633317462"
+        ],
+        "settings": {
+          "title": "Shop the Collections"
+        }
+      },
+      "collection-upgrade": {
+        "type": "collection-upgrade",
+        "blocks": {
+          "1510185936285": {
+            "type": "features",
+            "settings": {
+              "feature": "<h5 class=\"big\">Purium Brand Partner Starter Kit</h5><h6 class=\"small\">Essential Marketing & Training Materials</h6>,<h5 class=\"big\">Electronic Member Kit</h5>,<h5 class=\"big\">1 year of DREAMS Platform</h5><h6 class=\"small\">Phone App & Upgraded Online Back Office - $149 value</h6>,<h5 class=\"big\">The Green Foods Bible</h5><h6 class=\"small\">Book by Purium Owner David Sandoval</h6>,<h5 class=\"big\">Purium Shaker Bottle</h5><h6 class=\"small\">BPA-Free Shaker & Tablet Container</h6>,<h5 class=\"big\">Achievement Bonus Qualification</h5><h6 class=\"small\">Immediate Activation - Potential $700 Value!</h6>,<h5 class=\"big\">Gift Cards</h5>,<h5 class=\"big\">European Gift Cards</h5><h6 class=\"small\">Build Your Business in Europe - 50 Euro Value Per Card</h6>,<h5 class=\"big\">QV</h5>,<h5 class=\"big\">Matching Achievement Bonus</h5><h6 class=\"small\">Immediate Activation - Earn an Extra $700 Per Advancing Executive!</h6>"
+            }
+          },
+          "1510185939073": {
+            "type": "available",
+            "settings": {
+              "prod": "launch-pack",
+              "available": "check,check,check,check,check,check,<h5 class=\"big\">Unlimited $50 Gift Cards for 1 Year</h5><h6 class=\"small\">Start with 100 Gift Cards - FREE “refills” for 1 year</h6>,<h5 class=\"big\">15 European Gift Cards</h5>,<h5 class=\"big\">QV = 100</h5>,check"
+            }
+          },
+          "1510185961598": {
+            "type": "available",
+            "settings": {
+              "prod": "",
+              "available": "check,check,check,check,check,check,<h5 class=\"big\">50 Gift Cards</h5><h6 class=\"small\">Valued at $50 Each</h6>,<h5 class=\"big\">5 European Gift Cards</h5>,<h5 class=\"big\">QV = 250</h5>,dash"
+            }
+          },
+          "1510185974962": {
+            "type": "available",
+            "settings": {
+              "prod": "basic-pack",
+              "available": "dash,check,dash,dash,dash,dash,<h5 class=\"big\">5 Gift Cards</h5><h6 class=\"small\">Valued at $50 Each</h6>,dash,dash,dash"
+            }
+          }
+        },
+        "block_order": [
+          "1510185936285",
+          "1510185939073",
+          "1510185961598",
+          "1510185974962"
+        ],
+        "settings": {}
+      },
+      "callouts-upgrade": {
+        "type": "callouts-upgrade",
+        "blocks": {
+          "1510186018133": {
+            "type": "callout",
+            "settings": {
+              "call_img": "shopify://shop_images/Sun_3b483a15-ee16-46b7-a446-76dfe29d0b25.png",
+              "call_title": "Brand Partner Starter Kit",
+              "call_desc": "The basics you need to build your Purium business and manage your team. Includes training materials, marketing materials and access to an online Back Office with management reports."
+            }
+          },
+          "1510186071552": {
+            "type": "callout",
+            "settings": {
+              "call_img": "shopify://shop_images/Graph_8e6f1978-a1dc-4d55-8c26-8f588498d4fb.png",
+              "call_title": "DREAMS Platform",
+              "call_desc": "Maximize your network and profit with the Purium Phone App, upgraded DREAMS Back Office and dozens of management reports. Plus, easily share videos, PDFs or social squares from your phone."
+            }
+          },
+          "1510186078924": {
+            "type": "callout",
+            "settings": {
+              "call_img": "shopify://shop_images/Card_5643f708-4c93-458e-86af-a0af603bd13f.png",
+              "call_title": "Gift Cards",
+              "call_desc": "Build a Customer Franchise through sharing health, not selling it. You choose a Gift Card Code. Share it with your new Customers so they save $50 on their first purchases. You earn 20% of the product purchases for every order they place, including the first one."
+            }
+          },
+          "1510186084064": {
+            "type": "callout",
+            "settings": {
+              "call_img": "shopify://shop_images/Gift_934921d9-23b1-447b-8fd8-7b6880036b52.png",
+              "call_title": "Achievement Bonus Qualification",
+              "call_desc": "Achieve the rank of Director, get a $200 one-time bonus. Reach the rank of Executive, get a $500 one-time bonus. Purchase a Builder Pack or Launch Pack to immediately qualify for these bonuses as soon as you achieve them. If you don’t, in addition to achieving these ranks, you must also become a member of the alternative, “1K Club.”"
+            }
+          },
+          "1510186090067": {
+            "type": "callout",
+            "settings": {
+              "call_img": "shopify://shop_images/Ribbon_47a6bb1c-b6fb-4c76-86dd-f2cad6c74dce.png",
+              "call_title": "Matching Achievement Bonus",
+              "call_desc": "When a Brand Partner that you enroll reaches the Director rank, YOU get a $200 one-time bonus. When a Brand Partner reaches the Executive rank, YOU get a $500 one-time bonus. Immediately qualify for these bonuses by purchasing a Launch Pack. If you don’t purchase a Launch Pack, you must reach the “2K Club” to earn these lucrative Matching Achievement Bonuses."
+            }
+          },
+          "1510186095535": {
+            "type": "callout",
+            "settings": {
+              "call_img": "shopify://shop_images/Up_f7fa79f7-2693-422e-bbcc-8406b0849bf6.png",
+              "call_title": "QV",
+              "call_desc": "QV = Qualifying Volume. You accumulate QV points to help you advance in the Purium Compensation Plan and earn more income."
+            }
+          }
+        },
+        "block_order": [
+          "1510186018133",
+          "1510186071552",
+          "1510186078924",
+          "1510186084064",
+          "1510186090067",
+          "1510186095535"
+        ],
+        "settings": {}
+      },
+      "promo-banner": {
+        "type": "promo-banner",
+        "blocks": {
+          "1c16bef0-8e75-40a8-9a4f-e57288d3491c": {
+            "type": "value_prop",
+            "settings": {
+              "value_prop_title": "Expect Shipping Delays",
+              "value_prop_text": "",
+              "value_prop_link_text": "See Details",
+              "value_prop_url": "https://ishoppurium.com/pages/terms-and-conditions",
+              "customer_check": false
+            }
+          },
+          "1584831142715": {
+            "type": "value_prop",
+            "settings": {
+              "value_prop_title": "COVID-19 Update & Mission",
+              "value_prop_text": "",
+              "value_prop_link_text": "Read now",
+              "value_prop_url": "shopify://pages/a-mission-with-a-vision",
+              "customer_check": false
+            }
+          },
+          "1584832722915": {
+            "type": "value_prop",
+            "settings": {
+              "value_prop_title": "Shipping delays",
+              "value_prop_text": "5-14 days",
+              "value_prop_link_text": "See Details",
+              "customer_check": false
+            }
+          },
+          "1575048460265": {
+            "type": "value_prop",
+            "settings": {
+              "value_prop_title": "SAVE $50",
+              "value_prop_text": "on your first order",
+              "value_prop_link_text": "Learn More",
+              "value_prop_url": "shopify://pages/loyal-customer",
+              "customer_check": false
+            }
+          },
+          "1575048504515": {
+            "type": "value_prop",
+            "settings": {
+              "value_prop_title": "Earn 500 Pts",
+              "value_prop_text": "First 2 Orders = Bonus points",
+              "value_prop_link_text": "Learn More",
+              "value_prop_url": "shopify://pages/purium-rewards",
+              "customer_check": false
+            }
+          },
+          "1575416552331": {
+            "type": "value_prop",
+            "settings": {
+              "value_prop_title": "$10 DEDUCTION",
+              "value_prop_text": "off shipping for buying $250 or more",
+              "value_prop_link_text": "Learn More",
+              "value_prop_url": "shopify://pages/loyal-customer",
+              "customer_check": false
+            }
+          },
+          "1575416605801": {
+            "type": "value_prop",
+            "settings": {
+              "value_prop_title": "Earn 2x Points",
+              "value_prop_text": "Smart Order members earn 2x Rewards Points",
+              "value_prop_link_text": "See Details",
+              "value_prop_url": "shopify://pages/purium-rewards",
+              "customer_check": true
+            }
+          },
+          "1575416628785": {
+            "type": "value_prop",
+            "settings": {
+              "value_prop_title": "FREE SHIPPING",
+              "value_prop_text": "+ 25% off orders > $250",
+              "value_prop_link_text": "See Details",
+              "value_prop_url": "shopify://pages/loyal-customer",
+              "customer_check": true
+            }
+          }
+        },
+        "block_order": [
+          "1c16bef0-8e75-40a8-9a4f-e57288d3491c",
+          "1584831142715",
+          "1584832722915",
+          "1575048460265",
+          "1575048504515",
+          "1575416552331",
+          "1575416605801",
+          "1575416628785"
+        ],
+        "settings": {}
+      },
+      "inline-cart": {
+        "type": "inline-cart",
+        "blocks": {
+          "1553713021291": {
+            "type": "ticket_products",
+            "settings": {
+              "ticket_product": ""
+            }
+          },
+          "1553713053667": {
+            "type": "ticket_products",
+            "settings": {
+              "ticket_product": ""
+            }
+          },
+          "1553713075917": {
+            "type": "ticket_products",
+            "settings": {
+              "ticket_product": ""
+            }
+          },
+          "1553713094437": {
+            "type": "ticket_products",
+            "settings": {
+              "ticket_product": ""
+            }
+          },
+          "1553713115538": {
+            "type": "ticket_products",
+            "settings": {
+              "ticket_product": ""
+            }
+          },
+          "1553721465495": {
+            "type": "ticket_products",
+            "settings": {
+              "ticket_product": ""
+            }
+          },
+          "1553723292062": {
+            "type": "ticket_products",
+            "settings": {
+              "ticket_product": ""
+            }
+          },
+          "1553725236701": {
+            "type": "ticket_products",
+            "settings": {
+              "ticket_product": ""
+            }
+          },
+          "1553725328807": {
+            "type": "ticket_products",
+            "settings": {
+              "ticket_product": ""
+            }
+          }
+        },
+        "block_order": [
+          "1553713021291",
+          "1553713053667",
+          "1553713075917",
+          "1553713094437",
+          "1553713115538",
+          "1553721465495",
+          "1553723292062",
+          "1553725236701",
+          "1553725328807"
+        ],
+        "settings": {
+          "inlinecart_free_shipping_min": "250",
+          "collection_inline_cart": "goes-great-with"
+        }
+      },
+      "smart-orders-section": {
+        "type": "smart-orders-section",
+        "settings": {
+          "title": "Smart Order",
+          "top_text_1": "Keep your nutrition goals consistent with Smart Order - a monthly delivery of your products.",
+          "top_text_2": "<h2 style=\"text-align: center;\"><span style=\"color: #960058;\"><strong><span style=\"text-decoration: underline;\"><a href=\"https://blog.puriumcorp.com/2020/03/04/smart-order/\" style=\"color: #960058; text-decoration: underline;\">Click To Read More Benefits</a></span></strong></span></h2><br>  <div class=\"shogun-root\" data-shogun-id=\"5ffdf0ec877f46006db9a26d\" data-shogun-site-id=\"d15d42c3-e639-4148-864a-aaa2f74e3d79\" data-shogun-page-id=\"5ffdf0ec877f46006db9a26d\" data-shogun-page-version-id=\"603027458f197c00c00775a6\" data-shogun-platform-type=\"shopify\" data-shogun-variant-id=\"603027458f197c00c00775c9\" data-region=\"main\" style=\"text-align: center;\"> <div class=\"shg-box-vertical-align-wrapper\"> <div class=\"shg-box shg-c    \" id=\"s-c9707e51-6f60-41e4-9f29-737269917da2\"> <div class=\"shg-box-overlay\"></div> <div class=\"shg-box-content\"> <div id=\"s-d395075a-d036-4176-88ce-54db3db5e81d\" class=\"shg-c  \"> <div class=\"shogun-video shogun-video-16x9\"><iframe class=\"shogun-video-embed \" src=\"https://player.vimeo.com/video/514455235?autoplay=0&loop=0\" allowfullscreen=\"\">       </iframe></div> <div class=\"shogun-video shogun-video-16x9\"></div> <div class=\"shogun-video shogun-video-16x9\">\n<iframe src=\"https://player.vimeo.com/video/527441703\" width=\"440\" height=\"160\" frameborder=\"0\" allow=\"autoplay; fullscreen; picture-in-picture\" allowfullscreen=\"\"></iframe> <p><span style=\"color: #006145;\"><a href=\"https://vimeo.com/527441703\" style=\"color: #006145;\">Español Smart Order</a></span></p> </div> </div> </div> </div> </div> <div id=\"s-779ffa60-6765-44fa-b5f6-bc111b7dd247\" class=\"shg-c  \"></div> <script type=\"text/javascript\" src=\"https://cdn.getshogun.com/603027458f197c00c00775c9.js\" async=\"\"></script> </div>",
+          "smart_orders_desktop_hero": "shopify://shop_images/herobg_1.jpg",
+          "smart_orders_mobile_hero": "shopify://shop_images/herobg.jpg",
+          "smart_orders_collection": "3nfree"
+        }
+      },
+      "rewards-hero": {
+        "type": "rewards-hero",
+        "settings": {
+          "hero_img": "shopify://shop_images/AdobeStock_274127334_2x_b229d5dd-ac76-41ce-85d5-c2be2048dfc5.jpg",
+          "header": "Rewards",
+          "subheader": "Earn Rewards Points every time you shop.<br> <meta charset=\"utf-8\"> <h2 style=\"text-align: center;\"><a href=\"https://blog.puriumcorp.com/2021/01/13/purium-rewards/\" target=\"_blank\" rel=\"noopener noreferrer\"><span style=\"text-decoration: underline; color: #24408e;\"><strong>Click For Promo Benefits & Details</strong><strong></strong></span></a></h2> <p> </p> <meta charset=\"utf-8\"> <p> </p>"
+        }
+      },
+      "rewards-props": {
+        "type": "rewards-props",
+        "blocks": {
+          "1569449791938": {
+            "type": "value_prop",
+            "settings": {
+              "prop_img": "shopify://shop_images/enroll-icon_2x_36c07a98-4469-4c73-9982-8323d74c7f9a.png",
+              "prop_title": "Enroll",
+              "prop_copy": "Get 100 points instantly <br>when you make an account<br>on iShopPurium.com.",
+              "fine_print": ""
+            }
+          },
+          "1569449838112": {
+            "type": "value_prop",
+            "settings": {
+              "prop_img": "shopify://shop_images/earn-icon_2x_85c88dd7-f67b-49b5-8570-172e3950f353.png",
+              "prop_title": "Earn",
+              "prop_copy": "1 point for every $1 spent, and 2 <br>points for every $1 spent on your <br>first and second purchases.",
+              "fine_print": ""
+            }
+          },
+          "1569449866335": {
+            "type": "value_prop",
+            "settings": {
+              "prop_img": "shopify://shop_images/get-smart-icon_2x_2d57d20f-7395-4f79-bbce-b6437065da93.png",
+              "prop_title": "Get Smart",
+              "prop_copy": "When you enroll in Smart Order, earn <br>2 points for every $1 spent on ANY <br>purchase, not just Smart Orders!",
+              "fine_print": "*must keep Smart Order active"
+            }
+          }
+        },
+        "block_order": ["1569449791938", "1569449838112", "1569449866335"],
+        "settings": {
+          "header": "How It Works"
+        }
+      },
+      "rewards-redeem": {
+        "type": "rewards-redeem",
+        "blocks": {
+          "1569452390083": {
+            "type": "redeem_block",
+            "settings": {
+              "point_thresh": "1000",
+              "discount": "$10"
+            }
+          },
+          "1569452407504": {
+            "type": "redeem_block",
+            "settings": {
+              "point_thresh": "3000",
+              "discount": "$40"
+            }
+          }
+        },
+        "block_order": ["1569452390083", "1569452407504"],
+        "settings": {
+          "header": "Redeem Your Points and Save",
+          "background_img": "shopify://shop_images/AdobeStock_84629369_2x_2e668c02-853f-4e78-be80-afa4e8017883.jpg"
+        }
+      },
+      "rewards-bonus": {
+        "type": "rewards-bonus",
+        "blocks": {
+          "1569517546420": {
+            "type": "bonus",
+            "settings": {
+              "point_total": "+100",
+              "copy": "When you create <br>an account on <br>iShopPurium.com"
+            }
+          },
+          "1569517655768": {
+            "type": "bonus",
+            "settings": {
+              "point_total": "+500",
+              "copy": "When you place your first <br>order (in addition to the<br>2 points per $1 spent!)"
+            }
+          },
+          "1569517676324": {
+            "type": "bonus",
+            "settings": {
+              "point_total": "+500",
+              "copy": "When you make your second <br>order (in addition to the 2 <br>points per $1 spent!)"
+            }
+          },
+          "1569517688703": {
+            "type": "bonus",
+            "settings": {
+              "point_total": "+200",
+              "copy": "When you sign up for Smart <br>Order (in addition to the<br>2 points per $1 spent!)"
+            }
+          },
+          "1569517706829": {
+            "type": "bonus",
+            "settings": {
+              "point_total": "+50",
+              "copy": "When you “like”<br>Purium Health Products <br>on Facebook"
+            }
+          },
+          "1569517833543": {
+            "type": "bonus",
+            "settings": {
+              "point_total": "+50",
+              "copy": "When you follow <br>@puriumhp on Instagram"
+            }
+          },
+          "1569517852289": {
+            "type": "bonus",
+            "settings": {
+              "point_total": "+200",
+              "copy": "When you write a new<br>product review on iShopPurium<br>(up to once a month!)"
+            }
+          }
+        },
+        "block_order": [
+          "1569517546420",
+          "1569517655768",
+          "1569517676324",
+          "1569517688703",
+          "1569517706829",
+          "1569517833543",
+          "1569517852289"
+        ],
+        "settings": {
+          "header": "Don't Forget Your Bonus Points",
+          "background_color": "#f9f9f9",
+          "cta_url": "https://ishoppurium.com/collections/purium-bundles",
+          "cta_text": "Shop Now"
+        }
+      },
+      "rewards-slider": {
+        "type": "rewards-slider",
+        "settings": {
+          "header": "Best Rewarding Products",
+          "collection": "3nfree"
+        }
+      },
+      "hideNseek-props": {
+        "type": "hideNseek-props",
+        "blocks": {
+          "1573079718791": {
+            "type": "value_prop",
+            "settings": {
+              "prop_img": "shopify://shop_images/Vector_Finger-Circle.png",
+              "prop_title": "Find",
+              "prop_copy": "10 Tickets are hidden throughout iShop; each is worth 10,000 Rewards Points.",
+              "fine_print": "Note: 5 Tickets Hidden Today (11/29) and 5 Tomorrow (11/30)"
+            }
+          },
+          "1573079775780": {
+            "type": "value_prop",
+            "settings": {
+              "prop_img": "shopify://shop_images/Sign-In-Trans.png",
+              "prop_title": "Sign In",
+              "prop_copy": "You must be logged into your iShop Account.",
+              "fine_print": ""
+            }
+          },
+          "1573079818819": {
+            "type": "value_prop",
+            "settings": {
+              "prop_img": "shopify://shop_images/10000-Points-Icon-Black.png",
+              "prop_title": "Redeem",
+              "prop_copy": "Enter the code you find in the box below (Sign in first to reveal box). If the code hasn't been redeemed yet, you will immediately receive 10,000 Rewards Points.",
+              "fine_print": ""
+            }
+          }
+        },
+        "block_order": ["1573079718791", "1573079775780", "1573079818819"],
+        "settings": {
+          "header": "How It Works"
+        }
+      },
+      "hideNseek-redeem": {
+        "type": "hideNseek-redeem",
+        "settings": {
+          "header": "See If You've Won",
+          "background_img": "shopify://shop_images/BF-Background.png"
+        }
+      },
+      "member-price-info-tooltip": {
+        "type": "member-price-info-tooltip",
+        "settings": {
+          "tooltip_message": "Save 25% By Ordering Each Month"
+        }
+      },
+      "hideNseek-hero": {
+        "type": "hideNseek-hero",
+        "settings": {
+          "hero_img": "shopify://shop_images/LP-Banner-HIDE_SEEK.png",
+          "header": "",
+          "subheader": ""
+        }
+      },
+      "lifestyle-transformation-section": {
+        "type": "lifestyle-transformation-section",
+        "blocks": {
+          "1577831906907": {
+            "type": "value_prop",
+            "settings": {
+              "product": "super-amino-23-150-ct",
+              "prod_benefit": "BUILD",
+              "prod_fine_copy": "Pure Vegan Protein"
+            }
+          },
+          "1577832057419": {
+            "type": "value_prop",
+            "settings": {
+              "product": "power-shake-apple-berry-30-servings",
+              "prod_benefit": "NOURISH",
+              "prod_fine_copy": "Super Greens & Healthy Fats"
+            }
+          },
+          "1577831975539": {
+            "type": "value_prop",
+            "settings": {
+              "product": "biome-medic",
+              "prod_benefit": "DETOXIFY",
+              "prod_fine_copy": "Superior Gut Health"
+            }
+          },
+          "1577831997319": {
+            "type": "value_prop",
+            "settings": {
+              "product": "apothe-cherry-16oz-now-certified-organic",
+              "prod_benefit": "REGENERATE",
+              "prod_fine_copy": "Organic Super Fruit"
+            }
+          },
+          "1577832033115": {
+            "type": "value_prop",
+            "settings": {
+              "product": "super-cleansr",
+              "prod_benefit": "CLEANSE",
+              "prod_fine_copy": "Deep Colon Cleanse"
+            }
+          }
+        },
+        "block_order": [
+          "1577831906907",
+          "1577832057419",
+          "1577831975539",
+          "1577831997319",
+          "1577832033115"
+        ],
+        "settings": {
+          "smart_orders_desktop_hero": "shopify://shop_images/LP-Header-Transformation_1.png",
+          "smart_orders_mobile_hero": "shopify://shop_images/Mobile_LP-Header-Transformation.png",
+          "lifestyle_collection": "lifestyle-transformation",
+          "ultimate_products": "",
+          "ultimate_nutrition": "shopify://shop_images/ULT_Customizable.png?v=1601501940",
+          "daily_core_4": "shopify://shop_images/DailyCore4.png?v=1601502039",
+          "tracker_1": "shopify://shop_images/30Day_Placemat_1219_WEB_Page_2_resize.jpg",
+          "tracker_2": "shopify://shop_images/30Day_Placemat_1219_WEB_Page_2_resize.jpg",
+          "daily_fiber": "shopify://shop_images/DailyFiber.png",
+          "super_cleansr": "shopify://shop_images/SuperCleansR.png"
+        }
+      },
+      "pickle-ball-hero": {
+        "type": "pickle-ball-hero",
+        "settings": {
+          "smart_orders_desktop_hero": "shopify://shop_images/PickleBall_LP_Header.png",
+          "smart_orders_mobile_hero": "shopify://shop_images/PickleBall_LP_Header_Mobile.jpg",
+          "lifestyle_collection": "",
+          "ultimate_products": "",
+          "pickle_ball_power": "shopify://shop_images/SportsPowerPack.png?v=1601502139"
+        }
+      },
+      "pickle-ball-buy": {
+        "type": "pickle-ball-buy",
+        "settings": {
+          "lifestyle_collection": "lifestyle-transformation",
+          "ultimate_products": "",
+          "pickle_ball_pro": "shopify://shop_images/SportsProPack.png?v=1601502144"
+        }
+      },
+      "pickle-ball-products1": {
+        "type": "pickle-ball-products1",
+        "blocks": {
+          "1577831906908": {
+            "type": "value_prop",
+            "settings": {
+              "product": "coco-hydrate-pineapple",
+              "prod_benefit": "COCO HYDRATE–PINEAPPLE",
+              "prod_mayhelp": "May Help",
+              "prod_fine_copy": "rapidly rehydrate",
+              "prod_fine_copy1": "decrease cramping, headaches",
+              "prod_fine_copy2": "encourage joint recovery",
+              "prod_fine_copy3": ""
+            }
+          },
+          "1577832057420": {
+            "type": "value_prop",
+            "settings": {
+              "product": "cant-beet-this-15-30-servings",
+              "prod_benefit": "CAN'T BEET THIS!",
+              "prod_mayhelp": "May Help",
+              "prod_fine_copy": "improve blood circulation",
+              "prod_fine_copy1": "increase strength & endurance",
+              "prod_fine_copy2": "support healthy blood sugar levels",
+              "prod_fine_copy3": ""
+            }
+          },
+          "1577831975540": {
+            "type": "value_prop",
+            "settings": {
+              "product": "super-xanthin",
+              "prod_benefit": "SUPER XANTHIN",
+              "prod_mayhelp": "May Help",
+              "prod_fine_copy": "maximize endurance with minimal muscle fatigue",
+              "prod_fine_copy1": "reduce recovery time",
+              "prod_fine_copy2": "protect skin from the sun",
+              "prod_fine_copy3": ""
+            }
+          },
+          "1577831997320": {
+            "type": "value_prop",
+            "settings": {
+              "product": "prostak-blender-bottle",
+              "prod_benefit": "SHAKER BOTTLE & BAG",
+              "prod_mayhelp": "Comes With",
+              "prod_fine_copy": "BPA free shaker bottle",
+              "prod_fine_copy1": "blending wire whisk",
+              "prod_fine_copy2": "Purium-branded drawstring bag",
+              "prod_fine_copy3": ""
+            }
+          }
+        },
+        "block_order": [
+          "1577831906908",
+          "1577832057420",
+          "1577831975540",
+          "1577831997320"
+        ],
+        "settings": {}
+      },
+      "pickle-ball-products": {
+        "type": "pickle-ball-products",
+        "blocks": {
+          "1577831906909": {
+            "type": "value_prop",
+            "settings": {
+              "product": "revive-it-all-90-ct",
+              "prod_benefit": "REVIVE-IT-ALL",
+              "prod_mayhelp": "May Help",
+              "prod_fine_copy": "increase energy and vigor",
+              "prod_fine_copy1": "supercharge reaction time & hand-eye coordination",
+              "prod_fine_copy2": "improve mood, memory and cognition",
+              "prod_fine_copy3": ""
+            }
+          },
+          "1577831997321": {
+            "type": "value_prop",
+            "settings": {
+              "product": "super-amino-23-150-ct",
+              "prod_benefit": "SUPER AMINO 23",
+              "prod_mayhelp": "May Help",
+              "prod_fine_copy": "encourage muscle building",
+              "prod_fine_copy1": "improve mental acuity",
+              "prod_fine_copy2": "increase fat burn",
+              "prod_fine_copy3": ""
+            }
+          },
+          "1577831906910": {
+            "type": "value_prop",
+            "settings": {
+              "product": "joint-flex-180-ct",
+              "prod_benefit": "JOINT FLEX",
+              "prod_mayhelp": "May Help",
+              "prod_fine_copy": "increase mobility and flexibility",
+              "prod_fine_copy1": "support muscle repair",
+              "prod_fine_copy2": "support body's response to inflammation",
+              "prod_fine_copy3": ""
+            }
+          }
+        },
+        "block_order": ["1577831906909", "1577831997321", "1577831906910"],
+        "settings": {}
+      },
+      "collection-hero": {
+        "type": "collection-hero",
+        "blocks": {
+          "2c4f69a9-5db0-4d4e-bcb4-81f97f4db6b7": {
+            "type": "image_set",
+            "settings": {
+              "coll": ""
+            }
+          },
+          "8129afdb-31a4-4367-b9b8-b71bbf48aefb": {
+            "type": "image_set",
+            "settings": {
+              "coll": "immune-support"
+            }
+          }
+        },
+        "block_order": [
+          "2c4f69a9-5db0-4d4e-bcb4-81f97f4db6b7",
+          "8129afdb-31a4-4367-b9b8-b71bbf48aefb"
+        ],
+        "settings": {}
+      }
+    },
+    "content_for_index": []
+  }
+}

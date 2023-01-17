@@ -1,0 +1,22 @@
+.klaviyo_bare_embed_HJbSNM {
+  padding: 40px 10px;
+  @include mq($global-breakpoint-md) {
+    padding: 0px;
+  }
+  label {
+    font-size: 18px;
+    font-weight: 100;
+    margin-bottom: 10px;
+    display: block;
+    text-align: center;
+    @include mq($global-breakpoint-md) {
+      text-align: left;
+    }
+  }
+  .klaviyo_form_actions {
+    margin-top: 10px;
+  }
+  .btn {
+    width: 100%;
+  }
+}

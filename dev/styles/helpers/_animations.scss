@@ -1,0 +1,43 @@
+@keyframes arrowsRight {
+    0% {
+        border-left: $value-prop-arrow-size/3 solid rgba(255,255,255,0);
+        border-bottom: $value-prop-arrow-size/3 solid rgba(255,255,255,0);
+        transform: translate($value-prop-arrow-size*4/-6,$value-prop-arrow-size/-6)rotate(-135deg);
+    }
+    10%, 90% {
+        border-left: $value-prop-arrow-size/3 solid rgba(255,255,255,0);
+        border-bottom: $value-prop-arrow-size/3 solid rgba(255,255,255,0);
+    }
+    50% {
+        border-left: $value-prop-arrow-size/3 solid rgba(255,255,255,$value-prop-arrow-peakopacity);
+        border-bottom: $value-prop-arrow-size/3 solid rgba(255,255,255,$value-prop-arrow-peakopacity);
+        transform: translate(0,$value-prop-arrow-size/-6)rotate(-135deg);
+    }
+    100% {
+        border-left: $value-prop-arrow-size/3 solid rgba(255,255,255,0);
+        border-bottom: $value-prop-arrow-size/3 solid rgba(255,255,255,0);
+        transform: translate($value-prop-arrow-size*4/6,$value-prop-arrow-size/-6)rotate(-135deg);
+    }
+}
+
+@keyframes arrowsLeft {
+    0% {
+        border-left: $value-prop-arrow-size/3 solid rgba(255,255,255,0);
+        border-bottom: $value-prop-arrow-size/3 solid rgba(255,255,255,0);
+        transform: translate($value-prop-arrow-size*4/6,$value-prop-arrow-size/-6)rotate(45deg);
+    }
+    10%, 90% {
+        border-left: $value-prop-arrow-size/3 solid rgba(255,255,255,0);
+        border-bottom: $value-prop-arrow-size/3 solid rgba(255,255,255,0);
+    }
+    50% {
+        border-left: $value-prop-arrow-size/3 solid rgba(255,255,255,$value-prop-arrow-peakopacity);
+        border-bottom: $value-prop-arrow-size/3 solid rgba(255,255,255,$value-prop-arrow-peakopacity);
+        transform: translate(0,$value-prop-arrow-size/-6)rotate(45deg);
+    }
+    100% {
+        border-left: $value-prop-arrow-size/3 solid rgba(255,255,255,0);
+        border-bottom: $value-prop-arrow-size/3 solid rgba(255,255,255,0);
+        transform: translate($value-prop-arrow-size*4/-6,$value-prop-arrow-size/-6)rotate(45deg);
+    }
+}

@@ -1,0 +1,20 @@
+<form class="quick-shop-form add-to-cart-form" action="/cart/add" method="post">
+ <!--  <select id="single-product-select" name="id">
+    {% for variant in product.variants %}
+    <option value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
+    {% endfor %}
+  </select> -->
+  <input class="kit-product hidden required" id="{{forloop.index}}_product-id" type="hidden" name="id" value="{{product.selected_or_first_available_variant.id}}">
+
+  <div class="pdp-info__field-wrap">
+    <input class="kit-product exigo-id hidden required" id="{{forloop.index}}_property__exigo-id" type="hidden" name="properties[id]" value="{{product.metafields.global.item_id}}">
+    <input class="kit-product exigo-qty hidden required" id="{{forloop.index}}_property__exigo-qty" type="hidden" name="properties[qty]" value="1">
+    <input class="kit-product exigo-type hidden required" id="{{forloop.index}}_property__exigo-type" type="hidden" name="properties[type]" value="{{product.type}}">
+  </div>
+
+  <p class="pdp-info__delivery line-item-property__field">
+    <input required class="pdp-info__delivery-radio required" id="{{forloop.index}}_property__delivery--auto-order" type="hidden" name="properties[delivery]" value="One-time Order">
+  </p>
+  <input class="pdp-info__qty btn btn--secondary btn-transparent" type="hidden" value="1" name="quantity">
+  <input class="add-to-cart-button btn btn--primary" type="submit" value="Add to cart" />
+</form>

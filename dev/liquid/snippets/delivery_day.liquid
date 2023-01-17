@@ -1,0 +1,20 @@
+<script>
+$(document).ready(function(){
+  	var value = '{{ customer.id }}';
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://shopify-cartwebhooks.azurewebsites.net/api/CartUpdate_TimeOfOrder?code=qkR7AMju4mEO77NHYDZ0dMl8QZR1zR1r6Ho7lJk1DZmqLwvk5cpaLw==",
+        "method": "POST",
+        "headers": {
+          "content-type": "application/json"
+        },
+        "processData": false,
+        "data": "{\"value\" : \"" + value + "\"}"
+      }
+      
+     $.ajax(settings).done(function (response) {
+        console.log(response);
+      });
+});
+</script>

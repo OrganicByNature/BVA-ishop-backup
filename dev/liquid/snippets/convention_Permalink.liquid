@@ -1,0 +1,44 @@
+<script>
+   $(document).ready(function() {
+     var urlParams = new URLSearchParams(window.location.search);
+     if(urlParams.has('conventionitems')){
+     
+     // Get and decode query params
+     var q_param = urlParams.get('conventionitems')
+     var uri_dec = decodeURIComponent(q_param);  
+     
+     var prods_URL = "https://ishoppurium.com?prods=";
+     // or the shorthand way
+     var dict = {
+       '3551' : 11751429269,
+       '2111' : 3554648096840,
+       '14370' : 11924995733,
+       '2741' : 11751439317,
+       '2740' : 11751439637,
+       '2750' : 11751439829,
+       '2009' : 11751440341,
+       '2270' : 11925004565,
+       '2270-4' : 11792426133,
+       '4600' : 3922404769864,
+       '4840' : 3922404900936
+     };
+
+     var res = uri_dec;
+     var array = uri_dec.split(","); 
+
+     array.forEach(function(element) {
+       var itemcode = element.split(":",1);
+       var cleanitemcode = itemcode[0].trim();
+       var prod_id = dict[cleanitemcode];
+       prods_URL += prod_id + ":1,";
+     });
+
+     var final_url = prods_URL.slice(0, -1);
+		
+     console.log(final_url);
+     
+     window.location.href = final_url;	
+
+   };
+ });
+</script>

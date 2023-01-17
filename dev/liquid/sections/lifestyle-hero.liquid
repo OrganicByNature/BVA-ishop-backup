@@ -1,0 +1,148 @@
+{% schema %}
+{
+  "name":"Hero",
+  "settings":[
+    {
+       "id":"autoplay_speed",
+       "type":"text",
+       "label":"Autoplay Speed",
+       "default":"4000"
+    }
+  ],
+  "blocks":[
+    {
+       "type":"banner",
+       "name":"Single Banner",
+       "settings":[
+           {
+              "id":"slide_url",
+              "type":"url",
+              "label":"Slide Link"
+           },
+           {
+              "id":"slide_bg",
+              "type":"image_picker",
+              "label":"Slide Image",
+              "info":"1200px x 310px"
+           },
+           {
+              "id":"slide_bg_mob",
+              "type":"image_picker",
+              "label":"Slide Image Mobile",
+              "info":"640px x 310px"
+           },
+           {
+              "id":"slide_bg_color",
+              "type":"text",
+              "label":"Slide Background Color"
+           },
+          {
+            "type":"radio",
+            "id":"live_text",
+            "label":"Enable Live Text?",
+            "options": [
+              {
+                "value":"true",
+                "label":"Yes"
+              },
+              {
+                "value":"false",
+                "label":"No"
+              }
+            ],
+            "default":"true"
+          },
+          {
+            "type":"select",
+            "id":"live_text_pos",
+            "label":"Live Text Position",
+            "options": [
+              {
+                "value":"",
+                "label":"center"
+              },
+              {
+                "value":"to-left",
+                "label":"Align Left"
+              },
+              {
+                "value":"to-right",
+                "label":"Align Right"
+              }
+            ]
+          },
+          {
+            "type":"text",
+            "id":"live_text_color",
+            "label":"Live Text Color",
+            "default":"#FFFFFF"
+          },
+          {
+             "id":"slide_heading",
+             "type":"text",
+             "label":"Heading"
+          },
+          {
+             "id":"slide_copy",
+             "type":"text",
+             "label":"Copy"
+          },
+          {
+             "id":"slide_cta",
+             "type":"text",
+             "label":"CTA Text"
+          },
+          {
+             "id":"slide_cta_link",
+             "type":"url",
+             "label":"CTA Link"
+          }
+       ]
+    }
+  ],
+  "presets":[
+    {
+       "category":"Sliders",
+       "name":"Hero Slider",
+       "settings":{},
+       "blocks":[]
+    },
+    {
+       "category":"Banners",
+       "name":"Hero Banner",
+       "settings":{},
+       "blocks":[]
+    }
+  ]
+}
+{% endschema %}
+
+<div class="hero{% if section.blocks.size > 1 %} js-hero-slider slider" data-autoplay="{{section.settings.autoplay_speed}}{% endif %}">
+{% for block in section.blocks %}
+  <a href="{{block.settings.slide_url}}" class="hero-slide {{block.settings.live_text_pos}}" style="background-color:{{block.settings.slide_bg_color}};">
+    <div class="container">
+      <div class="hero-image">
+      {% if block.settings.slide_bg_mob %}
+        <img src="{{block.settings.slide_bg_mob | img_url: '320x'}}"
+        srcset="{{block.settings.slide_bg_mob | img_url: '320x'}} 320w,
+        {{block.settings.slide_bg_mob | img_url: '640x'}} 640w" />
+      {% endif %}
+        <img src="{{block.settings.slide_bg | img_url: '320x'}}"
+          srcset="{{block.settings.slide_bg | img_url: '320x'}} 320w,
+          {{block.settings.slide_bg | img_url: '640x'}} 640w,
+          {{block.settings.slide_bg | img_url: '960x'}} 960w,
+          {{block.settings.slide_bg | img_url: '1200x'}} 1200w" />
+      </div>
+    {% if block.settings.live_text == 'true' %}
+      <div class="hero-content" style="color:{{block.settings.live_text_color}}">
+        <h2 class="heading h1">{{block.settings.slide_heading}}</h2>
+      {% if block.settings.slide_copy != blank %}
+        <p class="heading hero-copy">{{block.settings.slide_copy}}</p>
+      {% endif %}
+        <span class="btn primary block js-link" data-href="{{block.settings.slide_cta_link}}">{{block.settings.slide_cta}}</span>
+      </div>
+    {% endif %}
+    </div>
+  </a>
+{% endfor %}
+</div>

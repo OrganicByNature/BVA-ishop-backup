@@ -1,0 +1,12 @@
+{% include 'customer-metafields' %}
+{% assign baseUrl  = 'https://puriumcorp.myshopify.com/blogs/' %}
+
+<div class="page-wrapper success-stories" >
+  {% for article in blogs.business-success-stories.articles %}
+  <a class="product-succes-story success-story" href="{{ aseUrl }}{{ article.handle }}/">
+    <h2>{{article.title}}</h2>
+    <img src="{{article.image | img_url: 'master'}}" />
+    <h2>{{article.excerpt}}</h2>
+    {% endfor %}
+  </a>
+</div>

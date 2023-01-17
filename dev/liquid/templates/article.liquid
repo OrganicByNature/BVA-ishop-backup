@@ -1,0 +1,28 @@
+<!-- /templates/article.liquid -->
+{% include 'customer-metafields' %}
+<div class="page-wrapper">
+  {% if blog.title == 'Product Success Stories' %}
+  <h1 class="article-title">Weight Loss Testimonial</h1>
+  <div class="testimonial-container">
+    <div class="col-1 col">
+      <img src="{{article | img_url: 'master'}}" />
+    </div>
+    <div class="col-2 col">
+      <h2>{{article.title}}</h2>
+      {{article.excerpt}}
+      <div class="page-content">{{article.content}}</div>
+    </div>
+  </div>
+  {% elsif blog.title == 'Business Success Stories' %}
+  <div class="testimonial-container">
+    <div class="col-1 col">
+      <img src="{{article | img_url: 'master'}}" />
+    </div>
+    <div class="col-2 col">
+      <h2>{{article.title}}</h2>
+      {{article.excerpt}}
+      <div class="page-content">{{article.content}}</div>
+    </div>
+  </div>
+  {% endif %}
+</div>

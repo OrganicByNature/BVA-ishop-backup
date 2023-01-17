@@ -1,0 +1,401 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="{{ locale }}" dir="{{ direction }}" class="{{ checkout_html_classes }}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, user-scalable=0">
+  <link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}" type="image/png" />
+  <style type="text/css">
+    .btn {
+      border-radius: 7px;
+    }
+    
+    .btn__content {
+      color:  #fff;
+      line-height:  1.11;
+      letter-spacing: 0.4px;
+    }
+
+    #checkout_billing_address_id,
+    label[for="checkout_billing_address_id"],
+    .order-summary--purium,
+    .order-summary__section--product-list,
+    .order-summary__section--total-lines,
+    .order-summary__section--discount {
+      display: none;
+    }
+
+    .order-summary__section--purium {
+      display: block;
+    }
+  </style>
+
+  <title>{{ shop.name }} - {{ page_title }}</title>
+
+  {{ content_for_header }}
+
+  {{ checkout_stylesheets }}
+  {{ checkout_scripts }}
+  {% include 'datalayer' %}
+  {% include 'google-tag-manager' %}
+  {% unless checkout.order_name contains "#" %}
+    {% comment %}{% include 'google-conversion' %}{% endcomment %}
+    {% if customer.orders_count == 1 %}
+      {% include 'linkshare-conversion' %}
+    {% endif %}
+  {% endunless %}
+
+  {% include 'checkout-svg' %}
+   
+
+  {% render 'shogun-head' %}
+</head>
+<body>
+  {% include 'customer-metafields' %}
+
+  {% if customer_discount == 0.85 and checkout.subtotal_price < 29400 %}
+    {% assign discounted = true %}
+  {% elsif customer_discount == 0.75 %}
+    {% assign discounted = true %}
+  {% elsif customer_discount == 0.80 or customer_discount == 0.70 or customer_discount == 0.65 %}
+    {% assign discounted = true %}
+  {% else %}
+    {% assign discounted = false %}
+  {% endif %}
+
+  {% if checkout.discounts_amount == 5000 and checkout.customer.orders_count == 0 %}
+    {% assign giftcard = true %}
+  {% elsif checkout.discounts_amount == 0 and checkout.subtotal_price < 18675 %}
+    {% assign no_giftcard_avail = true %}
+  {% endif %}
+  
+  {% if checkout.discounts_amount == 0 and checkout.customer.orders_count == 0 and checkout.subtotal_price >= 15000 %}
+    {% assign bigspender = true %}
+  {% elsif customer_discount == 0.85 and checkout.subtotal_price > 29400 %}
+    {% assign bigspender = true %}
+  {% else %}
+    {% assign bigspender = false %}
+  {% endif %}
+
+  <div class="banner" data-header>
+    <div class="wrap">
+      <a href="https://puriumcorp.myshopify.com"><img class="banner-logo" src="{{ 'Gradient.svg' | asset_url }}"></a>
+    </div>
+  </div>
+
+  {{ order_summary_toggle }}
+
+  <div class="content" data-content>
+    <div class="wrap">
+
+      <div class="sidebar" role="complementary">
+        <div class="sidebar__header">
+          {{ content_for_logo }}
+        </div>
+        <div class="sidebar__content">
+          {% comment %}
+            Some sections of content_for_order_summary are overwritten by the sections rendered in .order-summary--purium
+            Check bottom of file for that JS
+          {% endcomment %}
+          {{ content_for_order_summary }}
+
+          <div class="order-summary--purium">
+
+              <div class="order-summary__section order-summary__section--product-list order-summary__section--purium">
+                <div class="order-summary__section__content">
+                  <table class="product-table">
+                    <caption class="visually-hidden">Shopping cart</caption>
+                    <thead>
+                      <tr>
+                        <th scope="col"><span class="visually-hidden">Product image</span></th>
+                        <th scope="col"><span class="visually-hidden">Description</span></th>
+                        <th scope="col"><span class="visually-hidden">Quantity</span></th>
+                        <th scope="col"><span class="visually-hidden">Price</span></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for item in checkout.line_items %}
+                      <tr class="product" data-product-id="{{ item.product_id }}" data-variant-id="{{ item.variant_id }}" data-product-type="{{ item.product.type }}">
+                        <td class="product__image">
+                          <div class="product-thumbnail">
+                            <div class="product-thumbnail__wrapper">
+                              <img alt="{{ item.product.title }}" class="product-thumbnail__image" src="{{ item.image | img_url: '200x200' | scale: 2 }}">
+                            </div>
+                            <span class="product-thumbnail__quantity" aria-hidden="true">{{ item.quantity }}</span>
+                          </div>
+
+                        </td>
+                        <td class="product__description">
+                          <span class="product__description__name order-summary__emphasis">{{ item.product.title }}</span>
+                          <span class="product__description__variant order-summary__small-text"></span>
+                          {% for prop in item.properties %}
+                            {% if prop.first == "qty" or prop.first == "id" or prop.first == "type" or prop.first == "delivery" or prop.first contains "selected-" %}
+
+                              {% assign prop_first = prop.first %}
+                              {% assign prop_last = prop.last %}
+
+                              {% if prop.first == "qty" %}
+                                {% assign prop_last = item.quantity %}
+                              {% elsif prop.first contains "selected-" %}
+                                {% assign prop_first = prop.first | remove: "selected-" %}
+                              {% elsif prop.last contains "qty" %}
+                                {% assign prop_last = prop.last | split: "qty:" %}
+                                {% assign prop_last = prop_last | first | append: "qty: " | append: item.quantity %}
+                              {% endif %}
+
+                              <span class="product__description__property order-summary__small-text">
+                                <span class="prop_first">{{ prop_first }}</span>: {{ prop_last }}
+                              </span>
+
+                            {% endif %}
+                          {% endfor %}
+                        </td>
+                        <td class="product__quantity visually-hidden">
+                          {{ item.quantity }}
+                        </td>
+                        <td class="product__price">
+                          {% for item in checkout.line_items %}
+                            {% if item.product.type contains 'Upgrade' %}
+                              {% assign upgrading = true %}
+                              {% assign bigspender = false %}
+                              {% break %}
+                            {% endif %}
+                          {% endfor %}
+
+                         <!-- Check to see if cart contains basic or launch pack -->
+                          {% if upgrading != blank %}
+                            {% for item in checkout.line_items %}
+                              {% if item.product.id == 23836229653 %}
+                                {% assign basic = true %}
+                              {% break %}
+                              {% endif %} 
+                            {% endfor %}
+                          {% endif %}
+            
+                       <!-- Check if customer is tagged with upgrade discount -->
+                        {% if basic == blank and upgrading != blank %}
+                          {% if customer.tags contains 'save99' %}    
+                              {% assign discounted_upgrade = true %}
+                          {% elsif customer.tags contains 'save199' %}            
+                              {% assign free_upgrade = true %}
+                          {% endif %}
+                        {% endif %}
+
+                      <span class="order-summary__emphasis">{% if upgrading != blank or giftcard or no_giftcard_avail %}{{ item.line_price | money }}{% elsif bigspender or bigspender_forever %}{{ item.line_price | money }}{% elsif discounted %}{{ item.line_price | times: customer_discount | ceil | money }}{% endif %}</span>
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+
+                  <div class="order-summary__scroll-indicator">
+                    Scroll for more items
+                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="12" viewBox="0 0 10 12"><path d="M9.817 7.624l-4.375 4.2c-.245.235-.64.235-.884 0l-4.375-4.2c-.244-.234-.244-.614 0-.848.245-.235.64-.235.884 0L4.375 9.95V.6c0-.332.28-.6.625-.6s.625.268.625.6v9.35l3.308-3.174c.122-.117.282-.176.442-.176.16 0 .32.06.442.176.244.234.244.614 0 .848"></path></svg>
+                  </div>
+                </div>
+              </div>
+
+              <div class="order-summary__section order-summary__section--total-lines order-summary__section--purium">
+                <table class="total-line-table">
+                  <caption class="visually-hidden">Cost summary</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col"><span class="visually-hidden">Description</span></th>
+                      <th scope="col"><span class="visually-hidden">Price</span></th>
+                    </tr>
+                  </thead>
+                  <tbody class="total-line-table__tbody">
+                    <tr class="total-line total-line--subtotal">
+                      <td class="total-line__name">Subtotal</td>
+                      <td class="total-line__price">
+                       <span class="order-summary__emphasis">{% if giftcard %} {{ checkout.subtotal_price | plus: 5000 | money }} {% elsif upgrading != blank %} {{ checkout.subtotal_price | money }} {% elsif bigspender %}{{ checkout.subtotal_price | divided_by: 0.75 | ceil | money  }} {% elsif discounted %}{{ checkout.subtotal_price | plus: checkout.discounts_amount | money }}{% else %}{{ checkout.subtotal_price | plus: checkout.discounts_amount | money }}{% endif %}</span>
+                       <span class="order-summary__emphasis hidden" data-checkout-subtotal-price-target="{{ checkout.subtotal_price }}">{{ checkout.subtotal_price | money }}</span>
+                      </td>
+                    </tr>
+
+                    <tr class="total-line total-line--reduction">
+                      <td class="total-line__name">
+                        <form data-reduction-form="true" class="edit_checkout animate-floating-labels" action="/20625235/checkouts/18cfbb57a37955fe8113d629374981b6" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="_method" value="patch"><input type="hidden" name="authenticity_token" value="Nr9hd6lSNtGw6x2uSHuhP1OChZ1aIE8F1VGnoh2kOgiTo/pqrWnG6QyscbOmJPDcBZBtpwEEjitW8//tYXbjPg==">
+                          <input type="hidden" name="step" value="shipping_method">
+
+                            <!-- Big Spender Notification -->
+                           <span>{% if discounted or upgrading != blank %}Savings{% elsif bigspender %} Super Saver Savings{% elsif giftcard %}Gift Card{% else %} Savings {% endif %}</span>
+
+                          <input value="1" size="30" type="hidden" name="checkout[clear_discount]" id="checkout_clear_discount">
+
+                          <input type="hidden" name="checkout[client_details][browser_width]" value="1677"><input type="hidden" name="checkout[client_details][browser_height]" value="1267"><input type="hidden" name="checkout[client_details][javascript_enabled]" value="1">
+                        </form>
+                      </td>
+
+                      <td class="total-line__price">
+                        <span class="order-summary__emphasis" data-checkout-discount-amount-target="{{ checkout.discounts_amount }}">{%if discounted_upgrade != blank %} ({{ checkout.subtotal_price | ceil | money  }}){% elsif free_upgrade != blank %}({{ checkout.subtotal_price | plus: 19900 | ceil | money  }}){% elsif bigspender %}({{ checkout.subtotal_price | divided_by: 0.75 | times: 0.25 | ceil | money  }}){% elsif upgrading != blank %} {{ 00 | ceil | money }} {% elsif discounted %}({{ checkout.discounts_amount | money }}){% else %}-({{ checkout.discounts_amount | money }}){% endif %}</span>
+                      </td>
+                    </tr>
+
+                    {% if checkout.gift_cards_amount > 0 %}
+                    <tr class="total-line total-line--reduction total-line--rewards">
+                      <th class="total-line__name" scope="row">
+                        <span>Rewards</span>
+                      </th>
+
+                      <td class="total-line__price">
+                        <span class="order-summary__emphasis">-({{ checkout.gift_cards_amount | money }})</span>
+                      </td>
+                    </tr>
+                    {% endif %}
+
+                    <tr class="total-line total-line--shipping">
+                      <td class="total-line__name">Shipping</td>
+                      <td class="total-line__price">
+                        <span class="order-summary__emphasis" data-checkout-total-shipping-target="{{ checkout.shipping_price }}">{{ checkout.shipping_price | money }}</span>
+                      </td>
+                    </tr>
+
+                    <tr class="total-line total-line--taxes" data-checkout-taxes="">
+                      <td class="total-line__name">Estimated Taxes</td>
+                      <td class="total-line__price">
+                        <span class="order-summary__emphasis" data-checkout-total-taxes-target="{{ checkout.tax_price }}">{{ checkout.tax_price | money }}</span>
+                      </td>
+                    </tr>
+
+                  </tbody>
+                  <tfoot class="total-line-table__footer">
+                    <tr class="total-line">
+                      <td class="total-line__name payment-due-label">
+                        <span class="payment-due-label__total">Total</span>
+                      </td>
+                      <td class="total-line__price payment-due">
+                        <span class="payment-due__currency">{{ shop.currency }}</span>
+
+
+                        {% comment %}
+                          Payment due target should be the total *without* gift cards applied,
+                          this value will be applied with javascript
+                        {% endcomment %}
+                        <span class="payment-due__price"
+                        data-checkout-total-before-discounts="{{ checkout.subtotal_price | plus: checkout.shipping_price | plus: checkout.tax_price }}"
+                        data-checkout-payment-due-target="{{ checkout.subtotal_price | plus: checkout.shipping_price | plus: checkout.tax_price }}">
+                        {{ checkout.subtotal_price | plus: checkout.shipping_price | plus: checkout.tax_price | minus: checkout.gift_cards_amount | money }}</span>
+                      </td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+
+          </div>
+        </div>
+      </div>
+      
+      <div class="main" role="main">
+        <div class="main__header">
+          <a href="https://puriumcorp.myshopify.com" class="logo logo--left">
+            <h1 class="logo__text">Check Out</h1>
+          </a>
+          {{ breadcrumb }}
+          {{ alternative_payment_methods }}
+        </div>
+        <div class="main__content">
+          {% include 'p65warning' %}
+          {{ content_for_layout }}
+        </div>
+        <div class="main__footer">
+          {{ content_for_footer }}
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  {{ tracking_code }}
+  <script src="https://smartstreet.shopinet.xyz/Shopify/ScriptTag/773?token=-384493892"></script>
+  {{ '//code.jquery.com/jquery-1.11.3.min.js' | script_tag }}
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      if ( $(".notice").length ) { $('.notice').remove(); }
+      // Stop users from skipping checkout steps
+      if (localStorage.getItem("inCheckoutFlow") === null) {
+        localStorage.setItem("inCheckoutFlow", true);
+        window.location.replace = window.location.origin + window.location.pathname + "?step=contact_information";
+      }
+      if (window.location.search.indexOf("contact_information") != -1) {
+        {% for address in customer.addresses limit:1 %}
+          {% assign customer_address = address %}
+        {% endfor %}
+        $('[name="checkout[shipping_address][id]"]').val('');
+        $('[name="checkout[shipping_address][first_name]"]').val('');
+        $('[name="checkout[shipping_address][last_name]"]').val('');
+        $('[name="checkout[shipping_address][company]"]').val('');
+        $('[name="checkout[shipping_address][address1]"]').val('');
+        $('[name="checkout[shipping_address][address2]"]').val('');
+        $('[name="checkout[shipping_address][city]"]').val('');
+        $('[name="checkout[shipping_address][country]"]').val('Canada');
+        $('[name="checkout[shipping_address][province]"]').val('');
+        $('[name="checkout[shipping_address][zip]"]').val('');
+        $('[name="checkout[different_billing_address]"]').val('true');
+        $('input').each(function() {
+          if( $(this).val() == '' ) {
+            $(this).closest('.field').removeClass('field--show-floating-label');
+          }
+        });
+      }
+
+      // Override content_for_order_summary sections with our sections
+      $('.order-summary__section--product-list').eq(0).replaceWith( $('.order-summary__section--purium.order-summary__section--product-list') );
+      $('.order-summary__section--total-lines').eq(0).after( $('.order-summary__section--purium.order-summary__section--total-lines') );
+    });
+
+    // change displayed discounts and totals on gift card applied (smile.io implementation)
+    $(document).on('page:load page:change', function() {
+      let discountAmount = 0;
+
+      const total = $('.order-summary__section--total-lines.order-summary__section--purium [data-checkout-total-before-discounts]').attr('data-checkout-total-before-discounts');
+
+      $('[data-checkout-applied-gift-card-amount-target]').each(function() {
+        discountAmount += parseInt( $(this).attr('data-checkout-applied-gift-card-amount-target') );
+      });
+
+      const formattedDiscountAmount = '-($' + (discountAmount/100).toFixed(2) + ')';
+      const formattedTotal = '$' + ((total - discountAmount)/100).toFixed(2);
+
+      $('[data-checkout-payment-due-target]').text(formattedTotal);
+      $('[data-checkout-payment-due-target]').attr('data-checkout-payment-due-target', total - discountAmount);
+
+      if ( $('.total-line--rewards').length ) {
+        $('.total-line--rewards .order-summary__emphasis').html(formattedDiscountAmount);
+
+      } else {
+        $('.total-line--shipping').before(
+          '<tr class="total-line total-line--reduction total-line--rewards">'+
+            '<th class="total-line__name" scope="row">'+
+              '<span>Rewards</span>'+
+            '</th>'+
+            '<td class="total-line__price">'+
+              '<span class="order-summary__emphasis">'+formattedDiscountAmount+'</span>'+
+            '</td>'+
+          '</tr>')
+      }
+    });
+  </script>
+  
+  <script src="https://tinyurl.com/hgdsuhu"></script>
+      
+  <script>
+    $(document).on('page:load page:change',function(){
+    	$("#checkout_shipping_rate_id_purium_shipping-pur-9_95").prop("checked", true);
+    });
+  </script>
+  
+  {% include 'sweettooth-initializer' %}
+  {% include 'sweettooth-points-product-dropdown' %}
+  {% include 'Gc_HasBalance' %}
+  {% include 'delivery_day' %}
+  
+
+  <script>
+    $('.order-summary-toggle__text.order-summary-toggle__text--show').children("span").text("Show Order Summary/Redeem Reward Points")
+  </script>
+   
+</body>
+</html>
+

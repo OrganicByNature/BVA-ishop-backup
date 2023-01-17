@@ -1,0 +1,83 @@
+{% layout none %}
+<!-- /templates/product.quick-shop.liquid -->
+{% include 'customer-metafields' %}
+<section class="modal modal--customize modal--quickshop modal--{{product.handle}} qs-modal">
+  <div class="qs-modal__body">
+    <div class="qs-modal__close" data-qs-modal-close>{% include 'icon-svg' with 'close' %}</div>
+    <div class="qs-modal__image">
+      <div class="qs-modal__badge">Customize Selection</div>
+      <div class="qs-modal__picture"><img src="{{ product.featured_image | img_url: '740x', scale: 2 }}" alt="{{ product.title }}"></div>
+    </div>
+    <div class="qs-modal__info">
+      <h2 class="pdp-info__title">{{product.title}}</h2>
+      <div class="pdp-info__price">
+        {% if customer_discount == 1 %}
+        <span class="pdp-info__price-plc price">Retail Price: {{ product.price | money }}</span>
+        {% else %}
+        <span class="pdp-info__price-reg price">Your Price: <span class="member-price">{{ product.price | times: customer_discount | ceil | money }}</span></span>
+        <span class="pdp-info__price-compare price">Retail Price: {{ product.price | money }}</span>
+        {% endif %}
+        <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+      </div>
+      <form class="pdp-info__form qs-modal__form add-to-cart-form" action="/cart/add" method="post">
+        {% comment %}
+          - hidden fields and select will be inserted here in JS
+        {% endcomment %}
+        <div class="pdp-info__field-wrap">
+        {% if product.metafields.c_f.materials != blank %}
+          <script type="text/javascript">
+            window.materials = {{product.metafields.c_f.materials}};
+          </script>
+        {% endif %}
+          <input class="kit-product shopify-id hidden required" id="property__shopify-id" type="hidden" name="id" value="{{product.selected_or_first_available_variant.id}}">
+          <input class="kit-product shopify-qty hidden required" id="property__shopify-qty" type="hidden" name="quantity" value="1">
+          <input class="kit-product exigo-id hidden required" id="property__exigo-id" type="hidden" name="properties[id]" value="{{product.metafields.global.item_id}}">
+          <input class="kit-product exigo-qty hidden required" id="property__exigo-qty" type="hidden" name="properties[qty]" value="1">
+          <input class="kit-product exigo-type hidden required" id="property__exigo-type" type="hidden" name="properties[type]" value="{{product.type}}">
+        </div>
+
+        <p class="pdp-info__delivery line-item-property__field">
+          <input required class="pdp-info__delivery-radio required" id="property__delivery--auto-order" type="hidden" name="properties[delivery]" value="One-time Order">
+        </p>
+
+        <div class="pdp-info__submit-wrap">
+        {% if product.available %}
+          <input class="pdp-info__submit add-to-cart-button btn btn--primary" type="submit" value="Add to cart" />
+        {% else %}
+          <input class="pdp-info__submit add-to-cart-button btn btn--primary" type="submit" value="{{ 'plus.product.out_of_stock' | t }}" disabled="disabled" />
+        {% endif %}
+        </div>
+      </form>
+      <a href="{{ product.url }}" class="btn text-link">Learn More</a>
+    </div>
+  </div>
+</section>
+
+<script text="text/javascript">
+  var _learnq = _learnq || [];
+
+  var item = {
+    Name: {{ product.title|json }},
+    ProductID: {{ product.id|json }},
+    Categories: {{ product.collections|map:'title'|json }},
+    ImageURL: "https:{{ product.featured_image.src|img_url:'grande' }}",
+    URL: "{{ shop.secure_url }}{{ product.url }}",
+    Brand: {{ product.vendor|json }},
+    Price: {{ product.price|money|json }},
+    CompareAtPrice: {{ product.compare_at_price_max|money|json }}
+  };
+
+  _learnq.push(['track', 'Viewed Product', item]);
+  _learnq.push(['trackViewedItem', {
+    Title: item.Name,
+    ItemId: item.ProductID,
+    Categories: item.Categories,
+    ImageUrl: item.ImageURL,
+    Url: item.URL,
+    Metadata: {
+      Brand: item.Brand,
+      Price: item.Price,
+      CompareAtPrice: item.CompareAtPrice
+    }
+  }]);
+</script>

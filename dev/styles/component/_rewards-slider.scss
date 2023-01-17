@@ -1,0 +1,70 @@
+.rewards-slider {
+	.rewards-slider__inner {
+		padding: 80px 20px;
+
+		.pdp-info__submit-wrap {
+	    margin-bottom: 0px;
+		}
+
+		.pdp-info__submit {
+			flex-grow: 0;
+			font-size: 10px !important;
+			font-family: $global-font-bold;
+			-webkit-font-smoothing: antialiased;
+			width: auto;
+			margin: 0 auto;
+			padding: 10px 28px !important;
+	    line-height: 1;
+		}
+
+		.colls-grid {
+			padding-bottom: 0px !important;
+		}
+
+		.colls-grid__product {
+			height: 375px !important;
+			display: flex;
+			flex-direction: column;
+
+			a {
+				display: block;
+				flex: 1;
+			}
+		}
+
+		.pdp-info__form {
+			position: relative !important;
+			bottom: auto !important;
+			width: 100% !important;
+			max-width: 135px;
+			margin: 0 auto;
+		}
+
+		.product-a {
+			padding: 8px 0px !important;
+			width: 100%;
+			max-width: 135px;
+		}
+	}
+
+	.featured-products-container {
+		@include mq($global-breakpoint-md) {
+			width: 700px;
+		}
+	}
+}
+
+.rewards-slider__prod-title {
+	font-size: 16px;
+	font-weight: 500;
+	font-family: $global-font-primary;
+	color: $color-light-black;
+}
+
+.rewards-slider__header {
+	font-size: 43px;
+	text-align: center;
+	font-family: $global-font-bold;
+	-webkit-font-smoothing: antialiased;
+}
+

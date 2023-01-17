@@ -1,0 +1,53 @@
+{% render 'shogun-products', content: collection %}
+
+{{collection.metafields.shogun.above}}
+<!-- /templates/collection.liquid -->
+{% include 'customer-metafields' %}
+<div class="collections wrapper">
+    {% section 'collection-hero' %}
+
+
+  <div class="colls-promo">
+    <div class="colls-promo__info-wrap">
+      <div class="colls-promo__info">{{collection.description}}</div>
+    </div>
+    <div class="colls-promo__img-wrap">
+      {% if collection.metafields.c_f.Collection_Video == blank %}
+      <img class="colls-promo__img" src="{{ collection.metafields.c_f.Collection_Promo_Image }}">
+      {% else %}
+      {{ collection.metafields.c_f.Collection_Video }}
+      {% endif %}
+    </div>
+  </div>
+  <div class="colls-shop">
+    <h1 class="colls-shop-text"> Shop {{collection.title}} </h1>
+  </div>
+  <div class="colls-grid">
+    {% for product in collection.products %}
+    {% include 'grid-product' %}
+    {% comment %} <div class="colls-grid__product">
+      <a href="{{ product.url }}">
+        <div class="tag-img-container">
+          <img class="colls-grid__product-img" src="{{ product | img_url: '680x' | scale: 2 }}" />
+          {% for tag in product.tags %}
+          {% if tag contains 'new-product' %}
+          <div class="new-product-badge">NEW</div>
+          {% endif %}
+          {% endfor %}
+        </div>
+        <h3 class="colls-grid_product-title">{{ product.title }}</h3>
+        {% if customer_discount == 1 %}
+        <h3 class="colls-grid__product-price">Retail Price: <span>{{ product.price | money }}</span></h3>
+        {% else %}
+        <h3 class="colls-grid__plc-price">Your Price: <span class="member-price">{{product.price | times: customer_discount | ceil | money }}</span></h3>
+        {% endif %}
+      </a>
+    </div> {% endcomment %}
+    {% endfor %}
+  </div>
+</div>
+
+
+{{collection.metafields.shogun.below}}
+
+

@@ -1,0 +1,64 @@
+{% include 'customer-metafields' %}
+{% section 'best-sellers' %}
+
+<div class="page-wrapper page-wrapper--quickshop">
+  <h1 class="page-title">{{ collection.title }}</h1>
+  <form class="qs-search">
+    <input type="text" placeholder="Search for your product" class="qs-search__input" name="qs-search__input" value="">
+    <button class="btn btn--primary qs-search__submit">{% include "icon-svg" with "long-arrow" %}</button>
+  </form>
+  {% include 'quickshop-filters' %}
+  <div class="bests__mobile-trigger">
+    <div class="bests__left">
+      <div class="bests__badge">Best Sellers</div>
+      <div class="bests__picture bests__picture--mobile">
+        <img src="{{ 'best-sellers.png' | file_img_url: '140x', scale: 2 }}" alt="Best Sellers">
+      </div>
+    </div>
+    <div class="bests__right">
+      <div class="bests__ad">Products that Purium users love!</div>
+      <div class="bests__cta"><button class="btn btn--secondary btn-transparent bests__button" data-bests>View Best Sellers</button></div>
+    </div>
+  </div>
+  <div class="bests">
+    <div class="bests__close" data-bests-close>{% include "icon-svg" with "arrow-down" %} Back</div>
+    <div class="bests__header">Best Sellers</div>
+    <div class="bests__wrap">
+      {% comment %}Findify recommendations inserted here{% endcomment %}
+      <div class="findify-component-spinner"></div>
+    </div>
+  </div>
+  <div class="table-wrapper">
+    <table class="qs-table{% if customer %} customer{% endif %}">
+      <thead class="qs-table__head">
+        <tr>
+          <th class="qs-table__th qs-table__th--desc">Item Description{% include "icon-svg" with "arrow-down" %}{% include "icon-svg" with "arrow-down" %}</th>
+          {% if customer %}
+          <th class="qs-table__th qs-table__th--price">Your Price{% include "icon-svg" with "arrow-down" %}{% include "icon-svg" with "arrow-down" %}</th>
+          {% else %}
+          <th class="qs-table__th qs-table__th--price">Retail Price{% include "icon-svg" with "arrow-down" %}{% include "icon-svg" with "arrow-down" %}</th>
+          {% endif %}
+          <th class="qs-table__th qs-table__th--qualities">Additional Qualities</th>
+          <th class="qs-table__th qs-table__th--action">Get Yours</th>
+        </tr>
+      </thead>
+      <tbody class="qs-table__body">
+        {% comment %}Findify results inserted here{% endcomment %}
+        <tr><td colspan="4"><div class="findify-component-spinner"></div></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="js-cart-alert"></div>
+</div>
+
+<script>
+  window.badges = {
+    vegan: {{ 'Vegan.svg' | asset_url | json }},
+    kosher: {{ 'Kosher.svg' | asset_url | json }},
+    usda: {{ 'badge-usda.svg' | asset_url | json }},
+    organic: {{ 'badge-usda.svg' | asset_url | json }},
+    glutenfree: {{ 'glutenfree.svg' | asset_url | json }},
+    raw: {{ 'badge-raw-words.svg' | asset_url | json }},
+    detox: {{ 'badge-detox.svg' | asset_url | json }}
+  };
+</script>

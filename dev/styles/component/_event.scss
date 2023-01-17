@@ -1,0 +1,38 @@
+.events-container {
+  .event {
+    background-repeat: no-repeat;
+    background-position: top left;
+    width: 100%;
+    display: flex;
+    padding: 20px 0px;
+    border-bottom: 1px solid rgba(0, 0, 0, .2);
+    .image-wrapper {
+      display: none;
+      flex-basis: 20%;
+      @include mq($global-breakpoint-sm) {
+        display: block
+      }
+    }
+    .img {
+      max-width: 100%;
+    }
+    .events-content {
+      width: 100%;
+      @include mq($global-breakpoint-sm) {
+        padding: 0px 30px;
+        flex-basis: 80%;
+      }
+    }
+    .events-content {
+      a,
+      p {
+        display: block;
+        margin-top: 10px;
+      }
+      .no-block {
+        display: inline;
+      }
+    }
+
+  }
+}

@@ -1,0 +1,40 @@
+{% schema %}
+
+{
+  "name": "Value Proposition Banner",
+  "settings": [
+    {
+      "id": "banner_text",
+      "type": "text",
+      "label": "Enter banner text"
+    },
+    {
+      "id": "banner_color",
+      "type": "text",
+      "label": "Enter a hex color code for background color"
+    },
+    {
+      "id": "text_color",
+      "type": "text",
+      "label": "Enter a hex code for text color"
+    }
+  ]
+}
+
+{% endschema %}
+
+<div class="banner-wrapper page-wrapper" style="background: {{ section.settings.banner_color }}; display: none;">
+  <div>
+    <div class="card-container">
+    <img src="https://cdn.shopify.com/s/files/1/2062/5235/files/PURIUM_giftCard-web.png?4867358514541694184" align="bottom" style="vertical-align: baseline; width: 180px">
+      <!-- <h1 class="card-title">$50 Gift Card</h1> -->
+    </div>
+    <div class="flex-container">
+      <h4> Save $50 or 25% on your first order!</h4>
+      <h4>Save up to 25% on every order after that.</h4>
+      <h4>No Membership. No AutoShip. Best Prices!</h4>
+    </div>
+  </div>
+  <!-- {{section.settings.banner_text}} -->
+  <!-- <h1 style="color: {{ section.settings.text_color }}">{{section.settings.banner_text}}</h1> -->
+</div>

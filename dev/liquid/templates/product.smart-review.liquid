@@ -1,0 +1,96 @@
+<!-- /templates/product.smart-review.liquid -->
+{% include 'customer-metafields' %}
+<section class="customer-template account-container flex flex--wrap page-wrapper cust__template--product">
+  <header class="cust__header">
+    <h2 class="cust__title cust__title--my"><a href="/account">My Account</a></h2>
+    <h1 class="cust__title cust__title--smart active">Smart Order</h1>
+    <a href="/account/logout" class="cust__logout text-link">Log Out</a>
+  </header>
+
+  <div class="cust__sidebar">
+    {% include 'smart_order_nav' with 'Add an Item' %}
+  </div>
+
+  <div class="cust__main">
+    <a class="text-link so__go-back" href="{{ product.url | append: '?view=smart-order' }}">{% include 'icon-svg' with 'arrow-down' %} GO BACK</a>
+    <h2 class="h4 so__header">Review Your Order</h2>
+   
+
+      {% if product.title == 'Core 3 - Nutrition (Power Shake)' %}
+          <img src="{{ 'H5FSE7KTY.jpg' | asset_img_url }}">
+      {% endif %}
+    
+     {% if product.title == 'Core 4 - Nutrition' %}
+          <img src="{{ 'MY5P8462L.jpg' | asset_img_url }}">
+      {% endif %}
+
+
+    <div class="so__review pdp pdp--smart">
+      <section class="pdp-image">
+        <img class="pdp-image__featured" src="{{ product.featured_image | img_url: '1328x', scale: 2 }}">
+      </section>
+
+      <section class="pdp-info">
+        <h2 class="pdp-info__title">{{product.title}} <span class="so__smart-qty">x</span></h2>
+        <div class="pdp-info__sub-title"></div>
+        <div class="pdp-info__price">
+          <span class="pdp-info__price-reg price"><span class="member-price">{{ product.price | times: customer_discount | ceil | money }}</span></span>
+        </div>
+      </section>
+
+      <h3 class="so__section-header so__section-header--payment">Payment Method</h3>
+      <div class="so__line so__line--payment">
+        <p class="so__line so__line--number">Card ending in <span class="so__payment-number" data-so-payment="last4"></span></p>
+        <p class="so__line so__line--exp">Expires <span class="so__payment-month" data-so-payment="month"></span>/<span class="so__payment-year" data-so-payment="year"></span></p>
+      </div>
+
+      <h3 class="so__section-header so__section-header--shipping">Shipping Address</h3>
+      <div data-review-shipping-summary class="so__line so__line--shipping">
+        <p class="so__line so__line--address"><span class="so__shippping-address1" data-so-shipping="address1"></span> <span class="so__shippping-address2" data-so-shipping="address2"></span></p>
+        <p class="so__line so__line--city-state"><span class="so__shippping-city" data-so-shipping="city"></span>, <span class="so__shippping-state" data-so-shipping="state"></span> <span class="so__shippping-zip" data-so-shipping="zip"></span></p>
+        <p class="so__line so__line--country so__shippping-country" data-so-shipping="country"></p>
+        <p class="so__line so__line--phone so__shippping-phone" data-so-shipping="phone"></p>
+      </div>
+
+      <div class="so__shipping" data-review-shipping-form>
+        <div class="so__error smart-order-error"></div>
+        {% render 'shipping-address-form' %}
+      </div>
+
+      <form class="so__smart-review" data-add-to-smart>
+        <div class="pdp-info__submit-wrap">
+          <input class="pdp-info__submit add-to-cart-button btn btn--secondary" type="submit" value="Add to Order" />
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script text="text/javascript">
+  var _learnq = _learnq || [];
+
+  var item = {
+    Name: {{ product.title|json }},
+    ProductID: {{ product.id|json }},
+    Categories: {{ product.collections|map:'title'|json }},
+    ImageURL: "https:{{ product.featured_image.src|img_url:'grande' }}",
+    URL: "{{ shop.secure_url }}{{ product.url }}",
+    Brand: {{ product.vendor|json }},
+    Price: {{ product.price|money|json }},
+    CompareAtPrice: {{ product.compare_at_price_max|money|json }}
+  };
+
+  _learnq.push(['track', 'Viewed Product', item]);
+  _learnq.push(['trackViewedItem', {
+    Title: item.Name,
+    ItemId: item.ProductID,
+    Categories: item.Categories,
+    ImageUrl: item.ImageURL,
+    Url: item.URL,
+    Metadata: {
+      Brand: item.Brand,
+      Price: item.Price,
+      CompareAtPrice: item.CompareAtPrice
+    }
+  }]);
+</script>

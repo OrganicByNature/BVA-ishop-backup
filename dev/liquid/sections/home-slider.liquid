@@ -1,0 +1,104 @@
+<div class="home-slider__slider controls-white">
+  {% for block in section.blocks %}
+    {%if block.settings.home_slide_video != ''%}
+    <div>
+      <iframe class="home-slider__slide-image" src="{{ block.settings.home_slide_video }}"></iframe>
+      <div class="home-slider__cta-wrapper">
+        <h1 class="home-slider__cta-heading section-heading">{{ block.settings.home_slider_heading }}</h1>
+        <h2 class="home-slider__cta_desc">{{ block.settings.home_slider_desc }}</h2>
+        <ul class="home-slider__btns u-no-list-style">
+          <li class="home-slider__btn">
+            <a class="btn btn--primary home-slider__cta" href="{{ block.settings.home_slider_button_url }}">{{ block.settings.home_slider_button_text }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    {%else%}
+    <div>
+      <a href="{{ block.settings.home_slider_link }}">
+      <div class="home-slider__slide-image desktop-slide-image"  style="background-image: url({{block.settings.home_slide_image | img_url: '1903x540', scale: 2}})">
+        <div class="home-slider__cta-wrapper">
+          <h1 class="home-slider__cta-heading section-heading">{{ block.settings.home_slider_heading }}</h1>
+          <h2 class="home-slider__cta_desc">{{ block.settings.home_slider_desc }}</h2>          
+        <ul class="home-slider__btns u-no-list-style">
+          <li class="home-slider__btn">
+            <a class="btn btn--primary home-slider__cta" href="{{ block.settings.home_slider_button_url }}">{{ block.settings.home_slider_button_text }}</a>
+          </li>
+        </ul>
+        </div>
+      </div>
+     </a>
+      
+      <a href="{{ block.settings.home_slider_link }}">
+      <div class="home-slider__slide-image mobile-slide-image" style="background-image: url({{ block.settings.home_slide_image_mobile | img_url: '412x600', scale: 2}})">
+        <div class="home-slider__cta-wrapper">
+          <h1 class="home-slider__cta-heading section-heading">{{ block.settings.home_slider_heading }}</h1>
+          <h2 class="home-slider__cta_desc">{{ block.settings.home_slider_desc }}</h2>
+        <ul class="home-slider__btns u-no-list-style">
+          <li class="home-slider__btn">
+            <a class="btn btn--primary home-slider__cta" href="{{ block.settings.home_slider_button_url }}">{{ block.settings.home_slider_button_text }}</a>
+          </li>
+        </ul>
+        </div>
+      </div>
+       </a>
+    </div>
+    {%endif%}
+  {% endfor %}
+</div>
+
+{% schema %}
+  {
+    "name": "Home Slider",
+    "class": "home-slider index-section",
+    "settings": [],
+    "blocks": [
+      {
+        "type": "home_slide",
+        "name": "Home Slide",
+        "settings": [
+          {
+            "id": "home_slider_heading", 
+            "type": "text",
+            "label": "Home Slider Heading"
+          },
+          {
+            "id": "home_slider_desc",
+            "type": "text",
+            "label": "Enter slide description"
+          },
+          {
+            "id": "home_slider_button_text",
+            "type": "text",
+            "label": "Home Slider Button Text" 
+          },
+          {
+            "id": "home_slider_button_url",
+            "type": "url",
+            "label": "Home Slider Button URL"
+          },
+          {
+            "id": "home_slide_image",
+            "type": "image_picker",
+            "label": "Desktop Image"
+          },
+          {
+            "id": "home_slide_image_mobile",
+            "type": "image_picker",
+            "label": "Mobile Image"
+          },
+          {
+            "id": "home_slide_video",
+            "type": "text",
+            "label": "Insert video url"
+          },
+       {
+            "id": "home_slider_link",
+            "type": "url",
+            "label": "Home Slider Link" 
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,48 @@
+$flex-properties: (
+  'justify-content': '-justify',
+  'align-items': '-items',
+  'align-content': '-content',
+  'align-self': '-self'
+);
+
+$flex-property-values: (
+  'flex-start': '-start',
+  'flex-end': '-end',
+  'center': '-center',
+  'space-around': '-around',
+  'space-between': '-between',
+  'justify': '-justify',
+  'baseline': '-baseline',
+  'stretch': '-stretch'
+);
+
+@each $property, $property-namespace in $flex-properties {
+  @each $value, $value-namespace in $flex-property-values {
+    .flex#{$property-namespace}#{$value-namespace} {
+      #{$property}: #{$value};
+    }
+  }
+}
+
+.flex--column {
+  flex-direction: column;
+}
+
+.flex--wrap {
+  flex-wrap: wrap;
+}
+
+.flex-form-vertical form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.flex-push-right {
+  margin-left: auto;
+}
+
+.flex-push-left {
+  margin-right: auto;
+}

@@ -1,0 +1,115 @@
+<div class="prod-summary" data-line-item data-variant-id="{{ line_item.variant_id }}" data-variant-qty="{{ line_item.quantity }}" data-bv="{{ line_item.product.metafields.c_f.BV_Number }}">
+  <a href="{{ line_item.url | within: collections.all }}">
+  <div class="prod-summary__image-container" style="background: url('{{ line_item | img_url: '384x384', scale: 2 }}') center center/cover">
+  </div>
+  </a>
+  <div class="prod-summary__info">
+    <div class="prod-wrap prod-wrap--one">
+      <h4 class="prod-summary__title"><a href="{{ line_item.url | within: collections.all }}">{{ line_item.title }}</a></h4>
+      <p class="prod-summary__price">
+       
+        {% assign bigspender = false %}   
+        {% assign event_product = false %}
+        
+        {% if cart.original_total_price > 20000 %}
+          {% if customer_discount == 0.85 or customer_discount == 0.75 or customer_discount == 1 %}
+          	{% assign bigspender = true %}
+          {% endif %}
+        {% endif %}
+        
+        {% for tag in line_item.vendor %}
+          {% if tag == "Event"%}
+              {% assign event_product = true %}
+          {% endif %}
+        {% endfor %}
+        
+        {% if event_product %}
+        <span class="prod-summary__price-reg price">{{ line_item.original_price | ceil | money }}</span>
+        {% elsif bigspender %}
+        <span class="prod-summary__price-reg price">{{ line_item.original_price | times: 0.75 | ceil | money }}</span>
+        {% else %}  
+         <span class="prod-summary__price-reg price">{{ line_item.original_price | times: customer_discount | ceil | money }}</span>
+        {% endif %}
+        
+        {% if customer_discount != 1 or bigspender == true %}
+        <span class="prod-summary__price-compare-pre">Retail: </span>
+        <span class="prod-summary__price-compare price">{{ line_item.original_price | money }}</span>    
+        {% endif %}
+      </p>
+      
+      {% comment %}
+      Add Shaker Bottle notice to any products on cart page which have 9815M itemcode
+      {% endcomment %}
+      
+      {% comment %}
+      Add notice to any products on cart page which have 3551 itemcode
+      {% endcomment %}
+      
+      {% assign shaker = false %}
+      {% assign amino = false %}
+      {% assign bgma = false %}
+      
+      {% for tag in customer.tags %}
+          {% if tag == "BGMA"%}
+              {% assign bgma = true %}
+          {% endif %}
+      {% endfor %}
+
+      {% if bgma and cart.original_total_price < 20000 %}
+       <p style="color:red;">Please Note, your discount will be applied at checkout</p>
+      {% endif %}
+      
+      {% unless line_item.properties == empty %}
+        <ul class="unstyled">
+          {% for property in line_item.properties %}
+           {% if property.first contains 'selected' %}
+          <li>{{ property.last }}</li>
+            {% endif %}
+          {% endfor %}
+          
+          {%for property in line_item.properties %}
+            {% if property.last contains '9814M' %}
+              {% assign shaker = true %}
+          	{% endif %}
+          {% endfor %}
+              
+          
+        </ul>
+      {% endunless %}
+
+      
+      {% if event_product %}
+      <p style="color:red;">Please note: Event Products and regular items cannot be purchased together.</p>
+      {% endif %}
+
+      
+    </div>
+
+    {% comment %}
+    Added by Purium To prevent Customers from messing with Quantities of Dynamic Kits
+    {% endcomment %}
+    {% if line_item.product.type contains 'Dynamic' %}
+    <div class="prod-wrap prod-wrap--two">
+        <div class="prod-summary__qty qty-control">
+          <p>QTY: {{ line_item.quantity }}</p>
+          <input class="prod-summary__qty-input qty-control__qty" type="hidden" value="{{ line_item.quantity }}">
+          <span class="update-success">Cart Updated!</span>
+        </div>
+        <div class="prod-summary__remove js-remove-item" data-variant-id="{{ line_item.variant_id }}">
+          <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0"><img class="prod-summary__remove-img" src="{{ 'waste-bin.svg' | asset_url }}"></a>
+        </div>
+      </div>
+    
+    {% else %}
+    <div class="prod-wrap prod-wrap--two">
+      <div class="prod-summary__qty qty-control">
+        <input class="prod-summary__qty-input qty-control__qty" type="number" value="{{ line_item.quantity }}">
+        <span class="update-success">Cart Updated!</span>
+      </div>
+      <div class="prod-summary__remove js-remove-item" data-variant-id="{{ line_item.variant_id }}">
+        <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0"><img class="prod-summary__remove-img" src="{{ 'waste-bin.svg' | asset_url }}"></a>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>

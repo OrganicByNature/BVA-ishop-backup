@@ -1,0 +1,78 @@
+<script type="text/javascript">
+
+  function name(code, type){
+    console.log('Enroller Name ' + code);
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "https://shopify-getenrollername.azurewebsites.net/api/getEnrollerName?code=aaRJFAYjkoG54SRsLZ82s8B0hf2WzlaSbEqWJxWNWTG3CKlXVQMXsA==",
+      "method": "POST",
+      "headers": {
+        "content-type": "application/json"
+      },
+      "processData": false,
+      "data": "{\"value\" : \"" + code + "\"}"
+    }
+
+    $.ajax(settings).done(function (response) {
+      console.log(type);
+      if(response !== ''){
+       console.log('response ' + response);
+        if(type === "current"){
+            var alreadyConfirmed = localStorage.getItem('confirmedcode');
+            if(!alreadyConfirmed){
+              $(".modal.modal--gcValidate").css( "display", "block" );
+              $('.js-gc-code').text(code);
+              $('.js-gc-name').text(response);
+              $('#submit').css("display","none");
+            };
+
+          $( "<p id='referred'> Referred By: " + response + "</p> <br> <p id='referred_notice'>Did someone else refer you? Please enter the correct Gift Card code below!</p><br id='referred_notice_b'>" ).insertAfter( "#gcode_ref" );
+          
+        }else if(type === "new")
+        {
+          $( "#referred_notice" ).remove();
+          $( "#referred_notice_b" ).remove();
+
+          $( "#referred" ).replaceWith( "<p id='referred'> Referred By: " + response + "</p>" );
+        }else if(type === "none")
+        {
+           $( "#referred" ).remove();
+           $( "#referred_notice_b" ).remove();
+           $( "<p id='referred'> Referred By: " + response + "</p> <br id='referred_notice_b'>" ).insertAfter( "#gcode_ref" );
+        }
+      }else
+      {
+         $( "#referred" ).replaceWith( "<p id='referred'></p>" );
+         $( "#referred_notice" ).remove();
+         $( "#referred_notice_b" ).remove();
+      }
+    });
+  };
+  
+    $(document).ready(function() {
+      var code = localStorage.getItem('storedGiftCardCode');
+      if(code != null){
+      name(code,"current");
+      }else
+      {
+        var type = "none";
+      }     
+       $( "button" ).click(function() {
+ 		 var new_code = document.getElementById("web-alias").value;
+         if(code !== new_code){
+           if(type === "none"){
+         		name(new_code, type);
+           }else
+           {
+             name(new_code,"new");
+           }
+         }else
+         {
+           $( "#referred_notice" ).remove();
+           $( "#referred_notice_b" ).remove();}
+		});
+    });
+  
+   
+</script>

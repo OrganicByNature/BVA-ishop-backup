@@ -1,0 +1,28 @@
+{% comment %} add oval badges in order dictated in the product tag {% endcomment %}
+{% assign badge1 = '' %}
+{% assign badge2 = '' %}
+{% assign badge3 = '' %}
+{% assign badge4 = '' %}
+
+{% for tag in product.tags %}
+  {% if tag contains 'oval-icon::' %}
+    {% assign badgeData = tag | split: '::' %}
+    {% assign bgStyle = "background-color:" | append: badgeData[2] %}
+    {% assign badgeMarkup = "<div class='oval-badge' style=" | append: bgStyle | append: "><p>" | append: {{badgeData[1]}} | append: "</p></div>" %}
+    {% if badgeData[3] == '1' %}
+      {% assign badge1 = badgeMarkup %}
+    {% elsif badgeData[3] == '2' %}
+      {% assign badge2 = badgeMarkup %}
+    {% elsif badgeData[3] == '3' %}
+      {% assign badge3 = badgeMarkup %}
+    {% elsif badgeData[3] == '4' %}
+      {% assign badge4 = badgeMarkup %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+   
+  {{badge1}}
+  {{badge2}}
+  {{badge3}}
+  {{badge4}} 

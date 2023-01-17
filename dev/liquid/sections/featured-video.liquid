@@ -1,0 +1,21 @@
+{% schema %}
+
+{
+  "name": "Featured Video",
+  "settings": [
+    {
+      "type": "video_url",
+      "id": "featured_video",
+      "accept": ["vimeo", "youtube"],
+      "label": "Embedded Video URL"
+    }
+  ]
+}
+
+{% endschema %}
+
+
+
+<div class="featured-video">
+  <iframe width="100%" src="{{ section.settings.featured_video }}" allowtransparency="true" frameborder="0" scrolling="no" allowfullscreen width="620" height="349"></iframe>
+</div>

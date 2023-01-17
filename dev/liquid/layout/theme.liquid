@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="canonical" href="{{ canonical_url }}" />
+    <link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}" type="image/png" />
+
+    <!-- Title and Description ================================ -->
+    <title>
+      {{ page_title }}{% if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif %}{% if current_page != 1 %} &ndash; Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+    </title>
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}" />
+    {% endif %}
+
+    <!-- Product Meta ================================ -->
+    {% include 'open-graph-tags' %}
+    {% include 'twitter-card' %}
+
+    <!-- Exclude From Search Engines ================================ -->
+    {% if handle contains 'upgrade' %}
+      <meta name="robots" content="noindex">
+    {% endif %}
+
+    <!-- Header Content ================================ -->
+    {{ content_for_header }}
+
+    <!-- Stylesheets ================================ -->
+    {{ 'vendor.css' | asset_url | stylesheet_tag }}
+    {{ 'bvaccel.css' | asset_url | stylesheet_tag }}
+
+    <!-- jQuery ================================ -->
+    {{ '//code.jquery.com/jquery-1.11.3.min.js' | script_tag }}
+
+    <!-- Shopify ================================ -->
+    {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
+    {% if template contains 'product' %}
+    {{ 'option_selection.js' | shopify_asset_url | script_tag }}
+    {% endif %}
+    {% if template contains 'customers' %}
+      {% comment %}{{ 'customer_area.js'  | shopify_asset_url | script_tag }}{% endcomment %}
+    {% endif %}
+
+    <!-- Vendor Scripts & Libraries ================================ -->
+    <script src="{{ 'vendor.js' | asset_url }}"></script>
+    <script src="https://use.fontawesome.com/17b2bd72bb.js"></script>
+
+    <!-- Libraries Used: ================================ -->
+    <!-- ================================================ -->
+    <!-- ##########:   https://github.com/ -->
+
+    <!-- Object API ================================ -->
+    <script>
+      window.shop = {
+        template: {{ template | json }},
+        currentPage: {{ current_page }},
+        customerIsLogged: {% if customer %}true{% else %}false{% endif %},
+        shopCurrency: {{ shop.currency | json }},
+        moneyFormat: {{ shop.money_format | json }},
+        moneyWithCurrencyFormat: {{ shop.money_with_currency_format | json }},
+        collectionSortBy: {{ collection.sort_by | default: collection.default_sort_by | json }}
+      }
+    </script>
+
+  {% include 'datalayer' %}
+  {% include 'google-tag-manager' %}
+  {% include 'hotjar' %}
+          <!-- Algolia head -->
+  <script type="text/template" id="template_algolia_money_format">{% include 'algolia_money_format' %}</script>
+  <script type="text/template" id="template_algolia_autocomplete">{% include 'algolia_autocomplete.hogan' %}</script>
+  <script type="text/template" id="template_algolia_autocomplete.css">{% include 'algolia_autocomplete.css.hogan' %}</script>
+  <script type="text/template" id="template_algolia_autocomplete_pages_empty">{% include 'algolia_autocomplete_pages_empty.hogan' %}</script>
+  <script type="text/template" id="template_algolia_autocomplete_page">{% include 'algolia_autocomplete_page.hogan' %}</script>
+  <script type="text/template" id="template_algolia_autocomplete_collection">{% include 'algolia_autocomplete_collection.hogan' %}</script>
+  <script type="text/template" id="template_algolia_autocomplete_collections_empty">{% include 'algolia_autocomplete_collections_empty.hogan' %}</script>
+  <script type="text/template" id="template_algolia_autocomplete_article">{% include 'algolia_autocomplete_article.hogan' %}</script>
+  <script type="text/template" id="template_algolia_autocomplete_articles_empty">{% include 'algolia_autocomplete_articles_empty.hogan' %}</script>
+  <script type="text/template" id="template_algolia_autocomplete_product">{% include 'algolia_autocomplete_product.hogan' %}</script>
+  <script type="text/template" id="template_algolia_autocomplete_products_empty">{% include 'algolia_autocomplete_products_empty.hogan' %}</script>
+  <script type="text/template" id="template_algolia_autocomplete_footer">{% include 'algolia_autocomplete_footer.hogan' %}</script>
+  <script type="text/template" id="template_algolia_instant_search">{% include 'algolia_instant_search.hogan' %}</script>
+  <script type="text/template" id="template_algolia_instant_search.css">{% include 'algolia_instant_search.css.hogan' %}</script>
+  <script type="text/template" id="template_algolia_instant_search_stats">{% include 'algolia_instant_search_stats.hogan' %}</script>
+  <script type="text/template" id="template_algolia_instant_search_facet_item">{% include 'algolia_instant_search_facet_item.hogan' %}</script>
+  <script type="text/template" id="template_algolia_instant_search_current_refined_values_item">{% include 'algolia_instant_search_current_refined_values_item.hogan' %}</script>
+  <script type="text/template" id="template_algolia_instant_search_product">{% include 'algolia_instant_search_product.hogan' %}</script>
+  <script type="text/template" id="template_algolia_instant_search_no_result">{% include 'algolia_instant_search_no_result.hogan' %}</script>
+  {{ '//cdn.jsdelivr.net/fontawesome/4.4.0/css/font-awesome.min.css' | stylesheet_tag }}
+  {{ '//cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.css' | stylesheet_tag }}
+  {{ '//cdn.polyfill.io/v2/polyfill.min.js' | script_tag }}
+  {{ '//cdn.jsdelivr.net/lodash/3.7.0/lodash.min.js' | script_tag }}
+  {{ '//cdn.jsdelivr.net/jquery/2/jquery.min.js' | script_tag }}
+  {{ '//cdn.jsdelivr.net/hogan.js/3/hogan.min.js' | script_tag }}
+  {{ '//cdn.jsdelivr.net/autocomplete.js/0.24.2/autocomplete.jquery.min.js' | script_tag }}
+  {{ '//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js' | script_tag }}
+  {{ '//cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.js' | script_tag }}
+  {{ 'algolia_config.js' | asset_url | script_tag }}
+  {{ 'algolia_translations.js' | asset_url | script_tag }}
+  {{ 'algolia_init.js' | asset_url | script_tag }}
+  {{ 'algolia_helpers.js' | asset_url | script_tag }}
+  {{ 'algolia_autocomplete.js' | asset_url | script_tag }}
+  {{ 'algolia_facets.js' | asset_url | script_tag }}
+  {{ 'algolia_sort_orders.js' | asset_url | script_tag }}
+  {{ 'algolia_instant_search.js' | asset_url | script_tag }}
+<!-- /Algolia head -->
+
+   
+    <!-- JudgeMe Review App -->
+  {% include 'judgeme_core' %
+  
+  
+
+  {% render 'shogun-head' %}
+</head>
+
+  <body id="{{ page_title | handle }}" class="template__{{ template | replace: '.', '--' }}{% if customer %} customer-logged-in{% endif %}">
+    <div class="overlay" data-overlay></div>
+
+    {% include 'header' %}
+    {% section 'inline-cart' %}
+    <main class="">
+      {% include 'breadcrumbs' %}
+      {{ content_for_layout }}
+    </main>
+
+    <footer class="footer">{%include 'footer'%}</footer>
+
+    <!-- Misc. Popups -->
+    {% include '75-popup' %}
+    {% include 'cancelOrder-popup' %}
+    {% include 'GcValidate-Popup' %}
+
+
+    <!-- Smile.Io ======================================= -->   
+    {% include 'sweettooth-initializer' %}
+	  {% include 'sweettooth-tab-widget' %}
+
+    <!-- Klaviyo Tracking ================================ -->
+    <script type="text/javascript">
+      var _learnq = _learnq || [];
+
+      _learnq.push(['account', 'PGejLT']);
+
+      (function () {
+      var b = document.createElement('script'); b.type = 'text/javascript'; b.async = true;
+      b.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'a.klaviyo.com/media/js/analytics/analytics.js';
+      var a = document.getElementsByTagName('script')[0]; a.parentNode.insertBefore(b, a);
+      })();
+      
+ 	  _learnq.push(['identify', { '$email' : window.customer.email } ]);     
+
+    </script>
+
+
+    <!-- Findify ================================ -->
+    <script src="//findify-assets-2bveeb6u8ag.netdna-ssl.com/search/prod/puriumcorp.myshopify.com.min.js"></script>
+    <script src="//findify-assets-2bveeb6u8ag.netdna-ssl.com/analytics-js/prod/3.0.2/findify-analytics.min.js"></script>
+    <script src="//findify-assets-2bveeb6u8ag.netdna-ssl.com/js-sdk/findify-sdk.1.3.6.min.js"></script>
+    {% include 'findify-tagging' %}
+
+    <!-- Footer Scripts ================================ -->
+    <script src="{{ 'bvaccel.js' | asset_url }}"></script>
+    {% include 'customer-metafields' with inlineScript: true %}
+    <script>
+      (function() {
+        UTILS.init();
+        SweetToothHelper.init();
+        CartJS.init({{ cart | json }});
+        FastClick.attach(document.body);
+
+        // init modules
+        Exigo.init();
+        Toggle.init();
+        Overlay.init();
+        Scroll.init();
+        Modal.init();
+        Sliders.init();
+        Header.init();
+        Footer.init();
+        Homepage.init();
+        Search.init();
+        AddCart.init();
+        CartPermalink.init();
+        Findify.init();
+        PromoBar.init();
+        InfoTooltips.init();
+        InlineCart.init();
+        
+        {% if template contains 'product' or template contains 'quick-shop' or template contains 'at-convention' %}
+        Product.init();
+        {% endif %}
+        {% if template == 'product'%}
+        BoughtTogether.init();
+        {% endif %}
+        {% if template contains 'customers/login' or template contains 'customers/register' %}
+        Login.init();
+        {% endif %}
+        {% if template contains 'account' or template contains 'product.smart' %}
+        Account.init();
+        SmartOrders.init();
+        {% endif %}
+        {% if template == 'cart' %}
+        Cart.init();
+        {% endif %}
+        {% if template contains 'upgrade' %}
+        Upgrade.init();
+        {% endif %}
+        {% if template contains 'quick-shop' or template contains 'account.add-item' %}
+        Quickshop.init();
+        {% endif %}
+        {% if reset_password %}
+          Toggle.toggle('#reset-success');
+        {% endif %}
+      }());
+    </script>
+
+    {% include 'external-scripts' %}
+    {% include 'smile-initializer' %}
+    {% include 'jbot_Permalink' %}
+
+  <script src="https://a.klaviyo.com/media/js/onsite/onsite.js"></script>
+    <script>
+    var klaviyo = klaviyo || [];
+    klaviyo.init({
+      account: "PGejLT",
+      platform: "shopify"
+    });
+    klaviyo.enable("backinstock",{ 
+    trigger: {
+      product_page_text: "Notify Me When Available",
+      product_page_class: "btn",
+      product_page_text_align: "center",
+      product_page_margin: "0px",
+      replace_anchor: false
+    },
+    modal: {
+     headline: "{product_name}",
+     body_content: "Register to receive a notification when this item comes back in stock.",
+     email_field_label: "Email",
+     button_label: "Notify me when available",
+     subscription_success_label: "You're in! We'll let you know when it's back.",
+     footer_content: '',
+     additional_styles: "@import url('https://fonts.googleapis.com/css?family=Helvetica+Neue');",
+     drop_background_color: "#000",
+     background_color: "#fff",
+     text_color: "#222",
+     button_text_color: "#fff",
+     button_background_color: "#81bd03",
+     close_button_color: "#ccc",
+     error_background_color: "#fcd6d7",
+     error_text_color: "#C72E2F",
+     success_background_color: "#d3efcd",
+     success_text_color: "#1B9500"
+    }
+  });
+</script>
+
+  </body>
+</html>

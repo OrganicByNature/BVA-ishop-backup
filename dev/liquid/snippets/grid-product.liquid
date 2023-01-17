@@ -1,0 +1,25 @@
+{% for tag in product.tags %}
+  {% if tag contains 'new-product' %}
+    {% assign newProductTag = 'true' %}
+  {% elsif tag contains 'event' %}
+    {% assign event = true %}
+  {% endif %}
+{% endfor %}
+<div class="grid-prod">
+  {% include 'oval-badges' %}
+  <a href="{{product.url}}">
+    <div class="tag-img-container">
+      <img class="grid-prod__image" src="{{ product.featured_image | img_url: '390x', scale: 2 }}">
+      {% if newProductTag == 'true' %}
+        <div class="new-product-badge">NEW</div>
+      {% endif %}
+    </div>
+    <div class="grid-prod__info">
+    <h2 class="grid-prod__title">{{ product.title }}</h2>
+      {% render 'judgeme_widgets', widget_type: 'judgeme_preview_badge', jm_style: '', concierge_install: true, product: product %}
+      <div class="grid-prod__price price member-price"><span>Loyal Customer Price: {{ product.price | times: 0.25 | minus: product.price | abs | money }}</span></div>
+      <div class="grid-prod__price price">Retail Price:{{product.price | money}}<span>{{product.compare_at_price | money}}</span></div>
+      <div><p style="font-size: 14px;">All prices in USD</p></div>
+    </div>
+  </a>
+</div>

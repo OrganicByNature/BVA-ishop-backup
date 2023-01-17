@@ -1,0 +1,69 @@
+<!-- /templates/collection.liquid -->
+{% include 'customer-metafields' %}
+<style type="text/css">
+  .colls-promo__info-wrap{
+    margin: auto;
+    text-align: center;
+    flex-basis: 75%
+  }
+  .banner__img.mobile{
+     width: 100%
+  }
+   @media only screen and (min-width: 767px){
+    .banner__img.mobile{
+      display: none;
+    }
+    .banner__img{
+      display: block;
+    }
+  }
+   @media only screen and (max-width: 767px){
+    .banner__img.mobile{
+      display: block;
+    }
+    .banner__img{
+      display: none;
+    }
+  }
+</style>
+<div class="collections wrapper">
+  <div class="banner collections__banner">
+    <img class="banner__img" src="{{ collection.image | img_url: '1440x' }}">
+    <img class="banner__img mobile" src="https://cdn.shopify.com/s/files/1/2062/5235/files/Mobile-Collection-Page.png?112923">
+    <div class="banner__desc">
+      <h2 class="banner__header">&nbsp;</h2>
+      <p class="banner__para">{{ collection.metafields.c_f.Collection_Banner_Text }}</p>
+    </div>
+  </div>
+
+  <div class="colls-promo">
+    <div class="colls-promo__info-wrap">
+      <div class="colls-promo__info">{{ collection.description }}</div>
+    </div>
+  </div>
+  <div class="colls-shop">
+    <h1 class="colls-shop-text"> Shop {{ collection.title }} </h1>
+  </div>
+  <div class="colls-grid">
+    {% for product in collection.products %}
+    <div class="colls-grid__product">
+      <a href="{{ product.url }}">
+        <div class="tag-img-container">
+          <img class="colls-grid__product-img" src="{{ product | img_url: '680x' | scale: 2 }}" />
+          {% for tag in product.tags %}
+          {% if tag contains 'new-product' %}
+          <div class="new-product-badge">NEW</div>
+          {% endif %}
+          {% endfor %}
+        </div>
+        <h3 class="colls-grid_product-title">{{ product.title }}</h3>
+        {% if customer_discount == 1 %}
+        <h3 class="colls-grid__product-price">Retail Price: <span>{{ product.price | money }}</span></h3>
+        {% else %}
+        <h3 class="colls-grid__plc-price">Your Price: <span class="member-price">{{product.price | times: customer_discount | ceil | money }}</span></h3>
+        {% endif %}
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</div>

@@ -1,0 +1,92 @@
+<!-- /templates/cart.liquid -->
+{% include 'customer-metafields' %}
+
+<div class="cart-wrap wrapper">
+  <header class="cart-header">
+    <h1 class="cart-header__heading">Cart</h1>
+  </header>
+  <div class="prod-summary-wrapper">
+    <div class="cart-page-contents">
+
+    {% if cart.items.size > 0 %}
+      
+      <a class="btn btn--secondary cart-contents" href="/collections/quick-shop">Continue Shopping!</a>
+      
+      {% comment %}check if any single item orders{% endcomment %}
+      {% assign got_single = false %}
+      {% for line_item in cart.items %}
+        {% for property in line_item.properties %}
+          {% if property.last contains "One-time Order" %}
+            <h2 class="cart-header__sub-heading one-time-header cart-contents">
+              One-time Order Items
+            </h2>
+            <div class="cart-error cart-error__single-order"></div>
+            {% assign got_single = true %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
+        {% if got_single %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
+
+      {% comment %}single item order items loop{% endcomment %}
+      <div class="one-time-orders cart-contents">
+      {% for line_item in cart.items %}
+
+        {% assign single_order = false %}
+        {% for property in line_item.properties %}
+          {% if property.last contains "One-time Order" %}
+            {% assign single_order = true %}
+          {% endif %}
+        {% endfor %}
+
+        {% if single_order %}
+          {% include 'cart-item' %}
+        {% endif %}
+
+      {% endfor %}
+      </div>
+
+        <!-- Big Spender Notification -->
+       {% if cart.total_discount > 5000 and customer.orders_count == 0 %}
+       <h1> Super Saver Savings! {{ cart.total_discount | ceil | money}} </h1>
+       {% endif %}
+
+      <div class="cart-action cart-contents">
+        <div class="cart-action-wrapper">
+        {% if update_in_cart %}
+          <h2 class="subtotal" data-subtotal="{{cart.total_price}}">Subtotal: <span class="cart-span">{{cart.total_price | times: customer_discount | ceil | money}}</span></h2>
+          <a class="btn btn--primary single-order__confirm bottom-button" href="/checkout?discount={% if rank == '18' and customer.orders_count == 0 %}{{customer.metafields.customers.Affiliate_ID}}{% elsif customer.metafields.customers.Affiliate_ID != blank and customer.orders_count > 0 %}{{customer_discount_name}}{% endif %}
+          ">Checkout</a>
+        {% elsif customer %}
+          <div class="subtotal-wrap">
+            <h2 class="subtotal" data-subtotal="{{cart.total_price}}">Subtotal: <span class="cart-span">{{cart.total_price | times: customer_discount | ceil | money}}</span></h2>
+            {% unless rank == '18' or rank == '20' or rank == '22' or rank == blank %}
+              {% assign total_bv = 0 %}
+              {% for bv_item in cart.items %}
+                {% assign total_bv = total_bv | plus: bv_item.product.metafields.c_f.BV_Number | round %}
+              {% endfor %}
+              <h3 class="bvtotal">Total BV: <span class="bv-span">{{ total_bv }}</span></h3>
+            {% endunless %}
+          </div>
+
+          <h6 class="qualify-75">Add $<span class="js-money--under-75"></span> more to qualify to use your $50 gift card!</h6>
+          <a class="btn btn--primary single-order__confirm bottom-button" href="/checkout?step=contact_information&discount={% if rank == '18' and customer.orders_count == 0 %}{{customer.metafields.customers.Affiliate_ID}}{% elsif customer.metafields.customers.Affiliate_ID != blank and customer.orders_count > 0 %}{{customer_discount_name}}{% endif %}
+          ">Checkout</a>
+        {% else %}
+          <p class="cart-action-text">Please sign up or login to continue to checkout.</p>
+          <a class="btn btn--primary" href="/account/login?to-checkout">Checkout</a>
+        {% endif %}
+        </div>
+      </div>
+    {% else %}
+      <div class="empty-cart__contents">
+        <p class="empty-cart__text">Your cart is empty.</p>
+        <a class="btn btn--secondary" href="/collections/quick-shop">Get Shopping!</a>
+      </div>
+    {% endif %}
+
+    </div>
+  </div>
+</div>

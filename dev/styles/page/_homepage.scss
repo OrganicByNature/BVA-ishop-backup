@@ -1,0 +1,402 @@
+home-slider__slider.mobile-slide-image {
+  @include mq($global-breakpoint-md) {
+    display: none !important;
+  }
+}
+.desktop-slide-image {
+  display: none !important;
+  @include mq($global-breakpoint-md) {
+    display: block !important;
+  }
+}
+.slick-dots {
+  display: none !important;
+  @include mq($global-breakpoint-md) {
+    display: inline-block !important;
+    margin-left: 0px;
+    bottom: 0px;
+    background: rgba(0, 0, 0, .4);
+    padding: 8px 0px;
+  }
+}
+.slick-dots li {
+  width: auto;
+}
+.slick-dots li button {
+  width: 20px;
+}
+.slick-dots li.slick-active button:before {
+  color: white;
+  opacity: 1;
+}
+.slick-dots li button:before {
+  // font-size: 20px !important;
+  // width: auto !important;
+  left: 0%;
+  opacity: .5 ;
+  color: white ;
+  font-size: 30px;
+}
+.home-slider__slider {
+  opacity: 0;
+  margin-bottom: 0px !important;
+  transition: opacity .5s ease;
+  .slick-arrow {
+    display: none !important;
+  }
+}
+.home-slider__slider.slick-initialized {
+  opacity: 1;
+}
+.home-slider {
+  @include mq($global-breakpoint-md) {
+    margin-top: 0px;
+  }
+}
+.home-slider__cta-heading {
+  font-weight: bold;
+}
+.home-slider__cta-wrapper {
+  position: absolute;
+  color: white;
+  width: 90%;
+  left: 5%;
+  top: 28%;
+  @include  mq($global-breakpoint-md) {
+    max-width: 500px;
+    top: 35%;
+    left: 10%;
+  }
+}
+.home-slider__cta {
+  padding: 14px 50px;
+  @include mq($global-breakpoint-md) {
+    padding: 14px 50px;
+  }
+
+}
+.slick-slide {
+  position: relative;
+  max-height: 540px;
+}
+.home-slider__slide-image {
+  width: 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 540px;
+  border: none;
+  @include mq($global-breakpoint-md) {
+    // max-height: 540px;
+    // height: 540px;
+  }
+}
+.home-slider__btns {
+  margin-left: 0px !important;
+}
+.banner-wrapper {
+  text-align: center;
+  padding-bottom: 40px !important;
+  img {
+    display: inline-block;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    margin-bottom: 10px ;
+  }
+  .card-container {
+    margin: 0px;
+  }
+  .flex-container {
+    // margin-top: 40px ;
+    display: flex;
+    flex-direction: column;
+    @include mq($global-breakpoint-sm) {
+      flex-direction: row;
+    }
+  }
+  h1 {
+    font-size: 20px;
+    text-align: center;
+    padding: 60px 30px;
+    color: black;
+    margin-bottom: 0px !important;
+    @include mq($global-breakpoint-md) {
+      font-size: 2em;
+      padding: 100px 30px;
+    }
+    span {
+      line-height: 30px !important;
+      font-size: 20px !important;
+    }
+  }
+  .card-title {
+    padding: 40px 30px;
+    vertical-align: top;
+    font-size: 24px;
+  }
+  h4 {
+    width: 100%;
+    align-items: space-around;
+    padding: 50px 20px;
+    font-size: 16px;
+    margin-bottom: 0px;
+    text-align: center;
+    background: rgba(0, 0, 0, .02);
+    @include mq($global-breakpoint-sm) {
+      width: 33.332%;
+    }
+    @include mq($global-breakpoint-md) {
+      font-size: 20px;
+      padding: 100px 30px;
+    }
+    &:nth-of-type(2) {
+      background: rgba(0, 0, 0, .06)
+    }
+    &:nth-of-type(3) {
+      background: rgba(0, 0, 0, .1);
+    }
+  }
+}
+.banner-wrapper.page-wrapper {
+  padding: 0px;
+}
+.promise-section {
+  background-repeat: no-repeat;
+  background-size: cover;
+  @include mq($global-breakpoint-md) {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 0px;
+  }
+  .promise-section-container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 60px 0px;
+    background: rgba(0, 0, 0, .5);
+    @include mq($global-breakpoint-md) {
+      padding: 100px 0px;
+    }
+  }
+  .mobile-img {
+    display: block;
+    width: 100%;
+    @include mq($global-breakpoint-md) {
+      display: none;
+    }
+  }
+  .promise-content {
+    padding: 0px 30px;
+    margin: 0 auto;
+    @include mq($global-breakpoint-sm) {
+      width: 90%;
+      margin-left: 5%;
+    }
+    @include mq($global-breakpoint-md) {
+      max-width: 800px;
+    }
+    @include mq($global-breakpoint-lg) {
+      margin-left: 10%;
+    }
+  }
+  p {
+    font-size: 18px;
+    line-height: 30px;
+    @include mq($global-breakpoint-md) {
+      font-size: 20px;
+      line-height: 34px;
+    }
+  }
+}
+.featured-products-container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 60px 30px;
+  text-align: center;
+  h1 {
+    display: inline-block;
+    position: relative;
+    padding-bottom: 20px;
+  }
+  h1:before {
+    content: "";
+    position: absolute;
+    width: 30%;
+    height: 1px;
+    bottom: 0;
+    left: 35%;
+    border-bottom: 2px solid #F7911F;
+  }
+  .swipe-text {
+    text-align: center;
+    display: block;
+    @include mq(500) {
+      display: none;
+    }
+  }
+  @include mq($global-breakpoint-md) {
+    width: $global-breakpoint-md;
+    margin-top: 0px;
+    padding: 65px 0px 65px 0px;
+  }
+  @include mq($global-breakpoint-lg) {
+    width: $global-breakpoint-lg;
+  }
+  @include mq($global-breakpoint-xl) {
+    width: $global-breakpoint-xl;
+  }
+}
+.featured-products {
+  margin-bottom: 0px !important;
+  .product {
+    padding: 20px;
+    text-align: center;
+    padding-bottom: 0px;
+    h2 {
+      font-size: 16px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    h2:first-of-type {
+      font-weight: 800;
+      line-height: 20px;
+    }
+    h2:last-of-type {
+      font-weight: normal;
+      margin-top: 0px;
+    }
+    img {
+      margin: 0 auto;
+      max-width: 100%;
+      width: 100%;
+      object-fit: contain;
+      background: rgba(0,0,0,0.05);
+    }
+  }
+}
+.slick-arrow img {
+  position: absolute;
+  top: 0;
+}
+.slick-next img {
+    left: 0px;
+    display: none;
+}
+.slick-prev img {
+    right: 0px;
+    display: none;
+}
+#shopify-section-featured-video {
+  max-width: 1280px;
+  margin: 0 auto;
+  .featured-video {
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 56.25%;
+    iframe{
+      width: 100%;
+      height: 100%;
+      top: 0;
+      position: absolute;
+      left: 0;
+    }
+  }
+}
+.homepage-collection-container {
+  padding: 30px 0px;
+  text-align: center;
+  @include mq($global-breakpoint-md) {
+    padding: 100px 0px;
+  }
+  h1 {
+    text-align: center;
+    position: relative;
+    padding-bottom: 20px;
+    display: inline-block;
+  }
+  h1:before {
+    content: "";
+    position: absolute;
+    width: 30%;
+    height: 1px;
+    bottom: 0;
+    left: 35%;
+    border-bottom: 2px solid #24408E;
+  }
+}
+.homepage-collection-content {
+  display: block;
+  flex-wrap: wrap;
+  .collection-container {
+    display: block;
+    padding: 0px 5px 10px 5px;
+    flex-basis: 50%;
+    @include mq($global-breakpoint-md) {
+      flex-basis: 33.332%;
+    }
+  }
+  .collection {
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    h2 {
+      margin: 0px;
+      color: white;
+      position: absolute;
+      max-width: 350px;
+    }
+    .collection-overlay {
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      transition: all .3s ease;
+    }
+    .collection-overlay.active {
+      background: rgba(0, 0, 0, .7);
+    }
+  }
+  @include mq($global-breakpoint-sm) {
+    display: flex;
+    padding: 30px 0px 0px;
+  }
+}
+.instagram-feed-wrapper {
+  padding: 0px 0px;
+  text-align: center;
+  h1 {
+    margin-bottom: 50px !important;
+    position: relative;
+    padding-bottom: 20px;
+    position: relative;
+    display: inline-block;
+  }
+  h1:before {
+    content: "";
+    position: absolute;
+    width: 30%;
+    height: 1px;
+    bottom: 0;
+    left: 35%;
+    border-bottom: 2px solid #ACC42A;
+  }
+}
+.tag-img-container {
+  position: relative;
+}
+.new-product-badge {
+  position: absolute;
+  top: 10px;
+  right: 0px;
+  background: $color-primary;
+  color: white;
+  padding: 10px;
+  font-size: 14px;
+}
+.instagram-wrapper {
+  padding-top: 0px;
+}

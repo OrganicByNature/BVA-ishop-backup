@@ -1,0 +1,94 @@
+[
+  {
+    "name": "Social",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social Links"
+      },
+      {
+        "type": "text",
+        "id": "facebook_url",
+        "label": "Facebook URL"
+      },
+      {
+        "type": "text",
+        "id": "instagram_url",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "text",
+        "id": "twitter_url",
+        "label": "Twitter URL"
+      },
+      {
+        "type": "text",
+        "id": "pinterest_url",
+        "label": "Pinterest URL"
+      },
+      {
+        "type": "text",
+        "id": "tumblr_url",
+        "label": "Tumblr URL"
+      },
+      {
+        "type": "text",
+        "id": "youtube_url",
+        "label": "YouTube URL"
+      }
+    ]
+  },
+  {
+    "name": "Banner Messaging",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Gift Card Available"
+      },
+      {
+        "type": "textarea",
+        "id": "gc_uses_desktop",
+        "label": "Desktop Message",
+        "default": "Your Gift Card Code has been Activated! You can use it immediately by adding at least $75 worth of product to your cart and we will discount your order by $50."
+      },
+      {
+        "type": "textarea",
+        "id": "gc_uses_mobile",
+        "label": "Mobile Message",
+        "default": "Your Gift Card Has been Activated!"
+      },
+      {
+        "type": "header",
+        "content": "Gift Card Unavailable"
+      },
+      {
+        "type": "textarea",
+        "id": "gc_out_desktop",
+        "label": "Desktop Message",
+        "default": "Oh no! Your Brand Partner is so popular they're out of Gift Cards. Contact Purium Customer Service (888) 747-6733 and we'll be happy to fix this for you."
+      },
+      {
+        "type": "textarea",
+        "id": "gc_out_mobile",
+        "label": "Mobile Message",
+        "default": "Your Brand Partner is out of Gift Cards."
+      },
+      {
+        "type": "header",
+        "content": "Not Logged In"
+      },
+      {
+        "type": "textarea",
+        "id": "not_customer_desktop",
+        "label": "Desktop Message",
+        "default": "Save $50 on your first order with a Purium Gift Card! <a href='/pages/gift-card-marketing'>Learn More</a>"
+      },
+      {
+        "type": "textarea",
+        "id": "not_customer_mobile",
+        "label": "Mobile Message",
+        "default": "Save $50! <a href='/pages/gift-card-marketing'>Learn More</a>"
+      }
+    ]
+  }
+]

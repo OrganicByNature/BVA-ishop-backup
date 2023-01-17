@@ -1,0 +1,16 @@
+{% include 'customer-metafields' %}
+<div class="page-wrapper ansillary-page">
+  {% capture currentVideo %}farm-main-video{% endcapture %}
+  {% capture currentImage %}farm-main-image{% endcapture %}
+  {% capture vidUrl %}{{settings[currentVideo]}}{% endcapture%}
+  {% capture imgUrl %}{{settings[currentImage]}}{% endcapture%}
+  {% if vidUrl == '' and imgUrl != ''%}
+  <img class="farm-main-image farm-jumbotron" src="{{settings.farm-main-image | img_url: 'master'}}" />
+  {% elsif vidUrl != '' and imgUrl == '' %}
+  <iframe class="farm-main-video farm-jumbotron" src="{{vidUrl}}"></iframe>
+  {% endif %}
+  <h1 class="page-title">{{settings.farm-main-header}}</h1>
+  <h2 class="farm-subheader subheader">{{settings.farm-sub-header}}</h2>
+  <div class="page-content farm-to-family">{{ page.content }}</div>
+</div>
+

@@ -1,0 +1,90 @@
+{% if customer %}
+  {% assign rank = customer.metafields.customers.exigo_type_id %}
+  {% assign update_in_cart = false %}
+
+  {% comment %}
+   Customers being created with Exigo Type ID. ALL new customers without orders on their account should be retail aka type 18.
+  {% endcomment %}
+  {% if customer.orders_count == 0 and customer.metafields.customers.exigo_type_id == nil %}
+  	{% assign rank = '18' %}
+  {% endif %}
+
+  {% if rank == '18' or rank == '20' or rank == '22' or rank == blank %}
+    {% assign customer_status = "Upgrade Now" %}
+    {% assign customer_status_url = "/collections/upgrade" %}
+    {% assign show_bv = false %}
+  {% else %}
+    {% assign customer_status = "Login to Backoffice" %}
+     {% assign customer_status_url = "https://backoffice.mypurium.com/retailsilentlogin?token=" %}
+	{% assign customer_status_url_dreams = "https://puriumbuilder.mysecureoffice.com/remote/users/login?timestamp=" %}
+    {% assign show_bv = true %}
+  {% endif %}
+
+  {% if rank == '18'  %}
+    {% assign customer_discount = 1 %}
+    {% assign customer_discount_name = '' %}
+  {% elsif rank == '19' or rank == '20' %}
+    {% assign customer_discount = 0.85 %}
+    {% assign customer_discount_name = 'rank151920' %}
+  {% comment %}  
+  {% elsif rank == '12'  %}
+    {% assign customer_discount = 0.80 %}
+    {% assign customer_discount_name = 'rank12' %}
+  {% endcomment %}
+  {% elsif rank == '21' or rank == '22' or rank == '2' or rank == '12' or rank == '15' or rank == '24' %}
+    {% assign customer_discount = 0.75 %}
+    {% assign customer_discount_name = 'rank2122' %}
+  {% elsif rank == '4' or rank == '5' or rank == '6' or rank == '7' or rank == '8' or rank == '13'  %}
+    {% assign customer_discount = 0.70 %}
+    {% assign customer_discount_name = 'rank4567813' %}
+  {% elsif rank == '10' or rank == '23' or rank == '25'  %}
+    {% assign customer_discount = 0.65 %}
+    {% assign customer_discount_name = 'rank10' %}
+  {% else %}
+    {% assign customer_discount = 1 %}
+    {% assign customer_discount_name = '' %}
+  {% endif %}
+
+  {% if cart %}
+    {% for item in cart.items %}
+      {% if item.product.type == 'Upgrade' %}
+        {% assign update_in_cart = true %}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+
+    {% if update_in_cart %}
+      {% assign customer_discount = 1 %}
+      {% assign customer_discount_name = '' %}
+    {% endif %}
+  {% endif %}
+  <script {% if inlineScript%}id="customer-metafields" type="application/json"{% endif %}>
+    {%- unless inlineScript -%}
+      window.customer = 
+    {%- endunless -%}
+      {
+        "web_alias": {{ customer.metafields.customers.Affiliate_ID | json }},
+        "gift_card_code": "{{ customer.metafields.customers.GiftCardCode }}",
+        "title": {{ customer.metafields.customers.Customer_Rank | json }},
+        "rank": {% if rank != blank %}{{ customer.metafields.customers.exigo_type_id | plus: 0 | json }}{% else %}18{% endif %},
+        "discount": {{ customer_discount | json }},
+        "discount_name": {{ customer_discount_name | json }},
+        "status": {{ customer_status | json }},
+        "status_url": {{ customer_status_url | json }},
+        "id": {{ customer.id | json }},
+        "currency": {{ shop.currency | json }},
+        "order_count": {{ customer.orders_count | json }},
+        "last_order": {{ customer.last_order.created_at | date: "%c" | json }},
+        "gc_desktop": {{ settings.gc_uses_desktop | json }},
+        "gc_mobile": {{ settings.gc_uses_mobile | json }},
+        "wa_desktop": {{ settings.gc_out_desktop | json }},
+        "wa_mobile": {{ settings.gc_out_mobile | json }},
+        "update_in_cart": {{ update_in_cart | json }},
+        "show_bv": {{ show_bv | json }},
+        "tags": {{ customer.tags | json }},
+        "email": {{ customer.email | json }}
+      }
+  </script>
+{% else %}
+  {% assign customer_discount = 1 %}
+{% endif %}

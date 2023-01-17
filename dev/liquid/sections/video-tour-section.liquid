@@ -1,0 +1,39 @@
+{% schema %}
+
+{
+  "name":"Video Tour settings",
+  "settings":[],
+  "blocks":[
+    {
+       "type":"video",
+       "name":"Video",
+       "settings":[
+         {
+          "id": "video_title",
+          "type": "text",
+          "label": "Video title"
+         },
+         {
+          "id":"the_video",
+          "type":"video_url",
+          "accept": ["youtube", "vimeo"],
+          "label":"Embed Video URL"
+         }
+       ]
+    }
+  ]
+}
+
+{% endschema %}
+
+<div class="page-wrapper">
+  <h1 class="page-title">{{page.title}}</h1>
+  <div class="video-tour-container">
+    {% for block in section.blocks %}
+    <div class="video-container">
+      <h2>{{block.settings.video_title}}</h2>
+      <iframe class="video-iframe" src="{{block.settings.the_video}}"></iframe>
+    </div>
+    {% endfor %}
+  </div>
+</div>

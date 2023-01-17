@@ -1,0 +1,64 @@
+<div class="filters">
+  <div class="filter">
+    <h3 class="filter__title">Filter By Category {% include 'icon-svg' with 'plus' %}{% include 'icon-svg' with 'minus' %}</h3>
+    <fieldset class="filter__dropdown">
+      <div class="filter__wrap filter__wrap--category filter__wrap--cleansing">
+        <label class="filter__label" for="filter-cleansing">Cleansing</label>
+        <input id="filter-cleansing" class="filter__checkbox" type="checkbox" data-filter-type="custom_fields.custom_category" data-filter="Cleansing" checked />
+      </div>
+      <div class="filter__wrap filter__wrap--category filter__wrap--restorative">
+        <label class="filter__label" for="filter-restorative">Restorative</label>
+        <input id="filter-restorative" class="filter__checkbox" type="checkbox" data-filter-type="custom_fields.custom_category" data-filter="Restorative" checked />
+      </div>
+      <div class="filter__wrap filter__wrap--category filter__wrap--family">
+        <label class="filter__label" for="filter-family">Family</label>
+        <input id="filter-family" class="filter__checkbox" type="checkbox" data-filter-type="custom_fields.custom_category" data-filter="Family" checked />
+      </div>
+      <div class="filter__wrap filter__wrap--category filter__wrap--performance">
+        <label class="filter__label" for="filter-performance">Performance</label>
+        <input id="filter-performance" class="filter__checkbox" type="checkbox" data-filter-type="custom_fields.custom_category" data-filter="Performance" checked />
+      </div>
+      <div class="filter__wrap filter__wrap--category filter__wrap--weight-loss">
+        <label class="filter__label" for="filter-weightloss">Weight Loss</label>
+        <input id="filter-weightloss" class="filter__checkbox" type="checkbox" data-filter-type="custom_fields.custom_category" data-filter="Weight Loss" checked />
+      </div>
+      <button class="btn btn--secondary btn-transparent filter__close" data-close-filter>See Results</button>
+    </fieldset>
+  </div>
+  <div class="filter">
+    <h3 class="filter__title">Filter By Diet {% include 'icon-svg' with 'plus' %}{% include 'icon-svg' with 'minus' %}</h3>
+    <fieldset class="filter__dropdown">
+      <div class="filter__wrap filter__wrap--diet filter__wrap--gluten-free">
+        <label class="filter__label" for="filter-glutenfree">
+          <img class="filter__img" src="{{ 'badge-glutenfree.svg' | asset_url }}"/>Gluten Free
+        </label>
+        <input id="filter-glutenfree" class="filter__checkbox" type="checkbox" data-filter-type="custom_fields.custom_badge" data-filter="Glutenfree" />
+      </div>
+      <div class="filter__wrap filter__wrap--diet filter__wrap--raw">
+        <label class="filter__label" for="filter-raw">
+          <img class="filter__img" src="{{ 'badge-raw.svg' | asset_url }}"/>Raw
+        </label>
+        <input id="filter-raw" class="filter__checkbox" type="checkbox" data-filter-type="custom_fields.custom_badge" data-filter="Raw" />
+      </div>
+      <div class="filter__wrap filter__wrap--diet filter__wrap--vegan">
+        <label class="filter__label" for="filter-vegan">
+          <img class="filter__img" src="{{ 'badge-vegan.svg' | asset_url }}"/>Vegan
+        </label>
+        <input id="filter-vegan" class="filter__checkbox" type="checkbox" data-filter-type="custom_fields.custom_badge" data-filter="Vegan" />
+      </div>
+      <div class="filter__wrap filter__wrap--diet filter__wrap--kosher">
+        <label class="filter__label" for="filter-kosher">
+          <img class="filter__img" src="{{ 'badge-kosher.svg' | asset_url }}"/>Kosher
+        </label>
+        <input id="filter-kosher" class="filter__checkbox" type="checkbox" data-filter-type="custom_fields.custom_badge" data-filter="Kosher" />
+      </div>
+      <div class="filter__wrap filter__wrap--diet filter__wrap--organic">
+        <label class="filter__label" for="filter-organic">
+          <img class="filter__img" src="{{ 'badge-usda.svg' | asset_url }}"/>Organic
+        </label>
+        <input id="filter-organic" class="filter__checkbox" type="checkbox" data-filter-type="custom_fields.custom_badge" data-filter="Usda" />
+      </div>
+      <button class="btn btn--secondary btn-transparent filter__close" data-close-filter>See Results</button>
+    </fieldset>
+  </div>
+</div>

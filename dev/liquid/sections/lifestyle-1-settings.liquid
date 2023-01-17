@@ -1,0 +1,45 @@
+{% schema %}
+  {
+    "name": "Farm to Family Settings",
+    "class": "template-1",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "lifestyle-1-img",
+        "label": "Upload Image"
+      },
+      {
+        "type": "header",
+        "content": "Or upload a video"
+      },
+      {
+        "type": "textarea",
+        "id": "lifestyle-1-video",
+        "label": "Drop embedded video here"
+      },
+      {
+        "id": "lifestyle-1-title",
+        "type": "text",
+        "label": "Enter a title"
+      },
+      {
+        "id": "lifestyle-1-subtitle",
+        "type": "text",
+        "label": "Enter a subtitle"
+      }
+    ]
+  }
+{% endschema %}
+
+<div class="{{settings.lifestyle-1-title}}-template lifestyle-template lifestyle-template-1">
+  {%assign video = settings.lifestyle-1-video%}
+  {%assign image = settings.lifestyle-1-img%}
+  <div class="jumbotron">
+    {% if settings.lifestyle-1-video != '' %}
+    {{video}}
+    {% else %}
+    {{image}}
+    {% endif %}
+  </div>
+
+</div>

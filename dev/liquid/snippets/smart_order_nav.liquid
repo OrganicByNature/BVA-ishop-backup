@@ -1,0 +1,10 @@
+<div class="so__nav so__field-group so__field-group--select">
+  <a class="so__nav-item active active--mob">{{ smart_order_nav }}</a>
+  <div class="so__nav-drop">
+    <a class="so__nav-item{% if smart_order_nav == 'Current Smart Order' %} active active--desk{% endif %}" href="/account?view=smart-order">Current Smart Order</a>
+    <a class="so__nav-item{% if smart_order_nav == 'Add an Item' %} active active--desk{% endif %}" href="/account?view=add-item">Add a Product</a>
+    <a class="so__nav-item{% if smart_order_nav == 'Delivery Schedule' %} active active--desk{% endif %}" href="/account?view=delivery">Set Your Date</a>
+    <a class="so__nav-item{% if smart_order_nav == 'Billing Information' %} active active--desk{% endif %}" href="/account?view=billing">Payment Information</a>
+    <a class="so__nav-item{% if smart_order_nav == 'Shipping Information' %} active active--desk{% endif %}" href="/account?view=shipping">Shipping Information</a>
+  </div>
+</div>

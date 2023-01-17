@@ -1,0 +1,38 @@
+<script>
+   $(document).ready(function() {
+     var urlParams = new URLSearchParams(window.location.search);
+     if(urlParams.has('jbotItems')){
+     
+     // Get and decode query params
+     var q_param = urlParams.get('jbotItems')
+     var uri_dec = decodeURIComponent(q_param);  
+     
+     var prods_URL = "https://ishoppurium.com?prods=";
+     // or the shorthand way
+     var dict = {
+       '2752-JBOT' : 3986779603016,
+       '2750-JBOT' : 3986782912584,
+       '2754-JBOT' : 3986783174728,
+       '2009-JBOT' : 3986783371336,
+       '2741-JBOT' : 3986783600712
+     };
+
+     var res = uri_dec;
+     var array = uri_dec.split(","); 
+
+     array.forEach(function(element) {
+       var itemcode = element.split(":",1);
+       var cleanitemcode = itemcode[0].trim();
+       var prod_id = dict[cleanitemcode];
+       prods_URL += prod_id + ":1,";
+     });
+
+     var final_url = prods_URL.slice(0, -1);
+		
+     console.log(final_url);
+     
+     window.location.href = final_url;	
+
+   };
+ });
+</script>

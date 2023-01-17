@@ -1,0 +1,22 @@
+.video-tour-container {
+  display: block;
+  flex-flow: row wrap;
+  @include mq($global-breakpoint-md) {
+    display: flex;
+  }
+  .video-container {
+    padding: 0px;
+    width: 100%;
+    @include mq($global-breakpoint-md) {
+      padding: 10px;
+      flex-basis: 50%;
+    }
+    @include mq($global-breakpoint-lg) {
+      padding: 30px 80px;
+    }
+    .video-iframe {
+      width: 100%;
+      height: 250px;
+    }
+  }
+}

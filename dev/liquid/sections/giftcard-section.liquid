@@ -1,0 +1,45 @@
+<div class="giftcard-section">
+  <h2>{{section.settings.heading}}</h2>
+  <p>{{section.settings.subheading}}</p>
+  <div class="video-tour-container">
+    {% for block in section.blocks %}
+    <div class="video-container">
+      <iframe class="video-iframe" src="{{block.settings.the_video}}"></iframe>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name":"Giftcard settings",
+  "settings":[
+    {
+      "type":"text",
+      "label":"Heading",
+      "id":"heading"
+    },
+    {
+      "type":"textarea",
+      "label":"Sub-Heading",
+      "id":"subheading"
+    }
+  ],
+  "blocks":[
+    {
+       "type":"video",
+       "name":"Video",
+       "settings":[
+         {
+            "id":"the_video",
+            "type":"video_url",
+            "accept": ["youtube", "vimeo"],
+            "label":"Embed Video URL"
+         }
+       ]
+    }
+  ]
+}
+
+{% endschema %}
+

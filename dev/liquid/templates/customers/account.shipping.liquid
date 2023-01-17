@@ -1,0 +1,30 @@
+<!-- /templates/customers/account.payment.liquid -->
+{% include 'customer-metafields' %}
+
+<section class="customer-template account-container flex flex--wrap page-wrapper cust__template--shipping">
+  <header class="cust__header">
+    <h2 class="cust__title cust__title--my"><a href="/account">My Account</a></h2>
+    <h1 class="cust__title cust__title--smart active">Smart Order</h1>
+    <a href="/account/logout" class="cust__logout text-link">Log Out</a>
+  </header>
+
+  <div class="flex-4-md cust__sidebar">
+    {% include 'smart_order_nav' with 'Shipping Information' %}
+  </div>
+
+  <div class="flex-8-md cust__main">
+    <a class="text-link so__go-back" href="/account?view=billing">{% include 'icon-svg' with 'arrow-down' %} GO BACK</a>
+
+    <h2 class="h4 so__header">Shipping Information</h2>
+
+    <div class="so__shipping">
+      <div class="so__error smart-order-error"></div>
+
+      <h3 class="so__section-header so__section-header--shipping">Shipping Address</h3>
+      {% render 'shipping-address-form' %}
+
+      <a href="javascript:;" class="btn btn--secondary so__save" data-save-shipping>Save</a>
+
+    </div>
+  </div>
+</section>

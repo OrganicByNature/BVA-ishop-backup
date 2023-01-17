@@ -1,0 +1,21 @@
+<script>
+   var observer = new MutationObserver(function(mutations){
+      for (var i=0; i < mutations.length; i++){
+        for (var j=0; j < mutations[i].addedNodes.length; j++){
+          addedNode = mutations[i].addedNodes[j];
+          if (addedNode.matches('.form-note.is-error')){
+            $("li:contains('email has already been taken')").replaceWith('<li>Email has already been taken. <a href="/account/login">Click Here</a> to login.</li>');       
+         	observer.disconnect();
+          }
+        }
+      }
+    });
+    
+
+    observer.observe(document.documentElement, {
+      childList: true,
+      subtree: true,
+      attributes: true
+    });
+     
+</script>

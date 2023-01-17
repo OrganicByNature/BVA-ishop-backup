@@ -1,0 +1,194 @@
+{% schema %}
+{
+  "name":"Smart Order Page Settings",
+  "settings":[
+  {
+    "id": "title",
+    "type": "text",
+    "label": "Title" ,
+    "default":"Smart Order"
+   },
+   {
+    "id": "top_text_1",
+    "type": "text",
+    "label": "Top Text 1" ,
+    "default":"Keep your nutrition goals consistent with Smart Order"
+   },
+   {
+   "id": "top_text_2",
+   "type": "text",
+   "label": "Top Text 2",
+   "default":"- a monthly delivery of your products."
+  },
+  {
+    "type": "image_picker",
+    "id": "smart_orders_desktop_hero",
+    "label": "Desktop Hero",
+    "info": "Landscape Image 1920 x 1080"
+  },
+  {
+    "type": "image_picker",
+    "id": "smart_orders_mobile_hero",
+    "label": "Mobile Hero",
+    "info": "Portrait Image 900 x 640"
+  },
+  {
+    "type": "collection",
+    "id": "smart_orders_collection",
+    "label": "Featured Collection"
+ }
+  ]
+}
+{% endschema %}
+
+{% style %}
+  @media screen and (min-width:800px){
+    .top-container.smart-orders-bg{
+      background-image: url("{{section.settings.smart_orders_desktop_hero | img_url: '1884x' }}");
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  }
+  @media screen and (max-width:641px){
+    .top-container.smart-orders-bg-mobile{
+      background-image: url("{{section.settings.smart_orders_mobile_hero | img_url: 'original'}}");
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  }
+{% endstyle %}
+
+<div class="page-wrappery smart-orders-page">
+  <div class="top-container {% if section.settings.smart_orders_desktop_hero %} smart-orders-bg {% endif %}{% if section.settings.smart_orders_mobile_hero %} smart-orders-bg-mobile {% endif %}">
+    <div class='top-logo'>
+      <img class="logo-gradient" src="//cdn.shopify.com/s/files/1/2062/5235/t/43/assets/Gradient.svg?83116">
+    </div>
+    <div class='top-title'>
+      <h1 class="page-title">{{section.settings.title}}</h1>
+    </div>
+    <div class='top-text'>
+      <p class='top-text-p1'>{{section.settings.top_text_1}}</p>
+      <p class='top-text-p2'>{{section.settings.top_text_2}}</p>
+    </div>
+    <div class='top-ctas'>
+      {% if customer %}
+        <a class='sign-in' href='/account'>Sign In</a>
+        <a class='create-account' href='/account'>Create an Account</a>
+      {% else %}
+        <a class='sign-in' href='/account/login'>Sign In</a>
+        <a class='create-account' href='/account/login'>Create an Account</a>
+      {% endif %}
+    </div>
+  </div>
+  <div class='mid-bg'>
+    <div class="mid-container mid-top">
+      <div class='mid-left'>
+        <div>
+          <img src="{{ 'finger2.gif' | asset_url }}">
+        </div>
+        <div>
+          <h2>Easy</h2>
+          <p>Create or edit your Smart Order with just a few cicks from your account page.</p>
+        </div>
+      </div>
+      <div class='mid-mid'>
+        <div class='mid-img'>
+          <img src="{{ 'money2.gif' | asset_url }}">
+        </div>
+        <div class='mid-txt'>
+          <div class='reward'>
+            <h2>Rewarding</h2>
+            <p>Earn 200 Bonus Points when you set up your Smart Order, and you get <span class='x'>2x points on EVERYTHING*</span>, including regular orders.</p>
+          </div>
+        </div>          
+      </div>
+      <div class='mid-right'>
+        <div>
+          <img src="{{ 'check2.gif' | asset_url }}">
+        </div>
+        <div>
+          <h2>Consistent</h2>
+          <p>Get the same products delivered every month & commit to your health goals.</p>
+        </div>
+      </div>
+    </div>
+    <div class="mid-container mid-bot">
+      <div class='mid-ctas'>
+        {% if customer %}
+          <a class='smart-order' href='/account#smartorder'>View Smart Order</a>
+        {% else %}
+          <a class='smart-order' href='/account/login'>View Smart Order</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="lower-container low-top">
+    <div class='lower-para-imgs' data-parallax-object data-paroller-factor="0.15" data-paroller-type="foreground">
+      <img class='left js-parallax bottle' src="{{ 'apothecherry.png' | asset_url }}">
+      <img class='left js-parallax cherry' src="{{ 'cherries.png' | asset_url }}">
+      <img class='right js-parallax cream' src="{{ 'cocohydrate.png' | asset_url }}">
+      <img class='right js-parallax coco' src="{{ 'coconut.png' | asset_url }}">
+    </div>
+    {% if collections[section.settings.smart_orders_collection].products != "" %}
+      <div class='lower-title'>
+        <h2>Add These Top Products To Your Smart Order</h2>
+      </div>
+      <div class="colls-grid">
+        <div class='featured-products-container featured-products smart-order-products__slider'>
+          {% for product in collections[section.settings.smart_orders_collection].products %}
+            <div class="colls-grid__product product">
+              <a href="{{ product.url }}">
+                <div class="tag-img-container">
+                  <img class="colls-grid__product-img" src="{{ product | img_url: '680x' | scale: 2 }}" />
+                  <p>{{ product.title }}</p>
+                </div>
+              </a>
+              <form class="pdp-info__form smart-add-to-cart-form" action="/cart/add" method="post">
+                <select id="single-product-select" class='smart-orders-select' name="id">
+                    {% for variant in product.variants %}
+                      <option value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
+                    {% endfor %}
+                </select>
+                <div class="pdp-info__submit-wrap">
+                    <input class="pdp-info__qty btn btn--secondary" type="hidden" value="1" name="quantity">
+                    <input class="product-a pdp-info__submit add-to-cart-button btn btn--primary" type="submit" value="Add to cart" />
+                  </div>
+              </form>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+    <div class="bot-container low-bot">
+      <div class='bot-top-text'>
+        <h2>Start Your First Smart Order</h2>
+      </div>
+      <div class='bot-ol'>
+        <ol>
+          <li>
+            <span class='outer-li'><img src="{{ "1.png" | asset_url }}"></span>
+            <span class='inner-li'>Log in and view your current Smart Orders in your Accounts page.</span>
+          </li>
+          <li>
+            <span class='outer-li'><img src="{{ "2.png" | asset_url }}"></span>
+            <span class='inner-li'>Select Add An Item.</span>
+          </li>
+          <li>
+            <span class='outer-li'><img src="{{ "3.png" | asset_url }}"></span>
+            <span class='inner-li'>Scroll through our list of items and add to your Smart Order. Search manually by using the search barm or filter by Category and/or Diet.</span>
+          </li>
+        </ol>
+      </div>
+      <div class='bot-ctas'>
+        {% if customer %}
+          <a class='smart-order' href='/account#smartorder'>View Smart Order</a>
+        {% else %}
+          <a class='smart-order' href='/account/login'>View Smart Order</a>
+        {% endif %}
+        
+        
+      </div>
+    </div>
+    <hr class='bot-hr'>
+  </div>
+</div>

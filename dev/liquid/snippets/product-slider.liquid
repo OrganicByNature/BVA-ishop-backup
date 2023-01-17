@@ -1,0 +1,29 @@
+<div class="prod-slider">
+  <h1 class="prod-slider__heading">{{slide_head}}</h1>
+  <div class="prod-slider__wrap">
+  {% if slide_coll != blank %}
+    {% for product in slide_coll.products limit:limiter %}
+      {% include 'grid-product' %}
+    {% endfor %}
+  {% elsif findify != blank %}
+    {% assign limit = limiter %}
+    {% comment %}if there are pinned you may also like products{% endcomment %}
+    {% if product.metafields.c_f.You_May_Also_Like_Pinned_Prods != blank %}
+      {% comment %}make array{% endcomment %}
+      {% assign pinned_prods = product.metafields.c_f.You_May_Also_Like_Pinned_Prods | split: "," %}
+      {% comment %}subtract the pinned prods from number we pass to findify later{% endcomment %}
+      {% assign limit = limiter | minus: pinned_prods.size %}
+      {% comment %}loop, using all_products tag with product handles{% endcomment %}
+      {% for pinned_prod in pinned_prods %}
+        {% assign product_slider = all_products[pinned_prod] %}
+        {% include 'grid-product', product: product_slider %}
+      {% endfor %}
+    {% endif %}
+
+    <script>
+      window.findifyProdId = {{ findify | json }};
+      window.findifyProdsLimit = {{ limit | json }};
+    </script>
+  {% endif %}
+  </div>
+</div>

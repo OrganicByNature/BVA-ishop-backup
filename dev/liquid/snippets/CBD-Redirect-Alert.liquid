@@ -1,0 +1,20 @@
+<link href="{{ 'stickyalert.css' | asset_url }}" rel="stylesheet" type="text/css" />
+<script src="{{ 'stickyalert.js' | asset_url }}"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+  	console.log('working');
+	var fromcbd = localStorage.getItem('magento');  
+    console.log(fromcbd);
+    if(fromcbd !== null){
+      console.log('cbdredirect');
+      $('#alert-container').stickyalert({
+          barColor: '#4f7282', // alert background color
+          barFontColor: '#FFF', // text font color
+          barFontSize: '1.1rem', // text font size
+          barText: 'We are redirecting you back to PuriumCBD, this will only take a couple seconds :) ', // the text to display, linked with barTextLink
+         // barTextLink: '/collections/convention-2018?convention=true', // url for anchor
+          cookieRememberDays: '2', // in days
+          displayDelay: '1000' // in milliseconds, 3 second default
+      });
+    }});
+</script>

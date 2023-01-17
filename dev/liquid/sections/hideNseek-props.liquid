@@ -1,0 +1,44 @@
+{% include 'hideNseek-props' %}
+
+{% schema %}
+{
+	"name": "hideNseek Props",
+	"settings": [
+		{
+			"type": "text",
+			"id": "header",
+			"label": "Header",
+			"default": "How It Works"
+		}
+	],
+	"blocks": [
+		{
+			"name": "Value Prop",
+			"type": "value_prop",
+			"settings": [
+				{
+					"type": "image_picker",
+					"id": "prop_img",
+					"label": "Prop Icon"
+				},
+				{
+					"type": "text",
+					"id": "prop_title",
+					"label": "Prop Title"				
+				},
+				{
+					"type": "text",
+					"id": "prop_copy",
+					"label": "Prop Copy",
+					"default": "Get 100 points instantly when you make an account on iShopPurium.com."
+				},
+				{
+					"type": "text",
+					"id": "fine_print",
+					"label": "Fine Print"
+				}
+			]
+		}
+	]
+}
+{% endschema %}

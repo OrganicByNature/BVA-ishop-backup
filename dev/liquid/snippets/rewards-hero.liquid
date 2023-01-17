@@ -1,0 +1,15 @@
+<div class="rewards-hero rewards-hero--{{ section.id }}">
+	<div class="rewards-hero__content">
+		<img class="logo-gradient" src="{{'Gradient.svg' | asset_url}}" />
+		<h1 class="rewards-hero__header">{{ section.settings.header }}</h1>
+		<p class="rewards-hero__subheader">{{ section.settings.subheader }}</p>
+		<a class="rewards-hero__btn btn btn--tertiary" href="/account/register">CREATE AN ACCOUNT</a>
+		<a class="rewards-hero__link btn text-link" href="/account/login">Sign In</a>
+	</div>
+</div>
+
+<style type="text/css">
+	.rewards-hero--{{ section.id }} {
+		background-image: url('{{ section.settings.hero_img | img_url: '1920x' }}');
+	}
+</style>

@@ -1,0 +1,73 @@
+<!-- /templates/customers/account.add-item.liquid -->
+{% include 'customer-metafields' %}
+{% section 'best-sellers' %}
+
+<section class="customer-template account-container flex flex--wrap page-wrapper cust__template--add-item">
+  <header class="cust__header">
+    <h2 class="cust__title cust__title--my"><a href="/account">My Account</a></h2>
+    <h1 class="cust__title cust__title--smart active">Smart Order</h1>
+    <a href="/account/logout" class="cust__logout text-link">Log Out</a>
+  </header>
+
+  <div class="flex-4-md cust__sidebar">
+    {% include 'smart_order_nav' with 'Add an Item' %}
+  </div>
+
+  <div class="flex-8-md cust__main">
+    <h2 class="h4 so__header">Add an Item</h2>
+
+    <div class="so__add-item so__add-item--none">
+      <p class="so__start-content">Enter your payment information to start a Smart Order!</p>
+      <a class="so__start-btn btn btn--secondary" href="/account?view=payment" title="Add Payment Method">+ Add Payment Method</a>
+    </div>
+
+    <div class="so__add-item so__add-item--shop page-wrapper page-wrapper--quickshop">
+      <form class="qs-search">
+        <input type="text" placeholder="Search for your product" class="qs-search__input" name="qs-search__input" value="">
+        <button class="btn btn--primary qs-search__submit">{% include "icon-svg" with "long-arrow" %}</button>
+      </form>
+      {% include 'quickshop-filters' %}
+      <div class="table-wrapper">
+        <table class="qs-table{% if customer %} customer{% endif %}">
+          <thead class="qs-table__head">
+            <tr>
+              <th class="qs-table__th qs-table__th--desc">Item Description{% include "icon-svg" with "arrow-down" %}{% include "icon-svg" with "arrow-down" %}</th>
+              {% if customer %}
+              <th class="qs-table__th qs-table__th--price">Your Price{% include "icon-svg" with "arrow-down" %}{% include "icon-svg" with "arrow-down" %}</th>
+              {% else %}
+              <th class="qs-table__th qs-table__th--price">Retail Price{% include "icon-svg" with "arrow-down" %}{% include "icon-svg" with "arrow-down" %}</th>
+              {% endif %}
+              <th class="qs-table__th qs-table__th--qualities">Additional Qualities</th>
+              <th class="qs-table__th qs-table__th--action">Get Yours</th>
+            </tr>
+          </thead>
+          <tbody class="qs-table__body">
+            {% comment %}Findify results inserted here{% endcomment %}
+            <tr><td colspan="4"><div class="findify-component-spinner"></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="js-cart-alert"></div>
+    </div>
+  </div>
+</section>
+
+<div class="modal modal--add-success" data-modal="add-success">
+  <div class="modal__wrap">
+    <h2 class="modal__head">Success!</h2>
+    <p class="modal__desc">You added <span class="success-item"></span> to your smart order.</p>
+    <a class="btn modal__button btn--primary" href="/account?view=add-item">ADD ANOTHER ITEM</a>
+    <a class="btn modal__button btn--secondary" href="/account?view=smart-order">SEE SMART ORDER</a>
+  </div>
+</div>
+
+<script>
+  window.badges = {
+    vegan: {{ 'Vegan.svg' | asset_url | json }},
+    kosher: {{ 'Kosher.svg' | asset_url | json }},
+    usda: {{ 'badge-usda.svg' | asset_url | json }},
+    organic: {{ 'badge-usda.svg' | asset_url | json }},
+    glutenfree: {{ 'glutenfree.svg' | asset_url | json }},
+    raw: {{ 'badge-raw-words.svg' | asset_url | json }}
+  };
+</script>

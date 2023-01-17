@@ -1,0 +1,207 @@
+{% render 'shogun-products', content: product %}
+
+{{product.metafields.shogun.above}}
+<!-- /templates/product.liquid -->
+{% include 'customer-metafields' %}
+<div class="pdp wrapper">
+
+{% comment %}
+  - popups, fly-ins, etc
+{% endcomment %}
+<div class="js-cart-alert"></div>
+{% if product.metafields.c_f.Nutrition_Label != blank %}
+<div class="js__popup js__popup--nut" data-modal="nutrition">
+  <i class="js__popup-close js__close" data-modal-hide></i>
+  {{product.metafields.c_f.Nutrition_Label}}
+</div>
+{% endif %}
+
+<section class="pdp-image">
+  {% include 'oval-badges' %} 
+  <img class="pdp-image__featured" src="{{ product.featured_image | img_url: '1328x', scale: 2 }}">
+  <section class="pdp-extras pdp-extras--desktop">
+    <div class="pdp-extras__links">
+      {% if product.metafields.c_f.Nutrition_Label != blank %}
+      <a class="pdp-extras__link pdp-extras__link--nut text-link" data-modal-show="nutrition">View Nutrition Label</a>
+      {% endif %}
+    </div>
+  </section>
+</section>
+
+<section class="pdp-info">
+  <h2 class="pdp-info__title">{{product.title}}</h2>
+  <div class="pdp-info__price">
+  {% if customer_discount == 1 %}
+    <span class="pdp-info__price-plc price withTooltip" style="font-weight: 600;">
+      <span>Loyal Customer Price: {{ product.price | times: 0.25 | minus: product.price | abs | money }}</span>
+      {%- section 'member-price-info-tooltip' -%}
+    </span><br>
+      {% if product.compare_at_price_max != 0 %}
+        <span class="pdp-info__price-compare-plc price" style="margin-left: 0px;">Reduced Price: {{ product.price | money }}</span> <br> 
+        <span class="pdp-info__price-compare price" style="margin-left: 0px;">Retail Price: {{ product.compare_at_price_max | money }}</span>
+        {% else %}
+        <span class="pdp-info__price-plc price">Retail Price: {{ product.price | money }}</span> 
+      {% endif %}
+    {% else %}
+    <span class="pdp-info__price-reg price withTooltip">
+      Your Price: <span class="member-price">{{ product.price | times: customer_discount | ceil | money }}</span>
+      <button class="inline-cart__icon" data-st-intent='st:core:home'>{{ 'Info.svg' | asset_url | img_tag }}</button>
+    </span>
+    <span class="pdp-info__price-compare price">Retail Price: {{ product.price | money }}</span>
+    {% endif %}
+  </div>
+  <div class="pdp-extras__icons">
+    {% for tag in product.tags %}
+    {% if tag contains 'badge' %}
+    {% assign icon_url = tag | handleize | append: '.svg' %}
+    <span class="pdp-extras__icon icon__{{icon}}"><img class="pdp-extras__icon-img" src="{{ icon_url | asset_url }}"></span>
+    {% endif %}
+    {% endfor %}
+  </div>
+  <div class="pdp-info__price">
+        <span data-score='{{ shop.metafields.judgeme.all_reviews_rating }}' class='jdgm-all-reviews-rating'></span>
+  </div>
+  
+  <ul class="pdp-info__details">
+    {% assign product_deets = product.metafields.c_f.Product_Details | split:'-' %}
+    {% for detail in product_deets %}
+    <li class="pdp-info__detail">{{detail}}</li>
+    {% endfor %}
+  </ul>
+
+  <form class="pdp-info__form add-to-cart-form" action="/cart/add" method="post">
+    <select id="single-product-select" name="id">
+      {% for variant in product.variants %}
+        <option value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
+      {% endfor %}
+    </select>
+
+    {% comment %}
+      - hidden fields and select will be inserted here in JS
+    {% endcomment %}
+    <div class="pdp-info__field-wrap">
+    {% if product.metafields.c_f.materials != blank %}
+      <script type="text/javascript">
+        window.materials = {{product.metafields.c_f.materials}};
+      </script>
+    {% endif %}
+      <input class="kit-product exigo-id hidden required" id="property__exigo-id" type="hidden" name="properties[id]" value="{{product.metafields.global.item_id}}">
+      <input class="kit-product exigo-qty hidden required" id="property__exigo-qty" type="hidden" name="properties[qty]" value="1">
+      <input class="kit-product exigo-type hidden required" id="property__exigo-type" type="hidden" name="properties[type]" value="{{product.type}}">
+    </div>
+
+    <p class="pdp-info__delivery line-item-property__field">
+      <input required class="pdp-info__delivery-radio required" id="property__delivery--auto-order" type="hidden" name="properties[delivery]" value="One-time Order">
+    </p>
+
+    <div class="pdp-info__submit-wrap">
+    {% if product.available %}
+      <input class="pdp-info__qty btn btn--secondary" type="number" value="1" name="quantity">
+      <input class="pdp-info__submit add-to-cart-button btn btn--primary" type="submit" value="Add to cart" />
+    {% else %}
+      <input class="pdp-info__submit add-to-cart-button btn btn--primary" type="submit" value="{{ 'plus.product.out_of_stock' | t }}" disabled="disabled" >
+    {% endif %}  
+    </div>
+  </form>
+
+  <!--    <section class="pdp-smart">
+    {% if customer and product.available %}
+    <a class="pdp-smart__btn btn btn--secondary" href="{{ product.url | append: '?view=smart-order' }}" title="Add to Smart Order">Add to Smart Order</a>
+    {% endif %}
+    <p class="pdp-smart__content">Save 25% when you use Smart Orders!</p>
+    <a class="pdp-smart__link text-link" href="/pages/about-smart-orders">Read more</a><span class="pdp-smart__arrow"> {% include 'icon-svg' with 'arrow-down' %}</span>
+  </section> -->
+
+  <section class="pdp-more">
+    <h4 class="pdp-more__heading pdp-more__heading--first">Product Benefits<i class="pdp-more__heading-arrow"></i></h4>
+    <div class="pdp-more__info pdp-more__info--first">{{product.description}}</div>
+  {% if product.metafields.c_f.Product_More_Info_1 != blank %}
+    <h4 class="pdp-more__heading pdp-more__heading--first">Suggested Use/Ingredients<i class="pdp-more__heading-arrow"></i></h4>
+    <div class="pdp-more__info pdp-more__info--first">{{product.metafields.c_f.Product_More_Info_1}}</div>
+  {% endif %}
+  {% if product.metafields.c_f.Product_More_Info_2 != blank %}
+    <h4 class="pdp-more__heading pdp-more__heading--last">Videos &amp; More<i class="pdp-more__heading-arrow"></i></h4>
+    <div class="pdp-more__info pdp-more__info--last">{{product.metafields.c_f.Product_More_Info_2}}</div>
+  {% endif %}
+  </section>
+    <br> 
+  
+  {% if customer %}
+    {% if rank == '10' or rank == '19' or rank == '21' or rank == '25' %}
+    {% include 'social_sharing_custom' %}
+    {% endif %}
+  {% endif %}
+</section>
+  
+
+<section class="pdp-extras pdp-extras--mobile">
+  <div class="pdp-extras__links">
+    {% if product.metafields.c_f.Nutrition_Label != blank %}
+    <a class="pdp-extras__link pdp-extras__link--nut text-link" data-modal-show="nutrition">View Nutrition Label</a>
+    {% endif %}
+  </div>
+</section>
+
+<section class="pdp-together">
+  {% include "bought-together" %}
+</section>
+
+<section class="pdp-similar">
+  {% include "product-slider", findify: product.id, slide_head: "You May Also Like", limiter: 5 %}
+</section>
+  
+<div id="reviews">
+   {% render 'judgeme_widgets', widget_type: 'judgeme_review_widget', concierge_install: false, product: product %}
+</div>
+
+{% unless product.variants.size == 1 %}
+<script type="text/javascript">
+// initialize multi selector for product
+jQuery(function($) {
+  new Shopify.OptionSelectors("product-select", { product: {{product | json}}, onVariantSelected: Product.selectCallback });
+});
+</script>
+{% endunless %}
+</div>
+
+<script text="text/javascript">
+  var _learnq = _learnq || [];
+
+  var item = {
+    Name: {{ product.title|json }},
+    ProductID: {{ product.id|json }},
+    Categories: {{ product.collections|map:'title'|json }},
+    ImageURL: "https:{{ product.featured_image.src|img_url:'grande' }}",
+    URL: "{{ shop.secure_url }}{{ product.url }}",
+    Brand: {{ product.vendor|json }},
+    Price: {{ product.price|money|json }},
+    CompareAtPrice: {{ product.compare_at_price_max|money|json }}
+  };
+
+  _learnq.push(['track', 'Viewed Product', item]);
+  _learnq.push(['trackViewedItem', {
+    Title: item.Name,
+    ItemId: item.ProductID,
+    Categories: item.Categories,
+    ImageUrl: item.ImageURL,
+    Url: item.URL,
+    Metadata: {
+      Brand: item.Brand,
+      Price: item.Price,
+      CompareAtPrice: item.CompareAtPrice
+    }
+  }]);
+</script>
+
+    
+<script text="text/javascript">
+  var _learnq = _learnq || [];
+  document.getElementsByClassName("pdp-info__submit")[0].addEventListener('click',function (){
+    _learnq.push(['track', 'Added to Cart', item]);
+  });
+</script>
+
+
+{{product.metafields.shogun.below}}
+
+

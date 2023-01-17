@@ -1,0 +1,141 @@
+{% for block in section.blocks %}
+{% if block.type == "features" %}
+{% assign feats = block.settings.feature | split: ',' %}
+{% break %}
+{% endif %}
+{% endfor %}
+
+<div class="collections collections--upgrade wrapper--upgrade">
+  <div class="colls-head">
+    <div class="colls-head__stepper">Step <span class="colls-head__step" data-step-step>1</span> of 3</div>
+    <div class="colls-head__pick" data-step-pick>Pick a Kit</div>
+    <div class="colls-head__choose" data-step-choose>Choose your upgrade.</div>
+  </div>
+  <div class="colls-error"></div>
+  <div class="colls-table" data-step="1">
+    <div class="colls-table__product colls-table__product--desk">
+      <div class="colls-table__prod-head">
+        <h3 class="colls-table__product-title">-</h3>
+        <h4 class="colls-table__product-price">-</h4>
+        <h5 class="colls-table__compare-price">-</h5>
+        <p><a class="btn btn--secondary" href="javascript:;"">-</a></p>
+        <p><a class="btn" href="javascript:;">-</a></p>
+      </div>
+      <div class="colls-table__table" data-upgrade="{{product.handle}}">
+        <div class="colls-table__column">
+          {% for feat in feats %}
+          <div class="colls-table__cell colls-table__cell--feature">{{ feat }}</div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    {% for product in collection.products %}
+    <div class="colls-table__product{% if forloop.first %} colls-table__product--first{% elsif forloop.last %} colls-table__product--last{% endif %}">
+      <div class="colls-table__prod-head">
+        <h3 class="colls-table__product-title">{{ product.title }}</h3>
+        <h4 class="colls-table__product-price">{{ product.price | money_without_trailing_zeros }}</h4>
+        <h5 class="colls-table__compare-price">A {{product.compare_at_price | money_without_trailing_zeros }}+ VALUE</h5>
+        <p><a class="colls-table__upgrade btn btn--secondary" href="javascript:;" data-step-up data-prod-id="{{ product.selected_or_first_available_variant.id }}">Upgrade</a></p>
+        <p><a class="colls-table__view btn" data-toggle-upgrade="{{product.handle}}" href="javascript:;">View Details {% include 'icon-svg' with 'arrow-down' %}</a></p>
+      </div>
+      <div class="colls-table__table" data-upgrade="{{product.handle}}">
+        <div class="colls-table__column">
+          {% for block in section.blocks %}
+          {% if block.settings.prod == product.handle %}
+          {% assign checks = block.settings.available | split: ',' %}
+
+          {% for check in checks %}
+          <div class="colls-table__row">
+            <div class="colls-table__cell colls-table__cell--feature">{{ feats[forloop.index0] }}</div>
+            <div class="colls-table__cell colls-table__cell--product">
+              {% if check == "check" %}
+                {% include 'icon-svg' with 'check' %}
+              {% elsif check == "dash" %}
+                {% include 'icon-svg' with 'dash' %}
+              {% else %}
+                <span class="colls-table__cell-cont colls-table__cell-cont--mob">{% include 'icon-svg' with 'check' %}</span>
+                <span class="colls-table__cell-cont colls-table__cell-cont--desk">{{ check }}</span>
+              {% endif %}
+            </div>
+          </div>
+          {% endfor %}
+
+          {% break %}
+          {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="colls-code" data-step="2">
+    <form class="colls-code__form">
+      <div class="input-group colls-code__input-group">
+        <input type="text" name="upgrade[web_alias]" id="web-alias" class="colls-code__input" pattern="[a-zA-Z0-9]*" placeholder="Enter code here" required>
+      </div>
+      <div class="input-group colls-code__input-group">
+        <button type="submit" class="form-submit btn btn--primary flex-12 check-web-alias">Submit</button>
+      </div>
+    </form>
+  </div>
+  <div class="colls-tc" data-step="3">
+    <form class="colls-tc__form">
+      <div class="input-group colls-tc__input-group">
+        <p>{% if customer.phone != blank %}Is this your correct phone number? (optional){% else %}Please enter your phone number (optional){% endif %}</p>
+        <input type="tel" id="colls-tc__phone" name="upgrade[phone]" value="{{ customer.phone }}" placeholder="Phone Number">
+      </div>
+      <div class="input-group colls-tc__input-group">
+        <input type="checkbox" id="colls-tc__agree" name="upgrade[agree]" required>
+        <label for="colls-tc__agree" class="inline">I agree to Purium Terms and Conditions</label>
+      </div>
+      <div class="input-group colls-tc__input-group">
+        <input type="checkbox" id="colls-tc__subscribe" name="upgrade[subscribe]">
+        <label for="colls-tc__subscribe" class="inline">Subscribe me to Purium email alerts & newsletters</label>
+      </div>
+      <div class="input-group colls-tc__input-group">
+        <button type="submit" class="form-submit btn btn--primary flex-12 submit-upgrade">Check Out</button>
+      </div>
+    </form>
+    <p class="colls-tc__note">*Please note that proceeding to checkout will clear your cart of any items that are currently in it. Your cart contents will be replaced with your upgrade kit only.</p>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Upgrade Collection Table",
+  "settings": [
+  ],
+  "blocks": [
+    {
+      "type": "features",
+      "name": "Features",
+      "limit": 1,
+      "settings": [
+        {
+          "id": "feature",
+          "type": "textarea",
+          "label": "Features Text",
+          "info": "A comma separated list of features (HTML accepted)."
+        }
+      ]
+    },
+    {
+      "type": "available",
+      "name": "Product Availability",
+      "settings": [
+        {
+          "id": "prod",
+          "type": "product",
+          "label": "Which Product?"
+        },
+        {
+          "id": "available",
+          "type": "textarea",
+          "label": "Availability Text",
+          "info": "A comma separated list of product availability (HTML accepted). One of these blocks per product in collection."
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,95 @@
+@font-face {
+  font-family: 'Brandon Grotesque';
+  src: url("{{ 'brandon-grotesque.eot' | asset_url }}"); /* IE9 Compat Modes */
+  src: url("{{ 'brandon-grotesque.eot?#iefix' | asset_url }}") format('embedded-opentype'), /* IE6-IE8 */
+      url("{{ 'brandon-grotesque.woff' | asset_url }}") format('woff'), /* Modern Browsers */
+      url("{{ 'brandon-grotesque.ttf' | asset_url }}")  format('truetype'), /* Safari, Android, iOS */
+      url("{{ 'brandon-grotesque.svg#50bf5a2005a5412419d6a4b30314e68e' }}") format('svg'); /* Legacy iOS */
+  font-style:   normal;
+  font-weight:  400;
+}
+
+*, h1, h2, h3 {
+	font-family: 'Brandon Grotesque';
+}
+
+a,
+.link,
+.icon-svg--color-accent {
+	color: #80BD01;
+	&:hover,
+	&:active,
+	&:focus {
+		color: #33A643;
+	}
+}
+
+.step__footer__previous-link:hover .previous-link__icon {
+	fill: #33A643;
+}
+
+.btn {
+	background-color: #80BD01;
+	&:hover,
+	&:active,
+	&:focus {
+		background-color: #33A643;
+	}
+}
+
+// .applied-reduction-code,
+// .applied-reduction-code__clear-button {
+//  	display: none;
+//  }
+
+// .order-summary__section--discount {
+// 	display: none;
+// }
+
+.anyflexbox .banner {
+	display: block;
+    padding: 6px 0;
+	background-color: #F5F5F5;
+    text-align: center;
+}
+
+.banner-logo {
+	height: 42px;
+}
+
+.product__image {
+	vertical-align: top;
+}
+
+div[data-step="payment_method"] {
+  .hidden-on-desktop {
+    display: none;
+  }
+  .step__sections + form {
+    padding-top: 0;
+  }
+}
+
+.product__description__property {
+  padding: 3px 0;
+  line-height: 14px;
+
+  .prop_first {
+    color: #3f3f3f;
+  }
+}
+
+
+.anyflexbox .content .wrap {
+  flex-direction: column;
+}
+
+@media (min-width: 1000px) {
+  .anyflexbox .content .wrap {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row-reverse;
+  }
+}

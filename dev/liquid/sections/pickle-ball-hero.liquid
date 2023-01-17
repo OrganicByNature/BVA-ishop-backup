@@ -1,0 +1,136 @@
+{% schema %}
+  {
+    "name": "Pickleball Settings",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "smart_orders_desktop_hero",
+        "label": "Desktop Hero",
+        "info": "Landscape Image 1920 x 1080"
+      },
+      {
+        "type": "image_picker",
+        "id": "smart_orders_mobile_hero",
+        "label": "Mobile Hero",
+        "info": "Portrait Image 900 x 640"
+      },
+      {
+        "type": "collection",
+        "id": "lifestyle_collection",
+        "label": "Featured Collection"
+      },
+      {
+        "type": "collection",
+        "id": "ultimate_products",
+        "label": "Ultimate Products"
+      },
+      {
+        "type": "image_picker",
+        "id": "pickle_ball_power",
+        "label": "Pickle Ball Image"
+   
+      }
+	]
+}
+{% endschema%}
+
+{% style %}
+  @media screen and (min-width: 800px){
+    .top-container.smart-orders-bg{
+    background-image: url("{{section.settings.smart_orders_desktop_hero | img_url: '1884x' }}");
+    background-repeat: no-repeat;
+    background-size: cover;
+    }
+    .get-started p{
+	max-width: 50%;
+    margin-left: 25%;
+	}
+  }
+    @media screen and (max-width: 641px){
+    .top-container.smart-orders-bg-mobile{
+    background-image: url("{{section.settings.smart_orders_mobile_hero | img_url: 'original'}}");
+    background-repeat: no-repeat;
+    background-size: cover;
+    }
+    .colls-grid{
+    display: block;
+    }
+    .get-started p{
+      max-width: 75%;
+      margin-left: 12.5%;
+	}
+  }
+    
+    .mid-container{
+    padding-bottom: 40px;
+  }
+    .mid-img{
+    height: auto;
+    width: auto;
+  }
+    .mid-right{
+    text-align: left !important;
+  }
+    @media screen and (min-width: 1024px){
+    #main_prod{
+    height: 450px !important;
+    width: auto !important;
+	margin-top: 50px;
+	}
+   }
+  }
+   	.mid-bg{
+    background: #FFFFFF !important;
+  }
+	.outer-li{
+    margin-left: 10px;
+  }
+{% endstyle %}
+
+<div class="page-wrappery smart-orders-page">
+    <div
+        class="top-container {% if section.settings.smart_orders_desktop_hero %} smart-orders-bg {% endif %}{% if section.settings.smart_orders_mobile_hero %} smart-orders-bg-mobile {% endif %}">
+    </div>
+    <div class='mid-bg' style="padding-top: 0px; padding-right: 0px; padding-left: 0px;">
+        <div class="mid-container mid-top" style="background: #ffffff; padding-top: 0px;">
+
+            <div class='mid-left' style="flex: 0 0 50%;">
+                <div class='mid-img' style="flex: 0 0 100%" ;>
+                    <img id='main_prod' src="{{ section.settings.pickle_ball_power | img_url: 'original' }}">
+                </div>
+            </div>
+
+            <div class='mid-right' style="background:#ffffff; flex: 0 0 50%">
+                <div>
+                    <h2 style="color:#231F20; font-size:38px; line-height:40px; padding-top:50px; padding-left:5px; padding-right:10px;" >PICKLEBALL SPORTS POWER PACK</h2>
+                    <h2 style="color:#231F20; font-size:30px; line-height:40px; padding-top:10px; padding-left:5px; padding-right:10px;" >Bring Your Best To the Court</h2> 
+                    <p style="color:#231F20; padding:5px; font-size:18px;"> Serious athletes and weekend warriors of all types want to perform their best. To be your best, it’s important to fuel your body from the inside out.
+                                                               Pickleball is so fun and entertaining, most players want to stay on the court all day. This pack is for the casual player who still likes to bring their best to the court.  </p>
+                    <br>
+                    <br>
+                    <p style="border-bottom: 2px solid #006145; color:#231f20; width: 100px; display: initial; font-size:18px; ">The Pickleball Sports Power Pack provides:</p>
+
+                    <ul style="list-style:none; padding-top: 20px; font-size:18px; padding-left: -10px;">
+                        <li style="color:#231F20; padding: 3px">Stamina</li>
+                        <li style="color:#231F20">+</li>
+                        <li style="color:#231F20; padding: 3px">Hydration</li>
+                        <li style="color:#231F20">+</li>
+                        <li style="color:#231F20; padding: 3px">Recovery</li>
+                    </ul>   
+				<div style="text-align:center; margin-left: 20px;">
+                      <form class="pdp-info__form smart-add-to-cart-form" action="/cart/add" method="post" style="display: inline-block;">
+                        <select id="single-product-select" class='smart-orders-select' name="id">
+                          <option value="31631982264392">Default Title - $125.00</option>
+                        </select>
+                        <div class="pdp-info__submit-wrap">
+                          <input class="pdp-info__qty btn btn--secondary" type="hidden" value="1" name="quantity">
+                          <input class="product-a pdp-info__submit add-to-cart-button btn btn--primary" type="submit"
+                                 value="Add to cart" />
+                        </div>
+                      </form>  
+                 <p><a style="color:#006145; padding-top:25px;" href="https://ishoppurium.com/products/pickleball-power-pack" target="_blank">Learn More About the Pickleball Sports Power Pack</a></p>
+               </div>
+             </div>
+          </div>
+        </div>
+    </div> 

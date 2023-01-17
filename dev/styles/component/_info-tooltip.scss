@@ -1,0 +1,164 @@
+.withTooltip {
+  display: flex;
+  align-items: center;
+}
+
+.info-tooltip {
+  display: inline-flex;
+
+  @include mq($global-breakpoint-lg) {
+    position: relative;
+
+    &.is-open {
+      .info-tooltip__tooltip__wrapper {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.info-tooltip__icon {
+  display: block;
+  padding-left: 5px;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  cursor: pointer;
+  img {
+    width: 12px;
+    display: block;
+  }
+}
+
+.info-tooltip__tooltip {
+  display: none;
+  position: relative;
+  z-index: 9999;
+
+  @include mq($global-breakpoint-lg) {
+    pointer-events: none;
+    position: static;
+    display: block;
+  }
+}
+
+.info-tooltip__tooltip__container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.65);
+
+  @include mq($global-breakpoint-lg) {
+    position: absolute;
+    top: auto;
+    left: 50%;
+    right: auto;
+    bottom: 25px;
+    width: 230px;
+    z-index: 20;
+    background-color: transparent;
+    transform: translateX(-50%);
+
+    .withTooltip.open-below & {
+      top: 25px;
+      bottom: auto;
+    }
+  }
+}
+
+.info-tooltip__tooltip__wrapper {
+  background-color: $color-white;
+  font-size: 18px;
+  text-transform: none;
+  font-family: $global-font-medium;
+  line-height: 1.5;
+  letter-spacing: 0.3px;
+  text-align: center;
+  z-index: 2;
+  position: absolute;
+  max-width: 352px;
+  width: 90%;
+  padding: 40px 20px 20px;
+  border-radius: 4px;
+
+  @include mq($global-breakpoint-lg) {
+    position: relative;
+    font-size: 15px;
+    border: 1px solid #F5F5F5;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 24px 0 rgba(0,0,0,0.05);
+    width: 100%;
+    padding: 13px 15px;
+    border-radius: 0;
+    transform: translateY(5px);
+    opacity: 0;
+
+    &:after, 
+    &:before {
+      top: 100%;
+      left: 50%;
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+      @include mq($global-breakpoint-lg) {
+        .withTooltip.open-below & {
+          transform: rotate(-180deg);
+          top: auto;
+          bottom: 100%;
+        }
+      }
+    }
+    
+    &:after {
+      border-color: rgba(255, 255, 255, 0);
+      border-top-color: #FFFFFF;
+      border-width: 7px;
+      margin-left: -7px;
+    }
+    &:before {
+      border-color: rgba(185, 245, 44, 0);
+      border-top-color: #F5F5F5;
+      border-width: 9px;
+      margin-left: -9px;
+    }
+  }
+
+  .close-btn {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 0;
+    right: 0;
+
+    svg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 10px;
+      transform: translate(-50%, -50%);
+    }
+
+    @include mq($global-breakpoint-lg) {
+      display: none;
+    }
+  }
+
+  .btn {
+    margin-top: 25px;
+
+    @include mq($global-breakpoint-lg) {
+      display: none;
+    }
+  }
+}

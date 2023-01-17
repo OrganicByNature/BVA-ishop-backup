@@ -1,0 +1,32 @@
+<!-- /templates/customers/account.billing.liquid -->
+{% include 'customer-metafields' %}
+<section class="customer-template account-container flex flex--wrap page-wrapper cust__template--billing">
+  <header class="cust__header">
+    <h2 class="cust__title cust__title--my"><a href="/account">My Account</a></h2>
+    <h1 class="cust__title cust__title--smart active">Smart Order</h1>
+    <a href="/account/logout" class="cust__logout text-link">Log Out</a>
+  </header>
+
+  <div class="flex-4-md cust__sidebar">
+    {% include 'smart_order_nav' with 'Billing Information' %}
+  </div>
+
+  <div class="flex-8-md cust__main">
+    <h2 class="h4 so__header">Billing Information</h2>
+
+    <div class="so__billing so__billing--none">
+      <p class="so__start-content">You haven't entered a payment method yet!</p>
+      <a class="so__start-btn btn btn--secondary" href="/account?view=payment" title="Add Payment Method">+ Add Payment Method</a>
+    </div>
+
+    <div class="so__billing so__billing--filled">
+      <h3 class="so__section-header so__section-header--payment">Payment Method</h3>
+      <div class="so__line so__line--payment">
+        <p class="so__line so__line--number">Card ending in <span class="so__payment-number" data-so-payment="last4"></span></p>
+        <p class="so__line so__line--exp">Expires <span class="so__payment-month" data-so-payment="month"></span>/<span class="so__payment-year" data-so-payment="year"></span></p>
+      </div>
+
+      <a class="so__edit-btn btn btn--secondary" href="/account?view=payment" title="Edit">Edit</a>
+    </div>
+  </div>
+</section>

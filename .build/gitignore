@@ -1,0 +1,28 @@
+# Dependency directory
+# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
+node_modules
+npm-debug.log
+
+# Deployment files
+deploy
+
+# User
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+.vscode
+
+# Build Tools
+# .build
+test/tests/
+test/screenshots/
+
+# Heroku Apps
+.heroku
+
+# Environment Variables
+.env
+config.yml
+
+# Shopify Theme & Section Settings
+settings_data.json

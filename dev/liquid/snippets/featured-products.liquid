@@ -1,0 +1,27 @@
+<div class="featured-products-container homepage-section">
+  <h1>{{ collections.featured-products.title }}</h1>
+  <p class="swipe-text">Swipe to see  more options</p>
+  <div class="featured-products featured-products__slider">
+    {% for product in collections.featured-products.products %}
+      {% include 'grid-product' %}
+      {% comment %} <div class="product">
+        <a href="{{ product.url }}">
+          <div class="tag-img-container">
+            <img src="{{ product | img_url: 'medium' }}" />
+            {% for tag in product.tags %}
+            {% if tag contains 'new-product' %}
+            <div class="new-product-badge">NEW</div>
+            {% endif %}
+            {% endfor %}
+          </div>
+          <h2>{{ product.title }}</h2>
+          {% if customer_discount == 1 %}
+          <h2>{{ product.price | money }}</h2>
+          {% else %}
+          <h2><span class="member-price">{{ product.price | times: customer_discount | ceil | money }}</span></h2>
+          {% endif %}
+        </a>
+      </div> {% endcomment %}
+    {% endfor %}
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="rewards-hero rewards-hero--{{ section.id }}">
+</div>
+
+<style type="text/css">
+  @media only screen and (min-width: 767px){
+	.rewards-hero--{{ section.id }} {
+		background-image: url('{{ section.settings.hero_img | img_url: '1920x' }}');
+	}
+  }
+ @media only screen and (max-width: 767px){
+	.rewards-hero--{{ section.id }} {
+		background-image: url('{{ 'Mobile-Banner-hide-seek.png' | file_url }}');
+	}
+  }
+</style>

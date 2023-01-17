@@ -1,0 +1,21 @@
+<script type="text/javascript">
+$(document).ready(function(){
+  	var value = '{{ customer.id }}';
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://silentlogin.azurewebsites.net/api/CreateSoundConceptsToken?code=evLRjvaBAGeMYpuOMHiHaka7KFtxfd8g0zqvqY5Pj31Ozq2T82e3Qg==",
+        "method": "POST",
+        "headers": {
+          "content-type": "application/json"
+        },
+        "processData": false,
+        "data": "{\"value\" : \"" + value + "\"}"
+      }
+      
+     $.ajax(settings).done(function (response) {
+        $("a[href='https://puriumbuilder.mysecureoffice.com/remote/users/login?timestamp=']").attr('href', response);
+      });
+});
+</script>
+

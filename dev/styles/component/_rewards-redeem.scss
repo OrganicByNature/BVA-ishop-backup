@@ -1,0 +1,168 @@
+.rewards-redeem {
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+
+.rewards-redeem__inner {
+	padding: 40px 20px;
+
+	@include mq($global-breakpoint-md) {
+		padding: 115px 20px;
+	}
+}
+
+.rewards-redeem__header {
+	color: $color-white;
+	font-family: $global-font-bold;
+	-webkit-font-smoothing: antialiased;
+	text-align: center;
+	font-size: 43px;
+	margin-bottom: 60px;
+	line-height: 41px;
+}
+
+.rewards-redeem__blocks {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	margin: 0 auto;
+
+	@include mq($global-breakpoint-md) {
+		flex-direction: row;
+	}
+}
+
+.rewards-redeem__block {
+	position: relative;
+	border-radius: 8px;
+	height: 330px;
+	width: 326px;
+	box-shadow: 3px 1px 22px -10px rgba(0,0,0,0.75);
+
+	&:after {
+		content: '=';
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 48px;
+		height: 48px;
+		border-radius: 50%;
+		background-color: $color-white;
+		color: $color-fun-green;
+		font-family: $global-font-bold;
+		font-size: 47px;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	@include mq($global-breakpoint-md) {
+		height: 330px;
+		width: 326px;
+	}
+}
+
+.rewards-redeem__block-half {
+	height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+	&.top {
+		background-color: $color-fun-green;
+		border-top-right-radius: 6px;
+		border-top-left-radius: 6px;
+	}
+
+	&.bottom {
+		background-color: $color-white;
+		border-bottom-right-radius: 6px;
+		border-bottom-left-radius: 6px;
+	}
+}
+
+.rewards-redeem__points {
+	font-family: $global-font-bold;
+	position: relative;
+	-webkit-font-smoothing: antialiased;
+	letter-spacing: 0px;
+	position: relative;
+	margin: 0px;
+	display: flex;
+	align-items: center;
+
+	.big-text {
+		color: $color-white;
+		font-size: 46px;
+
+		@include mq($global-breakpoint-md) {
+			font-size: 68px;
+		}
+	}
+
+	.small-text {
+		padding-top: 22px;
+		color: $color-white;
+		font-size: 18px;
+
+		@include mq($global-breakpoint-md) {
+			font-size: 32px;
+		}
+	}
+
+}
+
+.rewards-redeem__label {
+	font-size: 20px;
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 20px;
+
+	.top & {
+		color: $color-white;
+	}
+
+	.bottom & {
+		color: $color-fun-green;
+		top: auto;
+		bottom: -20px;
+	}
+}
+
+.rewards-redeem__discount {
+	position: relative;
+	color: $color-fun-green;
+	font-family: $global-font-bold;
+	-webkit-font-smoothing: antialiased;
+	font-size: 38px;
+
+	@include mq($global-breakpoint-md) {
+		font-size: 46px;
+	}
+}
+
+.rewards-redeem__or {
+	width: 46px;
+	height: 46px;
+	border-radius: 50%;
+	background-color: $color-fun-green;
+	color: $color-white;
+	font-size: 18px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 20px 0px;
+	font-family: $global-font-bold;
+	-webkit-font-smoothing: antialiased;
+	box-shadow: 4px 1px 22px -7px rgba(0,0,0,0.75);
+
+	@include mq($global-breakpoint-md) {
+		margin: 0px 30px;
+	}
+}

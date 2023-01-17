@@ -1,0 +1,176 @@
+html,
+body {
+  overflow-x: hidden;
+}
+body {
+  font-family: $global-font-primary;
+  color: $global-font-color;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+  margin-bottom: $global-spacing-unit-md;
+}
+p {
+  line-height: 22px;
+}
+
+a {
+  color: $global-font-color;
+  text-decoration: none;
+  background: transparent;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+ol,
+ul,
+dd {
+  margin-left: $global-spacing-unit;
+}
+
+input {
+  &::placeholder,
+  &:focus::placeholder {
+    color: gray !important;
+    opacity: 1;
+  }
+
+  &::-webkit-input-placeholder,
+  &:focus::-webkit-input-placeholder {
+    color: gray !important;
+    opacity: 1;
+  }
+
+  &:-moz-placeholder,
+  &:focus:-moz-placeholder {
+    color: gray !important;
+    opacity: 1;
+  }
+
+  &::-moz-placeholder,
+  &:focus::-moz-placeholder {
+    color: gray !important;
+    opacity: 1;
+  }
+
+  &:-ms-input-placeholder,
+  &:focus:-ms-input-placeholder {
+    color: gray !important;
+    opacity: 1;
+  }
+
+  &[type="number"]::-webkit-inner-spin-button,
+  &[type="number"]::-webkit-outer-spin-button {
+    opacity: 1;
+  }
+}
+textarea:focus, input:focus{
+    outline: none;
+}
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px white inset;
+}
+
+h2 {
+  line-height: 30px;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+table {
+  width: 100%;
+}
+main {
+  margin-top: 68px;
+  @include mq(799px) {
+    margin-top: 0px;
+  }
+
+  .header-notice & {
+    margin-top: 125px;
+    @include mq(799px) {
+      margin-top: 0px;
+    }
+  }
+}
+
+.page-wrapper {
+  width: 1200px;
+  margin: 0 auto;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  @include mq($global-breakpoint-xs) {
+    width: 95%;
+    margin: 0 auto;
+  }
+  @include mq($global-breakpoint-md) {
+    width: $global-breakpoint-md;
+    padding: 70px 0px;
+  }
+  @include mq($global-breakpoint-lg) {
+    width: $global-breakpoint-lg;
+  }
+  @include mq($global-breakpoint-xl) {
+    width: $global-breakpoint-xl;
+  }
+}
+.page-title {
+  text-align: center;
+}
+.subheader {
+  text-align: center;
+}
+
+.breadcrumb {
+  display: none;
+  color: #008BD1;
+  position: absolute;
+  top: 75px;
+  left: 30px;
+  @include mq($global-breakpoint-md) {
+    display: none;
+  }
+}
+.jumbotron {
+  img {
+    width: 100%;
+  }
+  h1,
+  h2,
+  h3 {
+    text-align: center;
+  }
+}
+.member-price {
+  color: $color-primary;
+}
+.flex-container {
+  display: flex;
+}
+.player .controls-wrapper {
+  display: none !important;
+}
+.coming-soon {
+  h1 {
+    font-size: 50px;
+    text-align: center;
+    color: $color-primary;
+  }
+  @include mq($global-breakpoint-md) {
+    font-size: 80px;
+  }
+}
+
+.hidden {
+  display: none !important;
+}

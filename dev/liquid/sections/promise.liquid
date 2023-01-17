@@ -1,0 +1,44 @@
+{% schema %}
+
+{
+  "name": "Promise Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "promise_header",
+      "label": "Enter promise header"
+    },
+    {
+      "id": "the_promise",
+      "type": "text",
+      "label": "Enter promise text"
+    },
+    {
+      "id": "the_promise_image",
+      "type": "image_picker",
+      "label": "Upload Image"
+    },
+    {
+      "id": "the_promise_color",
+      "type": "text",
+      "label": "Please enter a hex color code for background"
+    },
+    {
+      "id": "the_promise_text_color",
+      "type": "text",
+      "label": "Please enter a hex color code for text"
+    }
+  ]
+}
+
+{% endschema %}
+
+<div class="promise-section homepage-section" style="background-image: url({{ section.settings.the_promise_image | img_url: 'master' }})">
+  <div class="promise-section-container" >
+    <!-- <img class="mobile-img" src="{{ section.settings.the_promise_image | img_url: 'master' }}" /> -->
+    <div class="promise-content" style="color: {{ section.settings.the_promise_text_color }}">
+      <h1>{{ section.settings.promise_header }}</h1>
+      <p>{{section.settings.the_promise}}</p>
+    </div>
+  </div>
+</div>

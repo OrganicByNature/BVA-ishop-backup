@@ -1,0 +1,40 @@
+<div class="callouts wrapper--upgrade">
+  {% for block in section.blocks %}
+  <div class="callout">
+    <img class="callout__img" src="{{ block.settings.call_img | img_url: 'x40', scale: 2 }}">
+    <h4 class="callout__title">{{ block.settings.call_title }}</h4>
+    <p class="callout__desc">{{ block.settings.call_desc }}</p>
+  </div>
+  {% endfor %}
+</div>
+
+{% schema %}
+{
+  "name": "Upgrade Callouts",
+  "settings": [
+  ],
+  "blocks": [
+    {
+      "type": "callout",
+      "name": "Callout",
+      "settings": [
+        {
+          "id": "call_img",
+          "type": "image_picker",
+          "label": "Icon"
+        },
+        {
+          "id": "call_title",
+          "type": "text",
+          "label": "Title"
+        },
+        {
+          "id": "call_desc",
+          "type": "textarea",
+          "label": "Description"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

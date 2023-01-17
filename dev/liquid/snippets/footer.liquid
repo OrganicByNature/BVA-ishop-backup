@@ -1,0 +1,103 @@
+<div class="desktop-footer">
+    <div class="footer-top footer-section">
+      <div class="footer-col col-one-third">
+        <div class="footer-col-inner">
+          <h2>COVID-19 UPDATES</h2>
+          <p class="footer-col-p">Even during this fluid time, we are proud to be here to serve.</p>
+          <a class="text-link" href="https://ishoppurium.com/pages/a-mission-with-a-vision">Get details</a>
+        </div>
+      </div>
+      <div class="footer-col col-one-third">
+        <div class="footer-col-inner">
+          <h2>Real people. Real results.</h2>
+          <p class="footer-col-p">Our business is full of #PuriumProud people. Take a look at a few stories from the thousands of people whose health and wealth improved from our pure, premium and non-GMO superfood products.</p>
+          <a class="text-link" href="https://blog.puriumcorp.com/2019/12/16/lifestyle-transformation-success-stories">Product Success Stories</a><br />
+          <a class="text-link" href="https://www.isharepurium.com/success-stories">Business Success Stories</a>
+        </div>
+      </div>
+      <div class="footer-col col-one-third">
+        <div class="footer-col-inner">
+          <h2>Recent News</h2>
+          <p class="footer-col-p">Learn about the products in an Ultimate Lifestyle Transformation.</p>
+          <a class="text-link less-margin" href="https://blog.puriumcorp.com/2019/12/16/get-familiar-with-the-products/" target="_blank">Learn product details</a>
+          <p class="footer-col-p">See the 30-day schedule options for the Ultimate Lifestyle Tansformation.</p>
+          <a class="text-link less-margin" href="https://blog.puriumcorp.com/2019/12/16/lifestyle-transformation-schedule/" target="_blank">See schedule options</a>
+          <p class="footer-col-p">Purium's planet promise to be plastic free in 2021.</p>
+          <a class="text-link less-margin" href="https://vimeo.com/384910280" target="_blank">Watch Video</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom footer-bottom-desktop footer-section">
+      <div class="footer-bottom-container">
+        <div class="footer-col footer-col-1 col-one-quarter bottom-col">
+          <div class="contact-container">
+            <address><img src="{{'House-blue.svg' | asset_url}}" />2610 Homestead Pl,<br /><span class="push-right">Rancho Dominguez, CA 90220</span></address>
+            <a href="tel:8887476733"><img src="{{'Phone-blue.svg' | asset_url}}" /> (888) 747-6733</a>
+          </div>
+        </div>
+        <div class="footer-col footer-col-2 col-one-quarter bottom-col">
+          {%for link in linklists.footer-1.links%}
+          <a href="{{link.url}}">{{link.title}}</a>
+          {%endfor%}
+        </div>
+        <div class="footer-col footer-col-3 col-one-quarter bottom-col">
+          {%for link in linklists.footer-2.links%}
+          <a class="yo" href="{{link.url}}">{{link.title}}</a>
+          {%endfor%}
+        </div>
+        <div class="footer-col footer-col-3 col-one-quarter bottom-col">
+          {%for link in linklists.footer-3.links%}
+          <a class="yo" href="{{link.url}}">{{link.title}}</a>
+          {%endfor%}
+          {% comment %}
+          {% include 'klaviyo-form' %}
+          {% endcomment %}
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom footer-bottom-mobile footer-section">
+
+    {% comment %}
+    {% include 'klaviyo-form' %}
+    {% endcomment %}
+
+      <div class="footer-bottom-container">
+        <div class="footer-col footer-col-1 col-one-quarter bottom-col">
+          <div class="contact-container">
+            <address><img src="{{'House-blue.svg' | asset_url}}" />2610 Homestead Pl,<br />Rancho Dominguez, CA 90220</address>
+            <a href="tel:8887476733"><img src="{{'Phone-blue.svg' | asset_url}}" /> (888) 747-6733</a>
+          </div>
+        </div>
+        <div class="footer-col footer-col-2 col-one-quarter bottom-col">
+          {%assign linkTitle1 = linklists.footer-1.title%}
+          <h2 class="footer-h2">{{linkTitle1}} <img class="nav-arrow" src="{{'Down.svg' | asset_url}}" /></h2>
+          <div class="footer-dropdown">
+            {%for link in linklists.footer-1.links%}
+            <a href="{{link.url}}">{{link.title}}</a>
+            {%endfor%}
+          </div>
+        </div>
+        <div class="footer-col footer-col-3 col-one-quarter bottom-col">
+          {%assign linkTitle2 = linklists.footer-2.title%}
+          <h2 class="footer-h2">{{linkTitle2}} <img class="nav-arrow" src="{{'Down.svg' | asset_url}}" /></h2>
+          <div class="footer-dropdown">
+            {%for link in linklists.footer-2.links%}
+            <a href="{{link.url}}">{{link.title}}</a>
+            {%endfor%}
+          </div>
+        </div>
+        <div class="footer-col footer-col-3 col-one-quarter bottom-col">
+          {%assign linkTitle3 = linklists.footer-3.title%}
+          <h2 class="footer-h2">{{linkTitle3}} <img class="nav-arrow" src="{{'Down.svg' | asset_url}}" /></h2>
+          <div class="footer-dropdown">
+            {%for link in linklists.footer-3.links%}
+            <a href="{{link.url}}">{{link.title}}</a>
+            {%endfor%}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      <h3>Copyright &copy; Purium {{ 'now' | date: "%Y" }}</h3>
+    </div>
+  </div>

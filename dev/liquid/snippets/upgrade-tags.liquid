@@ -1,0 +1,20 @@
+ <script type="text/javascript">
+    $(document).ready(function discountEligible(){
+        var value = '{{ customer.id }}';
+        var settings = {
+          "async": true,
+          "crossDomain": true,
+          "url": "https://shopify-updatetags.azurewebsites.net/api/HttpTrigger_UpgradeTag?code=/9SINlOcwx6tkMlqpAs3b17TS9KXH/cNpWO3alG62JAtj8hLCMCkTQ==",
+          "method": "POST",
+          "headers": {
+            "content-type": "application/json"
+          },
+          "processData": false,
+          "data": "{\"value\" : \"" + value + "\"}"
+        }
+
+        $.ajax(settings).done(function (response) {
+          $(console.log(response));
+        });
+      });
+</script>

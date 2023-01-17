@@ -1,0 +1,23 @@
+ <script type="text/javascript">
+    $(document).ready(function isAttending(){
+    var  answer = localStorage.getItem('attending');
+      if (answer !== null && answer !== "")  {
+        console.log('attending');
+        var value = '{{ customer.id }}';
+        var settings = {
+          "async": true,
+          "crossDomain": true,
+          "url": "https://shopify-addtags.azurewebsites.net/api/HttpTrigger_AddConventionTag?code=3ibpOblDfGH01UvCfaa7zn1demB7a918jE6Wdmj9N6Okdy5hOwQN0A==",
+          "method": "POST",
+          "headers": {
+            "content-type": "application/json"
+          },
+          "processData": false,
+          "data": "{\"value\" : \"" + value + "\"}"
+        }
+
+        $.ajax(settings).done(function (response) {
+          $(console.log(response));
+        });
+      }});
+</script>
